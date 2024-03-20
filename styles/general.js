@@ -4,9 +4,9 @@ export const gradientColors = ["#c36800", "#ff7d03", "#ff7b00"];
 
 export const general = StyleSheet.create({
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 30,
     color: "white",
+    fontFamily: "Gantari",
   },
   scaffold: {
     flex: 1,

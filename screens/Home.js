@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
-
 import { general, gradientColors } from "../styles/general";
 
 export default function Home() {
+
   return (
     <View style={general.scaffold}>
       <LinearGradient
@@ -17,7 +17,7 @@ export default function Home() {
         colors={gradientColors}
         style={general.container}
       >
-        <Text style={general.title}>My excercise routine</Text>
+        <Text style={general.title}>My exercise routine</Text>
         {/* <Button
         children="Show my progress!"
         mode="contained"
