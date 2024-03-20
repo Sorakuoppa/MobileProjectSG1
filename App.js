@@ -17,6 +17,7 @@ export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
+        {/* Go to ./components/ScreenStack to configure app navigation */}
         <ScreenStack />
       </NavigationContainer>
     </PaperProvider>
