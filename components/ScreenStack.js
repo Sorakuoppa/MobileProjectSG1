@@ -8,7 +8,9 @@ const Stack = createBottomTabNavigator();
 
 export default function ScreenStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerRight: () => <Text>Header</Text> }}>
+    <Stack.Navigator
+      screenOptions={{ headerRight: () => <Text>Drawer nav</Text> }}
+    >
       <Stack.Screen
         name="Get Started"
         component={GetStarted}
