@@ -2,10 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
-import { general, gradientColors } from "../styles/general";
+import { general, gradientColors, darkColors } from "../styles/general";
 
 export default function Home() {
-
   return (
     <View style={general.scaffold}>
       <LinearGradient
@@ -25,7 +24,7 @@ export default function Home() {
       /> */}
       </LinearGradient>
       <View style={general.progress}>
-        <Text style={{ color: "white" }}>Milestone achieved!</Text>
+        <Text style={{ color: darkColors.primary }}>Milestone achieved!</Text>
         <Text style={{ color: "white" }}>Run 10km</Text>
       </View>
     </View>

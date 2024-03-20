@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export const gradientColors = ["#c36800", "#ff7d03", "#ff7b00"];
+export const darkColors = {
+  primary: "#FF5C00",
+  secondary: "#363636",
+};
 
 export const general = StyleSheet.create({
   title: {
@@ -31,7 +35,7 @@ export const general = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     width: "80%",
-    backgroundColor: "#965e1a",
+    backgroundColor: darkColors.primary,
     margin: 10,
   },
 });

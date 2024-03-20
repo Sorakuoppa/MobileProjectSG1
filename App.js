@@ -1,13 +1,11 @@
 import React from "react";
-import Home from "./screens/Home";
+import ScreenStack from "./components/ScreenStack";
 import { PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-// import * as SplashScreen from "expo-splash-screen";
-
-// SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  //Custom fonts can be added to this list
   const [fontsLoaded] = useFonts({
     Gantari: require("./assets/fonts/Gantari.ttf"),
   });
@@ -17,10 +15,10 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <PaperProvider>
-        <Home />
-      </PaperProvider>
-    </NavigationContainer>
+    <PaperProvider>
+      <NavigationContainer>
+        <ScreenStack />
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
