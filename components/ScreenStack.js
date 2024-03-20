@@ -1,22 +1,41 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Text } from "react-native";
-import Home from "../screens/Home";
+
+import AboutUs from "../screens/AboutUs";
+import Account from "../screens/Account";
+import AddNew from "../screens/AddNew";
 import GetStarted from "../screens/GetStarted";
+import Home from "../screens/Home";
+import Trackers from "../screens/Trackers";
+import Settings from "../screens/Settings";
 
 const Stack = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
-export default function ScreenStack() {
+export function ScreenStack() {
   return (
     <Stack.Navigator
-      screenOptions={{ headerRight: () => <Text>Drawer nav</Text> }}
+      screenOptions={{ headerShown: false}}
     >
+      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen
-        name="Get Started"
-        component={GetStarted}
+        name="Add new"
+        component={AddNew}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Trackers" component={Trackers} />
     </Stack.Navigator>
+  );
+}
+
+export function DrawerStack() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="BottomStack" component={ScreenStack} />
+      <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name="About us" component={AboutUs} />
+    </Drawer.Navigator>
   );
 }

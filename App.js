@@ -1,5 +1,6 @@
+import "react-native-gesture-handler";
 import React from "react";
-import ScreenStack from "./components/ScreenStack";
+import {ScreenStack, DrawerStack}from "./components/ScreenStack";
 import { PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
@@ -18,7 +19,7 @@ export default function App() {
     <PaperProvider>
       <NavigationContainer>
         {/* Go to ./components/ScreenStack to configure app navigation */}
-        <ScreenStack />
+        <DrawerStack />
       </NavigationContainer>
     </PaperProvider>
   );
