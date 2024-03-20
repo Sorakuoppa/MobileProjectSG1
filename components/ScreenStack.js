@@ -16,15 +16,9 @@ const Drawer = createDrawerNavigator();
 
 export function ScreenStack() {
   return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false}}
-    >
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen
-        name="Add new"
-        component={AddNew}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name="Add new" component={AddNew} />
       <Stack.Screen name="Trackers" component={Trackers} />
     </Stack.Navigator>
   );
@@ -32,8 +26,8 @@ export function ScreenStack() {
 
 export function DrawerStack() {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="BottomStack" component={ScreenStack} />
+    <Drawer.Navigator screenOptions={{headerTitle: 'OnTrack' }}>
+      <Drawer.Screen name="home" component={ScreenStack} />
       <Drawer.Screen name="Settings" component={Settings} />
       <Drawer.Screen name="About us" component={AboutUs} />
     </Drawer.Navigator>
