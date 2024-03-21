@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import React from "react";
-import {ScreenStack, DrawerStack}from "./components/ScreenStack";
+import {DrawerStack}from "./components/ScreenStack";
 import { PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";

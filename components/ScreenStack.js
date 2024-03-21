@@ -1,7 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Text } from "react-native";
 
 import AboutUs from "../screens/miscellaneous/AboutUs";
 import Account from "../screens/accountManagement/Account";
@@ -26,10 +25,11 @@ export function ScreenStack() {
 
 export function DrawerStack() {
   return (
-    <Drawer.Navigator screenOptions={{headerTitle: 'OnTrack' }}>
+    <Drawer.Navigator screenOptions={{ headerTitle: "OnTrack" }}>
       <Drawer.Screen name="home" component={ScreenStack} />
       <Drawer.Screen name="Settings" component={Settings} />
       <Drawer.Screen name="About us" component={AboutUs} />
+      <Drawer.Screen name="Account" component={Account} />
     </Drawer.Navigator>
   );
 }
