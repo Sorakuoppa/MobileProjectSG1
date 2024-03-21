@@ -1,12 +1,10 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Text } from "react-native";
 
 import AboutUs from "../screens/AboutUs";
 import Account from "../screens/Account";
 import AddNew from "../screens/AddNew";
-import GetStarted from "../screens/GetStarted";
 import Home from "../screens/Home";
 import Trackers from "../screens/Trackers";
 import Settings from "../screens/Settings";
