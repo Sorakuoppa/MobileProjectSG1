@@ -16,6 +16,8 @@ export default function App() {
 
   //Detects the device's color scheme
   // const scheme = useColorScheme();
+
+  // HARD CODE SCHEME FOR TESTING, useColorScheme doesn't work on emulator
   const scheme = "dark";
 
   if (!fontsLoaded) {
@@ -24,7 +26,7 @@ export default function App() {
 
   return (
     <PaperProvider>
-      <StatusBar barStyle="light-content" backgroundColor={scheme === 'dark' ? darkColors.secondary : lightColors.secondary} />
+      <StatusBar barStyle={scheme === 'dark' ? "light-content" : "dark-content"} backgroundColor={scheme === 'dark' ? darkColors.secondary : lightColors.secondary} />
       <NavigationContainer theme={scheme === 'dark' ? DarkTheme : LightTheme}>
         {/* Go to ./components/ScreenStack to configure app navigation */}
         <DrawerStack />
