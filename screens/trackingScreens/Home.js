@@ -8,7 +8,7 @@ import { general, gradientColors, darkColors } from "../../styles/general";
 export default function Home() {
   return (
     <View style={general.scaffold}>
-      <LinearGradient
+      {/* <LinearGradient
         useAngle={true}
         angle={45}
         angleCenter={{ x: 0.5, y: 0.5 }}
@@ -18,12 +18,12 @@ export default function Home() {
         style={general.container}
       >
         <Text style={general.title}>My exercise routine</Text>
-        {/* <Button
+        <Button
         children="Show my progress!"
         mode="contained"
         onPress={() => console.log("Button Pressed")}
-      /> */}
-      </LinearGradient>
+      />
+      </LinearGradient> */}
       <View style={general.progress}>
         <Text style={{ color: darkColors.primary }}>Milestone achieved!</Text>
         <Text style={{ color: "white" }}>Run 10km</Text>

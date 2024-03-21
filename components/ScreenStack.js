@@ -1,6 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 import AboutUs from "../screens/miscellaneous/AboutUs";
 import Account from "../screens/accountManagement/Account";
@@ -20,11 +21,44 @@ export function ScreenStack() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: { backgroundColor: darkColors.secondary },
+        tabBarActiveTintColor: darkColors.primary,
+        tabBarInactiveTintColor: "gray",
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Add new" component={AddNew} />
-      <Stack.Screen name="Trackers" component={Trackers} />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarLabel: "Home",
+          tabBarIcon: ({ focused, color }) => (
+            <Icon
+              name="home"
+              size={20}
+              color={focused ? darkColors.primary : color}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Add new"
+        component={AddNew}
+        options={{
+          tabBarLabel: "Add new",
+          tabBarIcon: ({focused, color}) => (
+            <Icon name="plus" size={20} color={focused ? darkColors.primary : color} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Trackers"
+        component={Trackers}
+        options={{
+          tabBarLabel: "Trackers",
+          tabBarIcon: ({focused, color}) => (
+            <Icon name="chart-bar" size={20} color={focused ? darkColors.primary : color} />
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -37,7 +71,7 @@ export function DrawerStack() {
         swipeEdgeWidth: 80,
         headerStyle: { backgroundColor: darkColors.secondary },
         headerTitleStyle: { color: darkColors.primary },
-        headerTintColor: darkColors.primary
+        headerTintColor: darkColors.primary,
       }}
     >
       <Drawer.Screen name="home" component={ScreenStack} />

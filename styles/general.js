@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native";
 
 export const gradientColors = ["#c36800", "#ff7d03", "#ff7b00"];
 export const darkColors = {
-  primary: "#FF5C00",
-  secondary: "#363636",
+  primary: "#ff8c4c",
+  secondary: "#36363e",
 };
 export const lightColors = {
   primary: "#FF5C00",
@@ -39,7 +39,9 @@ export const general = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     width: "80%",
-    backgroundColor: lightColors.secondary,
+    backgroundColor: darkColors.secondary,
+    borderColor: darkColors.primary,
+    borderWidth: 2,
     margin: 10,
   },
 });
