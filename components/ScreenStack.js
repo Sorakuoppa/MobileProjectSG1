@@ -5,7 +5,6 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import AboutUs from "../screens/miscellaneous/AboutUs";
 import Account from "../screens/accountManagement/Account";
 import AddNew from "../screens/trackingScreens/AddNew";
-import GetStarted from "../screens/miscellaneous/GetStarted";
 import Home from "../screens/trackingScreens/Home";
 import Trackers from "../screens/trackingScreens/Trackers";
 import Settings from "../screens/miscellaneous/Settings";
