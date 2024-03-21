@@ -3,13 +3,13 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Text } from "react-native";
 
-import AboutUs from "../screens/AboutUs";
-import Account from "../screens/Account";
-import AddNew from "../screens/AddNew";
-import GetStarted from "../screens/GetStarted";
-import Home from "../screens/Home";
-import Trackers from "../screens/Trackers";
-import Settings from "../screens/Settings";
+import AboutUs from "../screens/miscellaneous/AboutUs";
+import Account from "../screens/accountManagement/Account";
+import AddNew from "../screens/trackingScreens/AddNew";
+import GetStarted from "../screens/miscellaneous/GetStarted";
+import Home from "../screens/trackingScreens/Home";
+import Trackers from "../screens/trackingScreens/Trackers";
+import Settings from "../screens/miscellaneous/Settings";
 
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();

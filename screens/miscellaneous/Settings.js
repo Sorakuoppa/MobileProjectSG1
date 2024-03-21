@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { general } from "../styles/general";
+import { general } from "../../styles/general";
 
-export default function Account() {
+export default function Settings() {
 
     return (
         <View style={general.scaffold}>
-            <Text style={general.title}>Account</Text>
+            <Text style={general.title}>Settings</Text>
         </View>
     );
 }
