@@ -26,7 +26,7 @@ export function ScreenStack() {
       }}
     >
       <Stack.Screen
-        name="Home"
+        name="HomeTab"
         component={Home}
         options={{
           tabBarLabel: "Home",
@@ -72,9 +72,13 @@ export function DrawerStack() {
         headerStyle: { backgroundColor: darkColors.secondary },
         headerTitleStyle: { color: darkColors.primary },
         headerTintColor: darkColors.primary,
+        drawerType: "slide",
+        drawerStyle: { backgroundColor: darkColors.secondary },
+        drawerActiveTintColor: darkColors.primary,
+        drawerInactiveTintColor: "white",
       }}
     >
-      <Drawer.Screen name="home" component={ScreenStack} />
+      <Drawer.Screen name="Home" component={ScreenStack} options={{tabBarLabel: "Home"}}  />
       <Drawer.Screen name="Settings" component={Settings} />
       <Drawer.Screen name="About us" component={AboutUs} />
       <Drawer.Screen name="Account" component={Account} />
