@@ -72,6 +72,30 @@ function ScreenStack() {
   );
 }
 
+const screens = [
+  {
+    name: "Home",
+    component: ScreenStack,
+    iconName: "home",
+  },
+  {
+    name: "Settings",
+    component: Settings,
+    iconName: "cog",
+  },
+  {
+    name: "Account",
+    component: Account,
+    iconName: "user",
+  },
+  {
+    name: "About us",
+    component: AboutUs,
+    iconName: "question",
+    drawerItemStyle: { marginTop: 400 },
+  },
+];
+
 export function DrawerStack() {
   const { colors } = useTheme();
   return (
@@ -88,60 +112,23 @@ export function DrawerStack() {
         drawerInactiveTintColor: colors.text,
       }}
     >
-      <Drawer.Screen
-        name="Home"
-        component={ScreenStack}
-        options={{
-          drawerIcon: ({ focused }) => (
-            <Icon
-              name="home"
-              size={20}
-              color={focused ? colors.primary : colors.text}
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          drawerIcon: ({ focused }) => (
-            <Icon
-              name="cog"
-              size={20}
-              color={focused ? colors.primary : colors.text}
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Account"
-        component={Account}
-        options={{
-          drawerIcon: ({ focused }) => (
-            <Icon
-              name="user-circle"
-              size={20}
-              color={focused ? colors.primary : colors.text}
-            />
-          ),
-        }}
-      />
-
-      <Drawer.Screen
-        name="About us"
-        component={AboutUs}
-        options={{
-          drawerIcon: ({ focused, color }) => (
-            <Icon
-              name="question-circle"
-              size={20}
-              color={focused ? colors.primary : color}
-            />
-          ),
-          drawerItemStyle: { marginTop: 400 },
-        }}
-      />
+      {screens.map((screen, index) => (
+        <Drawer.Screen
+          key={index}
+          name={screen.name}
+          component={screen.component}
+          options={{
+            drawerIcon: ({ focused }) => (
+              <Icon
+                name={screen.iconName}
+                size={20}
+                color={focused ? colors.primary : colors.text}
+              />
+            ),
+            drawerItemStyle: screen.drawerItemStyle,
+          }}
+        />
+      ))}
     </Drawer.Navigator>
   );
 }
