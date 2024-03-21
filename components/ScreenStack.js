@@ -26,10 +26,11 @@ export function ScreenStack() {
 
 export function DrawerStack() {
   return (
-    <Drawer.Navigator screenOptions={{headerTitle: 'OnTrack' }}>
+    <Drawer.Navigator screenOptions={{ headerTitle: "OnTrack" }}>
       <Drawer.Screen name="home" component={ScreenStack} />
       <Drawer.Screen name="Settings" component={Settings} />
       <Drawer.Screen name="About us" component={AboutUs} />
+      <Drawer.Screen name="Account" component={Account} />
     </Drawer.Navigator>
   );
 }
