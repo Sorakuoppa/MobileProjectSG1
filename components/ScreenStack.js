@@ -14,6 +14,28 @@ import Settings from "../screens/miscellaneous/Settings";
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
+// Manage labels and icons for bottom nav HERE
+const bottomTabs = [
+  {
+    name: "HomeTab",
+    component: Home,
+    tabBarLabel: "Home",
+    iconName: "home",
+  },
+  {
+    name: "Add new",
+    component: AddNew,
+    tabBarLabel: "Add new",
+    iconName: "plus",
+  },
+  {
+    name: "Trackers",
+    component: Trackers,
+    tabBarLabel: "Trackers",
+    iconName: "chart-bar",
+  },
+];
+
 function ScreenStack() {
   const { colors } = useTheme();
   return (
@@ -23,55 +45,31 @@ function ScreenStack() {
         headerShown: false,
         tabBarStyle: { backgroundColor: colors.background },
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: "gray",
+        tabBarInactiveTintColor: colors.text,
       }}
     >
-      <Stack.Screen
-        name="HomeTab"
-        component={Home}
-        options={{
-          tabBarLabel: "Home",
-          tabBarIcon: ({ focused, color }) => (
-            <Icon
-              name="home"
-              size={20}
-              color={focused ? colors.primary : color}
-            />
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="Add new"
-        component={AddNew}
-        options={{
-          tabBarLabel: "Add new",
-          tabBarIcon: ({ focused, color }) => (
-            <Icon
-              name="plus"
-              size={20}
-              color={focused ? colors.primary : color}
-            />
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="Trackers"
-        component={Trackers}
-        options={{
-          tabBarLabel: "Trackers",
-          tabBarIcon: ({ focused, color }) => (
-            <Icon
-              name="chart-bar"
-              size={20}
-              color={focused ? colors.primary : color}
-            />
-          ),
-        }}
-      />
+      {bottomTabs.map((screen, index) => (
+        <Stack.Screen
+          key={index}
+          name={screen.name}
+          component={screen.component}
+          options={{
+            tabBarLabel: screen.tabBarLabel,
+            tabBarIcon: ({ focused }) => (
+              <Icon
+                name={screen.iconName}
+                size={20}
+                color={focused ? colors.primary : colors.text}
+              />
+            ),
+          }}
+        />
+      ))}
     </Stack.Navigator>
   );
 }
 
+// Manage labels and icons for drawer nav HERE
 const screens = [
   {
     name: "Home",
