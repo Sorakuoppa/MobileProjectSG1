@@ -1,9 +1,12 @@
 import "react-native-gesture-handler";
 import React from "react";
-import {DrawerStack}from "./components/ScreenStack";
+import { StatusBar, useColorScheme } from "react-native";
+import { DrawerStack } from "./components/ScreenStack";
 import { PaperProvider } from "react-native-paper";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useTheme } from "@react-navigation/native";
 import { useFonts } from "expo-font";
+import { darkColors, lightColors, DarkTheme, LightTheme } from "./styles/general";
+
 
 export default function App() {
   //Custom fonts can be added to this list
@@ -11,13 +14,18 @@ export default function App() {
     Gantari: require("./assets/fonts/Gantari.ttf"),
   });
 
+  //Detects the device's color scheme
+  // const scheme = useColorScheme();
+  const scheme = "dark";
+
   if (!fontsLoaded) {
     return null;
   }
 
   return (
     <PaperProvider>
-      <NavigationContainer>
+      <StatusBar barStyle="light-content" backgroundColor={scheme === 'dark' ? darkColors.secondary : lightColors.secondary} />
+      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : LightTheme}>
         {/* Go to ./components/ScreenStack to configure app navigation */}
         <DrawerStack />
       </NavigationContainer>

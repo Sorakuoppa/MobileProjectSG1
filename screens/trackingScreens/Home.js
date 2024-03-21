@@ -1,11 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { DrawerStack } from "../../components/ScreenStack";
 import { Button } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
-import { general, gradientColors, darkColors } from "../../styles/general";
+import { homeStyles} from "../../styles/homeStyles";
+import { general } from "../../styles/general";
+import { useTheme } from "@react-navigation/native";
 
 export default function Home() {
+  const { colors } = useTheme();
+  console.log(colors);
   return (
     <View style={general.scaffold}>
       {/* <LinearGradient
@@ -24,9 +27,9 @@ export default function Home() {
         onPress={() => console.log("Button Pressed")}
       />
       </LinearGradient> */}
-      <View style={general.progress}>
-        <Text style={{ color: darkColors.primary }}>Milestone achieved!</Text>
-        <Text style={{ color: "white" }}>Run 10km</Text>
+      <View style={{...homeStyles.progress, borderColor: colors.primary}}>
+        <Text style={{ color: colors.primary }}>Milestone achieved!</Text>
+        <Text style={{ color: colors.text }}>Run 10km</Text>
       </View>
     </View>
   );

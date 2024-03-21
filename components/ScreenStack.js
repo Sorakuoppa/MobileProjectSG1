@@ -15,14 +15,16 @@ import { darkColors } from "../styles/general";
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-export function ScreenStack() {
+function ScreenStack() {
   return (
     <Stack.Navigator
+      initialRouteName="Add new"
       screenOptions={{
         headerShown: false,
         tabBarStyle: { backgroundColor: darkColors.secondary },
         tabBarActiveTintColor: darkColors.primary,
         tabBarInactiveTintColor: "gray",
+        
       }}
     >
       <Stack.Screen
@@ -125,7 +127,7 @@ export function DrawerStack() {
           ),
         }}
       />
-      
+
       <Drawer.Screen
         name="About us"
         component={AboutUs}
@@ -137,7 +139,7 @@ export function DrawerStack() {
               color={focused ? darkColors.primary : color}
             />
           ),
-          drawerItemStyle: { marginTop: 600},
+          drawerItemStyle: { marginTop: 400 },
         }}
       />
     </Drawer.Navigator>
