@@ -1,4 +1,5 @@
 import React from "react";
+import { useTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/FontAwesome5";
@@ -10,21 +11,19 @@ import Home from "../screens/trackingScreens/Home";
 import Trackers from "../screens/trackingScreens/Trackers";
 import Settings from "../screens/miscellaneous/Settings";
 
-import { darkColors } from "../styles/general";
-
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 function ScreenStack() {
+  const { colors } = useTheme();
   return (
     <Stack.Navigator
       initialRouteName="Add new"
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { backgroundColor: darkColors.secondary },
-        tabBarActiveTintColor: darkColors.primary,
+        tabBarStyle: { backgroundColor: colors.background },
+        tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: "gray",
-        
       }}
     >
       <Stack.Screen
@@ -36,7 +35,7 @@ function ScreenStack() {
             <Icon
               name="home"
               size={20}
-              color={focused ? darkColors.primary : color}
+              color={focused ? colors.primary : color}
             />
           ),
         }}
@@ -50,7 +49,7 @@ function ScreenStack() {
             <Icon
               name="plus"
               size={20}
-              color={focused ? darkColors.primary : color}
+              color={focused ? colors.primary : color}
             />
           ),
         }}
@@ -64,7 +63,7 @@ function ScreenStack() {
             <Icon
               name="chart-bar"
               size={20}
-              color={focused ? darkColors.primary : color}
+              color={focused ? colors.primary : color}
             />
           ),
         }}
@@ -74,29 +73,30 @@ function ScreenStack() {
 }
 
 export function DrawerStack() {
+  const { colors } = useTheme();
   return (
     <Drawer.Navigator
       screenOptions={{
         headerTitle: "OnTrack",
         swipeEdgeWidth: 80,
-        headerStyle: { backgroundColor: darkColors.secondary },
-        headerTitleStyle: { color: darkColors.primary },
-        headerTintColor: darkColors.primary,
+        headerStyle: { backgroundColor: colors.background },
+        headerTitleStyle: { color: colors.primary },
+        headerTintColor: colors.primary,
         drawerType: "slide",
-        drawerStyle: { backgroundColor: darkColors.secondary },
-        drawerActiveTintColor: darkColors.primary,
-        drawerInactiveTintColor: "white",
+        drawerStyle: { backgroundColor: colors.background },
+        drawerActiveTintColor: colors.primary,
+        drawerInactiveTintColor: colors.text,
       }}
     >
       <Drawer.Screen
         name="Home"
         component={ScreenStack}
         options={{
-          drawerIcon: ({ focused, color }) => (
+          drawerIcon: ({ focused }) => (
             <Icon
               name="home"
               size={20}
-              color={focused ? darkColors.primary : color}
+              color={focused ? colors.primary : colors.text}
             />
           ),
         }}
@@ -105,11 +105,11 @@ export function DrawerStack() {
         name="Settings"
         component={Settings}
         options={{
-          drawerIcon: ({ focused, color }) => (
+          drawerIcon: ({ focused }) => (
             <Icon
               name="cog"
               size={20}
-              color={focused ? darkColors.primary : color}
+              color={focused ? colors.primary : colors.text}
             />
           ),
         }}
@@ -118,11 +118,11 @@ export function DrawerStack() {
         name="Account"
         component={Account}
         options={{
-          drawerIcon: ({ focused, color }) => (
+          drawerIcon: ({ focused }) => (
             <Icon
               name="user-circle"
               size={20}
-              color={focused ? darkColors.primary : color}
+              color={focused ? colors.primary : colors.text}
             />
           ),
         }}
@@ -136,7 +136,7 @@ export function DrawerStack() {
             <Icon
               name="question-circle"
               size={20}
-              color={focused ? darkColors.primary : color}
+              color={focused ? colors.primary : color}
             />
           ),
           drawerItemStyle: { marginTop: 400 },
