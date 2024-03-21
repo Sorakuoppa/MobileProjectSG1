@@ -5,6 +5,10 @@ export const darkColors = {
   primary: "#FF5C00",
   secondary: "#363636",
 };
+export const lightColors = {
+  primary: "#FF5C00",
+  secondary: "#FFEBD8",
+};
 
 export const general = StyleSheet.create({
   title: {
@@ -16,7 +20,7 @@ export const general = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#5b5b5b",
+    backgroundColor: darkColors.secondary,
   },
   container: {
     flex: 0.2,
@@ -35,7 +39,7 @@ export const general = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     width: "80%",
-    backgroundColor: darkColors.primary,
+    backgroundColor: lightColors.secondary,
     margin: 10,
   },
 });
