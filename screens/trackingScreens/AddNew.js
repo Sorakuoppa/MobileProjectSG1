@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text} from "react-native";
+import { View, Text, Pressable} from "react-native";
 import { IconButton, Surface } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome5";
@@ -11,20 +11,15 @@ export default function AddNew() {
 
 
     return (
-        <View style={{...general.scaffold}}>
-            <Text style={general.title}>Add New</Text>
-            <View style={addNewStyle.templates}>
-               <Surface elevation={4}>
-                    <IconButton
-                        icon={({ color, size }) => (
-                            <Icon name="plus" color={color} size={size} />
-                        )}
-                        color={colors.primary}
-                        size={50}
-                        onPress={() => console.log("Pressed")}
-                    />
-               </Surface>
-            </View>
+      <View style={{ ...general.scaffold, justifyContent: "flex-start" }}>
+        <View style={addNewStyle.templatesContainer}>
+          <Pressable onPress={() => console.log('Template chosen!')}>
+            <Surface elevation={4} style={{...addNewStyle.template, backgroundColor: colors.background}}>
+              <Icon name="dumbbell" size={40} color={colors.primary} />
+              <Text style={{...addNewStyle.templateText, color: colors.text}}>Basic exercise template for your workout goals!</Text>
+            </Surface>
+          </Pressable>
         </View>
+      </View>
     );
 }
