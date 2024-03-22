@@ -14,7 +14,7 @@ import Settings from "../screens/miscellaneous/Settings";
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-// Manage labels and icons for bottom nav HERE
+// Manage labels and icons for BOTTOM NAV here
 const bottomTabs = [
   {
     name: "HomeTab",
@@ -46,6 +46,7 @@ function ScreenStack() {
         tabBarStyle: { backgroundColor: colors.background },
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.text,
+        tabBarLabelStyle: { fontSize: 13 },
       }}
     >
       {bottomTabs.map((screen, index) => (
@@ -58,7 +59,7 @@ function ScreenStack() {
             tabBarIcon: ({ focused }) => (
               <Icon
                 name={screen.iconName}
-                size={20}
+                size={22}
                 color={focused ? colors.primary : colors.text}
               />
             ),
@@ -69,7 +70,7 @@ function ScreenStack() {
   );
 }
 
-// Manage labels and icons for drawer nav HERE
+// Manage labels and icons for DRAWER NAV here
 const screens = [
   {
     name: "Home",

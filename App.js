@@ -17,7 +17,7 @@ export default function App() {
   //Detects the device's color scheme
   // const scheme = useColorScheme();
 
-  // HARD CODE SCHEME FOR TESTING, useColorScheme doesn't work on emulator
+  // HARD CODED FOR TESTING, useColorScheme doesn't work on emulator
   const scheme = "dark";
 
   if (!fontsLoaded) {

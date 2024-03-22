@@ -2,13 +2,12 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
-import { homeStyles} from "../../styles/homeStyles";
+import { homeStyles} from "../../styles/trackingScreens/homeStyle";
 import { general } from "../../styles/general";
 import { useTheme } from "@react-navigation/native";
 
 export default function Home() {
   const { colors } = useTheme();
-  console.log(colors);
   return (
     <View style={general.scaffold}>
       {/* <LinearGradient
