@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mobile-project",
-    "slug": "mobile-project",
+    "name": "tester",
+    "slug": "tester",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
