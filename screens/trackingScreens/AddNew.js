@@ -25,7 +25,7 @@ export default function AddNew() {
   };
 
   return (
-    <View style={{ ...general.scaffold, justifyContent: "flex-start" }}>
+    <View style={general.scaffold}>
       <View style={addNewStyle.templatesContainer}>
         {templateList.map((template, index) => (
           <Pressable key={index} onPressIn={fadeIn} onPressOut={fadeOut}>

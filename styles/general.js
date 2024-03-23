@@ -40,7 +40,8 @@ export const general = StyleSheet.create({
   },
   scaffold: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
+    marginTop: 20,
   },
 });
