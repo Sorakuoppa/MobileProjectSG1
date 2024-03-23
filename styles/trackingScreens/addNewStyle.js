@@ -6,9 +6,9 @@ export const addNewStyle = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         width: "90%",
-        flex: 0.4,
-        margin: 10,
+        height: 'auto',
         padding: 10,
+        margin: 10,
         borderRadius: 10,
     },
     templateText: {
@@ -16,7 +16,6 @@ export const addNewStyle = StyleSheet.create({
         width: "50%"
     },
     templatesContainer: {
-        flex: 0.7,
         justifyContent: "flex-start",
         alignItems: "center",
         width: "100%",
