@@ -1,19 +1,18 @@
-
 import React, { createContext, useState, useContext } from 'react';
 
 // Create context
-export const LoginContext = createContext();
+export const FirstTimeLoadContext = createContext(); // Renamed context
 
 // Create provider
 export const FirstTimeLoadProvider = ({ children }) => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [firstTimeLoaded, setFirstTimeLoaded] = useState(false); // Renamed variable
 
   return (
-    <LoginContext.Provider value={{ isUserLoggedIn, setIsUserLoggedIn }}>
+    <FirstTimeLoadContext.Provider value={{ firstTimeLoaded, setFirstTimeLoaded }}>
       {children}
-    </LoginContext.Provider>
+    </FirstTimeLoadContext.Provider>
   );
 };
 
 // Custom hook to consume the context
-export const useLoaded = () => useContext(LoginContext);
+export const useLoaded = () => useContext(FirstTimeLoadContext);

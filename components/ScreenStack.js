@@ -146,10 +146,10 @@ export function DrawerStack() {
   );
 }
 export function MainNavigator() {
-  const { isUserLoggedIn } = useLoaded();
+  const { firstTimeLoaded } = useLoaded();
   return (
     <>
-      {isUserLoggedIn ? (
+      {firstTimeLoaded ? (
         <DrawerStack />
       ) : (
         <InitialStackScreen />

@@ -1,8 +1,10 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { general } from "../../styles/general";
 import { useNavigation } from '@react-navigation/native';
 import { startedStyle } from "../../styles/miscellaneous/startedStyle";
+
 export default function GetStarted() {
   const navigation = useNavigation();
 
@@ -12,18 +14,18 @@ export default function GetStarted() {
   };
 
   return (
-    <View style={general.scaffold}>
-      <View style={startedStyle.container}>
-        <Text>Get Started</Text>
-
-        <Text>Here's going to be some text about getting started
-          with the application and some other useless shit ya know
+    <LinearGradient colors={['#FF2E00', '#FFC700']} style={[general.scaffold, startedStyle.container]}>
+      <View style={startedStyle.content}>
+        <Text style={startedStyle.welcomeText}>
+          Welcome to Our Tracking Application! {'\n\n'}
+          Welcome aboard! Our tracking application empowers you to stay organized and productive by tracking anything, anytime. Whether it's your daily habits, fitness goals, work projects, or personal milestones, our intuitive interface and insightful charts help you visualize your progress and make informed decisions. Sync across devices and get started today to unlock your full potential!
         </Text>
+        <View style={startedStyle.buttonContainer}>
+  <Pressable onPress={goToLoginOrRegister} style={startedStyle.button}>
+    <Text style={startedStyle.buttonText}>Get Started</Text>
+  </Pressable>
+</View>
       </View>
-      
-      <Pressable onPress={goToLoginOrRegister}>
-        <Text>Get Started</Text>
-      </Pressable>
-    </View>
+    </LinearGradient>
   );
 }

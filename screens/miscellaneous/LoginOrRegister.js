@@ -1,31 +1,25 @@
 import React, { useContext } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { CommonActions } from '@react-navigation/native'; // Import CommonActions
-import { LoginContext } from '../../components/FirstTimeLoadContext';
+import { FirstTimeLoadContext } from '../../components/FirstTimeLoadContext';
 export default function LoginOrRegister({ navigation }) {
-  const { setIsUserLoggedIn } = useContext(LoginContext);
+    const { setFirstTimeLoaded } = useContext(FirstTimeLoadContext); // Updated context and variable
 
   const handleLogin = () => {
-    // Perform login logic here
-    // Once login is successful, set isUserLoggedIn to true
-    setIsUserLoggedIn(true);
-
-    // Navigate to the home screen
+    // Tämä navigoi loginscreeniin
     navigation.navigate('Login');
   };
 
   const handleRegister = () => {
-    // Perform registration logic here
-    // Once registration is successful, set isUserLoggedIn to true
-    setIsUserLoggedIn(true);
-
-    // Navigate to the home screen
+  // Tämä navigoi kirjautumiseen
+  // Nämä kaikki napit vielä tyylittämättä
+    
     navigation.navigate('Register');
   };
 
   const handleAnonLogin = () => {
-    setIsUserLoggedIn(true);
-    navigation.dispatch(
+    setFirstTimeLoaded(true);
+        navigation.dispatch(
         CommonActions.reset({
           index: 0,
           routes: [{ name: 'DrawerStack' }],
