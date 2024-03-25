@@ -10,6 +10,10 @@ const LoginComponent = () => {
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password); // Access auth directly from FirebaseConfig
+      
+      // TÄHÄN LISÄTÄÄN MITÄ TAPAHTUU KUN LOGIN ON SUCCESFULL
+
+      
       console.log('User signed in successfully!');
     } catch (error) {
       alert(error.message);

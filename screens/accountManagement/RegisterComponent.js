@@ -10,6 +10,9 @@ const RegisterComponent = () => {
   const handleRegister = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      // TÄHÄN VÄLIIN LISÄTÄÄN MITÄ TAPAHTUU KUN REKISTERÖINTI ON ONNISTUNUT
+
+      
       console.log('User created successfully!');
     } catch (error) {
       alert(error.message);
