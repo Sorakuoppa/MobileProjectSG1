@@ -1,7 +1,11 @@
 import React, { useContext } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Image } from 'react-native';
 import { CommonActions } from '@react-navigation/native'; // Import CommonActions
 import { FirstTimeLoadContext } from '../../components/FirstTimeLoadContext';
+import { logOrReg } from '../../styles/miscellaneous/loginOrRegisterStyle';
+import { general } from '../../styles/general';
+import  onTrackLogo  from "../../assets/onTrackLogo.png";
+
 export default function LoginOrRegister({ navigation }) {
     const { setFirstTimeLoaded } = useContext(FirstTimeLoadContext); // Updated context and variable
 
@@ -28,17 +32,22 @@ export default function LoginOrRegister({ navigation }) {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Login or Register Screen</Text>
-      <Pressable onPress={handleLogin}>
-        <Text>Login</Text>
+    <View style={general.scaffold}>
+      <Image source={onTrackLogo} style={logOrReg.logo}/>
+      <Text style={logOrReg.headerText}>Welcome!</Text>
+    <View style={logOrReg.buttonContainer}>
+      <Pressable style={logOrReg.button} onPress={handleLogin}>
+        <Text style={logOrReg.buttonText}>Login</Text>
       </Pressable>
-      <Pressable onPress={handleRegister}>
-        <Text>Register</Text>
+      <Pressable style={logOrReg.button} onPress={handleRegister}>
+        <Text style={logOrReg.buttonText} >Register</Text>
       </Pressable>
-      <Pressable onPress={handleAnonLogin}>
-        <Text>Continue without login</Text>
+      <View style={logOrReg.anonContainer}>
+      <Pressable style={logOrReg.anonButton}  onPress={handleAnonLogin}>
+        <Text style={logOrReg.anonText}>Continue without login</Text>
       </Pressable>
+      </View>
+    </View>
     </View>
   );
 }
