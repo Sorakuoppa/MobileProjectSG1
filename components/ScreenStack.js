@@ -15,6 +15,8 @@ import Settings from "../screens/miscellaneous/Settings";
 import GetStarted from "../screens/miscellaneous/GetStarted";
 import LoginOrRegister from "../screens/miscellaneous/LoginOrRegister";
 import { useLoaded } from "./FirstTimeLoadContext";
+import LoginComponent from "../screens/accountManagement/LoginComponent";
+import RegisterComponent from "../screens/accountManagement/RegisterComponent";
 
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -46,6 +48,8 @@ function InitialStackScreen() {
     <InitialStack.Navigator>
       <InitialStack.Screen name="GetStarted" component={GetStarted} />
       <InitialStack.Screen name="LoginOrRegister" component={LoginOrRegister} />
+      <InitialStack.Screen name="Login" component={LoginComponent} />
+      <InitialStack.Screen name="Register" component={RegisterComponent} />
     </InitialStack.Navigator>
   );
 }
