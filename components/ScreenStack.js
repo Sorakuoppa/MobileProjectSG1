@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 import AboutUs from "../screens/miscellaneous/AboutUs";
@@ -10,10 +12,13 @@ import AddNew from "../screens/trackingScreens/AddNew";
 import Home from "../screens/trackingScreens/Home";
 import Trackers from "../screens/trackingScreens/Trackers";
 import Settings from "../screens/miscellaneous/Settings";
+import GetStarted from "../screens/miscellaneous/GetStarted";
+import LoginOrRegister from "../screens/miscellaneous/LoginOrRegister";
+import { useLoaded } from "./FirstTimeLoadContext";
 
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
-
+const InitialStack = createNativeStackNavigator();
 // Manage labels and icons for BOTTOM NAV here
 const bottomTabs = [
   {
@@ -35,6 +40,15 @@ const bottomTabs = [
     iconName: "chart-bar",
   },
 ];
+
+function InitialStackScreen() {
+  return (
+    <InitialStack.Navigator>
+      <InitialStack.Screen name="GetStarted" component={GetStarted} />
+      <InitialStack.Screen name="LoginOrRegister" component={LoginOrRegister} />
+    </InitialStack.Navigator>
+  );
+}
 
 function ScreenStack() {
   const { colors } = useTheme();
@@ -129,5 +143,17 @@ export function DrawerStack() {
         />
       ))}
     </Drawer.Navigator>
+  );
+}
+export function MainNavigator() {
+  const { isUserLoggedIn } = useLoaded();
+  return (
+    <>
+      {isUserLoggedIn ? (
+        <DrawerStack />
+      ) : (
+        <InitialStackScreen />
+      )}
+    </>
   );
 }

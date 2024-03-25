@@ -1,13 +1,13 @@
 import "react-native-gesture-handler";
 import React, {useState} from "react";
 import { StatusBar, useColorScheme } from "react-native";
-import { DrawerStack } from "./components/ScreenStack";
+import { DrawerStack, MainNavigator } from "./components/ScreenStack";
 import { PaperProvider } from "react-native-paper";
 import { NavigationContainer, useTheme } from "@react-navigation/native";
 import { ThemeContext } from "./components/Context";
 import { useFonts } from "expo-font";
 import { darkColors, lightColors, DarkTheme, LightTheme } from "./styles/general";
-
+import { FirstTimeLoadProvider } from "./components/FirstTimeLoadContext";
 
 
 export default function App() {
@@ -31,7 +31,9 @@ export default function App() {
       <NavigationContainer theme={theme === 'dark' ? DarkTheme : LightTheme}>
         {/* Go to ./components/ScreenStack to configure app navigation */}
         <ThemeContext.Provider value={{ theme, setTheme }}>
-        <DrawerStack />
+          <FirstTimeLoadProvider>
+            <MainNavigator/>
+        </FirstTimeLoadProvider>
         </ThemeContext.Provider>
       </NavigationContainer>
     </PaperProvider>
