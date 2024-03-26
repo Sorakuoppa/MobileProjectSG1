@@ -1,18 +1,17 @@
-import React, { createContext, useContext, useState } from 'react';
+// LoginContext.js
+import { createContext, useState, useContext } from 'react';
 
-// Create a context for user data
-const UserContext = createContext();
+const LoginContext = createContext();
 
-// Create a provider component to wrap your application with
-export const UserProvider = ({ children }) => {
-  const [userData, setUserData] = useState(null);
+export const LoginProvider = ({ children }) => {
+  const [email, setUserEmail] = useState('');
+  const [username, setUsername] = useState('');
 
   return (
-    <UserContext.Provider value={{ userData, setUserData }}>
+    <LoginContext.Provider value={{  email, setUserEmail, username, setUsername }}>
       {children}
-    </UserContext.Provider>
+    </LoginContext.Provider>
   );
 };
 
-// Custom hook to consume the user context
-export const useUser = () => useContext(UserContext);
+export const useLoginContext = () => useContext(LoginContext);

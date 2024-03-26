@@ -8,8 +8,7 @@ import { ThemeContext } from "./components/Context";
 import { useFonts } from "expo-font";
 import { darkColors, lightColors, DarkTheme, LightTheme } from "./styles/general";
 import { FirstTimeLoadProvider } from "./components/FirstTimeLoadContext";
-
-
+import { LoginProvider } from "./components/LoginContext";
 export default function App() {
   const [theme, setTheme] = useState("dark");
   //Custom fonts can be added to this list
@@ -31,8 +30,10 @@ export default function App() {
       <NavigationContainer theme={theme === 'dark' ? DarkTheme : LightTheme}>
         {/* Go to ./components/ScreenStack to configure app navigation */}
         <ThemeContext.Provider value={{ theme, setTheme }}>
-          <FirstTimeLoadProvider>
+        <FirstTimeLoadProvider>
+          <LoginProvider>
             <MainNavigator/>
+        </LoginProvider>
         </FirstTimeLoadProvider>
         </ThemeContext.Provider>
       </NavigationContainer>
