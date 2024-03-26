@@ -6,7 +6,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { general } from "../../styles/general";
 import { addNewStyle } from "../../styles/trackingScreens/addNewStyle";
 
-export default function AddNew() {
+export default function AddNew({navigation}) {
   const { colors } = useTheme();
   const animated = new Animated.Value(1);
   const fadeIn = () => {
@@ -23,6 +23,11 @@ export default function AddNew() {
       useNativeDriver: true,
     }).start();
   };
+
+  const templatePress = (templateName) => {
+    const routeObject = templateList.find((template) => template.name === templateName);
+    navigation.navigate('TemplateTracker', {template: routeObject});
+  }
 
   return (
     <View style={general.scaffold}>
@@ -44,7 +49,7 @@ export default function AddNew() {
                 icon="plus"
                 iconColor={colors.primary}
                 size={30}
-                onPress={() => {}}
+                onPress={() => templatePress(template.name)}
               />
             </Surface>
           </Pressable>
@@ -69,5 +74,10 @@ const templateList =  [
     name: 'run',
     icon: 'running',
     text: 'Sprint to your milestones!'
+  },
+  {
+    name: 'create',
+    icon: 'plus-circle',
+    text: 'Create your own template!'
   }
 ]

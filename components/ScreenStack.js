@@ -11,6 +11,7 @@ import Account from "../screens/accountManagement/Account";
 import AddNew from "../screens/trackingScreens/AddNew";
 import Home from "../screens/trackingScreens/Home";
 import Trackers from "../screens/trackingScreens/Trackers";
+import TemplateTracker from "../screens/trackingScreens/TemplateTracker";
 import Settings from "../screens/miscellaneous/Settings";
 import GetStarted from "../screens/miscellaneous/GetStarted";
 import LoginOrRegister from "../screens/miscellaneous/LoginOrRegister";
@@ -46,7 +47,7 @@ const bottomTabs = [
 function InitialStackScreen() {
   return (
     <InitialStack.Navigator>
-      <InitialStack.Screen name="GetStarted" component={GetStarted} />
+      <InitialStack.Screen name="GetStarted" component={GetStarted} options={{headerShown: false}} />
       <InitialStack.Screen name="LoginOrRegister" component={LoginOrRegister} />
       <InitialStack.Screen name="Login" component={LoginComponent} />
       <InitialStack.Screen name="Register" component={RegisterComponent} />
@@ -110,6 +111,12 @@ const screens = [
     component: AboutUs,
     iconName: "question",
     drawerItemStyle: { marginTop: 400 },
+  },
+  {
+    name: "TemplateTracker",
+    component: TemplateTracker,
+    iconName: "plus",
+    drawerItemStyle: { display: "none" },
   },
 ];
 

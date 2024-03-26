@@ -10,6 +10,8 @@ export const addNewStyle = StyleSheet.create({
         padding: 10,
         margin: 10,
         borderRadius: 10,
+        borderWidth: 1,
+        borderColor: "#6e6e6e",
     },
     templateText: {
         fontSize: 15,
@@ -19,6 +21,17 @@ export const addNewStyle = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         width: "100%",
-        backgroundColor: "#645454",
     },
+});
+
+export const templateStyle = StyleSheet.create({
+    milestones: {
+        width: "90%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        backgroundColor: "#919191",
+
+    }
+
 });
