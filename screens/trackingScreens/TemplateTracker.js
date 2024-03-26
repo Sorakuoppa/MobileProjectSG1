@@ -1,20 +1,15 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { useTheme } from "@react-navigation/native";
-import { IconButton, Checkbox } from "react-native-paper";
-import Icon from "react-native-vector-icons/FontAwesome5";
+
 
 import Create from "./templates/Create";
 import Exercise from "./templates/Exercise";
 import Reading from "./templates/Reading";
 import Running from "./templates/Running";
 
-import { general } from "../../styles/general";
-import { templateStyle } from "../../styles/trackingScreens/addNewStyle";
+
 
 export default function TemplateTracker({ route }) {
   const { template } = route.params;
-  const { colors } = useTheme();
 
     switch (template.name) {
     case "create":

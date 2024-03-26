@@ -30,8 +30,10 @@ export const templateStyle = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "#919191",
-
+        backgroundColor: "#616161",
+        padding: 10,
+        margin: 5,
+        borderRadius: 10,
     }
 
 });
