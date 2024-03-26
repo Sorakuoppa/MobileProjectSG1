@@ -52,7 +52,7 @@ export default function MyTracker({ route }) {
         width={15}
         fill={progress}
         tintColor={colors.primary}
-        onAnimationComplete={() => console.log("onAnimationComplete")}
+        onAnimationComplete={() => {}}
         backgroundColor={colors.text}
       />
     </View>
