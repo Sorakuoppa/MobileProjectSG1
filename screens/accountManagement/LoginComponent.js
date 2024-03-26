@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 import { auth } from '../../components/FirebaseConfig'; // Import FirebaseConfig auth
+import { loginAndRegisterStyles } from '../../styles/accountManagementStyles/loginAndRegisterComponent';
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('');
@@ -22,54 +23,30 @@ const LoginComponent = () => {
   };
 
   return (
-    <View style={styles.authContainer}>
-      <Text style={styles.title}>Sign In</Text>
+    <View style={loginAndRegisterStyles.authContainer}>
+      <Text style={loginAndRegisterStyles.title}>Sign In</Text>
       <TextInput
-        style={styles.input}
+        style={loginAndRegisterStyles
+          .input}
         value={email}
         onChangeText={setEmail}
         placeholder="Email"
         autoCapitalize="none"
       />
       <TextInput
-        style={styles.input}
+        style={loginAndRegisterStyles.input}
         value={password}
         onChangeText={setPassword}
         placeholder="Password"
         secureTextEntry
       />
-      <View style={styles.buttonContainer}>
+      <View style={loginAndRegisterStyles.buttonContainer}>
         <Button title="Sign In" onPress={handleLogin} color="#3498db" />
       </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  authContainer: {
-    width: '80%',
-    maxWidth: 400,
-    backgroundColor: '#fff',
-    padding: 16,
-    borderRadius: 8,
-    elevation: 3,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  input: {
-    height: 40,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    marginBottom: 16,
-    padding: 8,
-    borderRadius: 4,
-  },
-  buttonContainer: {
-    marginBottom: 16,
-  },
-});
+
 
 export default LoginComponent;

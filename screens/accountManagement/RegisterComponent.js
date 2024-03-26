@@ -1,74 +1,58 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, Alert } from 'react-native';
 import { createUserWithEmailAndPassword } from '@firebase/auth'; // Import createUserWithEmailAndPassword function
 import { auth } from '../../components/FirebaseConfig'; // Import FirebaseConfig auth
+import { useNavigation } from '@react-navigation/native';
+import { loginAndRegisterStyles } from '../../styles/accountManagementStyles/loginAndRegisterComponent';
 
 const RegisterComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const navigation = useNavigation();
+
+ 
 
   const handleRegister = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      // TÄHÄN VÄLIIN LISÄTÄÄN MITÄ TAPAHTUU KUN REKISTERÖINTI ON ONNISTUNUT
-
-      
-      console.log('User created successfully!');
+      setShowSuccessMessage(true); // Show success message
+      setTimeout(() => {
+        navigation.navigate('Login');
+      }, 2000); // Navigate to login screen after 2 seconds
     } catch (error) {
       alert(error.message);
       console.error('Authentication error:', error.message);
     }
   };
-
   return (
-    <View style={styles.authContainer}>
-      <Text style={styles.title}>Sign Up</Text>
+    <View style={loginAndRegisterStyles.authContainer}>
+      <Text style={loginAndRegisterStyles.title}>Sign Up</Text>
       <TextInput
-        style={styles.input}
+        style={loginAndRegisterStyles.input}
         value={email}
         onChangeText={setEmail}
         placeholder="Email"
         autoCapitalize="none"
       />
       <TextInput
-        style={styles.input}
+        style={loginAndRegisterStyles.input}
         value={password}
         onChangeText={setPassword}
         placeholder="Password"
         secureTextEntry
       />
-      <View style={styles.buttonContainer}>
+      <View style={loginAndRegisterStyles.buttonContainer}>
         <Button title="Sign Up" onPress={handleRegister} color="#3498db" />
       </View>
-    </View>
+      {showSuccessMessage && (
+        <Text style={loginAndRegisterStyles.successMessage}>
+          Registration successful! 
+        </Text>
+      )}
+     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  authContainer: {
-    width: '80%',
-    maxWidth: 400,
-    backgroundColor: '#fff',
-    padding: 16,
-    borderRadius: 8,
-    elevation: 3,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  input: {
-    height: 40,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    marginBottom: 16,
-    padding: 8,
-    borderRadius: 4,
-  },
-  buttonContainer: {
-    marginBottom: 16,
-  },
-});
 
 export default RegisterComponent;
