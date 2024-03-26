@@ -6,6 +6,10 @@ import { logOrReg } from '../../styles/miscellaneous/loginOrRegisterStyle';
 import { general } from '../../styles/general';
 import  onTrackLogo  from "../../assets/onTrackLogo.png";
 
+// Tän funktion ja siihen liittyvän tyylitiedoston vois tulevaisuudessa nimetä uuellee ja organisoida ettei
+// mee login ja register componenttien kans sekasin
+// t. samppa
+
 export default function LoginOrRegister({ navigation }) {
     const { setFirstTimeLoaded } = useContext(FirstTimeLoadContext); // Updated context and variable
 
