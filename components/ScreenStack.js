@@ -11,7 +11,8 @@ import Account from "../screens/accountManagement/Account";
 import AddNew from "../screens/trackingScreens/AddNew";
 import Home from "../screens/trackingScreens/Home";
 import Trackers from "../screens/trackingScreens/Trackers";
-import TemplateTracker from "../screens/trackingScreens/TemplateTracker";
+import MyTracker from "../screens/trackingScreens/MyTracker";
+import Templates from "../screens/trackingScreens/Templates";
 import Settings from "../screens/miscellaneous/Settings";
 import GetStarted from "../screens/miscellaneous/GetStarted";
 import LoginOrRegister from "../screens/miscellaneous/LoginOrRegister";
@@ -47,7 +48,11 @@ const bottomTabs = [
 function InitialStackScreen() {
   return (
     <InitialStack.Navigator>
-      <InitialStack.Screen name="GetStarted" component={GetStarted} options={{headerShown: false}} />
+      <InitialStack.Screen
+        name="GetStarted"
+        component={GetStarted}
+        options={{ headerShown: false }}
+      />
       <InitialStack.Screen name="LoginOrRegister" component={LoginOrRegister} />
       <InitialStack.Screen name="Login" component={LoginComponent} />
       <InitialStack.Screen name="Register" component={RegisterComponent} />
@@ -82,6 +87,7 @@ function ScreenStack() {
                 color={focused ? colors.primary : colors.text}
               />
             ),
+            tabBarItemStyle: screen.tabBarItemStyle,
           }}
         />
       ))}
@@ -113,9 +119,13 @@ const screens = [
     drawerItemStyle: { marginTop: 400 },
   },
   {
-    name: "TemplateTracker",
-    component: TemplateTracker,
-    iconName: "plus",
+    name: "Templates",
+    component: Templates,
+    drawerItemStyle: { display: "none" },
+  },
+  {
+    name: "MyTracker",
+    component: MyTracker,
     drawerItemStyle: { display: "none" },
   },
 ];
@@ -158,13 +168,5 @@ export function DrawerStack() {
 }
 export function MainNavigator() {
   const { firstTimeLoaded } = useLoaded();
-  return (
-    <>
-      {firstTimeLoaded ? (
-        <DrawerStack />
-      ) : (
-        <InitialStackScreen />
-      )}
-    </>
-  );
+  return <>{firstTimeLoaded ? <DrawerStack /> : <InitialStackScreen />}</>;
 }

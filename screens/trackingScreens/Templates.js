@@ -8,7 +8,7 @@ import Running from "./templates/Running";
 
 
 
-export default function TemplateTracker({ route }) {
+export default function Templates({ route }) {
   const { template } = route.params;
 
     switch (template.name) {
@@ -22,16 +22,3 @@ export default function TemplateTracker({ route }) {
         return <Running template={template} />;
     }
 }
-
-
-//   return (
-//     <View style={general.scaffold}>
-//       <Icon name={template.icon} size={40} color={colors.primary} />
-//       <Text>Template: {template.name} </Text>
-//       <View style={templateStyle.milestones}>
-//         <Text> Book read? </Text>
-//         <Checkbox status="checked" color={colors.primary} />
-//       </View>
-//     </View>
-//   );
-// }

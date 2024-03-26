@@ -26,7 +26,7 @@ export default function AddNew({navigation}) {
 
   const templatePress = (templateName) => {
     const routeObject = templateList.find((template) => template.name === templateName);
-    navigation.navigate('TemplateTracker', {template: routeObject});
+    navigation.navigate('Templates', {template: routeObject});
   }
 
   return (
