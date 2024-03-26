@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { IconButton, Checkbox } from "react-native-paper";
+import { Button, Checkbox } from "react-native-paper";
 import Collapsible from "react-native-collapsible";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { exerciseData } from "../data/exerciseData";
@@ -21,10 +21,13 @@ export default function Exercise() {
 
   return (
     <View style={general.scaffold}>
-      <ScrollView style={{ width: '100%'}}>
+      <ScrollView style={{ width: "100%" }}>
         <TouchableOpacity
           onPress={() => setCollapsedPush(!collapsedPush)}
-          style={{ ...templateStyle.exerciseContainer, flexDirection: "column"}}
+          style={{
+            ...templateStyle.exerciseContainer,
+            flexDirection: "column",
+          }}
         >
           <Text style={{ color: colors.primary }}> Push day </Text>
           <Collapsible
@@ -46,7 +49,10 @@ export default function Exercise() {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setCollapsedPull(!collapsedPull)}
-          style={{ ...templateStyle.exerciseContainer, flexDirection: "column" }}
+          style={{
+            ...templateStyle.exerciseContainer,
+            flexDirection: "column",
+          }}
         >
           <Text style={{ color: colors.primary }}> Pull day </Text>
           <Collapsible
@@ -68,7 +74,10 @@ export default function Exercise() {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setCollapsedLegs(!collapsedLegs)}
-          style={{ ...templateStyle.exerciseContainer, flexDirection: "column" }}
+          style={{
+            ...templateStyle.exerciseContainer,
+            flexDirection: "column",
+          }}
         >
           <Text style={{ color: colors.primary }}> Leg day </Text>
           <Collapsible
@@ -89,6 +98,13 @@ export default function Exercise() {
           </Collapsible>
         </TouchableOpacity>
       </ScrollView>
+      <Button
+        children="Add this tracker"
+        mode="contained"
+        buttonColor={colors.primary}
+        style={{ marginBottom: 20 }}
+        onPress={() => console.log("Add new exercise")}
+      />
     </View>
   );
 }
