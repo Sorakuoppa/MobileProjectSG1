@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { Checkbox } from "react-native-paper";
+import { Button, Checkbox } from "react-native-paper";
 import Collapsible from "react-native-collapsible";
-
 import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
 
 export default function CollapsibleComponent({ dataList, title }) {
@@ -17,8 +16,10 @@ export default function CollapsibleComponent({ dataList, title }) {
     if (!checked) {
       setSelectedExercises(dataList);
       console.log(selectedExercises);
+    }else
+    {
+      console.log("Array cleared");
     }
-
   };
 
   return (
@@ -49,6 +50,8 @@ export default function CollapsibleComponent({ dataList, title }) {
           </View>
         ))}
       </Collapsible>
+      <Button mode="contained"/>
     </TouchableOpacity>
+    
   );
 }
