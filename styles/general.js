@@ -37,7 +37,6 @@ export const DarkTheme = {
 export const general = StyleSheet.create({
   title: {
     fontSize: 30,
-    color: "white",
     fontFamily: "Gantari",
   },
   scaffold: {
