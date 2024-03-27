@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -97,49 +97,54 @@ function ScreenStack() {
 }
 
 // Manage labels and icons for DRAWER NAV here
-const screens = [
-  {
-    name: "Home",
-    component: ScreenStack,
-    iconName: "home",
-  },
-  {
-    name: "Settings",
-    component: Settings,
-    iconName: "cog",
-  },
-  {
-    name: "Account",
-    component: Account,
-    iconName: "user",
-    drawerItemStyle: useLoginContext ? {} : { display: "none" }
-  },
-  {
-    name: "Login",
-    component: LoginComponent,
-    iconName: "sign-in-alt",
-    drawerItemStyle: useLoginContext ? { display: "none" } : {}  
-  },
-  {
-    name: "About us",
-    component: AboutUs,
-    iconName: "question",
-    drawerItemStyle: { marginTop: 400 },
-  },
-  {
-    name: "Templates",
-    component: Templates,
-    drawerItemStyle: { display: "none" },
-  },
-  {
-    name: "MyTracker",
-    component: MyTracker,
-    drawerItemStyle: { display: "none" },
-  },
-];
-
 export function DrawerStack() {
+  const  { LoggedIn }  = useLoginContext();
+  useEffect(() => {
+    // Check the login state every time the drawer stack mounts
+    console.log('Login state checked:', LoggedIn);
+  }, [LoggedIn]);
   const { colors } = useTheme();
+  const screens = [
+    {
+      name: "Home",
+      component: ScreenStack,
+      iconName: "home",
+    },
+    {
+      name: "Settings",
+      component: Settings,
+      iconName: "cog",
+    },
+    {
+      name: "Account",
+      component: Account,
+      iconName: "user",
+      drawerItemStyle: LoggedIn ? {} : { display: "none" }
+    },
+    {
+      name: "Login",
+      component: LoginComponent,
+      iconName: "sign-in-alt",
+      drawerItemStyle: LoggedIn ? { display: "none" } : {}  
+    },
+    {
+      name: "About us",
+      component: AboutUs,
+      iconName: "question",
+      drawerItemStyle: { marginTop: 400 },
+    },
+    {
+      name: "Templates",
+      component: Templates,
+      drawerItemStyle: { display: "none" },
+    },
+    {
+      name: "MyTracker",
+      component: MyTracker,
+      drawerItemStyle: { display: "none" },
+    },
+  ];
+  
   return (
     <Drawer.Navigator
       screenOptions={{
