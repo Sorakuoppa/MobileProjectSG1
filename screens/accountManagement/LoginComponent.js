@@ -10,7 +10,7 @@ import { CommonActions } from '@react-navigation/native';
 
 const LoginComponent = (navigation) => {
   const { setFirstTimeLoaded } = useContext(FirstTimeLoadContext); // Updated context and variable
-  const { setUserEmail, setUsername } = useLoginContext();
+  const { setUserEmail, setUsername, setLoginState } = useLoginContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const usersRef = collection(db, "users")
@@ -28,6 +28,7 @@ const LoginComponent = (navigation) => {
         const username = userData.username;
         setUserEmail(userEmail);
         setUsername(username);
+        setLoginState(true);
 
         console.log('User signed in successfully!');
         setFirstTimeLoaded(true);

@@ -98,11 +98,11 @@ function ScreenStack() {
 
 // Manage labels and icons for DRAWER NAV here
 export function DrawerStack() {
-  const  { LoggedIn }  = useLoginContext();
+  const  { loginState }  = useLoginContext();
   useEffect(() => {
     // Check the login state every time the drawer stack mounts
-    console.log('Login state checked:', LoggedIn);
-  }, [LoggedIn]);
+    console.log('Login state checked:', loginState);
+  }, [loginState]);
   const { colors } = useTheme();
   const screens = [
     {
@@ -119,13 +119,13 @@ export function DrawerStack() {
       name: "Account",
       component: Account,
       iconName: "user",
-      drawerItemStyle: LoggedIn ? {} : { display: "none" }
+      drawerItemStyle: loginState ? {} : { display: "none" }
     },
     {
       name: "Login",
       component: LoginComponent,
       iconName: "sign-in-alt",
-      drawerItemStyle: LoggedIn ? { display: "none" } : {}  
+      drawerItemStyle: loginState ? { display: "none" } : {}  
     },
     {
       name: "About us",
