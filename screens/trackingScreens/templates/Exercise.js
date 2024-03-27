@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Button } from "react-native-paper";
-
+import Icon from "react-native-vector-icons/FontAwesome5";
 import CollapsibleComponent from "./CollapsibleComponent";
 import { exerciseData } from "../data/exerciseData";
 
 import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Exercise() {
+export default function Exercise({ template }) {
   const { colors } = useTheme();
   const pushDay = exerciseData.filter((exercise) => exercise.type === "push");
   const pullDay = exerciseData.filter((exercise) => exercise.type === "pull");
@@ -17,6 +17,8 @@ export default function Exercise() {
 
   return (
     <View style={general.scaffold}>
+      <Icon name={template.icon} size={40} color={colors.primary} />
+      <Text style={{ ...general.title, color: colors.text }}>Exercise </Text>
       <ScrollView style={{ width: "80%" }}>
         <CollapsibleComponent dataList={pushDay} title="Push day" />
         <CollapsibleComponent dataList={pullDay} title="Pull day" />

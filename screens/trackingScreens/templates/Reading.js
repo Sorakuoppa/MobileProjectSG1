@@ -15,7 +15,7 @@ export default function Reading({ template }) {
     <View style={{ ...general.scaffold, justifyContent: "space-between" }}>
       <View style={general.scaffold}>
         <Icon name={template.icon} size={40} color={colors.primary} />
-        <Text style={general.title}>Reading </Text>
+        <Text style={{ ...general.title, color: colors.text }}>Reading </Text>
         <Text style={{ color: colors.text }}> Milestones in this tracker:</Text>
         <MilestoneComponent text="Read 10 pages" type="checkbox" />
         <MilestoneComponent text="Read 20 pages" type="count" />
