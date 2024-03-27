@@ -177,7 +177,7 @@ export function DrawerStack() {
           }}
         />
       ))}
-            <Drawer.Screen name="SignOut" component={SignOutButton} />
+            <Drawer.Screen name="Sign Out" component={SignOutButton} />
     </Drawer.Navigator>
   );
 }

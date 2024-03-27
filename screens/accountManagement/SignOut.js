@@ -3,8 +3,9 @@ import { Button, View } from 'react-native';
 import { signOut } from '@firebase/auth'; // Import the signOut function from Firebase authentication
 import { useLoginContext } from '../../components/LoginContext';
 import { auth } from '../../components/FirebaseConfig';
-import Icon from "react-native-vector-icons/FontAwesome5";
 import { useTheme } from 'react-native-paper';
+import { DrawerItem } from '@react-navigation/drawer';
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 const SignOutButton = () => {
     const { loginState, setLoginState, setUserEmail, setUsername } = useLoginContext(); // Get the function to update login state from the context
@@ -22,11 +23,14 @@ const SignOutButton = () => {
   };
   return (
     <View>
-     {loginState && ( // Render the button only if the user is logged in
-        <Icon
-          name="sign-out-alt"
-          size={24}
-          color={focused ? colors.primary : colors.text}
+      {loginState && ( // Render the button only if the user is logged in
+        <DrawerItem
+          label="Sign Out"
+          icon={({ focused, color, size }) => (
+            <Icon
+              name="sign-out-alt"
+            />
+          )}
           onPress={handleSignOut}
         />
       )}
