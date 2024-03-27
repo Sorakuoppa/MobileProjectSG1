@@ -36,10 +36,11 @@ export default function AddNew({navigation}) {
         {templateList.map((template, index) => (
           <Pressable key={index} onPressIn={fadeIn} onPressOut={fadeOut}>
             <Surface
-              elevation={4}
+              elevation={3}
               style={{
                 ...addNewStyle.template,
-                backgroundColor: colors.background,
+                backgroundColor: colors.accent,
+                borderColor: colors.primary,
               }}
             >
               <Icon name={template.icon} size={40} color={colors.primary} />

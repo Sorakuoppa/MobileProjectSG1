@@ -14,6 +14,10 @@ export default function Exercise() {
   const [collapsedPush, setCollapsedPush] = useState(true);
   const [collapsedPull, setCollapsedPull] = useState(true);
   const [collapsedLegs, setCollapsedLegs] = useState(true);
+  const [checkedPush, setCheckedPush] = useState(false);
+  const [checkedPull, setCheckedPull] = useState(false);
+  const [checkedLegs, setCheckedLegs] = useState(false);
+
   const { colors } = useTheme();
   const pushDay = exerciseData.filter((exercise) => exercise.type === "push");
   const pullDay = exerciseData.filter((exercise) => exercise.type === "pull");
@@ -21,7 +25,7 @@ export default function Exercise() {
 
   return (
     <View style={general.scaffold}>
-      <ScrollView style={{ width: "100%" }}>
+      <ScrollView style={{ width: "80%" }}>
         <TouchableOpacity
           onPress={() => setCollapsedPush(!collapsedPush)}
           style={{
@@ -29,7 +33,14 @@ export default function Exercise() {
             flexDirection: "column",
           }}
         >
-          <Text style={{ color: colors.primary }}> Push day </Text>
+          <View style={templateStyle.exerciseTitle}>
+            <Text style={{ color: colors.primary }}> Push day </Text>
+            <Checkbox
+              status={checkedPush ? "checked" : "unchecked"}
+              onPress={() => setCheckedPush(!checkedPush)}
+              color={colors.primary}
+            />
+          </View>
           <Collapsible
             collapsed={collapsedPush}
             style={{ width: "auto", padding: 10 }}
@@ -54,7 +65,14 @@ export default function Exercise() {
             flexDirection: "column",
           }}
         >
-          <Text style={{ color: colors.primary }}> Pull day </Text>
+          <View style={templateStyle.exerciseTitle}>
+            <Text style={{ color: colors.primary }}> Pull day </Text>
+            <Checkbox
+              status={checkedPull ? "checked" : "unchecked"}
+              onPress={() => setCheckedPull(!checkedPull)}
+              color={colors.primary}
+            />
+          </View>
           <Collapsible
             collapsed={collapsedPull}
             style={{ width: "auto", padding: 10 }}
@@ -79,7 +97,14 @@ export default function Exercise() {
             flexDirection: "column",
           }}
         >
-          <Text style={{ color: colors.primary }}> Leg day </Text>
+          <View style={templateStyle.exerciseTitle}>
+            <Text style={{ color: colors.primary }}> Leg day </Text>
+            <Checkbox
+              status={checkedLegs ? "checked" : "unchecked"}
+              onPress={() => setCheckedLegs(!checkedLegs)}
+              color={colors.primary}
+            />
+          </View>
           <Collapsible
             collapsed={collapsedLegs}
             style={{ width: "auto", padding: 10 }}

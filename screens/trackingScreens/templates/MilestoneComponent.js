@@ -7,34 +7,14 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { general } from "../../../styles/general";
 import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
 
-export default function MilestoneComponent({text, type, onPress }) {
+export default function MilestoneComponent({text }) {
     const [checked, setChecked] = useState(false)
     const { colors } = useTheme();
 
-
-    if (type === "checkbox") {
         return (
-            <View style={{...templateStyle.milestones, backgroundColor: colors.background}}>
+            <View style={{...templateStyle.milestones, backgroundColor: colors.accent, borderColor: colors.primary}}>
                 <Text style={{ color: colors.text }}> {text} </Text>
-                <Checkbox status={checked ? 'checked' : 'unchecked'} onPress={() => setChecked(!checked)} color={colors.primary}  />
+                <Checkbox status={checked ? 'checked' : 'unchecked'} onPress={() => setChecked(!checked)} color={colors.primary} uncheckedColor={colors.text}/>
             </View>
         );
-    } else if (type === "count") {
-        return (
-          <View
-            style={{
-              ...templateStyle.milestones,
-              backgroundColor: colors.background,
-            }}
-          >
-            <Text style={{ color: colors.text }}> {text} </Text>
-            <Text
-              style={{ color: colors.text, fontSize: 18, paddingRight: 10 }}
-            >
-              {" "}
-              0{" "}
-            </Text>
-          </View>
-        );
-    }
-}
+    } 

@@ -13,6 +13,7 @@ export const startedStyle = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 20,
         fontSize: 16,
+        fontFamily: 'Gantari',
       },
       button: {
         backgroundColor: '#ff5c00',

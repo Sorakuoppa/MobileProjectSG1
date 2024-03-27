@@ -6,13 +6,14 @@ export const darkColors = {
 };
 export const lightColors = {
   primary: "#FF5C00",
-  secondary: "#FFEBD8",
+  secondary: "#ffffff",
 };
 export const LightTheme = {
   dark: false,
   colors: {
     primary: lightColors.primary,
     background: lightColors.secondary,
+    accent: '#FFF7F0',
     card: lightColors.secondary,
     text: "black",
     border: lightColors.primary,
@@ -25,6 +26,7 @@ export const DarkTheme = {
   colors: {
     primary: darkColors.primary,
     background: darkColors.secondary,
+    accent: '#4c4c4c',
     card: darkColors.secondary,
     text: "white",
     border: darkColors.primary,

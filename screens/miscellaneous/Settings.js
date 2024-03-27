@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import { ThemeContext } from "../../components/Context";
-import { View, Text } from "react-native";
+import { View, Text, useColorScheme } from "react-native";
 import { Switch } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import { general } from "../../styles/general";
