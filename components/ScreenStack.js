@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -19,6 +19,7 @@ import LoginOrRegister from "../screens/miscellaneous/LoginOrRegister";
 import { useLoaded } from "./FirstTimeLoadContext";
 import LoginComponent from "../screens/accountManagement/LoginComponent";
 import RegisterComponent from "../screens/accountManagement/RegisterComponent";
+import { useLoginContext } from "./LoginContext";
 
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -96,42 +97,54 @@ function ScreenStack() {
 }
 
 // Manage labels and icons for DRAWER NAV here
-const screens = [
-  {
-    name: "Home",
-    component: ScreenStack,
-    iconName: "home",
-  },
-  {
-    name: "Settings",
-    component: Settings,
-    iconName: "cog",
-  },
-  {
-    name: "Account",
-    component: Account,
-    iconName: "user",
-  },
-  {
-    name: "About us",
-    component: AboutUs,
-    iconName: "question",
-    drawerItemStyle: { marginTop: 400 },
-  },
-  {
-    name: "Templates",
-    component: Templates,
-    drawerItemStyle: { display: "none" },
-  },
-  {
-    name: "MyTracker",
-    component: MyTracker,
-    drawerItemStyle: { display: "none" },
-  },
-];
-
 export function DrawerStack() {
+  const  { loginState }  = useLoginContext();
+  useEffect(() => {
+    // Check the login state every time the drawer stack mounts
+    console.log('Login state checked:', loginState);
+  }, [loginState]);
   const { colors } = useTheme();
+  const screens = [
+    {
+      name: "Home",
+      component: ScreenStack,
+      iconName: "home",
+    },
+    {
+      name: "Settings",
+      component: Settings,
+      iconName: "cog",
+    },
+    {
+      name: "Account",
+      component: Account,
+      iconName: "user",
+      drawerItemStyle: loginState ? {} : { display: "none" }
+    },
+    {
+      name: "Login",
+      component: LoginComponent,
+      iconName: "sign-in-alt",
+      drawerItemStyle: loginState ? { display: "none" } : {}  
+    },
+    {
+      name: "About us",
+      component: AboutUs,
+      iconName: "question",
+      drawerItemStyle: { marginTop: 400 },
+    },
+    {
+      name: "Templates",
+      component: Templates,
+      drawerItemStyle: { display: "none" },
+    },
+    {
+      name: "MyTracker",
+      component: MyTracker,
+      drawerItemStyle: { display: "none" },
+    },
+  ];
+  
   return (
     <Drawer.Navigator
       screenOptions={{
