@@ -27,14 +27,17 @@ export default function CollapsibleComponent({ dataList, title }) {
       style={{
         ...templateStyle.exerciseContainer,
         flexDirection: "column",
+        borderColor: colors.primary,
+        backgroundColor: colors.accent,
       }}
     >
       <View style={templateStyle.exerciseTitle}>
-        <Text style={{ color: colors.primary }}> {title} </Text>
+        <Text style={{ color: colors.text }}> {title} </Text>
         <Checkbox
           status={checked ? "checked" : "unchecked"}
           onPress={handleCheckboxToggle}
           color={colors.primary}
+          uncheckedColor={colors.text}
         />
       </View>
       <Collapsible
