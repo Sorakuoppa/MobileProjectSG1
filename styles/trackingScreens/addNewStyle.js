@@ -47,9 +47,10 @@ export const templateStyle = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#616161",
     padding: 10,
     margin: 5,
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#6e6e6e",
   },
 });

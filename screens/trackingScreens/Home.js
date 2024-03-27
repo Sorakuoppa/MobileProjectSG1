@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+
 import { Button } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { homeStyles} from "../../styles/trackingScreens/homeStyle";

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Pressable, Animated } from "react-native";
 
+
 import { general } from "../../styles/general";
 import { trackerStyle } from "../../styles/trackingScreens/trackerStyle";
 import { addNewStyle } from "../../styles/trackingScreens/addNewStyle";
@@ -15,25 +16,26 @@ export default function Trackers({ navigation }) {
     navigation.navigate("MyTracker");
   };
 
+
+
   return (
-    <View style={general.scaffold}>
-      <Text style={general.title}>Trackers</Text>
-      <View>
-        <Pressable onPress={trackerPress}>
-          <Surface
-            elevation={4}
-            style={{
-              ...addNewStyle.template,
-              backgroundColor: colors.background,
-            }}
-          >
-            <Icon name="running" size={40} color={colors.primary} />
-            <Text style={{ ...addNewStyle.templateText, color: colors.text }}>
-              My running tracker
-            </Text>
-          </Surface>
-        </Pressable>
+      <View style={general.scaffold}>
+        <View>
+          <Pressable onPress={trackerPress}>
+            <Surface
+              elevation={4}
+              style={{
+                ...addNewStyle.template,
+                backgroundColor: colors.background,
+              }}
+            >
+              <Icon name="running" size={40} color={colors.primary} />
+              <Text style={{ ...addNewStyle.templateText, color: colors.text }}>
+                My running tracker
+              </Text>
+            </Surface>
+          </Pressable>
+        </View>
       </View>
-    </View>
   );
 }
