@@ -20,6 +20,7 @@ import { useLoaded } from "./FirstTimeLoadContext";
 import LoginComponent from "../screens/accountManagement/LoginComponent";
 import RegisterComponent from "../screens/accountManagement/RegisterComponent";
 import { useLoginContext } from "./LoginContext";
+import SignOutButton from "../screens/accountManagement/SignOut";
 
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -176,6 +177,7 @@ export function DrawerStack() {
           }}
         />
       ))}
+            <Drawer.Screen name="Sign Out" component={SignOutButton} />
     </Drawer.Navigator>
   );
 }
