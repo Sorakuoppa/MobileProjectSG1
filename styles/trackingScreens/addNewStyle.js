@@ -11,7 +11,6 @@ export const addNewStyle = StyleSheet.create({
     margin: 10,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#6e6e6e",
   },
   templateText: {
     fontSize: 15,
@@ -21,6 +20,7 @@ export const addNewStyle = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     width: "100%",
+    
   },
 });
 
@@ -41,6 +41,12 @@ export const templateStyle = StyleSheet.create({
     padding: 10,
     margin: 5,
   },
+  exerciseTitle: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "80%",
+  },
   milestones: {
     width: "90%",
     height: "auto",
@@ -51,6 +57,5 @@ export const templateStyle = StyleSheet.create({
     margin: 5,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#6e6e6e",
   },
 });
