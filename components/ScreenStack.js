@@ -19,6 +19,7 @@ import LoginOrRegister from "../screens/miscellaneous/LoginOrRegister";
 import { useLoaded } from "./FirstTimeLoadContext";
 import LoginComponent from "../screens/accountManagement/LoginComponent";
 import RegisterComponent from "../screens/accountManagement/RegisterComponent";
+import { useLoginContext } from "./LoginContext";
 
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -111,6 +112,13 @@ const screens = [
     name: "Account",
     component: Account,
     iconName: "user",
+    drawerItemStyle: useLoginContext ? {} : { display: "none" }
+  },
+  {
+    name: "Login",
+    component: LoginComponent,
+    iconName: "sign-in-alt",
+    drawerItemStyle: useLoginContext ? { display: "none" } : {}  
   },
   {
     name: "About us",

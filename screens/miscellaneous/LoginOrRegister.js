@@ -27,12 +27,12 @@ export default function LoginOrRegister({ navigation }) {
 
   const handleAnonLogin = () => {
     setFirstTimeLoaded(true);
-        navigation.dispatch(
+        
         CommonActions.reset({
           index: 0,
           routes: [{ name: 'DrawerStack' }],
         })
-      );
+      ;
   }
 
   return (
