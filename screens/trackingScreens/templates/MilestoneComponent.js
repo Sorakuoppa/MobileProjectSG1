@@ -14,17 +14,27 @@ export default function MilestoneComponent({text, type, onPress }) {
 
     if (type === "checkbox") {
         return (
-            <View style={templateStyle.milestones}>
+            <View style={{...templateStyle.milestones, backgroundColor: colors.background}}>
                 <Text style={{ color: colors.text }}> {text} </Text>
                 <Checkbox status={checked ? 'checked' : 'unchecked'} onPress={() => setChecked(!checked)} color={colors.primary}  />
             </View>
         );
     } else if (type === "count") {
         return (
-            <View style={templateStyle.milestones}>
-                <Text style={{ color: colors.text }}> {text} </Text>
-                <Text style={{ color: colors.text, fontSize: 18, paddingRight: 10 }}> 0 </Text>
-            </View>
+          <View
+            style={{
+              ...templateStyle.milestones,
+              backgroundColor: colors.background,
+            }}
+          >
+            <Text style={{ color: colors.text }}> {text} </Text>
+            <Text
+              style={{ color: colors.text, fontSize: 18, paddingRight: 10 }}
+            >
+              {" "}
+              0{" "}
+            </Text>
+          </View>
         );
     }
 }
