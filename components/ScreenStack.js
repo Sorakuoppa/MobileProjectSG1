@@ -98,7 +98,14 @@ function ScreenStack() {
 }
 
 export function DrawerStack() {
-  const { loginState } = useLoginContext(); // Get the function to update login state from the context
+  const { loginState, username } = useLoginContext(); // Get the function to update login state from the context
+  const getHeaderTitle = (route, loginState, username) => {
+    if (loginState) {
+      return `Welcome ${username}`;
+    } else {
+      return 'Welcome Guest';
+    }
+  };
 
   useEffect(() => {
     // Check the login state every time the drawer stack mounts
@@ -151,17 +158,17 @@ export function DrawerStack() {
   
   return (
     <Drawer.Navigator
-      screenOptions={{
-        headerTitle: "OnTrack",
-        swipeEdgeWidth: 80,
-        headerStyle: { backgroundColor: colors.background },
-        headerTitleStyle: { color: colors.primary },
-        headerTintColor: colors.primary,
-        drawerType: "slide",
-        drawerStyle: { backgroundColor: colors.background },
-        drawerActiveTintColor: colors.primary,
-        drawerInactiveTintColor: colors.text,
-      }}
+    screenOptions={({ route }) => ({
+      headerTitle: getHeaderTitle(route, loginState, username),
+      swipeEdgeWidth: 80,
+      headerStyle: { backgroundColor: colors.background },
+      headerTitleStyle: { color: colors.primary },
+      headerTintColor: colors.primary,
+      drawerType: "slide",
+      drawerStyle: { backgroundColor: colors.background },
+      drawerActiveTintColor: colors.primary,
+      drawerInactiveTintColor: colors.text,
+    })}
     >
       {screens.map((screen, index) => (
         <Drawer.Screen
