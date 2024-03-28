@@ -16,37 +16,17 @@ export default function MyTracker({ route }) {
 
   const { colors } = useTheme();
 
-  const updateProgress = () => {
-    setChecked(!checked);
-    if (!checked && progress < 100) {
-      setProgress(progress + 10);
-    } else if (checked && progress > 0) {
-      setProgress(progress - 10);
-    }
+  const updateProgress = (value) => {
+    const newProgress = progress + value;
+    setProgress(newProgress);
   };
 
   return (
     <View style={general.scaffold}>
       <Icon name="running" size={40} color={colors.primary} />
-      <Text style={general.title}>My running tracker</Text>
-
-      <View style={{ flexDirection: "row" }}>
-        <Text style={{ color: colors.text }}> Run 10km </Text>
-        <Checkbox
-          status={checked ? "checked" : "unchecked"}
-          onPress={updateProgress}
-          color={colors.primary}
-        />
-      </View>
-
-      <View style={{ flexDirection: "row" }}>
-        <Text style={{ color: colors.text }}> Run 10km </Text>
-        <Checkbox
-          status={checked ? "checked" : "unchecked"}
-          onPress={updateProgress}
-          color={colors.primary}
-        />
-      </View>
+      <Text style={{ ...general.title, color: colors.text }}>
+        My running tracker
+      </Text>
       <AnimatedCircularProgress
         size={120}
         width={15}
@@ -54,6 +34,16 @@ export default function MyTracker({ route }) {
         tintColor={colors.primary}
         onAnimationComplete={() => {}}
         backgroundColor={colors.text}
+      />
+      <MilestoneComponent
+        text={"Run 20 km"}
+        onCheck={() => updateProgress(20)}
+        onUncheck={() => updateProgress(-20)}
+      />
+      <MilestoneComponent
+        text={"Run 40 km"}
+        onCheck={() => updateProgress(20)}
+        onUncheck={() => updateProgress(-20)}
       />
     </View>
   );

@@ -26,7 +26,9 @@ export default function Trackers({ navigation }) {
               elevation={4}
               style={{
                 ...addNewStyle.template,
-                backgroundColor: colors.background,
+                backgroundColor: colors.accent,
+                borderColor: colors.primary
+                
               }}
             >
               <Icon name="running" size={40} color={colors.primary} />

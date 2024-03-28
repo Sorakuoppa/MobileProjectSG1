@@ -1,39 +1,53 @@
-import React from "react";
-import { View, Text, Pressable, Animated } from "react-native";
+import React, {useRef} from "react";
+import { View, Text, Animated } from "react-native";
 import { IconButton, Surface } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { general } from "../../styles/general";
 import { addNewStyle } from "../../styles/trackingScreens/addNewStyle";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function AddNew({navigation}) {
+export default function AddNew({ navigation }) {
   const { colors } = useTheme();
-  const animated = new Animated.Value(1);
-  const fadeIn = () => {
-    Animated.timing(animated, {
-      toValue: 0.4,
-      duration: 100,
-      useNativeDriver: true,
-    }).start();
-  };
-  const fadeOut = () => {
-    Animated.timing(animated, {
+ const fadeAnims = useRef(
+   templateList.map(() => new Animated.Value(1))
+ ).current;
+
+
+  const handlePress = ( index ,templateName) => {
+    const fadeAnim = fadeAnims[index];
+
+    Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 200,
+      duration: 200, 
       useNativeDriver: true,
-    }).start();
+    }).start(() => {
+      templatePress(templateName);
+      fadeAnim.setValue(1);
+    });
   };
 
   const templatePress = (templateName) => {
-    const routeObject = templateList.find((template) => template.name === templateName);
-    navigation.navigate('Templates', {template: routeObject});
-  }
+    const routeObject = templateList.find(
+      (template) => template.name === templateName
+    );
+    navigation.navigate("Templates", { template: routeObject });
+  };
 
   return (
     <View style={general.scaffold}>
       <View style={addNewStyle.templatesContainer}>
         {templateList.map((template, index) => (
-          <Pressable key={index} onPressIn={fadeIn} onPressOut={fadeOut}>
+          <TouchableOpacity
+            key={index}
+            onPressIn={() => handlePress(index, template.name)}
+          >
+            <Animated.View
+              style={{
+                opacity: fadeAnims[index],
+                transform: [{ scale: fadeAnims[index] }],
+              }}
+            >
             <Surface
               elevation={3}
               style={{
@@ -50,35 +64,36 @@ export default function AddNew({navigation}) {
                 icon="plus"
                 iconColor={colors.primary}
                 size={30}
-                onPress={() => templatePress(template.name)}
+                onPress={() => {}}
               />
             </Surface>
-          </Pressable>
+          </Animated.View>
+          </TouchableOpacity>
         ))}
       </View>
     </View>
   );
 }
 
-const templateList =  [
+const templateList = [
   {
-    name: 'exercise',
-    icon: 'dumbbell',
-    text: 'Basic exercise template for your workout goals!'
+    name: "exercise",
+    icon: "dumbbell",
+    text: "Basic exercise template for your workout goals!",
   },
   {
-    name: 'read',
-    icon: 'book',
-    text: 'Trying to be a bookworm? This template is for you!'
+    name: "read",
+    icon: "book",
+    text: "Trying to be a bookworm? This template is for you!",
   },
   {
-    name: 'run',
-    icon: 'running',
-    text: 'Sprint to your milestones!'
+    name: "run",
+    icon: "running",
+    text: "Sprint to your milestones!",
   },
   {
-    name: 'create',
-    icon: 'plus-circle',
-    text: 'Create your own template!'
-  }
-]
+    name: "create",
+    icon: "plus-circle",
+    text: "Create your own template!",
+  },
+];

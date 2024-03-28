@@ -38,6 +38,7 @@ export const general = StyleSheet.create({
   title: {
     fontSize: 30,
     fontFamily: "Gantari",
+    marginBottom: 20,
   },
   scaffold: {
     flex: 1,
