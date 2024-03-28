@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext } from 'react';CommonActions
 import { View, Text, Pressable, Image } from 'react-native';
 import {Button } from 'react-native-paper';
-import { CommonActions, useTheme } from '@react-navigation/native'; // Import CommonActions
+import { CommonActions, useTheme } from '@react-navigation/native'; // Import 
 import { FirstTimeLoadContext } from '../../components/FirstTimeLoadContext';
 import { logOrReg } from '../../styles/miscellaneous/loginOrRegisterStyle';
 import { general } from '../../styles/general';
