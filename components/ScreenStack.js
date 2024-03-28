@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useTheme } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { DrawerItem, createDrawerNavigator } from "@react-navigation/drawer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Icon from "react-native-vector-icons/FontAwesome5";
-
 import AboutUs from "../screens/miscellaneous/AboutUs";
 import Account from "../screens/accountManagement/Account";
 import AddNew from "../screens/trackingScreens/AddNew";
@@ -16,15 +15,16 @@ import Templates from "../screens/trackingScreens/Templates";
 import Settings from "../screens/miscellaneous/Settings";
 import GetStarted from "../screens/miscellaneous/GetStarted";
 import LoginOrRegister from "../screens/miscellaneous/LoginOrRegister";
-import { useLoaded } from "./FirstTimeLoadContext";
 import LoginComponent from "../screens/accountManagement/LoginComponent";
 import RegisterComponent from "../screens/accountManagement/RegisterComponent";
 import { useLoginContext } from "./LoginContext";
-import SignOutButton from "../screens/accountManagement/SignOut";
+import { useLoaded } from "./FirstTimeLoadContext";
+import SignOut from "../screens/accountManagement/SignOut";
 
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const InitialStack = createNativeStackNavigator();
+
 // Manage labels and icons for BOTTOM NAV here
 const bottomTabs = [
   {
@@ -97,13 +97,16 @@ function ScreenStack() {
   );
 }
 
-// Manage labels and icons for DRAWER NAV here
 export function DrawerStack() {
-  const  { loginState }  = useLoginContext();
+  const { loginState } = useLoginContext(); // Get the function to update login state from the context
+
   useEffect(() => {
     // Check the login state every time the drawer stack mounts
     console.log('Login state checked:', loginState);
   }, [loginState]);
+
+    
+
   const { colors } = useTheme();
   const screens = [
     {
@@ -177,7 +180,17 @@ export function DrawerStack() {
           }}
         />
       ))}
-            <Drawer.Screen name="Sign Out" component={SignOutButton} />
+      {loginState ?(
+      <Drawer.Screen
+        name="SignOut"
+        component={SignOut} // Or any other suitable component
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Icon name="sign-out-alt" size={size} color={color} />
+          ),
+          drawerLabel: 'Sign Out',
+        }}
+      />) : null }
     </Drawer.Navigator>
   );
 }
