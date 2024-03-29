@@ -14,9 +14,9 @@ export default function MilestoneComponent({ text, onCheck, onUncheck }) {
   const handleCheck = () => {
     setChecked(!checked);
     if (!checked) {
-        onCheck()
+        onCheck(text)
     } else {
-        onUncheck()
+        onUncheck(text)
     }
   };
 

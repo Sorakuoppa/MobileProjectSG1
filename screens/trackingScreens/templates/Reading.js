@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Button, Checkbox } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import MilestoneComponent from "./MilestoneComponent";
+import MilestoneComponent from "../components/MilestoneComponent";
 
 import { general } from "../../../styles/general";
 import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";

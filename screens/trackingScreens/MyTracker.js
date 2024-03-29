@@ -5,7 +5,7 @@ import { IconButton, Checkbox } from "react-native-paper";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 import Icon from "react-native-vector-icons/FontAwesome5";
-import MilestoneComponent from "./templates/MilestoneComponent";
+import MilestoneComponent from "./components/MilestoneComponent";
 
 import { general } from "../../styles/general";
 import { trackerStyle } from "../../styles/trackingScreens/trackerStyle";

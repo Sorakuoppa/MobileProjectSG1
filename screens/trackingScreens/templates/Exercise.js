@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import CollapsibleComponent from "./CollapsibleComponent";
+import CollapsibleComponent from "../components/CollapsibleComponent";
 import { exerciseData } from "../data/exerciseData";
 
 import { general } from "../../../styles/general";
