@@ -35,12 +35,13 @@ export default function Running({ template }) {
   };
   // Add the objectList to the Firestore database
   const buttonHandler = async () => {
-    console.log(collection(db, 'users', ));
+    const reference = collection(db, 'users', auth.currentUser.uid, 'trackers');
     const newTracker = {
       name: template.name,
-      icon: template.icon,
       milestones: objectList,
     };
+    const docRef = await addDoc(reference, newTracker);
+
   };
 
   return (
