@@ -40,7 +40,7 @@ export default function Running({ template }) {
       <View style={general.scaffold}>
         <Icon name={template.icon} size={40} color={colors.primary} />
         <Text style={{ ...general.title, color: colors.text }}>Running </Text>
-        <InfoModal text={"kkonaa kon korner onko onko onko" }/>
+        <InfoModal text1={"Checkmark indicates that the milestone will be completed upon checking!" } icon1={'check'} text2={'Milestones with these icons can be incremented according to your progress.'} icon2={'plus'} icon3={'minus'} />
         <Text style={{ color: colors.text }}> Choose your milestones:</Text>
         <MilestoneComponent
           text={"Run 5km"}

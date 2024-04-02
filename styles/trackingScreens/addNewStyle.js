@@ -68,10 +68,18 @@ export const templateStyle = StyleSheet.create({
 export const modalStyle = StyleSheet.create({
   modal: {
     width: "70%",
+    height: "50%",
     justifyContent: "space-between",
     alignItems: "center",
     padding: 20,
-    margin: 20,
     borderRadius: 10,
+    borderWidth: 1,
+    
+  },
+  modalContent: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 20,
+    margin: 10,
   },
 });
