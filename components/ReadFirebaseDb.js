@@ -1,20 +1,31 @@
-import { db } from "./FirebaseConfig";
+import { db, auth } from "./FirebaseConfig"; // Import the db object from your Firestore configuration
 import { collection, getDocs } from "firebase/firestore";
 
-async function fetchDataFromFirestore() {
+export async function getTrackers(loginState) {
   try {
-    const collectionRef = collection(db, "your_collection_name");
+    // Check if user is authenticated
+    if (loginState === false) {
+      console.log("User is not authenticated. Cannot fetch trackers.");
+      return [];
+    }
+    
+    // Check if auth.currentUser is null to prevent accessing currentUser property on null
+    if (!auth.currentUser) {
+      console.log("Current user is null. Cannot fetch trackers.");
+      return [];
+    }
 
-    const snapshot = await getDocs(collectionRef);
-
-    snapshot.forEach((doc) => {
-      const data = doc.data();
-      console.log("Document ID: ", doc.id);
-      console.log("Document data: ", data);
+    // User is authenticated, proceed with fetching trackers
+    const trackersCol = collection(db, "trackers", auth.currentUser.uid, "trackers");
+    const trackersSnapshot = await getDocs(trackersCol);
+    const trackerList = trackersSnapshot.docs.map(doc => {
+      console.log(doc.data()); // Log each document's data
+      return doc.data();
     });
+
+    return trackerList;
   } catch (error) {
-    console.error("Error fetching data: ", error);
+    console.error("Error fetching trackers:", error);
+    return [];
   }
 }
-
-fetchDataFromFirestore();
