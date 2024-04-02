@@ -1,4 +1,4 @@
-// Exercise.js
+// Toimii toistaiseksi puskee FB:hen valitut liikkeet ja niiden tiedot
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
