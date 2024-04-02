@@ -1,3 +1,6 @@
+// TODO: Show all the trackers that the user has created
+// and allow them to click on them to view the tracker details
+
 import React from "react";
 import { View, Text, Pressable, Animated } from "react-native";
 
