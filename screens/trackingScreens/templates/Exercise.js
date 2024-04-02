@@ -6,6 +6,8 @@ import { Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CollapsibleComponent from "../components/CollapsibleComponent";
 import { exerciseData } from "../data/exerciseData";
+import addToFirebase from "../../../components/AddToFirebase";
+
 
 import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";
@@ -19,10 +21,14 @@ export default function Exercise({ template }) {
   // State to manage selected exercises
   const [selectedExercises, setSelectedExercises] = useState([]);
 
-  // Function to handle adding selected exercises
   const handleAddTracker = () => {
-    console.log(selectedExercises); // Log selectedExercises array
-    // You can perform any other operations with selectedExercises here
+    if (selectedExercises.length > 0) {
+      // Use addToFirebase function to add selectedExercises to Firebase
+      addToFirebase(selectedExercises, 'Exercise');
+      console.log("Added to Firebase")
+    } else {
+      alert("Please select at least one exercise to add this tracker");
+    }
   };
 
   return (

@@ -11,3 +11,4 @@ export default async function addToFirebase(object, type) {
     console.error("Error adding document: ", e);
   }
 }
+
