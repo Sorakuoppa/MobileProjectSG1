@@ -54,7 +54,7 @@ const LoginComponent = () => {
     <View style={loginAndRegisterStyles.container}>
       <Text style={{...loginAndRegisterStyles.title, color: colors.text}}>Sign In</Text>
       <View style={loginAndRegisterStyles.formFieldContainer}>
-        <Text style={{...loginAndRegisterStyles.formFieldTitle, color: colors.text}}>Email</Text>
+        <Text style={{...loginAndRegisterStyles.formFieldTitle, color: colors.primary}}>Email</Text>
         <TextInput
           style={loginAndRegisterStyles.formFieldInput}
           value={email}
