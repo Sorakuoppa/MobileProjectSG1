@@ -16,7 +16,7 @@ const RegisterComponent = () => {
 
   const pushDataToBase = async (email, username) => {
     try {
-    await setDoc(doc(db,"users", username), {
+    await setDoc(doc(db,"users", auth.currentUser.uid), {
     email: email,
     username: username,}) 
   console.log("Data pushed to database successfully");
