@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, Pressable } from 'react-nati
 import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
 import { auth, db } from '../../components/FirebaseConfig'; // Import FirebaseConfig auth
 import { loginAndRegisterStyles } from '../../styles/accountManagementStyles/loginAndRegisterComponent';
+import { useTheme } from "@react-navigation/native";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useLoginContext } from '../../components/LoginContext';
 import { FirstTimeLoadContext } from '../../components/FirstTimeLoadContext';
@@ -15,6 +16,7 @@ const LoginComponent = () => {
   const navigation = useNavigation();
   const usersRef = collection(db, "users")
   const q = query(usersRef, where("email", '==', email))
+  const { colors } = useTheme();
 
   const navigateForgotPage = () => {
     navigation.navigate("ForgotPassword")
@@ -50,9 +52,9 @@ const LoginComponent = () => {
 
   return (
     <View style={loginAndRegisterStyles.container}>
-      <Text style={loginAndRegisterStyles.title}>Sign In</Text>
+      <Text style={{...loginAndRegisterStyles.title, color: colors.text}}>Sign In</Text>
       <View style={loginAndRegisterStyles.formFieldContainer}>
-        <Text style={loginAndRegisterStyles.formFieldTitle}>Email</Text>
+        <Text style={{...loginAndRegisterStyles.formFieldTitle, color: colors.text}}>Email</Text>
         <TextInput
           style={loginAndRegisterStyles.formFieldInput}
           value={email}
