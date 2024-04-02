@@ -15,10 +15,13 @@ export default function InfoModal({text, icon1, icon2}) {
 
   return (
     <>
-      <Portal style={{ ...general.scaffold, justifyContent: "center" }}>
+      <Portal style={{ ...general.scaffold }}>
         <Modal
           visible={visible}
           style={{ ...modalStyle.modal, backgroundColor: colors.background }}
+          dismissable={true}
+          onDismiss={() => setVisible(false)}
+          dismissableBackButton={true}
         >
           <IconButton
             icon="close"
@@ -26,7 +29,9 @@ export default function InfoModal({text, icon1, icon2}) {
             size={20}
             onPress={() => setVisible(false)}
           />
-          <Text style={{ color: colors.text }}>{text}</Text>
+          <View>
+            <Text style={{ color: colors.text }}>{text}</Text>
+          </View>
         </Modal>
       </Portal>
       <IconButton
