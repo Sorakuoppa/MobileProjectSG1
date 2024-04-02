@@ -1,5 +1,5 @@
 import { initializeApp } from '@firebase/app';
-import { getAuth, initializeAuth, getReactNativePersistence } from '@firebase/auth'; // Import getAuth function
+import { getAuth, initializeAuth, getReactNativePersistence, sendPasswordResetEmail, ActionCodeSettings } from '@firebase/auth'; // Import getAuth function
 import { getFirestore } from '@firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -12,13 +12,20 @@ const firebaseConfig = {
   messagingSenderId: "638686673712",
   appId: "1:638686673712:web:d3f4dbe5ed223a8db0e6f5"
 };
+const actionCodeSettings = {
+  // Customize email template
+  emailTemplate: {
+body: `You can customize the body of the email here. Use {{link}} to include the password reset link.`,
+  },
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app, {persistence: getReactNativePersistence(AsyncStorage)})
-
 const db = getFirestore(app);
+const passwordReset = (email) => {
+  return sendPasswordResetEmail(auth, email, actionCodeSettings); 
+};
 
 
-
-export { app, auth, db }; // Export both app and auth
+export { app, auth, db, passwordReset }; 

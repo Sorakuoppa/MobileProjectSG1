@@ -20,6 +20,7 @@ import RegisterComponent from "../screens/accountManagement/RegisterComponent";
 import { useLoginContext } from "./LoginContext";
 import { useLoaded } from "./FirstTimeLoadContext";
 import SignOut from "../screens/accountManagement/SignOut";
+import ForgotPassword from "../screens/accountManagement/ForgotPassword";
 
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -46,7 +47,6 @@ const bottomTabs = [
     iconName: "chart-bar",
   },
 ];
-
 function InitialStackScreen() {
   return (
     <InitialStack.Navigator>
@@ -55,9 +55,27 @@ function InitialStackScreen() {
         component={GetStarted}
         options={{ headerShown: false }}
       />
-      <InitialStack.Screen name="LoginOrRegister" component={LoginOrRegister} />
-      <InitialStack.Screen name="Login" component={LoginComponent} />
-      <InitialStack.Screen name="Register" component={RegisterComponent} />
+      <InitialStack.Screen 
+       name="LoginOrRegister"
+       component={LoginOrRegister} 
+       options={{ headerShown: false }}
+
+       />
+      <InitialStack.Screen 
+      name="Login" 
+      component={LoginComponent}
+      options={{ headerShown: false }}
+      />
+      <InitialStack.Screen 
+      name="Register" 
+      component={RegisterComponent}
+      options={{ headerShown: false }}
+      />
+      <InitialStack.Screen
+      name="ForgotPassword"
+      component={ForgotPassword}
+      options={{ headerShown: false }}
+      />
     </InitialStack.Navigator>
   );
 }
