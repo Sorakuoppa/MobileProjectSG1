@@ -9,6 +9,7 @@ import {
   deleteDoc,
   onSnapshot,
   doc,
+  setDoc,
 } from "firebase/firestore";
 import MilestoneComponent from "../components/MilestoneComponent";
 import { IconButton, Checkbox } from "react-native-paper";
@@ -35,13 +36,19 @@ export default function Running({ template }) {
   };
   // Add the objectList to the Firestore database
   const buttonHandler = async () => {
-    const reference = collection(db, 'users', auth.currentUser.uid, 'trackers');
-    const newTracker = {
-      name: template.name,
-      milestones: objectList,
-    };
-    const docRef = await addDoc(reference, newTracker);
+   try {
+      const trackerRef = collection(db, "trackers");
+      const newTracker = {
+        name: "Running",
+        milestones: objectList,
+        
+      };
+      const docRef = await addDoc(trackerRef, newTracker);
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) { 
+      console.error("Error adding document: ", e);
 
+   }
   };
 
   return (

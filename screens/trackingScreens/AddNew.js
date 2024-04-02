@@ -1,6 +1,6 @@
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import { View, Text, Animated } from "react-native";
-import { IconButton, Surface } from "react-native-paper";
+import { IconButton, Surface, TouchableRipple } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { general } from "../../styles/general";
@@ -9,17 +9,16 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function AddNew({ navigation }) {
   const { colors } = useTheme();
- const fadeAnims = useRef(
-   templateList.map(() => new Animated.Value(1))
- ).current;
+  const fadeAnims = useRef(
+    templateList.map(() => new Animated.Value(1))
+  ).current;
 
-
-  const handlePress = ( index ,templateName) => {
+  const handlePress = (index, templateName) => {
     const fadeAnim = fadeAnims[index];
 
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 200, 
+      duration: 200,
       useNativeDriver: true,
     }).start(() => {
       templatePress(templateName);
@@ -38,16 +37,19 @@ export default function AddNew({ navigation }) {
     <View style={general.scaffold}>
       <View style={addNewStyle.templatesContainer}>
         {templateList.map((template, index) => (
-          <TouchableOpacity
+          <TouchableRipple
             key={index}
             onPressIn={() => handlePress(index, template.name)}
+            rippleColor={colors.primary}
+            borderless={true}
+            style={{ borderRadius: 20 }}
           >
-            <Animated.View
+            {/* <Animated.View
               style={{
                 opacity: fadeAnims[index],
                 transform: [{ scale: fadeAnims[index] }],
               }}
-            >
+            > */}
             <Surface
               elevation={3}
               style={{
@@ -67,8 +69,8 @@ export default function AddNew({ navigation }) {
                 onPress={() => {}}
               />
             </Surface>
-          </Animated.View>
-          </TouchableOpacity>
+            {/* </Animated.View> */}
+          </TouchableRipple>
         ))}
       </View>
     </View>
