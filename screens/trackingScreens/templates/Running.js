@@ -2,17 +2,8 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Button } from "react-native-paper";
-import { app, auth, db } from "../../../components/FirebaseConfig";
-import {
-  collection,
-  addDoc,
-  deleteDoc,
-  onSnapshot,
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import addToFirebase from "../../../components/AddToFirebase";
 import MilestoneComponent from "../components/MilestoneComponent";
-import { IconButton, Checkbox } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { general } from "../../../styles/general";
@@ -34,21 +25,13 @@ export default function Running({ template }) {
     let list = objectList.filter((obj) => obj.milestone !== text);
     setObjectList(list);
   };
-  // Add the objectList to the Firestore database
-  const buttonHandler = async () => {
-   try {
-      const trackerRef = collection(db, "trackers");
-      const newTracker = {
-        name: "Running",
-        milestones: objectList,
-        
-      };
-      const docRef = await addDoc(trackerRef, newTracker);
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) { 
-      console.error("Error adding document: ", e);
 
-   }
+  const buttonHandler = () => {
+    if (objectList.length > 0) {
+      addToFirebase(objectList, 'Running');
+    } else {
+      alert("Please select at least one milestone to add this tracker");
+    }
   };
 
   return (
