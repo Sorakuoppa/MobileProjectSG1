@@ -29,6 +29,7 @@ export default function MilestoneComponent({ text, onCheck, onUncheck }) {
       }}
     >
       <Text style={{ color: colors.text }}> {text} </Text>
+      
       <Checkbox
         status={checked ? "checked" : "unchecked"}
         onPress={handleCheck}

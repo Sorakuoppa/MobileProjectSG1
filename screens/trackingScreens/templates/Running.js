@@ -55,6 +55,11 @@ export default function Running({ template }) {
           onCheck={onCheck}
           onUncheck={onUncheck}
         />
+        <MilestoneComponent
+        text={"Kilometers ran this month:"}
+        onCheck={onCheck}
+        onUncheck={onUncheck}
+        />
       </View>
       <Button
         mode="contained"
