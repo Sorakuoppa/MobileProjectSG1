@@ -96,6 +96,6 @@ const templateList = [
   {
     name: "create",
     icon: "plus-circle",
-    text: "Create your own template!",
+    text: "Create your own tracker!",
   },
 ];
