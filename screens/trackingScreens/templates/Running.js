@@ -4,6 +4,7 @@ import { useTheme } from "@react-navigation/native";
 import { Button } from "react-native-paper";
 import addToFirebase from "../../../components/AddToFirebase";
 import MilestoneComponent from "../components/MilestoneComponent";
+import InfoModal from "../components/InfoModal";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { general } from "../../../styles/general";
@@ -28,7 +29,7 @@ export default function Running({ template }) {
 
   const buttonHandler = () => {
     if (objectList.length > 0) {
-      addToFirebase(objectList, 'Running');
+      addToFirebase(objectList, "Running");
     } else {
       alert("Please select at least one milestone to add this tracker");
     }
@@ -39,7 +40,8 @@ export default function Running({ template }) {
       <View style={general.scaffold}>
         <Icon name={template.icon} size={40} color={colors.primary} />
         <Text style={{ ...general.title, color: colors.text }}>Running </Text>
-        <Text style={{ color: colors.text }}> Milestones in this tracker:</Text>
+        <InfoModal text={"kkonaa kon korner onko onko onko" }/>
+        <Text style={{ color: colors.text }}> Choose your milestones:</Text>
         <MilestoneComponent
           text={"Run 5km"}
           onCheck={onCheck}
@@ -56,9 +58,10 @@ export default function Running({ template }) {
           onUncheck={onUncheck}
         />
         <MilestoneComponent
-        text={"Kilometers ran this month:"}
-        onCheck={onCheck}
-        onUncheck={onUncheck}
+          text={"Kilometers ran this month:"}
+          onCheck={onCheck}
+          onUncheck={onUncheck}
+          numeric={true}
         />
       </View>
       <Button
