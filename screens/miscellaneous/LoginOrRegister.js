@@ -40,7 +40,7 @@ export default function LoginOrRegister({ navigation }) {
   return (
     <View style={general.scaffold}>
       <Image source={onTrackLogo} style={logOrReg.logo}/>
-      <Text style={logOrReg.headerText}>Welcome!</Text>
+      <Text style={logOrReg.welcomeText}>Welcome!</Text>
     <View style={logOrReg.buttonContainer}>
       <Pressable style={logOrReg.button} onPress={handleLogin}>
         <Text style={logOrReg.buttonText}>Login</Text>
@@ -49,16 +49,10 @@ export default function LoginOrRegister({ navigation }) {
         <Text style={logOrReg.buttonText} >Register</Text>
       </Pressable>
       <View style={logOrReg.anonContainer}>
-      {/* <Pressable style={logOrReg.anonButton}  onPress={handleAnonLogin}>
+       <Pressable style={logOrReg.anonButton}  onPress={handleAnonLogin}>
         <Text style={logOrReg.anonText}>Continue without login</Text>
-      </Pressable> */}
-      <Button 
-        children= "Continue without login"
-        onPress={handleAnonLogin}
-        style={logOrReg.anonButton}
-        mode="contained"
-        buttonColor={colors.primary}
-      />
+      </Pressable> 
+    
       </View>
     </View>
     </View>

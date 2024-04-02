@@ -58,4 +58,20 @@ export const templateStyle = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
   },
+  icons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+});
+
+export const modalStyle = StyleSheet.create({
+  modal: {
+    width: "70%",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 20,
+    margin: 20,
+    borderRadius: 10,
+  },
 });

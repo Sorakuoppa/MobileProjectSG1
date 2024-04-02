@@ -22,8 +22,9 @@ export const logOrReg = StyleSheet.create({
   welcomeText: {
     textAlign: 'center',
     marginBottom: 20,
-    fontSize: 16,
-    color: '#fff', // Adjust text color
+    fontSize: 30,
+    fontWeight: '900',
+    fontFamily: 'Gantari',
   },
   buttonContainer: {
     width: windowWidth - 25,
@@ -39,11 +40,13 @@ export const logOrReg = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Gantari',
   },
   anonText: {
     fontWeight: 'bold',
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: 'Gantari',
+
   },
   headerText: {
     fontWeight: "bold",
@@ -53,5 +56,8 @@ export const logOrReg = StyleSheet.create({
   anonContainer: {
     marginTop: 15,
     alignSelf: "center"
+},
+anonbutton: { 
+  fontFamily: 'Gantari',
 }
 });

@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 
 const windowWidth = Dimensions.get('window').width;
 
-export const loginAndRegisterStyles = StyleSheet.create({
+export const forgotPasswordStyle = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
@@ -29,7 +29,6 @@ export const loginAndRegisterStyles = StyleSheet.create({
   anonText: {
     fontSize: 16,
     fontFamily: 'Gantari',
-    color: '#fff'
   },
  
   formFieldContainer: {
