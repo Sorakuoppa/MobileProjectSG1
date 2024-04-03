@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Button, Checkbox } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import MilestoneComponent from "../components/MilestoneComponent";
 import InfoModal from "../components/InfoModal";
+import addToFirebase from "../../../components/AddToFirebase";
 import { readingData } from "../data/readingData";
 
 import { general } from "../../../styles/general";
@@ -12,8 +13,32 @@ import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function Reading({ template }) {
+  const [objectList, setObjectList] = useState([]);
   const { colors } = useTheme();
 
+  const onCheck = (text, numeric) => {
+    let list = [...objectList];
+    let newTrackerObject = {};
+    newTrackerObject = { milestone: text, checked: true, numeric: numeric  };
+    list.push(newTrackerObject);
+    setObjectList(list);
+    console.log(objectList);
+  };
+
+  const onUncheck = (text) => {
+    let list = objectList.filter((obj) => obj.milestone !== text);
+    setObjectList(list);
+  };
+
+  const buttonHandler = () => {
+    if (objectList.length > 0) {
+      addToFirebase(objectList, "Running");
+    } else {
+      alert("Please select at least one milestone to add this tracker");
+    }
+  };
+
+  // Please manage the contents of this template from readingData.js
   return (
     <View style={{ ...general.scaffold, justifyContent: "space-between" }}>
       <View style={general.scaffold}>
@@ -31,14 +56,14 @@ export default function Reading({ template }) {
           icon2={"minus"}
           icon3={"plus"}
         />
-        <ScrollView contentContainerStyle={{width: '95%'}}>
+        <ScrollView contentContainerStyle={{ width: "95%" }}>
           {readingData.map((milestone, index) => (
             <MilestoneComponent
               key={index}
               text={milestone.title}
               numeric={milestone.numeric}
-              onCheck={() => {}}
-              onUncheck={() => {}}
+              onCheck={(text) => onCheck(text, milestone.numeric)}
+              onUncheck={onUncheck}
             />
           ))}
         </ScrollView>
@@ -47,7 +72,7 @@ export default function Reading({ template }) {
         mode="contained"
         buttonColor={colors.primary}
         children="Add this tracker"
-        onPress={() => console.log("Button pressed")}
+        onPress={buttonHandler}
         style={{ margin: 20 }}
       />
     </View>

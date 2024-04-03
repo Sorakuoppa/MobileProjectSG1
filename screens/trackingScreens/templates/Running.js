@@ -15,10 +15,10 @@ export default function Running({ template }) {
   const [objectList, setObjectList] = useState([]);
   const { colors } = useTheme();
 
-  const onCheck = (text) => {
+  const onCheck = (text, numeric) => {
     let list = [...objectList];
     let newTrackerObject = {};
-    newTrackerObject = { milestone: text, checked: true };
+    newTrackerObject = { milestone: text, checked: true, numeric: numeric };
     list.push(newTrackerObject);
     setObjectList(list);
   };
@@ -35,7 +35,7 @@ export default function Running({ template }) {
       alert("Please select at least one milestone to add this tracker");
     }
   };
-
+  // Please manage the contents of this template from runningData.js
   return (
     <View style={{ ...general.scaffold, justifyContent: "space-between" }}>
       <View style={general.scaffold}>
@@ -53,13 +53,13 @@ export default function Running({ template }) {
           icon2={"minus"}
           icon3={"plus"}
         />
-        <ScrollView contentContainerStyle={{widht: '95%'}}>
+        <ScrollView contentContainerStyle={{ widht: "95%" }}>
           {runningData.map((milestone, index) => (
             <MilestoneComponent
               key={index}
               text={milestone.title}
               numeric={milestone.numeric}
-              onCheck={onCheck}
+              onCheck={(text) => onCheck(text, milestone.numeric)}
               onUncheck={onUncheck}
             />
           ))}

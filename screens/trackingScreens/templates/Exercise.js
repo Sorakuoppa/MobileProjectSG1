@@ -30,7 +30,7 @@ export default function Exercise({ template }) {
       alert("Please select at least one exercise to add this tracker");
     }
   };
-
+ // Please manage the contents of this template from exerciseData.js
   return (
     <View style={general.scaffold}>
       <Icon name={template.icon} size={40} color={colors.primary} />
