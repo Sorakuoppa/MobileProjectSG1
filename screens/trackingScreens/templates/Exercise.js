@@ -5,6 +5,7 @@ import { useTheme } from "@react-navigation/native";
 import { Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CollapsibleComponent from "../components/CollapsibleComponent";
+import InfoModal from "../components/InfoModal";
 import { exerciseData } from "../data/exerciseData";
 import addToFirebase from "../../../components/AddToFirebase";
 
@@ -35,6 +36,18 @@ export default function Exercise({ template }) {
     <View style={general.scaffold}>
       <Icon name={template.icon} size={40} color={colors.primary} />
       <Text style={{ ...general.title, color: colors.text }}>Exercise </Text>
+      <Text style={{ color: colors.text }}> Choose your milestones</Text>
+      <InfoModal
+        text1={
+          "Checkmark indicates that the milestone will be completed upon checking!"
+        }
+        icon1={"check"}
+        text2={
+          "Milestones with these icons can be incremented according to your progress."
+        }
+        icon2={"minus"}
+        icon3={"plus"}
+      />
       <ScrollView style={{ width: "80%" }}>
         {/* Pass setSelectedExercises to CollapsibleComponent */}
         <CollapsibleComponent

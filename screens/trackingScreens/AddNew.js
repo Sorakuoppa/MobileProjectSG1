@@ -66,7 +66,7 @@ export default function AddNew({ navigation }) {
                 icon="plus"
                 iconColor={colors.primary}
                 size={30}
-                onPress={() => {}}
+                onPress={() => {templatePress(template.name)}}
               />
             </Surface>
             {/* </Animated.View> */}

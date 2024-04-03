@@ -79,7 +79,14 @@ export const modalStyle = StyleSheet.create({
   modalContent: {
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 20,
+    flexDirection: "column",
+    padding: 30,
     margin: 10,
+    borderRadius: 10,
+  },
+  closeButton: {
+    position: "absolute",
+    top: 0,
+    right: 0,
   },
 });
