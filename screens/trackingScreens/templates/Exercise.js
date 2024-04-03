@@ -5,10 +5,10 @@ import { useTheme } from "@react-navigation/native";
 import { Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CollapsibleComponent from "../components/CollapsibleComponent";
+import MilestoneComponent from "../components/MilestoneComponent";
 import InfoModal from "../components/InfoModal";
-import { exerciseData } from "../data/exerciseData";
+import { exerciseData, exerciseTrackers } from "../data/exerciseData";
 import addToFirebase from "../../../components/AddToFirebase";
-
 
 import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";
@@ -18,15 +18,14 @@ export default function Exercise({ template }) {
   const pushDay = exerciseData.filter((exercise) => exercise.type === "push");
   const pullDay = exerciseData.filter((exercise) => exercise.type === "pull");
   const legDay = exerciseData.filter((exercise) => exercise.type === "legs");
-
   // State to manage selected exercises
   const [selectedExercises, setSelectedExercises] = useState([]);
 
   const handleAddTracker = () => {
     if (selectedExercises.length > 0) {
       // Use addToFirebase function to add selectedExercises to Firebase
-      addToFirebase(selectedExercises, 'Exercise');
-      console.log("Added to Firebase")
+      addToFirebase(selectedExercises, "Exercise");
+      console.log("Added to Firebase");
     } else {
       alert("Please select at least one exercise to add this tracker");
     }
@@ -48,7 +47,7 @@ export default function Exercise({ template }) {
         icon2={"minus"}
         icon3={"plus"}
       />
-      <ScrollView style={{ width: "80%" }}>
+      <ScrollView contentContainerStyle={{ width: "90%" }}>
         {/* Pass setSelectedExercises to CollapsibleComponent */}
         <CollapsibleComponent
           dataList={pushDay}
@@ -68,6 +67,26 @@ export default function Exercise({ template }) {
           selectedExercises={selectedExercises}
           setSelectedExercises={setSelectedExercises}
         />
+        {exerciseTrackers.map((tracker, index) => (
+          <MilestoneComponent
+            key={index}
+            text={tracker.name}
+            numeric={tracker.numeric}
+            onCheck={() => {
+              setSelectedExercises((prevSelectedExercises) => [
+                ...prevSelectedExercises,
+                tracker,
+              ]);
+            }}
+            onUncheck={() => {
+              setSelectedExercises((prevSelectedExercises) =>
+                prevSelectedExercises.filter(
+                  (exercise) => exercise.name !== tracker.name
+                )
+              );
+            }}
+          />
+        ))}
       </ScrollView>
       {/* Button to add tracker */}
       <Button

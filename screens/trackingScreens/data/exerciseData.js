@@ -109,5 +109,33 @@ export const exerciseData = [
     reps: "8-10",
     sets: 3,
     id: "17",
+  }
+];
+
+export const exerciseTrackers = [
+    // Additional trackers
+  {
+    name: "Workout completed",
+    type: "tracker",
+    numeric: false,
+    id: "18",
   },
+  {
+    name: "Five workouts this week",
+    type: "tracker",
+    numeric: false,
+    id: "20",
+  },
+  {
+    name: "Sets completed",
+    type: "tracker",
+    numeric: true,
+    id: "19",
+  },
+  {
+    name: "Hours on gym",
+    type: "tracker",
+    numeric: true,
+    id: "23",
+  }
 ];
