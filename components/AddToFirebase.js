@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { auth, db } from "./FirebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
