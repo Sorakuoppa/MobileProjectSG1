@@ -13,7 +13,8 @@ import { trackerStyle } from "../../styles/trackingScreens/trackerStyle";
 export default function MyTracker({ route }) {
   const [progress, setProgress] = useState(0);
   const [checked, setChecked] = useState(false);
-
+  const { tracker } = route.params;
+  console.log(tracker);
   const { colors } = useTheme();
 
   const updateProgress = (value) => {
@@ -35,8 +36,17 @@ export default function MyTracker({ route }) {
         onAnimationComplete={() => {}}
         backgroundColor={colors.text}
       />
-      <MilestoneComponent
-        text={"Run 20 km"}
+      {/* {tracker.map((milestone, index) => (
+        <MilestoneComponent
+          key={index}
+          text={milestone.milestone}
+          numeric={milestone.numeric}
+          onCheck={() => updateProgress(20)}
+          onUncheck={() => updateProgress(-20)}
+        />
+      ))} */}
+      {/* <MilestoneComponent
+        text={}
         onCheck={() => updateProgress(20)}
         onUncheck={() => updateProgress(-20)}
       />
@@ -44,7 +54,7 @@ export default function MyTracker({ route }) {
         text={"Run 40 km"}
         onCheck={() => updateProgress(20)}
         onUncheck={() => updateProgress(-20)}
-      />
+      /> */}
     </View>
   );
 }
