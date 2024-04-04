@@ -37,13 +37,20 @@ const LoginComponent = () => {
         setLoginState(true);
   
         console.log('User signed in successfully!');
+        setEmail('')
+        setPassword('')
         setFirstTimeLoaded(true);
   
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: 'DrawerStack' }],
-        });
+        
       });
+      const redirected = navigation.dispatch(CommonActions.navigate({ name: 'Home' }));
+      if (!redirected) {
+    CommonActions.reset({
+        index: 0,
+        routes: [{ name: 'DrawerStack' }],
+    });
+}
+
     } catch (error) {
       alert(error.message);
       console.error('Authentication error:', error.message);

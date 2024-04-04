@@ -22,6 +22,15 @@ import { useLoaded } from "./FirstTimeLoadContext";
 import SignOut from "../screens/accountManagement/SignOut";
 import ForgotPassword from "../screens/accountManagement/ForgotPassword";
 
+const navigateForgotPage = (navigation, action) => {
+  if (action === 'ForgotPassword') {
+    navigation.navigate('ForgotPassword');
+  } else if (action === 'Login') {
+    navigation.navigate('Login', { navigateForgotPage });
+  }
+};
+
+
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const InitialStack = createNativeStackNavigator();
@@ -48,6 +57,7 @@ const bottomTabs = [
   },
 ];
 function InitialStackScreen() {
+
   return (
     <InitialStack.Navigator>
       <InitialStack.Screen
@@ -65,6 +75,7 @@ function InitialStackScreen() {
       name="Login" 
       component={LoginComponent}
       options={{ headerShown: false }}
+      initialParams= { {action: 'Login'} }
       />
       <InitialStack.Screen 
       name="Register" 
@@ -115,7 +126,7 @@ function ScreenStack() {
   );
 }
 
-export function DrawerStack() {
+export function DrawerStack({navigation, route}) {
   const { loginState, username } = useLoginContext(); // Get the function to update login state from the context
   const getHeaderTitle = (route, loginState, username) => {
     if (loginState) {
@@ -172,6 +183,12 @@ export function DrawerStack() {
       component: MyTracker,
       drawerItemStyle: { display: "none" },
     },
+    {
+      name: "ForgotPassword",
+      component: ForgotPassword,
+      drawerItemStyle: { display: "none" },
+      initialParams: { action: 'ForgotPassword' }
+    },
   ];
   
   return (
@@ -202,6 +219,11 @@ export function DrawerStack() {
               />
             ),
             drawerItemStyle: screen.drawerItemStyle,
+            ...(screen.name === 'Login'
+              ? { 
+                  onPress: () => handleLogin(navigation),
+                }
+              : {})
           }}
         />
       ))}
