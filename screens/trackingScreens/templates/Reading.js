@@ -22,7 +22,7 @@ export default function Reading({ template }) {
     newTrackerObject = { milestone: text, checked: true, numeric: numeric  };
     list.push(newTrackerObject);
     setObjectList(list);
-    console.log(objectList);
+
   };
 
   const onUncheck = (text) => {

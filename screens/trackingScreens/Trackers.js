@@ -5,7 +5,7 @@ import React from "react";
 import { View, Text, Pressable, Animated } from "react-native";
 import { useState } from "react";
 import { getTrackers } from "../../components/ReadFirebaseDb"; // Import getTrackers
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { general } from "../../styles/general";
 import { trackerStyle } from "../../styles/trackingScreens/trackerStyle";
 import { addNewStyle } from "../../styles/trackingScreens/addNewStyle";
@@ -28,6 +28,21 @@ export default function Trackers({ navigation }) {
 
   const trackerPress = () => {
     navigation.navigate("MyTracker");
+  };
+  // TESTING ASYNCSTORAGE REMOVE THIS
+  const showAsyncStorage = async () => {
+    // AsyncStorage.clear(); 
+
+    try {
+      const value = await AsyncStorage.getAllKeys();
+
+      if (value !== null) {
+        alert(value);
+      }
+    }
+    catch (e) {
+      console.error("Error fetching asyncStorage: ", e);
+    }
   };
 
 // TESTI NAPPI FIREBASE HAKUUN
@@ -63,6 +78,14 @@ export default function Trackers({ navigation }) {
         {/* TESTI NAPPI MILLÄ HAETAAN DATAA FIREBASESTA*/}
         <Button title="Fetch Trackers" onPress={handleButtonPress}>asddasadsasdadsdas</Button>
       {/* CONSOLELOGAA PAINETTAESSA KOKO TRACKERLISTAN ATM */}      
+      {/* Button for testing asyncStorage */}
+      <Button
+        children="Show asyncStorage"
+        mode="contained"
+        buttonColor={colors.primary}
+        onPress={showAsyncStorage}
+      />
+
       </View>
     </View>
   );
