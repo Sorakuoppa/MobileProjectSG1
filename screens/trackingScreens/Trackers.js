@@ -1,7 +1,7 @@
 // TODO: Show all the trackers that the user has created
 // and allow them to click on them to view the tracker details
 
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, Pressable, Animated } from "react-native";
 import { useState } from "react";
 import { getTrackers } from "../../components/ReadFirebaseDb"; // Import getTrackers
@@ -17,6 +17,12 @@ export default function Trackers({ navigation }) {
   const { colors } = useTheme();
   const [trackerList, setTrackerList] = useState([]);
 
+  
+  useEffect(() => {
+    fetchTrackers();
+    console.log(trackerList);
+  }, [navigation]);
+
   const fetchTrackers = async () => {
     try {
       const fetchedTrackers = await readFromFirebase();
@@ -25,7 +31,6 @@ export default function Trackers({ navigation }) {
       console.error("Error fetching trackers:", error);
     }
   };
-
   const trackerPress = () => {
     navigation.navigate("MyTracker");
   };
@@ -77,7 +82,8 @@ export default function Trackers({ navigation }) {
 
         {/* TESTI NAPPI MILLÄ HAETAAN DATAA FIREBASESTA*/}
         <Button title="Fetch Trackers" onPress={handleButtonPress}>asddasadsasdadsdas</Button>
-      {/* CONSOLELOGAA PAINETTAESSA KOKO TRACKERLISTAN ATM */}      
+      {/* CONSOLELOGAA PAINETTAESSA KOKO TRACKERLISTAN ATM */}   
+
       {/* Button for testing asyncStorage */}
       <Button
         children="Show asyncStorage"

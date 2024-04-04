@@ -61,7 +61,7 @@ export default function Create({ template }) {
         style={{ width: "95%", margin: 10 }}
         onPress={() => {}}
         />
-        <View></View>
+        <View style={createOwnStyle.milestoneList}></View>
     </View>
   );
 }
