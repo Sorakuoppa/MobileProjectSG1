@@ -20,7 +20,6 @@ export default function Trackers({ navigation }) {
 
   useEffect(() => {
     handleButtonPress();
-    console.log(trackerList);
   }, [navigation]);
 
   // const fetchTrackers = async () => {
@@ -32,8 +31,8 @@ export default function Trackers({ navigation }) {
   //   }
   // };
 
-  const trackerPress = () => {
-    navigation.navigate("MyTracker");
+  const trackerPress = (tracker) => {
+    navigation.navigate("MyTracker", { tracker: tracker });
   };
 
   // TESTING ASYNCSTORAGE REMOVE THIS
@@ -67,7 +66,7 @@ export default function Trackers({ navigation }) {
       {trackerList.map((tracker, index) => (
         <Pressable
           key={index}
-          onPress={trackerPress}
+          onPress={() => trackerPress(tracker)}
           style={trackerStyle.tracker}
         >
           <Surface
