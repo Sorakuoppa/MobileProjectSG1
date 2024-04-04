@@ -13,11 +13,13 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { IconButton, Surface, Button } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
+import { useLoginContext } from "../../components/LoginContext";
 
 export default function Trackers({ navigation }) {
   const { colors } = useTheme();
   const [trackerList, setTrackerList] = useState([]);
   const [iconName, setIconName] = useState("running");
+  const { loginState } = useLoginContext();
 
   useEffect(() => {
     handleButtonPress();
@@ -55,7 +57,7 @@ export default function Trackers({ navigation }) {
   // TESTI NAPPI FIREBASE HAKUUN
   const handleButtonPress = async () => {
     try {
-      const fetchedTrackers = await getTrackers();
+      const fetchedTrackers = await getTrackers(loginState);
       setTrackerList(fetchedTrackers);
     } catch (error) {
       console.error("Error fetching trackers:", error);
