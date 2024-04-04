@@ -24,7 +24,7 @@ export default function Exercise({ template }) {
   const handleAddTracker = () => {
     if (selectedExercises.length > 0) {
       // Use addToFirebase function to add selectedExercises to Firebase
-      addToFirebase(selectedExercises, "Exercise");
+      addToFirebase(selectedExercises, "Exercise", "My exercise tracker");
       console.log("Added to Firebase");
     } else {
       alert("Please select at least one exercise to add this tracker");
