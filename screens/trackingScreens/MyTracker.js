@@ -13,8 +13,7 @@ import { trackerStyle } from "../../styles/trackingScreens/trackerStyle";
 export default function MyTracker({ route }) {
   const [progress, setProgress] = useState(0);
   const [checked, setChecked] = useState(false);
-  const { tracker } = route.params;
-  console.log(tracker);
+  const {tracker} = route.params;
   const { colors } = useTheme();
 
   const updateProgress = (value) => {
@@ -36,7 +35,7 @@ export default function MyTracker({ route }) {
         onAnimationComplete={() => {}}
         backgroundColor={colors.text}
       />
-      {/* {tracker.map((milestone, index) => (
+      {/* {tracker.milestones.map((milestone, index) => (
         <MilestoneComponent
           key={index}
           text={milestone.milestone}

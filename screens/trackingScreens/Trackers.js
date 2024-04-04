@@ -32,6 +32,7 @@ export default function Trackers({ navigation }) {
   // };
 
   const trackerPress = (tracker) => {
+    console.log(tracker);
     navigation.navigate("MyTracker", { tracker: tracker });
   };
 
