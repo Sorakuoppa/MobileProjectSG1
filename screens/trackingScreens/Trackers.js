@@ -17,7 +17,6 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function Trackers({ navigation }) {
   const { colors } = useTheme();
   const [trackerList, setTrackerList] = useState([]);
-  const [iconName, setIconName] = useState("running");
 
   useEffect(() => {
     handleButtonPress();

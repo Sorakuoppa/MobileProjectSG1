@@ -23,9 +23,13 @@ export default function MyTracker({ route }) {
 
   return (
     <View style={general.scaffold}>
-      <Icon name="running" size={40} color={colors.primary} />
+      <Icon name={
+        tracker.type ===  "Running" ? 'running' :
+        tracker.type === "Reading" ? 'book' :
+        tracker.type === "Exercise" ? 'dumbbell' : 'question'
+    } size={40} color={colors.primary} />
       <Text style={{ ...general.title, color: colors.text }}>
-        My running tracker
+        {tracker.name}
       </Text>
       <AnimatedCircularProgress
         size={120}
@@ -35,7 +39,7 @@ export default function MyTracker({ route }) {
         onAnimationComplete={() => {}}
         backgroundColor={colors.text}
       />
-      {/* {tracker.milestones.map((milestone, index) => (
+      {tracker.milestones.map((milestone, index) => (
         <MilestoneComponent
           key={index}
           text={milestone.milestone}
@@ -43,7 +47,7 @@ export default function MyTracker({ route }) {
           onCheck={() => updateProgress(20)}
           onUncheck={() => updateProgress(-20)}
         />
-      ))} */}
+      ))}
       {/* <MilestoneComponent
         text={}
         onCheck={() => updateProgress(20)}
