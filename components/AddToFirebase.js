@@ -1,7 +1,14 @@
 import { auth, db } from "./FirebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
+
 export default async function addToFirebase(object, type) {
+
+  if (!auth.currentUser) {
+    
+    return;
+  }
+
   try {
     await addDoc(collection(db, "trackers", auth.currentUser.uid, "trackers"), {
       milestones: object,
