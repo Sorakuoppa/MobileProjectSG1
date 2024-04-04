@@ -7,7 +7,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { general } from "../../../styles/general";
 import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
 
-export default function Create() {
+export default function Create({template}) {
   const { colors } = useTheme();
 
 
@@ -18,8 +18,12 @@ export default function Create() {
 
 
   return (
-    <View style={{...general.scaffold, justifyContent: 'space-between'}}>
-      <Text>Create your own tracker</Text>
+    <View style={{ ...general.scaffold, justifyContent: "space-between" }}>
+      <Icon name={template.icon} size={40} color={colors.primary} />
+      <Text style={{ ...general.title, color: colors.text }}>
+        Create your own tracker
+      </Text>
+      <Text style={{ color: colors.text }}> Choose your milestones</Text>
     </View>
   );
 }
