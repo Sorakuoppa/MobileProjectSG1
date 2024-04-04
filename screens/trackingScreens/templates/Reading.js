@@ -9,7 +9,6 @@ import addToFirebase from "../../../components/AddToFirebase";
 import { readingData } from "../data/readingData";
 
 import { general } from "../../../styles/general";
-import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function Reading({ template }) {
@@ -19,10 +18,9 @@ export default function Reading({ template }) {
   const onCheck = (text, numeric) => {
     let list = [...objectList];
     let newTrackerObject = {};
-    newTrackerObject = { milestone: text, checked: true, numeric: numeric  };
+    newTrackerObject = { milestone: text, checked: true, numeric: numeric };
     list.push(newTrackerObject);
     setObjectList(list);
-
   };
 
   const onUncheck = (text) => {
@@ -41,33 +39,32 @@ export default function Reading({ template }) {
   // Please manage the contents of this template from readingData.js
   return (
     <View style={{ ...general.scaffold, justifyContent: "space-between" }}>
-      <View style={general.scaffold}>
-        <Icon name={template.icon} size={40} color={colors.primary} />
-        <Text style={{ ...general.title, color: colors.text }}>Reading </Text>
-        <Text style={{ color: colors.text }}> Choose your milestones</Text>
-        <InfoModal
-          text1={
-            "Checkmark indicates that the milestone will be completed upon checking!"
-          }
-          icon1={"check"}
-          text2={
-            "Milestones with these icons can be incremented according to your progress."
-          }
-          icon2={"minus"}
-          icon3={"plus"}
-        />
-        <ScrollView contentContainerStyle={{ width: "95%" }}>
-          {readingData.map((milestone, index) => (
-            <MilestoneComponent
-              key={index}
-              text={milestone.title}
-              numeric={milestone.numeric}
-              onCheck={(text) => onCheck(text, milestone.numeric)}
-              onUncheck={onUncheck}
-            />
-          ))}
-        </ScrollView>
-      </View>
+      <Icon name={template.icon} size={40} color={colors.primary} />
+      <Text style={{ ...general.title, color: colors.text }}>Reading </Text>
+      <Text style={{ color: colors.text }}> Choose your milestones</Text>
+      <InfoModal
+        text1={
+          "Checkmark indicates that the milestone will be completed upon checking!"
+        }
+        icon1={"check"}
+        text2={
+          "Milestones with these icons can be incremented according to your progress."
+        }
+        icon2={"minus"}
+        icon3={"plus"}
+      />
+      <ScrollView contentContainerStyle={{ width: "95%" }}>
+        {readingData.map((milestone, index) => (
+          <MilestoneComponent
+            key={index}
+            text={milestone.title}
+            numeric={milestone.numeric}
+            onCheck={(text) => onCheck(text, milestone.numeric)}
+            onUncheck={onUncheck}
+          />
+        ))}
+      </ScrollView>
+
       <Button
         mode="contained"
         buttonColor={colors.primary}

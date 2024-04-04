@@ -9,7 +9,6 @@ import { runningData } from "../data/runningData";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { general } from "../../../styles/general";
-import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
 
 export default function Running({ template }) {
   const [objectList, setObjectList] = useState([]);
@@ -38,33 +37,31 @@ export default function Running({ template }) {
   // Please manage the contents of this template from runningData.js
   return (
     <View style={{ ...general.scaffold, justifyContent: "space-between" }}>
-      <View style={general.scaffold}>
-        <Icon name={template.icon} size={40} color={colors.primary} />
-        <Text style={{ ...general.title, color: colors.text }}>Running </Text>
-        <Text style={{ color: colors.text }}> Choose your milestones</Text>
-        <InfoModal
-          text1={
-            "Checkmark indicates that the milestone will be completed upon checking!"
-          }
-          icon1={"check"}
-          text2={
-            "Milestones with these icons can be incremented according to your progress."
-          }
-          icon2={"minus"}
-          icon3={"plus"}
-        />
-        <ScrollView contentContainerStyle={{ widht: "95%" }}>
-          {runningData.map((milestone, index) => (
-            <MilestoneComponent
-              key={index}
-              text={milestone.title}
-              numeric={milestone.numeric}
-              onCheck={(text) => onCheck(text, milestone.numeric)}
-              onUncheck={onUncheck}
-            />
-          ))}
-        </ScrollView>
-      </View>
+      <Icon name={template.icon} size={40} color={colors.primary} />
+      <Text style={{ ...general.title, color: colors.text }}>Running </Text>
+      <Text style={{ color: colors.text }}> Choose your milestones</Text>
+      <InfoModal
+        text1={
+          "Checkmark indicates that the milestone will be completed upon checking!"
+        }
+        icon1={"check"}
+        text2={
+          "Milestones with these icons can be incremented according to your progress."
+        }
+        icon2={"minus"}
+        icon3={"plus"}
+      />
+      <ScrollView contentContainerStyle={{ width: "95%" }}>
+        {runningData.map((milestone, index) => (
+          <MilestoneComponent
+            key={index}
+            text={milestone.title}
+            numeric={milestone.numeric}
+            onCheck={(text) => onCheck(text, milestone.numeric)}
+            onUncheck={onUncheck}
+          />
+        ))}
+      </ScrollView>
       <Button
         mode="contained"
         buttonColor={colors.primary}

@@ -8,9 +8,18 @@ import { general } from "../../../styles/general";
 import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
 
 export default function Create() {
+  const { colors } = useTheme();
+
+
+
+
+
+
+
+
   return (
-    <View>
-      <Text>Create</Text>
+    <View style={{...general.scaffold, justifyContent: 'space-between'}}>
+      <Text>Create your own tracker</Text>
     </View>
   );
 }

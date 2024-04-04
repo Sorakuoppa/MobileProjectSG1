@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { IconButton, Checkbox, RadioButton, Tooltip } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
@@ -28,14 +28,15 @@ export default function MilestoneComponent({
 
   if (numericMilestone) {
     return (
-      <View
-        style={{
-          ...templateStyle.milestones,
-          backgroundColor: colors.accent,
-          borderColor: colors.primary,
-        }}
-      >
-        <Text style={{ color: colors.text }}> {text} </Text>
+      <TouchableOpacity onPress={handleCheck} style={{ width: "100%" }}>
+        <View
+          style={{
+            ...templateStyle.milestones,
+            backgroundColor: colors.accent,
+            borderColor: colors.primary,
+          }}
+        >
+          <Text style={{ color: colors.text }}> {text} </Text>
           <View style={templateStyle.icons}>
             <Icon
               name="minus"
@@ -54,33 +55,36 @@ export default function MilestoneComponent({
               uncheckedColor={colors.text}
             />
           </View>
-      </View>
+        </View>
+      </TouchableOpacity>
     );
   }
 
   return (
-    <View
-      style={{
-        ...templateStyle.milestones,
-        backgroundColor: colors.accent,
-        borderColor: colors.primary,
-      }}
-    >
-      <Text style={{ color: colors.text }}> {text} </Text>
-      <View style={templateStyle.icons}>
-        <Icon
-          name="check"
-          size={20}
-          color={colors.primary}
-          style={{ marginRight: 20 }}
-        />
-        <Checkbox
-          status={checked ? "checked" : "unchecked"}
-          onPress={handleCheck}
-          color={colors.primary}
-          uncheckedColor={colors.text}
-        />
+    <TouchableOpacity onPress={handleCheck} style={{width: '100%'}}>
+      <View
+        style={{
+          ...templateStyle.milestones,
+          backgroundColor: colors.accent,
+          borderColor: colors.primary,
+        }}
+      >
+        <Text style={{ color: colors.text }}> {text} </Text>
+        <View style={templateStyle.icons}>
+          <Icon
+            name="check"
+            size={20}
+            color={colors.primary}
+            style={{ marginRight: 20 }}
+          />
+          <Checkbox
+            status={checked ? "checked" : "unchecked"}
+            onPress={handleCheck}
+            color={colors.primary}
+            uncheckedColor={colors.text}
+          />
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
