@@ -22,20 +22,19 @@ export default function Trackers({ navigation }) {
   const { loginState } = useLoginContext();
 
   useEffect(() => {
-    handleButtonPress();
+    showTrackers();
   }, [navigation]);
 
-  // const fetchTrackers = async () => {
-  //   try {
-  //     const fetchedTrackers = await readFromFirebase();
-  //     setTrackerList(fetchedTrackers);
-  //   } catch (error) {
-  //     console.error("Error fetching trackers:", error);
-  //   }
-  // };
+  const showTrackers = async () => {
+    try {
+      const fetchedTrackers = await getTrackers(loginState);
+      setTrackerList(fetchedTrackers);
+    } catch (error) {
+      console.error("Error fetching trackers:", error);
+    }
+  };
 
   const trackerPress = (tracker) => {
-    console.log(tracker);
     navigation.navigate("MyTracker", { tracker: tracker });
   };
 
@@ -51,16 +50,6 @@ export default function Trackers({ navigation }) {
       }
     } catch (e) {
       console.error("Error fetching asyncStorage: ", e);
-    }
-  };
-
-  // TESTI NAPPI FIREBASE HAKUUN
-  const handleButtonPress = async () => {
-    try {
-      const fetchedTrackers = await getTrackers(loginState);
-      setTrackerList(fetchedTrackers);
-    } catch (error) {
-      console.error("Error fetching trackers:", error);
     }
   };
 
@@ -102,12 +91,6 @@ export default function Trackers({ navigation }) {
           </Pressable>
         ))}
       </ScrollView>
-
-      {/* TESTI NAPPI MILLÄ HAETAAN DATAA FIREBASESTA*/}
-      <Button title="Fetch Trackers" onPress={handleButtonPress}>
-        asddasadsasdadsdas
-      </Button>
-      {/* CONSOLELOGAA PAINETTAESSA KOKO TRACKERLISTAN ATM */}
 
       {/* Button for testing asyncStorage */}
       <Button
