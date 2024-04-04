@@ -30,7 +30,7 @@ export default function Reading({ template }) {
 
   const buttonHandler = () => {
     if (objectList.length > 0) {
-      addToFirebase(objectList, "Running");
+      addToFirebase(objectList, "Reading", "My reading tracker");
     } else {
       alert("Please select at least one milestone to add this tracker");
     }

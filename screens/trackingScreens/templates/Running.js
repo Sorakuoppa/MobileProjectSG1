@@ -29,7 +29,7 @@ export default function Running({ template }) {
 
   const buttonHandler = () => {
     if (objectList.length > 0) {
-      addToFirebase(objectList, "Running");
+      addToFirebase(objectList, "Running", "My running tracker");
     } else {
       alert("Please select at least one milestone to add this tracker");
     }

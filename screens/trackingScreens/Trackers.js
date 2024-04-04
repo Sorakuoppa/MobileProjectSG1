@@ -16,27 +16,29 @@ import { useTheme } from "@react-navigation/native";
 export default function Trackers({ navigation }) {
   const { colors } = useTheme();
   const [trackerList, setTrackerList] = useState([]);
+  const [iconName, setIconName] = useState("running");
 
-  
   useEffect(() => {
-    fetchTrackers();
+    handleButtonPress();
     console.log(trackerList);
   }, [navigation]);
 
-  const fetchTrackers = async () => {
-    try {
-      const fetchedTrackers = await readFromFirebase();
-      setTrackerList(fetchedTrackers);
-    } catch (error) {
-      console.error("Error fetching trackers:", error);
-    }
-  };
+  // const fetchTrackers = async () => {
+  //   try {
+  //     const fetchedTrackers = await readFromFirebase();
+  //     setTrackerList(fetchedTrackers);
+  //   } catch (error) {
+  //     console.error("Error fetching trackers:", error);
+  //   }
+  // };
+
   const trackerPress = () => {
     navigation.navigate("MyTracker");
   };
+
   // TESTING ASYNCSTORAGE REMOVE THIS
   const showAsyncStorage = async () => {
-    // AsyncStorage.clear(); 
+    // AsyncStorage.clear();
 
     try {
       const value = await AsyncStorage.getAllKeys();
@@ -44,14 +46,12 @@ export default function Trackers({ navigation }) {
       if (value !== null) {
         alert(value);
       }
-    }
-    catch (e) {
+    } catch (e) {
       console.error("Error fetching asyncStorage: ", e);
     }
   };
 
-// TESTI NAPPI FIREBASE HAKUUN
-
+  // TESTI NAPPI FIREBASE HAKUUN
   const handleButtonPress = async () => {
     try {
       const fetchedTrackers = await getTrackers();
@@ -63,8 +63,13 @@ export default function Trackers({ navigation }) {
 
   return (
     <View style={general.scaffold}>
-      <View>
-        <Pressable onPress={trackerPress}>
+      <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
+      {trackerList.map((tracker, index) => (
+        <Pressable
+          key={index}
+          onPress={trackerPress}
+          style={trackerStyle.tracker}
+        >
           <Surface
             elevation={4}
             style={{
@@ -73,16 +78,31 @@ export default function Trackers({ navigation }) {
               borderColor: colors.primary,
             }}
           >
-            <Icon name="running" size={40} color={colors.primary} />
+            <Icon
+              name={
+                tracker.type === "Running"
+                  ? "running"
+                  : tracker.type === "Reading"
+                  ? "book"
+                  : tracker.type === "Exercise"
+                  ? "dumbbell"
+                  : "question-circle"
+              }
+              size={40}
+              color={colors.primary}
+            />
             <Text style={{ ...addNewStyle.templateText, color: colors.text }}>
-              My running tracker
+              {tracker.name}
             </Text>
           </Surface>
         </Pressable>
+      ))}
 
-        {/* TESTI NAPPI MILLÄ HAETAAN DATAA FIREBASESTA*/}
-        <Button title="Fetch Trackers" onPress={handleButtonPress}>asddasadsasdadsdas</Button>
-      {/* CONSOLELOGAA PAINETTAESSA KOKO TRACKERLISTAN ATM */}   
+      {/* TESTI NAPPI MILLÄ HAETAAN DATAA FIREBASESTA*/}
+      <Button title="Fetch Trackers" onPress={handleButtonPress}>
+        asddasadsasdadsdas
+      </Button>
+      {/* CONSOLELOGAA PAINETTAESSA KOKO TRACKERLISTAN ATM */}
 
       {/* Button for testing asyncStorage */}
       <Button
@@ -91,8 +111,6 @@ export default function Trackers({ navigation }) {
         buttonColor={colors.primary}
         onPress={showAsyncStorage}
       />
-
-      </View>
     </View>
   );
 }
