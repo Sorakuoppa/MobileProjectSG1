@@ -12,6 +12,7 @@ import { addNewStyle } from "../../styles/trackingScreens/addNewStyle";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { IconButton, Surface, Button } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Trackers({ navigation }) {
   const { colors } = useTheme();
@@ -64,39 +65,41 @@ export default function Trackers({ navigation }) {
   return (
     <View style={general.scaffold}>
       <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
-      {trackerList.map((tracker, index) => (
-        <Pressable
-          key={index}
-          onPress={() => trackerPress(tracker)}
-          style={trackerStyle.tracker}
-        >
-          <Surface
-            elevation={4}
-            style={{
-              ...addNewStyle.template,
-              backgroundColor: colors.accent,
-              borderColor: colors.primary,
-            }}
+      <ScrollView>
+        {trackerList.map((tracker, index) => (
+          <Pressable
+            key={index}
+            onPress={() => trackerPress(tracker)}
+            style={trackerStyle.tracker}
           >
-            <Icon
-              name={
-                tracker.type === "Running"
-                  ? "running"
-                  : tracker.type === "Reading"
-                  ? "book"
-                  : tracker.type === "Exercise"
-                  ? "dumbbell"
-                  : "question-circle"
-              }
-              size={40}
-              color={colors.primary}
-            />
-            <Text style={{ ...addNewStyle.templateText, color: colors.text }}>
-              {tracker.name}
-            </Text>
-          </Surface>
-        </Pressable>
-      ))}
+            <Surface
+              elevation={4}
+              style={{
+                ...addNewStyle.template,
+                backgroundColor: colors.accent,
+                borderColor: colors.primary,
+              }}
+            >
+              <Icon
+                name={
+                  tracker.type === "Running"
+                    ? "running"
+                    : tracker.type === "Reading"
+                    ? "book"
+                    : tracker.type === "Exercise"
+                    ? "dumbbell"
+                    : "question-circle"
+                }
+                size={40}
+                color={colors.primary}
+              />
+              <Text style={{ ...addNewStyle.templateText, color: colors.text }}>
+                {tracker.name}
+              </Text>
+            </Surface>
+          </Pressable>
+        ))}
+      </ScrollView>
 
       {/* TESTI NAPPI MILLÄ HAETAAN DATAA FIREBASESTA*/}
       <Button title="Fetch Trackers" onPress={handleButtonPress}>
