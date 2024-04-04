@@ -52,4 +52,7 @@ export const loginAndRegisterStyles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Gantari',
   },
+  paddingTopView: {
+    paddingTop: 15,
+  }
 });

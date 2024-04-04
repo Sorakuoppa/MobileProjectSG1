@@ -189,6 +189,11 @@ export function DrawerStack({navigation, route}) {
       drawerItemStyle: { display: "none" },
       initialParams: { action: 'ForgotPassword' }
     },
+    {
+      name: "Register",
+      component: RegisterComponent,
+      drawerItemStyle: { display: "none" },
+    },
   ];
   
   return (

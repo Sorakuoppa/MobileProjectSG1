@@ -22,6 +22,10 @@ const LoginComponent = () => {
     navigation.navigate("ForgotPassword")
   }
 
+  const navigateRegisterPage = () => {
+    navigation.navigate("Register")
+  }
+
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password); // Access auth directly from FirebaseConfig
@@ -84,7 +88,12 @@ const LoginComponent = () => {
         <Pressable >
           <Text style={loginAndRegisterStyles.anonText} onPress={navigateForgotPage}>Forgot password?</Text>
         </Pressable>
-      </View>
+        </View>
+        <View style={loginAndRegisterStyles.paddingTopView}>
+        <Pressable >
+          <Text style={loginAndRegisterStyles.anonText} onPress={navigateRegisterPage}>New user? Register here!</Text>
+        </Pressable>
+        </View>
       <View>
         <Pressable  style={loginAndRegisterStyles.button} onPress={handleLogin}>
           <Text style={loginAndRegisterStyles.buttonText}>Login</Text>
