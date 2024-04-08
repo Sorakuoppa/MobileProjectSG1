@@ -37,6 +37,7 @@ export default function Account() {
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
+        aspect: [4,3],
         quality: 1,
       });
       const uri = result.assets[0].uri
