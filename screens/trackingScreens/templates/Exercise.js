@@ -13,7 +13,7 @@ import addToFirebase from "../../../components/AddToFirebase";
 import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Exercise({ template }) {
+export default function Exercise({ template, navigation }) {
   const { colors } = useTheme();
   const pushDay = exerciseData.filter((exercise) => exercise.type === "push");
   const pullDay = exerciseData.filter((exercise) => exercise.type === "pull");
@@ -25,7 +25,7 @@ export default function Exercise({ template }) {
     if (selectedExercises.length > 0) {
       // Use addToFirebase function to add selectedExercises to Firebase
       addToFirebase(selectedExercises, "Exercise", "My exercise tracker");
-      console.log("Added to Firebase");
+      navigation.navigate("Trackers");
     } else {
       alert("Please select at least one exercise to add this tracker");
     }

@@ -8,17 +8,17 @@ import Running from "./templates/Running";
 
 
 
-export default function Templates({ route }) {
+export default function Templates({ route, navigation }) {
   const { template } = route.params;
 
     switch (template.name) {
-    case "create":
-      return <Create template={template} />;
+    case "create": 
+      return <Create template={template} navigation={navigation} />;
     case "exercise":
-        return <Exercise template={template} />;
+        return <Exercise template={template} navigation={navigation} />;
     case "read":
-        return <Reading template={template} />;
+        return <Reading template={template} navigation={navigation} />;
     case "run":
-        return <Running template={template} />;
+        return <Running template={template} navigation={navigation} />;
     }
 }
