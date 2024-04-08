@@ -195,7 +195,8 @@ export function DrawerStack({ navigation, route }) {
   ];
 
   return (
-    <Drawer.Navigator
+    <Drawer.Navigator 
+      initialRouteName="Home"
       screenOptions={({ route }) => ({
         headerTitle: getHeaderTitle(route, loginState, username),
         swipeEdgeWidth: 80,
@@ -218,6 +219,7 @@ export function DrawerStack({ navigation, route }) {
               style={{ width: 200, height: 100 }}
             />
           ),
+          drawerActiveTintColor: colors.background,
         }}
       />
 
