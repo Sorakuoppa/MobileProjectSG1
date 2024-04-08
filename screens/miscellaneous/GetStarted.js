@@ -23,7 +23,7 @@ export default function GetStarted() {
           Welcome aboard! Our tracking application empowers you to stay organized and productive by tracking anything, anytime. Whether it's your daily habits, fitness goals, work projects, or personal milestones, our intuitive interface and insightful charts help you visualize your progress and make informed decisions. Sync across devices and get started today to unlock your full potential!
         </Text>
         <View style={startedStyle.buttonContainer}>
-  <Pressable onPress={goToLoginOrRegister} style={startedStyle.button}>
+  <Pressable onPress={goToLoginOrRegister} style={{...startedStyle.button, }}>
     <Text style={startedStyle.buttonText}>Get Started</Text>
   </Pressable>
 </View>

@@ -40,6 +40,7 @@ export const logOrReg = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontFamily: 'Gantari',
+    fontWeight: 'bold',
   },
   anonText: {
     fontWeight: 'bold',

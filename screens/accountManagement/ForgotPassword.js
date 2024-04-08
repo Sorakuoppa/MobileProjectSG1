@@ -3,9 +3,11 @@ import { Text, View, TextInput, Pressable, Alert } from 'react-native'
 import { forgotPasswordStyle } from '../../styles/accountManagementStyles/forgotPasswordStyle'
 import { db, passwordReset } from '../../components/FirebaseConfig' // Assuming passwordReset function is exported from FirebaseConfig
 import { collection, getDocs, query, where } from '@firebase/firestore'
+import { useTheme } from "@react-navigation/native";
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState('')
+    const { colors } = useTheme();
 
     const handlePasswordReset = async () => {
         const usersRef = collection(db, "users")
@@ -33,14 +35,14 @@ export default function ForgotPassword() {
 
     return (
         <View style={forgotPasswordStyle.container}>
-            <Text style={forgotPasswordStyle.formFieldTitle}>Enter your email here</Text>
+            <Text style={{...forgotPasswordStyle.formFieldTitle, color: colors.primary}}>Enter your email here</Text>
             <TextInput           
                 placeholder="Email"
-                style={forgotPasswordStyle.formFieldInput}
+                style={{...forgotPasswordStyle.formFieldInput, borderColor: colors.primary}}
                 value={email}
                 onChangeText={setEmail}
             />
-            <Pressable  style={forgotPasswordStyle.button} onPress={handlePasswordReset}>
+            <Pressable  style={{...forgotPasswordStyle.button, backgroundColor: colors.primary}} onPress={handlePasswordReset}>
                 <Text style={forgotPasswordStyle.buttonText}>Send new password</Text>
             </Pressable>
         </View>
