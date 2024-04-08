@@ -27,11 +27,11 @@ export const startedStyle = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 100,
         borderRadius: 30,
-        borderBlockColor: '#ffffff',
+        borderColor: '#ffe8d3',
         borderWidth: 2,
       },
       buttonText: {
-        color: '#fff',
+        color: '#ffffff',
         fontSize: 16,
         fontWeight: 'bold',
       },
