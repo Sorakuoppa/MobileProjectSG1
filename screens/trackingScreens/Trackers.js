@@ -24,9 +24,10 @@ export default function Trackers({ navigation }) {
 
   useFocusEffect(
     useCallback(() => {
+      console.log("useFocusEffect");
       showTrackers();
       return () => {};
-    }, [])
+    }, [loginState])
   );
 
   const showTrackers = async () => {
