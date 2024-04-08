@@ -20,6 +20,7 @@ const RegisterComponent = () => {
       await setDoc(doc(db,"users", auth.currentUser.uid), {
         email: email,
         username: username,
+        profilePicture: ''
       });
       console.log("Data pushed to database successfully");
     } catch (e) {

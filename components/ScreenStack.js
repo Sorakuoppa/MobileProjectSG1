@@ -21,6 +21,7 @@ import { useLoginContext } from "./LoginContext";
 import { useLoaded } from "./FirstTimeLoadContext";
 import SignOut from "../screens/accountManagement/SignOut";
 import ForgotPassword from "../screens/accountManagement/ForgotPassword";
+import { auth } from "./FirebaseConfig";
 
 const navigateForgotPage = (navigation, action) => {
   if (action === 'ForgotPassword') {
@@ -139,6 +140,7 @@ export function DrawerStack({navigation, route}) {
   useEffect(() => {
     // Check the login state every time the drawer stack mounts
     console.log('Login state checked:', loginState);
+    console.log(auth.currentUser)
   }, [loginState]);
 
     
