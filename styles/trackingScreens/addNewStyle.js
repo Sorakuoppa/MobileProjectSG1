@@ -8,7 +8,6 @@ export const addNewStyle = StyleSheet.create({
     width: "90%",
     height: "auto",
     padding: 10,
-    margin: 10,
     borderRadius: 10,
     borderWidth: 1,
   },

@@ -4,7 +4,8 @@
 import React, { useEffect } from "react";
 import { View, Text, Pressable, Animated } from "react-native";
 import { useState } from "react";
-import { getTrackers } from "../../components/ReadFirebaseDb"; // Import getTrackers
+import { getTrackers } from "../../components/ReadFirebaseDb";
+import { auth } from "../../components/FirebaseConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { general } from "../../styles/general";
 import { trackerStyle } from "../../styles/trackingScreens/trackerStyle";
@@ -44,7 +45,8 @@ export default function Trackers({ navigation }) {
 
     try {
       const value = await AsyncStorage.getAllKeys();
-
+      console.log(auth.currentUser.uid);
+      console.log()
       if (value !== null) {
         alert(value);
       }
