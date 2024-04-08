@@ -9,10 +9,16 @@ export const startedStyle = StyleSheet.create({
         alignItems: "center",
         backgroundColor: darkColors.primary,
     },
+    welcomeTitle: {
+      textAlign: 'center',
+      fontSize: 24,
+      fontWeight: 'bold'
+    },
     welcomeText: {
-        textAlign: 'center',
+        textAlign: 'justify',
         marginBottom: 20,
-        fontSize: 16,
+        padding: 20,
+        fontSize: 18,
         fontFamily: 'Gantari',
       },
       button: {
