@@ -12,7 +12,8 @@ export const startedStyle = StyleSheet.create({
     welcomeTitle: {
       textAlign: 'center',
       fontSize: 24,
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontFamily: "Gantari"
     },
     welcomeText: {
         textAlign: 'justify',

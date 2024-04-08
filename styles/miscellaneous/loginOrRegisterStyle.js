@@ -11,7 +11,7 @@ export const logOrReg = StyleSheet.create({
   logo: {
     maxWidth: windowWidth - 5, // Set max width for the logo with some padding
     height: windowWidth / 1.5, // Set the height of the logo to 1/3rd of the screen width
-    resizeMode: "cover",
+    resizeMode: "contain",
     marginBottom: 20,
   },
   content: {
@@ -30,10 +30,9 @@ export const logOrReg = StyleSheet.create({
     width: windowWidth - 25,
   },
   button: {
-    backgroundColor: '#ff5c00',
     paddingVertical: 12,
     paddingHorizontal: 24,
-    borderRadius: 8,
+    borderRadius: 30,
     alignItems: 'center',
     marginTop: 20, // Add margin between content and button
   },
@@ -57,7 +56,7 @@ export const logOrReg = StyleSheet.create({
     marginTop: 15,
     alignSelf: "center"
 },
-anonbutton: { 
+anonButton: { 
   fontFamily: 'Gantari',
 }
 });
