@@ -39,19 +39,12 @@ export default function Account() {
         allowsEditing: true,
         quality: 1,
       });
-
-
-      
       const uri = result.assets[0].uri
       if (!result.canceled && uri) {
         const imageUrl = await UploadImage(uri); // Upload image and get URL
         if (imageUrl) {
-          const usersRef = collection(db, "users");
-          const q = query(usersRef, where("email", '==', email));
-          const querySnapshot = await getDocs(q);
-          querySnapshot.forEach((doc) => {
-            setUserData(doc.data());
-          });}     
+          setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
+        }     
        } else {
         console.log('Image selection cancelled or URI not found');
       } 
@@ -70,8 +63,7 @@ export default function Account() {
             <Image source={{ uri: userData.profilePicture }} style={accountStyle.image} />
           ) : (
             <Image style={accountStyle.image} />
-            // Alternatively, you can leave it blank
-            // <View style={{ width: 100, height: 100 }} />
+
           )}
           <Button title="Select Image" onPress={selectImage} />
         </View>
