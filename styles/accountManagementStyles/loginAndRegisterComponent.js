@@ -14,10 +14,9 @@ export const loginAndRegisterStyles = StyleSheet.create({
     fontSize: 25
   },
   button: {
-    backgroundColor: '#ff5c00',
     paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
+    paddingHorizontal: 150,
+    borderRadius: 30,
     alignItems: 'center',
     marginTop: 20, // Add margin between content and button
   },
@@ -25,6 +24,7 @@ export const loginAndRegisterStyles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontFamily: 'Gantari',
+    fontWeight: 'bold',
   },
   anonText: {
     fontSize: 16,
@@ -37,18 +37,16 @@ export const loginAndRegisterStyles = StyleSheet.create({
     marginBottom: 20,
   },
   formFieldTitle: {
-    color: '#FF5C00',
     fontSize: 16,
     fontFamily: 'Gantari',
     marginBottom: 5,
   },
   formFieldInput: {
     backgroundColor: '#FFF',
-    borderRadius: 8,
+    borderRadius: 30,
     paddingVertical: 12,
     paddingHorizontal: 16,
-    borderWidth: 1,
-    borderColor: '#FF5C00',
+    borderWidth: 2,
     fontSize: 16,
     fontFamily: 'Gantari',
   },

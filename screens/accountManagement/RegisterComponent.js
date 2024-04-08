@@ -5,6 +5,7 @@ import { auth, db } from '../../components/FirebaseConfig'; // Import FirebaseCo
 import { useNavigation } from '@react-navigation/native';
 import { loginAndRegisterStyles } from '../../styles/accountManagementStyles/loginAndRegisterComponent';
 import { setDoc, doc } from '@firebase/firestore';
+import { useTheme } from "@react-navigation/native";
 
 
 const RegisterComponent = () => {
@@ -14,6 +15,7 @@ const RegisterComponent = () => {
   const [username, setUsername] = useState('');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const navigation = useNavigation();
+  const { colors } = useTheme();
 
   const pushDataToBase = async (email, username) => {
     try {
@@ -51,9 +53,9 @@ const RegisterComponent = () => {
     <View style={loginAndRegisterStyles.container}>
       <Text style={loginAndRegisterStyles.title}>Sign Up</Text>
       <View style={loginAndRegisterStyles.formFieldContainer}>
-        <Text style={loginAndRegisterStyles.formFieldTitle}>Email</Text>
+        <Text style={{...loginAndRegisterStyles.formFieldTitle, color: colors.primary}}>Email</Text>
         <TextInput
-          style={loginAndRegisterStyles.formFieldInput}
+          style={{...loginAndRegisterStyles.formFieldInput, borderColor: colors.primary}}
           value={email}
           onChangeText={setEmail}
           placeholder="Email"
@@ -61,9 +63,9 @@ const RegisterComponent = () => {
         />
       </View>
       <View style={loginAndRegisterStyles.formFieldContainer}>
-        <Text style={loginAndRegisterStyles.formFieldTitle}>Username</Text>
+        <Text style={{...loginAndRegisterStyles.formFieldTitle, color: colors.primary}}>Username</Text>
         <TextInput
-          style={loginAndRegisterStyles.formFieldInput}
+          style={{...loginAndRegisterStyles.formFieldInput, borderColor: colors.primary}}
           value={username}
           onChangeText={setUsername}
           placeholder="Username"
@@ -71,9 +73,9 @@ const RegisterComponent = () => {
         />
       </View>
       <View style={loginAndRegisterStyles.formFieldContainer}>
-        <Text style={loginAndRegisterStyles.formFieldTitle}>Password</Text>
+        <Text style={{...loginAndRegisterStyles.formFieldTitle, color: colors.primary}}>Password</Text>
         <TextInput
-          style={loginAndRegisterStyles.formFieldInput}
+          style={{...loginAndRegisterStyles.formFieldInput, borderColor: colors.primary}}
           value={password}
           onChangeText={setPassword}
           placeholder="Password"
@@ -81,9 +83,9 @@ const RegisterComponent = () => {
         />
       </View>
       <View style={loginAndRegisterStyles.formFieldContainer}>
-        <Text style={loginAndRegisterStyles.formFieldTitle}>Confirm password</Text>
+        <Text style={{...loginAndRegisterStyles.formFieldTitle, color: colors.primary}}>Confirm password</Text>
         <TextInput
-          style={loginAndRegisterStyles.formFieldInput}
+          style={{...loginAndRegisterStyles.formFieldInput, borderColor: colors.primary}}
           value={passwordRetype}
           onChangeText={setPasswordRetype}
           placeholder="Confirm password"
@@ -91,7 +93,7 @@ const RegisterComponent = () => {
         />
       </View>
       <View style={loginAndRegisterStyles.buttonContainer}>
-        <Pressable style={loginAndRegisterStyles.button} onPress={handleRegister}>
+        <Pressable style={{...loginAndRegisterStyles.button, backgroundColor: colors.primary}} onPress={handleRegister}>
           <Text style={loginAndRegisterStyles.buttonText}>Sign up</Text>
         </Pressable>
       </View>

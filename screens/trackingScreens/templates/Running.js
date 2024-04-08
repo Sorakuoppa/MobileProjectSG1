@@ -10,7 +10,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { general } from "../../../styles/general";
 
-export default function Running({ template }) {
+export default function Running({ template, navigation }) {
   const [objectList, setObjectList] = useState([]);
   const { colors } = useTheme();
 
@@ -30,6 +30,7 @@ export default function Running({ template }) {
   const buttonHandler = () => {
     if (objectList.length > 0) {
       addToFirebase(objectList, "Running", "My running tracker");
+      navigation.navigate("Trackers");
     } else {
       alert("Please select at least one milestone to add this tracker");
     }
