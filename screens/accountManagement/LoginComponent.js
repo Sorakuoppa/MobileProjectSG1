@@ -64,10 +64,10 @@ const LoginComponent = () => {
   return (
     <View style={loginAndRegisterStyles.container}>
       <Text style={{...loginAndRegisterStyles.title, color: colors.text}}>Sign In</Text>
-      <View style={loginAndRegisterStyles.formFieldContainer}>
+      <View style={{...loginAndRegisterStyles.formFieldContainer, borderColor: colors.primary}}>
         <Text style={{...loginAndRegisterStyles.formFieldTitle, color: colors.primary}}>Email</Text>
         <TextInput
-          style={loginAndRegisterStyles.formFieldInput}
+          style={{...loginAndRegisterStyles.formFieldInput, borderColor: colors.primary}}
           value={email}
           onChangeText={setEmail}
           placeholder="Email"
@@ -75,9 +75,9 @@ const LoginComponent = () => {
         />
       </View>
       <View style={loginAndRegisterStyles.formFieldContainer}>
-        <Text style={loginAndRegisterStyles.formFieldTitle}>Password</Text>
+        <Text style={{...loginAndRegisterStyles.formFieldTitle, color: colors.primary}}>Password</Text>
         <TextInput
-          style={loginAndRegisterStyles.formFieldInput}
+          style={{...loginAndRegisterStyles.formFieldInput, borderColor: colors.primary}}
           value={password}
           onChangeText={setPassword}
           placeholder="Password"
@@ -95,7 +95,7 @@ const LoginComponent = () => {
         </Pressable>
         </View>
       <View>
-        <Pressable  style={loginAndRegisterStyles.button} onPress={handleLogin}>
+        <Pressable  style={{...loginAndRegisterStyles.button, backgroundColor: colors.primary}} onPress={handleLogin}>
           <Text style={loginAndRegisterStyles.buttonText}>Login</Text>
         </Pressable>
       </View>
