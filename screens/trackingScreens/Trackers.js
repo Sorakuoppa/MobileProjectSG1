@@ -62,6 +62,7 @@ export default function Trackers({ navigation }) {
   if (isLoading) {
     return (
       <View style={{ ...general.scaffold, justifyContent: "center" }}>
+        <Text >Fetching your trackers...</Text>
         <ActivityIndicator animating={true} color={colors.primary} size={80} />
       </View>
     );
