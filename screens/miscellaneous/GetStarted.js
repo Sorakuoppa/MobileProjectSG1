@@ -16,8 +16,10 @@ export default function GetStarted() {
   return (
     <LinearGradient colors={['#FF2E00', '#FFC700']} style={[general.scaffold, startedStyle.container]}>
       <View style={startedStyle.content}>
+        <Text style={startedStyle.welcomeTitle}>
+          Welcome to Our Tracking Application!
+        </Text>
         <Text style={startedStyle.welcomeText}>
-          Welcome to Our Tracking Application! {'\n\n'}
           Welcome aboard! Our tracking application empowers you to stay organized and productive by tracking anything, anytime. Whether it's your daily habits, fitness goals, work projects, or personal milestones, our intuitive interface and insightful charts help you visualize your progress and make informed decisions. Sync across devices and get started today to unlock your full potential!
         </Text>
         <View style={startedStyle.buttonContainer}>
