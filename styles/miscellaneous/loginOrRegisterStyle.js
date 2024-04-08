@@ -53,10 +53,10 @@ export const logOrReg = StyleSheet.create({
     
   },
   anonContainer: {
-    marginTop: 15,
+    marginTop: 30,
     alignSelf: "center"
-},
-anonButton: { 
-  fontFamily: 'Gantari',
-}
+  },
+  anonButton: {
+    fontFamily: 'Gantari',
+  }
 });
