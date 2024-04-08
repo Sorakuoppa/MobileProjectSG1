@@ -1,8 +1,9 @@
 // TODO: Show all the trackers that the user has created
 // and allow them to click on them to view the tracker details
 
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { View, Text, Pressable, Animated } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import { useState } from "react";
 import { getTrackers } from "../../components/ReadFirebaseDb";
 import { auth } from "../../components/FirebaseConfig";
@@ -21,9 +22,13 @@ export default function Trackers({ navigation }) {
   const [trackerList, setTrackerList] = useState([]);
   const { loginState } = useLoginContext();
 
-  useEffect(() => {
-    showTrackers();
-  }, [navigation]);
+  useFocusEffect(
+    useCallback(() => {
+      showTrackers();
+      return  () => {
+        console.log("cleanup");
+      };
+    }, []));
 
   const showTrackers = async () => {
     try {

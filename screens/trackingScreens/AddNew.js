@@ -14,6 +14,7 @@ export default function AddNew({ navigation }) {
   ).current;
 
   const handlePress = (index, templateName) => {
+
     const fadeAnim = fadeAnims[index];
 
     Animated.timing(fadeAnim, {
