@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export async function getTrackers(loginState) {
   try {
-    if (loginState === false) {
+    if (loginState === false || !auth.currentUser) {
       console.log("User is not authenticated. Trying to fetch trackers from AsyncStorage.");
       const storedData = await getTrackersFromAsyncStorage();
       return storedData;
