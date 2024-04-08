@@ -3,26 +3,7 @@ import { auth, db } from "./FirebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
 export default async function addToFirebase(object, type, trackerName) {
-  if (!auth.currentUser) {
-    let counter = 0;
-    let key = "tracker" + counter;
-    let key2 = "type" + counter;
-    let key3 = "name" + counter;
-
-    try {
-      while (await AsyncStorage.getItem(key)) {
-        counter++;
-        key = "tracker" + counter;
-        key2 = "type" + counter;
-      }
-      await AsyncStorage.setItem(key, JSON.stringify(object));
-      await AsyncStorage.setItem(key2, type);
-      await AsyncStorage.setItem(key3, trackerName);
-      alert("Saved to asyncstorage");
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  } else {
+  if (auth.currentUser) {
     try {
       await addDoc(
         collection(db, "trackers", auth.currentUser.uid, "trackers"),
@@ -32,6 +13,27 @@ export default async function addToFirebase(object, type, trackerName) {
           name: trackerName,
         }
       );
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  } else {
+    try {
+      let counter = 0;
+      let key = "tracker" + counter;
+      let key2 = "type" + counter;
+      let key3 = "name" + counter;
+
+      while (await AsyncStorage.getItem(key)) {
+        counter++;
+        key = "tracker" + counter;
+        key2 = "type" + counter;
+        key3 = "name" + counter;
+      }
+      
+      await AsyncStorage.setItem(key, JSON.stringify(object));
+      await AsyncStorage.setItem(key2, type);
+      await AsyncStorage.setItem(key3, trackerName);
+      alert("Saved to AsyncStorage");
     } catch (e) {
       console.error("Error adding document: ", e);
     }
