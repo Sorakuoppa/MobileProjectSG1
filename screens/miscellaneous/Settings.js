@@ -16,19 +16,13 @@ export default function Settings() {
     theme.setTheme(switchOn ? "light" : "dark");
   };
 
-  return (
-    <View style={general.scaffold}>
-      <Text style={general.title}>Settings</Text>
-      <View style={settingStyle.setting}>
-        <Text style={{ ...general.text, color: colors.text, fontSize: 16 }}>
-          Dark mode
-        </Text>
-        <Switch
-          value={switchOn}
-          onValueChange={toggleSwitch}
-          color={colors.primary}
-        />
-      </View>
-    </View>
-  );
+    return (
+        <View style={general.scaffold}>
+            <Text style={{...general.title, color: colors.text}}>Settings</Text>
+            <View style={settingStyle.setting}>
+                <Text style={{...general.text, color: colors.text, fontSize: 16}}>Dark mode</Text>
+                <Switch value={switchOn} onValueChange={toggleSwitch} color={colors.primary} />
+                </View>
+        </View>
+    );
 }

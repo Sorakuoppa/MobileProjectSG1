@@ -46,4 +46,11 @@ export const general = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
+  text: {
+    textAlign: 'left',
+    width: "80%",
+    padding: 10,
+    fontSize: 18,
+    fontFamily: 'Gantari',
+  },
 });
