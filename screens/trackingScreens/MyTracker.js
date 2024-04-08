@@ -18,6 +18,7 @@ export default function MyTracker({ route }) {
   const { colors } = useTheme();
 
   const updateProgress = (value) => {
+    console.log(tracker);
     const newProgress = progress + value;
     setProgress(newProgress);
   };
