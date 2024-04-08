@@ -18,6 +18,7 @@ export default function MyTracker({ route }) {
   const { colors } = useTheme();
 
   const updateProgress = (value) => {
+    console.log(tracker);
     const newProgress = progress + value;
     setProgress(newProgress);
   };
@@ -52,7 +53,7 @@ export default function MyTracker({ route }) {
         {tracker.milestones.map((milestone, index) => (
           <MilestoneComponent
             key={index}
-            text={milestone.milestone}
+            text={tracker.type === "Exercise" ? milestone.name + milestone.reps : milestone.milestone}
             numeric={milestone.numeric}
             onCheck={() => updateProgress(20)}
             onUncheck={() => updateProgress(-20)}

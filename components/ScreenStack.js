@@ -241,7 +241,7 @@ export function DrawerStack({navigation, route}) {
             <Icon name="sign-out-alt" size={size} color={color} />
           ),
           drawerLabel: 'Sign Out',
-        }}
+        }}  
       />) : null }
     </Drawer.Navigator>
   );
