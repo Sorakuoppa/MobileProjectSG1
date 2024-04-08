@@ -4,7 +4,8 @@
 import React, { useEffect } from "react";
 import { View, Text, Pressable, Animated } from "react-native";
 import { useState } from "react";
-import { getTrackers } from "../../components/ReadFirebaseDb"; // Import getTrackers
+import { getTrackers } from "../../components/ReadFirebaseDb";
+import { auth } from "../../components/FirebaseConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { general } from "../../styles/general";
 import { trackerStyle } from "../../styles/trackingScreens/trackerStyle";
@@ -18,7 +19,6 @@ import { useLoginContext } from "../../components/LoginContext";
 export default function Trackers({ navigation }) {
   const { colors } = useTheme();
   const [trackerList, setTrackerList] = useState([]);
-  const [iconName, setIconName] = useState("running");
   const { loginState } = useLoginContext();
 
   useEffect(() => {
@@ -44,7 +44,8 @@ export default function Trackers({ navigation }) {
 
     try {
       const value = await AsyncStorage.getAllKeys();
-
+      console.log(auth.currentUser.uid);
+      console.log()
       if (value !== null) {
         alert(value);
       }
@@ -61,12 +62,12 @@ export default function Trackers({ navigation }) {
           <Pressable
             key={index}
             onPress={() => trackerPress(tracker)}
-            style={trackerStyle.tracker}
+            style={{}}
           >
             <Surface
               elevation={4}
               style={{
-                ...addNewStyle.template,
+                ...trackerStyle.tracker,
                 backgroundColor: colors.accent,
                 borderColor: colors.primary,
               }}

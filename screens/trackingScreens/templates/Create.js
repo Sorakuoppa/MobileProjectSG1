@@ -9,7 +9,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { general } from "../../../styles/general";
-import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
+import { createStyle } from "../../../styles/trackingScreens/createStyle";
 
 export default function Create({ template }) {
   const [value, setValue] = useState("Check");
@@ -61,7 +61,7 @@ export default function Create({ template }) {
         style={{ width: "95%", margin: 10 }}
         onPress={() => {}}
         />
-        <View style={createOwnStyle.milestoneList}></View>
+        <View style={createStyle.milestoneList}></View>
     </View>
   );
 }

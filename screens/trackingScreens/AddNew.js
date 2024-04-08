@@ -42,20 +42,14 @@ export default function AddNew({ navigation }) {
             onPressIn={() => handlePress(index, template.name)}
             rippleColor={colors.primary}
             borderless={true}
-            style={{ borderRadius: 20 }}
+            style={{ ...addNewStyle.ripple, borderColor: colors.primary }}
           >
-            {/* <Animated.View
-              style={{
-                opacity: fadeAnims[index],
-                transform: [{ scale: fadeAnims[index] }],
-              }}
-            > */}
             <Surface
               elevation={3}
               style={{
                 ...addNewStyle.template,
                 backgroundColor: colors.accent,
-                borderColor: colors.primary,
+
               }}
             >
               <Icon name={template.icon} size={40} color={colors.primary} />
@@ -66,10 +60,11 @@ export default function AddNew({ navigation }) {
                 icon="plus"
                 iconColor={colors.primary}
                 size={30}
-                onPress={() => {templatePress(template.name)}}
+                onPress={() => {
+                  templatePress(template.name);
+                }}
               />
             </Surface>
-            {/* </Animated.View> */}
           </TouchableRipple>
         ))}
       </View>

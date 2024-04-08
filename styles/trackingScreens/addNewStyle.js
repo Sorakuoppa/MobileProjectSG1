@@ -8,9 +8,6 @@ export const addNewStyle = StyleSheet.create({
     width: "90%",
     height: "auto",
     padding: 10,
-    margin: 10,
-    borderRadius: 10,
-    borderWidth: 1,
   },
   templateText: {
     fontSize: 15,
@@ -21,6 +18,12 @@ export const addNewStyle = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     
+  },
+  ripple: {
+    borderRadius: 20,
+    margin: 10,
+    borderWidth: 1,
+    borderRadius: 10,
   },
 });
 
