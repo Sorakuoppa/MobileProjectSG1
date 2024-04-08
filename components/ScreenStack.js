@@ -23,6 +23,7 @@ import { ThemeContext } from "./ThemeContext";
 import { useLoaded } from "./FirstTimeLoadContext";
 import SignOut from "../screens/accountManagement/SignOut";
 import ForgotPassword from "../screens/accountManagement/ForgotPassword";
+import { auth } from "./FirebaseConfig";
 
 const navigateForgotPage = (navigation, action) => {
   if (action === "ForgotPassword") {
