@@ -16,8 +16,8 @@ export const loginAndRegisterStyles = StyleSheet.create({
   button: {
     backgroundColor: '#ff5c00',
     paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
+    paddingHorizontal: 150,
+    borderRadius: 30,
     alignItems: 'center',
     marginTop: 20, // Add margin between content and button
   },
@@ -44,7 +44,7 @@ export const loginAndRegisterStyles = StyleSheet.create({
   },
   formFieldInput: {
     backgroundColor: '#FFF',
-    borderRadius: 8,
+    borderRadius: 30,
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderWidth: 1,
