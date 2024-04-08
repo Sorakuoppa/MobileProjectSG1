@@ -15,11 +15,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function MyTracker({ route, navigation }) {
   const [progress, setProgress] = useState(0);
   const { tracker } = route.params;
+  const {tracker} = route.params;
   const { colors } = useTheme();
   const { loginState } = useLoginContext(); // Accessing login state from context
 
   const updateProgress = (value) => {
-    console.log(tracker);
     const newProgress = progress + value;
     setProgress(newProgress);
   };
@@ -74,7 +74,7 @@ export default function MyTracker({ route, navigation }) {
         {tracker.milestones.map((milestone, index) => (
           <MilestoneComponent
             key={index}
-            text={tracker.type === "Exercise" ? milestone.name + milestone.reps : milestone.milestone}
+            text={tracker.type === "Exercise" ? milestone.name : milestone.milestone}
             numeric={milestone.numeric}
             onCheck={() => updateProgress(20)}
             onUncheck={() => updateProgress(-20)}

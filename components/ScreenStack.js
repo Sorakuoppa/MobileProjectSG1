@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { Image } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { DrawerItem, createDrawerNavigator } from "@react-navigation/drawer";
@@ -18,18 +19,19 @@ import LoginOrRegister from "../screens/miscellaneous/LoginOrRegister";
 import LoginComponent from "../screens/accountManagement/LoginComponent";
 import RegisterComponent from "../screens/accountManagement/RegisterComponent";
 import { useLoginContext } from "./LoginContext";
+import { ThemeContext } from "./ThemeContext";
 import { useLoaded } from "./FirstTimeLoadContext";
 import SignOut from "../screens/accountManagement/SignOut";
 import ForgotPassword from "../screens/accountManagement/ForgotPassword";
+import { auth } from "./FirebaseConfig";
 
 const navigateForgotPage = (navigation, action) => {
-  if (action === 'ForgotPassword') {
-    navigation.navigate('ForgotPassword');
-  } else if (action === 'Login') {
-    navigation.navigate('Login', { navigateForgotPage });
+  if (action === "ForgotPassword") {
+    navigation.navigate("ForgotPassword");
+  } else if (action === "Login") {
+    navigation.navigate("Login", { navigateForgotPage });
   }
 };
-
 
 const Stack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -57,7 +59,6 @@ const bottomTabs = [
   },
 ];
 function InitialStackScreen() {
-
   return (
     <InitialStack.Navigator>
       <InitialStack.Screen
@@ -65,27 +66,26 @@ function InitialStackScreen() {
         component={GetStarted}
         options={{ headerShown: false }}
       />
-      <InitialStack.Screen 
-       name="LoginOrRegister"
-       component={LoginOrRegister} 
-       options={{ headerShown: false }}
-
-       />
-      <InitialStack.Screen 
-      name="Login" 
-      component={LoginComponent}
-      options={{ headerShown: false }}
-      initialParams= { {action: 'Login'} }
-      />
-      <InitialStack.Screen 
-      name="Register" 
-      component={RegisterComponent}
-      options={{ headerShown: false }}
+      <InitialStack.Screen
+        name="LoginOrRegister"
+        component={LoginOrRegister}
+        options={{ headerShown: false }}
       />
       <InitialStack.Screen
-      name="ForgotPassword"
-      component={ForgotPassword}
-      options={{ headerShown: false }}
+        name="Login"
+        component={LoginComponent}
+        options={{ headerShown: false }}
+        initialParams={{ action: "Login" }}
+      />
+      <InitialStack.Screen
+        name="Register"
+        component={RegisterComponent}
+        options={{ headerShown: false }}
+      />
+      <InitialStack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
+        options={{ headerShown: false }}
       />
     </InitialStack.Navigator>
   );
@@ -126,22 +126,21 @@ function ScreenStack() {
   );
 }
 
-export function DrawerStack({navigation, route}) {
+export function DrawerStack({ navigation, route }) {
   const { loginState, username } = useLoginContext(); // Get the function to update login state from the context
+  const { theme } = useContext(ThemeContext);
   const getHeaderTitle = (route, loginState, username) => {
     if (loginState) {
       return `Welcome ${username}`;
     } else {
-      return 'Welcome Guest';
+      return "Welcome Guest";
     }
   };
 
   useEffect(() => {
     // Check the login state every time the drawer stack mounts
-    console.log('Login state checked:', loginState);
+    console.log("Login state checked:", loginState);
   }, [loginState]);
-
-    
 
   const { colors } = useTheme();
   const screens = [
@@ -159,13 +158,13 @@ export function DrawerStack({navigation, route}) {
       name: "Account",
       component: Account,
       iconName: "user",
-      drawerItemStyle: loginState ? {} : { display: "none" }
+      drawerItemStyle: loginState ? {} : { display: "none" },
     },
     {
       name: "Login",
       component: LoginComponent,
       iconName: "sign-in-alt",
-      drawerItemStyle: loginState ? { display: "none" } : {}  
+      drawerItemStyle: loginState ? { display: "none" } : {},
     },
     {
       name: "About us",
@@ -187,7 +186,7 @@ export function DrawerStack({navigation, route}) {
       name: "ForgotPassword",
       component: ForgotPassword,
       drawerItemStyle: { display: "none" },
-      initialParams: { action: 'ForgotPassword' }
+      initialParams: { action: "ForgotPassword" },
     },
     {
       name: "Register",
@@ -195,21 +194,36 @@ export function DrawerStack({navigation, route}) {
       drawerItemStyle: { display: "none" },
     },
   ];
-  
+
   return (
-    <Drawer.Navigator
-    screenOptions={({ route }) => ({
-      headerTitle: getHeaderTitle(route, loginState, username),
-      swipeEdgeWidth: 80,
-      headerStyle: { backgroundColor: colors.background },
-      headerTitleStyle: { color: colors.primary },
-      headerTintColor: colors.primary,
-      drawerType: "slide",
-      drawerStyle: { backgroundColor: colors.background },
-      drawerActiveTintColor: colors.primary,
-      drawerInactiveTintColor: colors.text,
-    })}
+    <Drawer.Navigator 
+      initialRouteName="Home"
+      screenOptions={({ route }) => ({
+        headerTitle: getHeaderTitle(route, loginState, username),
+        swipeEdgeWidth: 80,
+        headerStyle: { backgroundColor: colors.background },
+        headerTitleStyle: { color: colors.primary },
+        headerTintColor: colors.primary,
+        drawerType: "slide",
+        drawerStyle: { backgroundColor: colors.background },
+        drawerActiveTintColor: colors.primary,
+        drawerInactiveTintColor: colors.text,
+      })}
     >
+      <Drawer.Screen
+        name=" "
+        component={ScreenStack}
+        options={{
+          drawerIcon: ({ focused }) => (
+            <Image
+              source={theme === "dark" ? require("../assets/logos/onTrack_dark_theme.png") : require("../assets/logos/onTrack_light_theme.png")}
+              style={{ width: 200, height: 100 }}
+            />
+          ),
+          drawerActiveTintColor: colors.background,
+        }}
+      />
+
       {screens.map((screen, index) => (
         <Drawer.Screen
           key={index}
@@ -224,25 +238,26 @@ export function DrawerStack({navigation, route}) {
               />
             ),
             drawerItemStyle: screen.drawerItemStyle,
-            ...(screen.name === 'Login'
-              ? { 
+            ...(screen.name === "Login"
+              ? {
                   onPress: () => handleLogin(navigation),
                 }
-              : {})
+              : {}),
           }}
         />
       ))}
-      {loginState ?(
-      <Drawer.Screen
-        name="SignOut"
-        component={SignOut} // Or any other suitable component
-        options={{
-          drawerIcon: ({ color, size }) => (
-            <Icon name="sign-out-alt" size={size} color={color} />
-          ),
-          drawerLabel: 'Sign Out',
-        }}  
-      />) : null }
+      {loginState ? (
+        <Drawer.Screen
+          name="SignOut"
+          component={SignOut} // Or any other suitable component
+          options={{
+            drawerIcon: ({ color, size }) => (
+              <Icon name="sign-out-alt" size={size} color={color} />
+            ),
+            drawerLabel: "Sign Out",
+          }}
+        />
+      ) : null}
     </Drawer.Navigator>
   );
 }

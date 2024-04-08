@@ -1,12 +1,17 @@
 import "react-native-gesture-handler";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { StatusBar, useColorScheme } from "react-native";
 import { DrawerStack, MainNavigator } from "./components/ScreenStack";
 import { PaperProvider } from "react-native-paper";
 import { NavigationContainer, useTheme } from "@react-navigation/native";
-import { ThemeContext } from "./components/Context";
+import { ThemeContext } from "./components/ThemeContext";
 import { useFonts } from "expo-font";
-import { darkColors, lightColors, DarkTheme, LightTheme } from "./styles/general";
+import {
+  darkColors,
+  lightColors,
+  DarkTheme,
+  LightTheme,
+} from "./styles/general";
 import { FirstTimeLoadProvider } from "./components/FirstTimeLoadContext";
 import { LoginProvider } from "./components/LoginContext";
 export default function App() {
@@ -19,22 +24,26 @@ export default function App() {
   //Detects the device's color scheme
   // const scheme = useColorScheme();
 
-
   if (!fontsLoaded) {
     return null;
   }
 
   return (
     <PaperProvider>
-      <StatusBar barStyle={theme === 'dark' ? "light-content" : "dark-content"} backgroundColor={theme === 'dark' ? darkColors.secondary : lightColors.secondary} />
-      <NavigationContainer theme={theme === 'dark' ? DarkTheme : LightTheme}>
+      <StatusBar
+        barStyle={theme === "dark" ? "light-content" : "dark-content"}
+        backgroundColor={
+          theme === "dark" ? darkColors.secondary : lightColors.secondary
+        }
+      />
+      <NavigationContainer theme={theme === "dark" ? DarkTheme : LightTheme}>
         {/* Go to ./components/ScreenStack to configure app navigation */}
         <ThemeContext.Provider value={{ theme, setTheme }}>
-        <FirstTimeLoadProvider>
-          <LoginProvider>
-            <MainNavigator/>
-        </LoginProvider>
-        </FirstTimeLoadProvider>
+          <FirstTimeLoadProvider>
+            <LoginProvider>
+              <MainNavigator />
+            </LoginProvider>
+          </FirstTimeLoadProvider>
         </ThemeContext.Provider>
       </NavigationContainer>
     </PaperProvider>

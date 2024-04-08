@@ -11,7 +11,7 @@ import { readingData } from "../data/readingData";
 import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Reading({ template }) {
+export default function Reading({ template, navigation }) {
   const [objectList, setObjectList] = useState([]);
   const { colors } = useTheme();
 
@@ -31,6 +31,7 @@ export default function Reading({ template }) {
   const buttonHandler = () => {
     if (objectList.length > 0) {
       addToFirebase(objectList, "Reading", "My reading tracker");
+      navigation.navigate ("Trackers");
     } else {
       alert("Please select at least one milestone to add this tracker");
     }
