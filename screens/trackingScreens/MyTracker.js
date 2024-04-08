@@ -22,7 +22,7 @@ export default function MyTracker({ route, navigation }) {
     const newProgress = progress + value;
     setProgress(newProgress);
   };
-
+ ///ASDDSADSADSADSADSADSADSA
   const deleteTracker = async () => {
     try {
       // Retrieve the tracker list from AsyncStorage
