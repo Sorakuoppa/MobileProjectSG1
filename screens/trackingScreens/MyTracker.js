@@ -15,7 +15,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function MyTracker({ route, navigation }) {
   const [progress, setProgress] = useState(0);
   const { tracker } = route.params;
-  const {tracker} = route.params;
   const { colors } = useTheme();
   const { loginState } = useLoginContext(); // Accessing login state from context
 
