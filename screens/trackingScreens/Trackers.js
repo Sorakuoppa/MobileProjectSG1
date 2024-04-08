@@ -26,7 +26,6 @@ export default function Trackers({ navigation }) {
     useCallback(() => {
       showTrackers();
       return  () => {
-        console.log("cleanup");
       };
     }, []));
 
@@ -49,8 +48,6 @@ export default function Trackers({ navigation }) {
 
     try {
       const value = await AsyncStorage.getAllKeys();
-      console.log(auth.currentUser.uid);
-      console.log()
       if (value !== null) {
         alert(value);
       }

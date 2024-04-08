@@ -19,7 +19,6 @@ export async function getTrackers(loginState) {
     const trackersCol = collection(db, "trackers", auth.currentUser.uid, "trackers");
     const trackersSnapshot = await getDocs(trackersCol);
     const trackerList = trackersSnapshot.docs.map(doc => {
-      console.log(doc.data()); // Log each document's data
       return doc.data();
     });
 
