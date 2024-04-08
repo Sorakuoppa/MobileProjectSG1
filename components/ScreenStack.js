@@ -206,7 +206,6 @@ export function DrawerStack({ navigation, route }) {
         drawerStyle: { backgroundColor: colors.background },
         drawerActiveTintColor: colors.primary,
         drawerInactiveTintColor: colors.text,
-        drawerI
       })}
     >
       <Drawer.Screen
