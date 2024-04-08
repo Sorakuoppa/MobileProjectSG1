@@ -25,8 +25,10 @@ export const startedStyle = StyleSheet.create({
       button: {
         backgroundColor: '#ff5c00',
         paddingVertical: 12,
-        paddingHorizontal: 24,
-        borderRadius: 8,
+        paddingHorizontal: 100,
+        borderRadius: 30,
+        borderBlockColor: '#ffffff',
+        borderWidth: 2,
       },
       buttonText: {
         color: '#fff',

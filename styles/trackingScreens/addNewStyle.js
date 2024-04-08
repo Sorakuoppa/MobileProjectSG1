@@ -23,7 +23,7 @@ export const addNewStyle = StyleSheet.create({
     borderRadius: 20,
     margin: 10,
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 15,
   },
 });
 
