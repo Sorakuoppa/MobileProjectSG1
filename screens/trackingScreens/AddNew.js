@@ -14,17 +14,16 @@ export default function AddNew({ navigation }) {
   ).current;
 
   const handlePress = (index, templateName) => {
-    console.log('ripple');
-    // const fadeAnim = fadeAnims[index];
+    const fadeAnim = fadeAnims[index];
 
-    // Animated.timing(fadeAnim, {
-    //   toValue: 1,
-    //   duration: 200,
-    //   useNativeDriver: true,
-    // }).start(() => {
-    //   templatePress(templateName);
-    //   fadeAnim.setValue(1);
-    // });
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+    }).start(() => {
+      templatePress(templateName);
+      fadeAnim.setValue(1);
+    });
   };
 
   const templatePress = (templateName) => {
@@ -43,17 +42,16 @@ export default function AddNew({ navigation }) {
             onPressIn={() => handlePress(index, template.name)}
             rippleColor={colors.primary}
             borderless={true}
-            style={{ borderRadius: 20, margin: 10 }}
+            style={{ ...addNewStyle.ripple, borderColor: colors.primary }}
           >
             <Surface
               elevation={3}
               style={{
                 ...addNewStyle.template,
                 backgroundColor: colors.accent,
-                borderColor: colors.primary,
+
               }}
             >
-
               <Icon name={template.icon} size={40} color={colors.primary} />
               <Text style={{ ...addNewStyle.templateText, color: colors.text }}>
                 {template.text}

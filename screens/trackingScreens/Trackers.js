@@ -19,7 +19,6 @@ import { useLoginContext } from "../../components/LoginContext";
 export default function Trackers({ navigation }) {
   const { colors } = useTheme();
   const [trackerList, setTrackerList] = useState([]);
-  const [iconName, setIconName] = useState("running");
   const { loginState } = useLoginContext();
 
   useEffect(() => {
@@ -63,12 +62,12 @@ export default function Trackers({ navigation }) {
           <Pressable
             key={index}
             onPress={() => trackerPress(tracker)}
-            style={trackerStyle.tracker}
+            style={{}}
           >
             <Surface
               elevation={4}
               style={{
-                ...addNewStyle.template,
+                ...trackerStyle.tracker,
                 backgroundColor: colors.accent,
                 borderColor: colors.primary,
               }}
