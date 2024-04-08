@@ -24,21 +24,20 @@ export default function Trackers({ navigation }) {
 
   useFocusEffect(
     useCallback(() => {
-      setIsLoading(true);
       showTrackers();
-      return () => {
-        setIsLoading(false);
-      };
+      return () => {};
     }, [])
   );
 
   const showTrackers = async () => {
+    setIsLoading(true);
     try {
       const fetchedTrackers = await getTrackers(loginState);
       setTrackerList(fetchedTrackers);
     } catch (error) {
       console.error("Error fetching trackers:", error);
     }
+    setIsLoading(false);
   };
 
   const trackerPress = (tracker) => {
@@ -62,11 +61,15 @@ export default function Trackers({ navigation }) {
   if (isLoading) {
     return (
       <View style={{ ...general.scaffold, justifyContent: "center" }}>
-        <Text >Fetching your trackers...</Text>
+        <Text
+          style={{ ...general.title, color: colors.text, marginBottom: 40 }}
+        >
+          Fetching your trackers...
+        </Text>
         <ActivityIndicator animating={true} color={colors.primary} size={80} />
       </View>
     );
-  } else {
+  } else if (!isLoading) {
     return (
       <View style={general.scaffold}>
         <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
