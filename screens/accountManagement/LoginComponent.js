@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Pressable } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
 import { auth, db } from '../../components/FirebaseConfig'; // Import FirebaseConfig auth
 import { loginAndRegisterStyles } from '../../styles/accountManagementStyles/loginAndRegisterComponent';
@@ -13,6 +14,7 @@ const LoginComponent = () => {
   const { setUserEmail, setUsername, setLoginState } = useLoginContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
   const usersRef = collection(db, "users")
   const q = query(usersRef, where("email", '==', email))
@@ -27,6 +29,7 @@ const LoginComponent = () => {
   }
 
   const handleLogin = async () => {
+    setIsLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password); // Access auth directly from FirebaseConfig
   
@@ -59,7 +62,17 @@ const LoginComponent = () => {
       alert(error.message);
       console.error('Authentication error:', error.message);
     }
+    setIsLoading(false);
   };
+
+  if (isLoading) {
+    return (
+      <View style={loginAndRegisterStyles.container}>
+        <Text style={{...loginAndRegisterStyles.title, color: colors.text, marginBottom: 20}}>Logging in...</Text>
+        <ActivityIndicator animating={true} color={colors.primary} size={80} />
+      </View>
+    );
+  }
 
   return (
     <View style={loginAndRegisterStyles.container}>
