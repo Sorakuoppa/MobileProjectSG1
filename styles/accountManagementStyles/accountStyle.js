@@ -5,5 +5,11 @@ export const accountStyle = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50,
-    }
+    },
+    padding: {
+        paddingTop: 20,
+        marginTop: 20,
+        
+    },
+    
 })
