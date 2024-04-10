@@ -47,18 +47,26 @@ export default function Trackers({ navigation }) {
   };
 
   const clearFirebase = async () => {
-    try {
-      const trackerRef = collection(db, "trackers", auth.currentUser.uid, "trackers"); 
-      await deleteDoc(trackerRef);
-
-    } catch (e) {
-      console.error("Error deleting document: ", e);
-  }
+    if (loginState === false || !auth.currentUser) {
+      AsyncStorage.clear();
+      return;
+    } else {
+      try {
+        const trackerRef = collection(
+          db,
+          "trackers",
+          auth.currentUser.uid,
+          "trackers"
+        );
+        await deleteDoc(trackerRef);
+      } catch (e) {
+        console.error("Error deleting document: ", e);
+      }
+    }
 };
 
   // TESTING ASYNCSTORAGE REMOVE THIS
   const showAsyncStorage = async () => {
-    // AsyncStorage.clear();
 
     try {
       const value = await AsyncStorage.getAllKeys();
@@ -89,7 +97,7 @@ export default function Trackers({ navigation }) {
           children= "Delete all trackers"
           mode="contained"
           buttonColor={colors.primary}
-          onPress={() => clearFirebase}
+          onPress={clearFirebase}
         />
         <ScrollView>
           {trackerList.map((tracker, index) => (
