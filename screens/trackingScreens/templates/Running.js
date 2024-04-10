@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { Button } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import addToFirebase from "../../../components/AddToFirebase";
 import MilestoneComponent from "../components/MilestoneComponent";
 import InfoModal from "../components/InfoModal";
@@ -9,9 +9,11 @@ import { runningData } from "../data/runningData";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { general } from "../../../styles/general";
+import { set } from "@firebase/database";
 
 export default function Running({ template, navigation }) {
   const [objectList, setObjectList] = useState([]);
+  const [trackerName, setTrackerName] = useState("");
   const { colors } = useTheme();
 
   const onCheck = (text, numeric) => {
@@ -28,8 +30,14 @@ export default function Running({ template, navigation }) {
   };
 
   const buttonHandler = () => {
+    let newName = trackerName.trim();
+    if (newName === "") {
+      newName = "My Reading Tracker";
+      setTrackerName(newName);
+    }
     if (objectList.length > 0) {
-      addToFirebase(objectList, "Running", "My running tracker");
+      addToFirebase(objectList, "Running", newName);
+      setTrackerName("");
       navigation.navigate("Trackers");
     } else {
       alert("Please select at least one milestone to add this tracker");
@@ -40,6 +48,17 @@ export default function Running({ template, navigation }) {
     <View style={{ ...general.scaffold, justifyContent: "space-between" }}>
       <Icon name={template.icon} size={40} color={colors.primary} />
       <Text style={{ ...general.title, color: colors.text }}>Running </Text>
+      <TextInput
+        label=""
+        placeholder="Name your tracker"
+        mode="outlined"
+        value={trackerName}
+        onChangeText={(text) => setTrackerName(text)}
+        selectionColor={colors.primary}
+        outlineColor={colors.primary}
+        activeOutlineColor={colors.primary}
+        style={{ width: "90%", marginBottom: 20 }}
+      />
       <Text style={{ color: colors.text }}> Choose your milestones</Text>
       <InfoModal
         text1={

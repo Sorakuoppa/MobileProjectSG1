@@ -1,12 +1,12 @@
 // TODO: Show all the trackers that the user has created
 // and allow them to click on them to view the tracker details
 
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { View, Text, Pressable, Animated } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
-
-import { useState } from "react";
+import { collection, getDocs, deleteDoc } from "firebase/firestore";
 import { getTrackers } from "../../components/ReadFirebaseDb";
+import { db, auth } from "../../components/FirebaseConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { general } from "../../styles/general";
 import { trackerStyle } from "../../styles/trackingScreens/trackerStyle";
@@ -46,6 +46,16 @@ export default function Trackers({ navigation }) {
     navigation.navigate("MyTracker", { tracker: tracker });
   };
 
+  const clearFirebase = async () => {
+    try {
+      const trackerRef = collection(db, "trackers", auth.currentUser.uid, "trackers"); 
+      await deleteDoc(trackerRef);
+
+    } catch (e) {
+      console.error("Error deleting document: ", e);
+  }
+};
+
   // TESTING ASYNCSTORAGE REMOVE THIS
   const showAsyncStorage = async () => {
     // AsyncStorage.clear();
@@ -75,6 +85,12 @@ export default function Trackers({ navigation }) {
     return (
       <View style={general.scaffold}>
         <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
+        <Button
+          children= "Delete all trackers"
+          mode="contained"
+          buttonColor={colors.primary}
+          onPress={() => clearFirebase}
+        />
         <ScrollView>
           {trackerList.map((tracker, index) => (
             <Pressable

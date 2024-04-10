@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { Button } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CollapsibleComponent from "../components/CollapsibleComponent";
 import MilestoneComponent from "../components/MilestoneComponent";
@@ -14,6 +14,7 @@ import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function Exercise({ template, navigation }) {
+  const [trackerName, setTrackerName] = useState("");
   const { colors } = useTheme();
   const pushDay = exerciseData.filter((exercise) => exercise.type === "push");
   const pullDay = exerciseData.filter((exercise) => exercise.type === "pull");
@@ -22,19 +23,37 @@ export default function Exercise({ template, navigation }) {
   const [selectedExercises, setSelectedExercises] = useState([]);
 
   const handleAddTracker = () => {
+    let newName = trackerName.trim();
+    if (newName === "") {
+      newName = "My Reading Tracker";
+      setTrackerName(newName);
+    }
     if (selectedExercises.length > 0) {
       // Use addToFirebase function to add selectedExercises to Firebase
-      addToFirebase(selectedExercises, "Exercise", "My exercise tracker");
+      addToFirebase(selectedExercises, "Exercise", newName);
+      setTrackerName("");
       navigation.navigate("Trackers");
     } else {
       alert("Please select at least one exercise to add this tracker");
     }
   };
- // Please manage the contents of this template from exerciseData.js
+
+  // Please manage the contents of this template from exerciseData.js
   return (
     <View style={general.scaffold}>
       <Icon name={template.icon} size={40} color={colors.primary} />
       <Text style={{ ...general.title, color: colors.text }}>Exercise </Text>
+      <TextInput
+        label=""
+        placeholder="Name your tracker"
+        mode="outlined"
+        value={trackerName}
+        onChangeText={(text) => setTrackerName(text)}
+        selectionColor={colors.primary}
+        outlineColor={colors.primary}
+        activeOutlineColor={colors.primary}
+        style={{ width: "90%", marginBottom: 20 }}
+      />
       <Text style={{ color: colors.text }}> Choose your milestones</Text>
       <InfoModal
         text1={
