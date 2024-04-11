@@ -45,7 +45,7 @@ export default function Account() {
       {userData && (
         <View>
           {userData.profilePicture ? (
-            <Image source={{ uri: userData.profilePicture }} style={{...accountStyle.image, color:colors.text}} />
+            <Image source={{ uri: userData.profilePicture }} style={{...accountStyle.image,}} />
           ) : (
             <Image source={avatar} style={{...accountStyle.image}} />
           )}

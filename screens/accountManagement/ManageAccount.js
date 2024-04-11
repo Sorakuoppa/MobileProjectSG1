@@ -12,7 +12,7 @@ import { updatePassword } from 'firebase/auth';
 import { Modal } from 'react-native';
 import { manageAccountStyle } from '../../styles/accountManagementStyles/manageAccountStyle';
 import { Pressable } from 'react-native';
-TouchableOpacity
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 export default function ManageAccount() {
   const { email } = useLoginContext(); // Assuming you have userEmail in your context
@@ -101,26 +101,23 @@ export default function ManageAccount() {
 
   return (
     <View style={general.scaffold}>
-      <Text style={general.title}>Account</Text>
+      <Text style={{...general.title, color: colors.text}}>Account</Text>
       {userData && (
         <View>
-          {userData.profilePicture ? (
-            <Image source={{ uri: userData.profilePicture }} style={manageAccountStyle.image} />
-          ) : (
-            <Image source={avatar} style={manageAccountStyle.image} />
-          )}
-          <Text>Email: {userData.email}</Text>
-          <Text>Username: {userData.username}</Text>
-          
+          <TouchableOpacity onPress={selectImage}>
+            <View>
+              <Image source={userData.profilePicture ? { uri: userData.profilePicture } : avatar} style={manageAccountStyle.image} />
+              <View style={{...manageAccountStyle.overlay, backgroundColor: colors.overlayBackgroundColor}}>
+              <MaterialIcons name="add-a-photo" size={24} color="black" onPress={selectImage} />
+              </View>
+            </View>
+          </TouchableOpacity>
         </View>
       )}
       
       <View style={manageAccountStyle.padding}>
-      <Pressable style={{...manageAccountStyle.button, backgroundColor:colors.primary}} onPress={selectImage}>
-          <Text>Set a new profile photo</Text>
-        </Pressable>
         <Pressable style={{...manageAccountStyle.button, backgroundColor:colors.primary}} onPress={deleteUserProfilePicture}>
-          <Text>Delete your profile picture</Text>
+          <Text style={{...manageAccountStyle.text,color: colors.text}}>Delete your profile picture</Text>
         </Pressable>
       </View>
 
@@ -132,15 +129,15 @@ export default function ManageAccount() {
         onRequestClose={() => setModalVisible(false)}
       >
         <View style={manageAccountStyle.modalContainer}>
-          <View style={manageAccountStyle.modalContent}>
+          <View style={{...manageAccountStyle.modalContent, backgroundColor: colors.background}}>
             <TouchableOpacity style={{...manageAccountStyle.button, backgroundColor:colors.primary, alignSelf: 'left'}} onPress={takePictureWithCamera}>
-              <Text style={manageAccountStyle.modalButtonText}>Take a picture</Text>
+              <Text style={{...manageAccountStyle.modalButtonText, color: colors.text}}>Take a picture</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{...manageAccountStyle.button, backgroundColor:colors.primary, alignSelf: 'left'}} onPress={chooseFromGallery}>
-              <Text style={manageAccountStyle.modalButtonText}>Choose from gallery</Text>
+              <Text style={{...manageAccountStyle.modalButtonText, color: colors.text}}>Choose from gallery</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{...manageAccountStyle.button, backgroundColor:colors.primary, alignSelf: 'left'}} onPress={() => setModalVisible(false)}>
-              <Text style={manageAccountStyle.modalButtonText}>Cancel</Text>
+              <Text style={{...manageAccountStyle.modalButtonText, color: colors.text}}>Cancel</Text>
             </TouchableOpacity>
           </View>
         </View>

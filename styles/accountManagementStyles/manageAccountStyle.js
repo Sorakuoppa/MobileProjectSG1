@@ -24,6 +24,7 @@ export const manageAccountStyle = StyleSheet.create({
   modalButtonText: {
     color: 'white',
     fontWeight: 'bold',
+    fontFamily: 'Gantari'
   },
   button: {
     paddingVertical: 12,
@@ -41,5 +42,16 @@ export const manageAccountStyle = StyleSheet.create({
   padding: {
     paddingTop: 20,
     marginTop: 20,
-},
+  },
+  overlay: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    borderRadius: 20,
+    padding: 10,
+  },
+  text: {
+    fontFamily: 'Gantari',
+    fontSize: 16,
+  },
 });
