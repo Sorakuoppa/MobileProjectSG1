@@ -1,28 +1,28 @@
-import React, { useState } from 'react'
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import { auth, db, storage } from './FirebaseConfig';
 import { doc, updateDoc } from '@firebase/firestore';
 
-export async function deleteProfilePicture(passedUserData) {
+export async function deleteProfilePicture(userData) {
+
         const currentUser = auth.currentUser; // Get the current user
         const filename = `images/${currentUser.uid}`
         const storageRef = ref(storage, filename);
-        const [userData, setUserData] = useState(passedUserData);
-        console.log(userData);
-  try {
-    // Delete profile picture from Firebase Storage
-    await deleteObject(storageRef)
-    const userDocRef = doc(db, 'users', userData.email);
-    await updateDoc(userDocRef, { profilePicture: '' });
-    // Update local state
-    setUserData(prevUserData => ({ ...prevUserData, profilePicture: '' }));
-    Alert.alert('Success', 'Profile picture deleted successfully.');
-    // Update user data in Firestore to remove profile picture
-    return(userData)
-  } catch (error) {
-    console.log('Error deleting profile picture:', error);
-    Alert.alert('Error', 'Failed to delete profile picture.');
-  }
+        try {
+          // Delete profile picture from Firebase Storage
+          await deleteObject(storageRef);
+  
+          // Update user document in Firestore to remove profile picture
+          const userDocRef = doc(db, 'users', currentUser.uid);
+          await updateDoc(userDocRef, { profilePicture: '' });
+  
+          // Update local user data
+          userData.profilePicture = '';
+          console.log('Profile picture deleted successfully:', userData);
+          return userData;
+      } catch (error) {
+          console.log('Error deleting profile picture:', error);
+          throw error; // Rethrow the error for handling in the caller function
+      }
 };
 
 export default async function UploadImage(uri, fileType) {

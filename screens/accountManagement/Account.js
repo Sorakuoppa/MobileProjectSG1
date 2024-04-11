@@ -7,7 +7,7 @@ import { useLoginContext } from '../../components/LoginContext';
 import * as ImagePicker from 'expo-image-picker';
 import UploadImage, { deleteProfilePicture } from '../../components/ImageManagement';
 import { accountStyle } from '../../styles/accountManagementStyles/accountStyle';
-
+import avatar from '../../assets/avatar.png'
 export default function Account() {
   const { email } = useLoginContext(); // Assuming you have userEmail in your context
   const [userData, setUserData] = useState(null);
@@ -42,10 +42,10 @@ export default function Account() {
       });
       const uri = result.assets[0].uri
       if (!result.canceled && uri) {
-        const imageUrl = await UploadImage(uri); // Upload image and get URL
-        if (imageUrl) {
-          setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
-        }     
+         await UploadImage(uri); // Upload image and get URL
+         setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
+         console.log('Set user profile picture data as:', userData.profilePicture);
+        
        } else {
         console.log('Image selection cancelled or URI not found');
       } 
@@ -79,7 +79,6 @@ export default function Account() {
   const deleteUserProfilePicture = async () => {
     try {
       const deleteUserPicture = await deleteProfilePicture(userData)
-      console.log(deleteUserPicture);
       if (deleteUserPicture) {
       setUserData(prevUserData => ({ ...prevUserData, profilePicture: '' }));
     }
@@ -99,7 +98,7 @@ export default function Account() {
           {userData.profilePicture ? (
             <Image source={{ uri: userData.profilePicture }} style={accountStyle.image} />
           ) : (
-            <Image style={accountStyle.image} />
+            <Image source={avatar} style={accountStyle.image} />
 
           )}
           <Button title="Select Image from gallery" onPress={selectImage} />
