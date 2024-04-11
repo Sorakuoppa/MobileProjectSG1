@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Button, Image, Alert } from 'react-native';
+import { Text, View, Button, Image, Alert, Pressable } from 'react-native';
 import { general } from '../../styles/general';
 import { db  } from '../../components/FirebaseConfig';
 import { collection,  getDocs, query, where } from '@firebase/firestore';
@@ -8,9 +8,19 @@ import * as ImagePicker from 'expo-image-picker';
 import UploadImage, { deleteProfilePicture } from '../../components/ImageManagement';
 import { accountStyle } from '../../styles/accountManagementStyles/accountStyle';
 import avatar from '../../assets/avatar.png'
+import { useTheme } from "@react-navigation/native";
+import { CommonActions, useNavigation } from "@react-navigation/native";
+
+
+
 export default function Account() {
-  const { email } = useLoginContext(); // Assuming you have userEmail in your context
-  const [userData, setUserData] = useState(null);
+    const { colors } = useTheme();
+    const { email } = useLoginContext(); // Assuming you have userEmail in your context
+    const [userData, setUserData] = useState(null);
+    const navigation = useNavigation()
+    const navigateToManagement = () => {
+        navigation.navigate("ManageAccount")
+    }
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -29,86 +39,24 @@ export default function Account() {
       fetchUserData();
     }
   }, [email]);
-
-  // Function to handle image selection
-  const selectImage = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4,3],
-        quality: 1,
-      });
-      const uri = result.assets[0].uri
-      if (!result.canceled && uri) {
-         await UploadImage(uri); // Upload image and get URL
-         setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
-         console.log('Set user profile picture data as:', userData.profilePicture);
-       } else {
-        console.log('Image selection cancelled or URI not found');
-      } 
-    } catch (error) {
-      console.log('ImagePicker Error:', error);
-    }
-  };
-
-  const takePictureWithCamera = async () => {
-    try {
-      const result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4,3],
-        quality: 1,
-      });
-      const uri = result.assets[0].uri
-      console.log('URI Logged',uri);
-      if (!result.canceled && uri) {
-        // Upload the taken picture to Firebase Storage and update user data
-       await UploadImage(uri);
-       setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
-      }
-    } catch (error) {
-      console.log('Error taking picture:', error);
-    }
-  };
-
-  const deleteUserProfilePicture = async () => {
-    try {
-      const deleteUserPicture = await deleteProfilePicture(userData)
-      if (deleteUserPicture) {
-      setUserData(prevUserData => ({ ...prevUserData, profilePicture: '' }));
-    }
-    } catch (error) {
-
-    }
-  }
-  
-
   return (
     <View style={general.scaffold}>
-      <Text style={general.title}>Account</Text>
+      <Text style={{...general.title, color:colors.text}}>Account</Text>
       {userData && (
         <View>
-          <Text>Email: {userData.email}</Text>
-          <Text>Username: {userData.username}</Text>
           {userData.profilePicture ? (
-            <Image source={{ uri: userData.profilePicture }} style={accountStyle.image} />
+            <Image source={{ uri: userData.profilePicture }} style={{...accountStyle.image, color:colors.text}} />
           ) : (
-            <Image source={avatar} style={accountStyle.image} />
-
+            <Image source={avatar} style={{...accountStyle.image, color:colors.text}} />
           )}
-          <Button title="Select Image from gallery" onPress={selectImage} />
-
+            <Text style={{...accountStyle.text, color:colors.text}}>{userData.username}</Text>
         </View>
-        
       )}
-      <View style={accountStyle.padding}>
-     <Button title="Take a picture"  onPress={takePictureWithCamera} />
-     </View>
-      <View style={accountStyle.padding}>
-     <Button title="Delete your profile picture "  onPress={deleteUserProfilePicture} />
-     </View>
+    <View>
+        <Pressable onPress={navigateToManagement} style={{...accountStyle.button, backgroundColor:colors.primary}}>
+            <Text style={{...accountStyle.buttonText, color:colors.text}}>Edit account</Text>
+        </Pressable>
+    </View>
     </View>
   );
-  
 }

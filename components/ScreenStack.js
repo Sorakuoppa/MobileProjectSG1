@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import AboutUs from "../screens/miscellaneous/AboutUs";
 import Account from "../screens/accountManagement/Account";
+import ManageAccount from "../screens/accountManagement/ManageAccount";
 import AddNew from "../screens/trackingScreens/AddNew";
 import Home from "../screens/trackingScreens/Home";
 import Trackers from "../screens/trackingScreens/Trackers";
@@ -159,6 +160,12 @@ export function DrawerStack({ navigation, route }) {
       component: Account,
       iconName: "user",
       drawerItemStyle: loginState ? {} : { display: "none" },
+    },
+    {
+      name: "ManageAccount",
+      component: ManageAccount,
+      iconName: "",
+      drawerItemStyle: { display: "none" },
     },
     {
       name: "Login",
