@@ -88,6 +88,11 @@ function InitialStackScreen() {
         component={ForgotPassword}
         options={{ headerShown: false }}
       />
+      <InitialStack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
     </InitialStack.Navigator>
   );
 }
