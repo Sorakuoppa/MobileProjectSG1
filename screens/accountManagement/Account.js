@@ -24,8 +24,7 @@ export default function Account() {
       } catch (error) {
         console.error('Error fetching user data:', error.message);
       }
-    };
-
+    }
     if (email) {
       fetchUserData();
     }
@@ -45,7 +44,6 @@ export default function Account() {
          await UploadImage(uri); // Upload image and get URL
          setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
          console.log('Set user profile picture data as:', userData.profilePicture);
-        
        } else {
         console.log('Image selection cancelled or URI not found');
       } 
@@ -66,10 +64,8 @@ export default function Account() {
       console.log('URI Logged',uri);
       if (!result.canceled && uri) {
         // Upload the taken picture to Firebase Storage and update user data
-        const imageUrl = await UploadImage(uri);
-        if (imageUrl) {
-          setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
-        }
+       await UploadImage(uri);
+       setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
       }
     } catch (error) {
       console.log('Error taking picture:', error);
