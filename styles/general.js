@@ -6,7 +6,7 @@ export const darkColors = {
 };
 export const lightColors = {
   primary: "#FF5C00",
-  secondary: "#ffffff",
+  secondary: "#FFE8D3",
 };
 export const LightTheme = {
   dark: false,

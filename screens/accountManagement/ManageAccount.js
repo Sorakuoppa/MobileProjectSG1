@@ -226,7 +226,7 @@ if (isLoading) {
         <View>
           <TouchableOpacity onPress={selectImage}>
             <View>
- 
+              <Surface style={{borderRadius: 90, backgroundColor: colors.accent}} elevation={3}>
                 <Image
                   source={
                     userData.profilePicture
@@ -235,7 +235,7 @@ if (isLoading) {
                   }
                   style={manageAccountStyle.image}
                 />
-
+              </Surface>
               <View
                 style={{
                   ...manageAccountStyle.overlay,
@@ -247,7 +247,12 @@ if (isLoading) {
                   size={24}
                   color={colors.primary}
                   onPress={selectImage}
-                  style={{ opacity: 0.9, backgroundColor: colors.accent, borderRadius: 20, padding: 10 }}
+                  style={{
+                    opacity: 0.9,
+                    backgroundColor: colors.accent,
+                    borderRadius: 20,
+                    padding: 10,
+                  }}
                 />
               </View>
             </View>
