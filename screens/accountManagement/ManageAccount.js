@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Text, View, Button, Image, Alert, TouchableOpacity } from 'react-native';
 import { general } from '../../styles/general';
 import { db  } from '../../components/FirebaseConfig';
@@ -13,12 +13,17 @@ import { Modal } from 'react-native';
 import { manageAccountStyle } from '../../styles/accountManagementStyles/manageAccountStyle';
 import { Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
+import { PermissionContext } from '../../components/Permissions';
 
 export default function ManageAccount() {
-  const { email } = useLoginContext(); // Assuming you have userEmail in your context
+  const { email } = useLoginContext(); 
   const [userData, setUserData] = useState(null);
   const { colors } = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
+  const { mediaLibararyStatus, requestMediaPermission, cameraStatus, requestCameraPermission } = useContext(PermissionContext);
+
+ 
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -41,24 +46,37 @@ export default function ManageAccount() {
   // Function to handle image selection
   const selectImage = () => {
     setModalVisible(true);
-
   };
 
   const takePictureWithCamera = async () => {
     try {
-      const result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4,3],
-        quality: 1,
-      });
-      const uri = result.assets[0].uri
-      console.log('URI Logged',uri);
-      if (!result.canceled && uri) {
-        // Upload the taken picture to Firebase Storage and update user data
-       await UploadImage(uri);
-       setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
-       setModalVisible(false);
+      // Check if camera permissions are granted
+      if (cameraStatus.granted) {
+        const result = await ImagePicker.launchCameraAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+        const uri = result.assets[0].uri;
+        console.log('URI Logged', uri);
+        if (!result.canceled && uri) {
+          // Upload the taken picture to Firebase Storage and update user data
+          await UploadImage(uri);
+          setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
+          setModalVisible(false);
+        }
+      } else if (!cameraStatus.granted) {
+        // Request camera permissions
+        const { status } = await requestCameraPermission();
+        if (status.granted) {
+          // If permissions granted, proceed to take picture
+          takePictureWithCamera();
+        } else {
+          Alert.alert('Camera permissions are required to take a photo.');
+        }
+      } else {
+        Alert.alert('Camera permissions are required to take a photo.');
       }
     } catch (error) {
       console.log('Error taking picture:', error);
@@ -67,36 +85,66 @@ export default function ManageAccount() {
 
   const chooseFromGallery = async () => {
     try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4,3],
-        quality: 1,
-      });
-      const uri = result.assets[0].uri
-      if (!result.canceled && uri) {
-         await UploadImage(uri); // Upload image and get URL
-         setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
-         console.log('Set user profile picture data as:', userData.profilePicture);
-         setModalVisible(false);
-       } else {
-        console.log('Image selection cancelled or URI not found');
-      } 
+      // Check if media library permissions are granted
+      if (mediaLibararyStatus.granted) {
+        const result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+        const uri = result.assets[0].uri;
+        if (!result.canceled && uri) {
+          // Upload the selected picture to Firebase Storage and update user data
+          await UploadImage(uri);
+          setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
+          setModalVisible(false);
+        }
+      } else if (!mediaLibararyStatus.granted) {
+        // Request media library permissions
+        const { status } = await requestMediaPermission();
+        console.log(status);
+        if (status.granted) {
+          // If permissions granted, proceed to choose from gallery
+          chooseFromGallery();
+        } else {
+          Alert.alert('Media library permissions are required to choose a photo.');
+        }
+      } else {
+        Alert.alert('Media library permissions are required to choose a photo.');
+      }
     } catch (error) {
       console.log('ImagePicker Error:', error);
     }
-  }
-
+  };
   const deleteUserProfilePicture = async () => {
     try {
-      const deleteUserPicture = await deleteProfilePicture(userData)
-      if (deleteUserPicture) {
-      setUserData(prevUserData => ({ ...prevUserData, profilePicture: '' }));
-    }
+      Alert.alert(
+        'Confirm Deletion',
+        'Are you sure you want to delete your profile picture?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'Delete',
+            onPress: async () => {
+              const deleteUserPicture = await deleteProfilePicture(userData);
+              if (deleteUserPicture) {
+                setUserData(prevUserData => ({ ...prevUserData, profilePicture: '' }));
+                setModalVisible(false);
+              }
+            },
+          },
+        ],
+        { cancelable: false }
+      );
     } catch (error) {
-
+      console.error('Error deleting profile picture:', error);
+      Alert.alert('Error', 'Failed to delete profile picture.');
     }
-  }
+  };
   
 
   return (
@@ -115,12 +163,6 @@ export default function ManageAccount() {
         </View>
       )}
       
-      <View style={manageAccountStyle.padding}>
-        <Pressable style={{...manageAccountStyle.button, backgroundColor:colors.primary}} onPress={deleteUserProfilePicture}>
-          <Text style={{...manageAccountStyle.text,color: colors.text}}>Delete your profile picture</Text>
-        </Pressable>
-      </View>
-
       {/* Modal for selecting image source */}
       <Modal
         animationType="slide"
@@ -136,7 +178,10 @@ export default function ManageAccount() {
             <TouchableOpacity style={{...manageAccountStyle.button, backgroundColor:colors.primary, alignSelf: 'left'}} onPress={chooseFromGallery}>
               <Text style={{...manageAccountStyle.modalButtonText, color: colors.text}}>Choose from gallery</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{...manageAccountStyle.button, backgroundColor:colors.primary, alignSelf: 'left'}} onPress={() => setModalVisible(false)}>
+            <TouchableOpacity style={{...manageAccountStyle.button, backgroundColor:'red', alignSelf: 'left',}} onPress={deleteUserProfilePicture}>
+              <Text style={{...manageAccountStyle.modalButtonText, color: colors.text}}>Delete your profile picture</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{...manageAccountStyle.button, backgroundColor:colors.primary}} onPress={() => setModalVisible(false)}>
               <Text style={{...manageAccountStyle.modalButtonText, color: colors.text}}>Cancel</Text>
             </TouchableOpacity>
           </View>

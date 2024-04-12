@@ -28,5 +28,10 @@ export const accountStyle = StyleSheet.create({
         alignItems: 'center',
         marginTop: 150, // Add margin between content and button
     },
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
     
 })

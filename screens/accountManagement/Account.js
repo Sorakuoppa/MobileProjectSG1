@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, Button, Image, Alert, Pressable } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { Text, View, Image, Pressable } from 'react-native';
 import { general } from '../../styles/general';
 import { db  } from '../../components/FirebaseConfig';
 import { collection,  getDocs, query, where } from '@firebase/firestore';
 import { useLoginContext } from '../../components/LoginContext';
-import * as ImagePicker from 'expo-image-picker';
-import UploadImage, { deleteProfilePicture } from '../../components/ImageManagement';
 import { accountStyle } from '../../styles/accountManagementStyles/accountStyle';
 import avatar from '../../assets/avatar.png'
 import { useTheme } from "@react-navigation/native";
-import { CommonActions, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+import { ActivityIndicator } from "react-native-paper";
+import { ThemeContext } from "../../components/ThemeContext";
 
 
 
@@ -18,6 +18,8 @@ export default function Account() {
     const { email } = useLoginContext(); // Assuming you have userEmail in your context
     const [userData, setUserData] = useState(null);
     const navigation = useNavigation()
+    const [isLoading, setIsLoading] = useState(true);
+    const { theme } = useContext(ThemeContext);
     const navigateToManagement = () => {
         navigation.navigate("ManageAccount")
     }
@@ -31,6 +33,7 @@ export default function Account() {
         querySnapshot.forEach((doc) => {
           setUserData(doc.data());
         });
+        setIsLoading(false)
       } catch (error) {
         console.error('Error fetching user data:', error.message);
       }
@@ -39,6 +42,36 @@ export default function Account() {
       fetchUserData();
     }
   }, [email]);
+  if (isLoading) {
+    return (
+      <View style={{...accountStyle.container}}>
+        <Image
+          source={
+            theme === "dark"
+              ? require("../../assets/logos/onTrack_dark_theme.png")
+              : require("../../assets/logos/onTrack_light_theme.png")
+          }
+          style={{ width: 200, height: 100, marginBottom: 40}}
+        />
+        <View>
+          <Text
+            style={{
+              ...accountStyle.title,
+              color: colors.text,
+              marginBottom: 20,
+            }}
+          >
+            Fetching account data...
+          </Text>
+          <ActivityIndicator
+            animating={true}
+            color={colors.primary}
+            size={80}
+          />
+        </View>
+      </View>
+    );
+  }
   return (
     <View style={general.scaffold}>
       <Text style={{...general.title, color:colors.text}}>Account</Text>
@@ -49,9 +82,9 @@ export default function Account() {
           ) : (
             <Image source={avatar} style={{...accountStyle.image}} />
           )}
-            <Text style={{...accountStyle.text, color:colors.text}}>{userData.username}</Text>
         </View>
       )}
+      <Text style={{...accountStyle.text, color:colors.text}}>{userData.username}</Text>
     <View>
         <Pressable onPress={navigateToManagement} style={{...accountStyle.button, backgroundColor:colors.primary}}>
             <Text style={{...accountStyle.buttonText, color:colors.text}}>Edit account</Text>

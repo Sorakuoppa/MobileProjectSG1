@@ -33,6 +33,7 @@ export const manageAccountStyle = StyleSheet.create({
     borderRadius: 30,
     alignItems: 'center',
     marginTop: 15, // Add margin between content and button
+  
   },
   image: {
     width: 200,

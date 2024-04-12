@@ -14,6 +14,7 @@ import {
 } from "./styles/general";
 import { FirstTimeLoadProvider } from "./components/FirstTimeLoadContext";
 import { LoginProvider } from "./components/LoginContext";
+import { PermissionProvider } from "./components/Permissions";
 export default function App() {
   const [theme, setTheme] = useState("dark");
   //Custom fonts can be added to this list
@@ -29,13 +30,14 @@ export default function App() {
   }
 
   return (
-    <PaperProvider>
+  <PaperProvider>
       <StatusBar
         barStyle={theme === "dark" ? "light-content" : "dark-content"}
         backgroundColor={
           theme === "dark" ? darkColors.secondary : lightColors.secondary
         }
       />
+    <PermissionProvider>
       <NavigationContainer theme={theme === "dark" ? DarkTheme : LightTheme}>
         {/* Go to ./components/ScreenStack to configure app navigation */}
         <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -46,6 +48,7 @@ export default function App() {
           </FirstTimeLoadProvider>
         </ThemeContext.Provider>
       </NavigationContainer>
-    </PaperProvider>
+    </PermissionProvider>
+  </PaperProvider>
   );
 }
