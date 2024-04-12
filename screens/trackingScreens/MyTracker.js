@@ -18,11 +18,12 @@ export default function MyTracker({ route, navigation }) {
   const { colors } = useTheme();
   const { loginState } = useLoginContext(); // Accessing login state from context
 
+  // MAKE THIS UPDATE THE PROGRESS IN FIREBASE
   const updateProgress = (value) => {
     const newProgress = progress + value;
     setProgress(newProgress);
   };
-  
+
   const deleteTracker = async () => {
     try {
       // Retrieve the tracker list from AsyncStorage

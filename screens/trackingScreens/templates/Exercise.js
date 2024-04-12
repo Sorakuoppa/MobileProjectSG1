@@ -30,7 +30,7 @@ export default function Exercise({ template, navigation }) {
     }
     if (selectedExercises.length > 0) {
       // Use addToFirebase function to add selectedExercises to Firebase
-      addToFirebase(selectedExercises, "Exercise", newName);
+      addToFirebase(selectedExercises, "Exercise", newName, 0);
       setTrackerName("");
       navigation.navigate("Trackers");
     } else {

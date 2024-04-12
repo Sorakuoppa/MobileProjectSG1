@@ -156,7 +156,7 @@ export default function Trackers({ navigation}) {
                   color={colors.primary}
                 />
                 <Text style={{ color: colors.text, fontSize: 24 }}>
-                  {trackerProgress}%
+                  {tracker.progress}%
                 </Text>
                 <Text
                   style={{ ...addNewStyle.templateText, color: colors.text }}

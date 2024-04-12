@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { auth, db } from "./FirebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
-export default async function addToFirebase(object, type, trackerName) {
+export default async function addToFirebase(object, type, trackerName, progress) {
   if (auth.currentUser) {
     try {
       await addDoc(
@@ -11,6 +11,7 @@ export default async function addToFirebase(object, type, trackerName) {
           milestones: object,
           type: type,
           name: trackerName,
+          progress: progress,
         }
       );
     } catch (e) {

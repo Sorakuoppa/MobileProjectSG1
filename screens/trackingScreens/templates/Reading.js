@@ -38,7 +38,7 @@ export default function Reading({ template, navigation }) {
 
     if (objectList.length > 0) {
       console.log(newName);
-      addToFirebase(objectList, "Reading", newName);
+      addToFirebase(objectList, "Reading", newName, 0);
       setTrackerName("");
       navigation.navigate("Trackers");
     } else {
