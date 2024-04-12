@@ -247,7 +247,7 @@ if (isLoading) {
                   size={24}
                   color={colors.primary}
                   onPress={selectImage}
-                  style={{ opacity: 0.9, backgroundColor: colors.accent, borderRadius: 20, padding: 10 }}
+                  style={{ ...manageAccountStyle.iconStyle, backgroundColor: colors.accent, }}
                 />
               </View>
             </View>

@@ -68,4 +68,9 @@ export const manageAccountStyle = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Gantari',
   },
+  iconStyle: {
+    opacity: 0.9,
+    borderRadius: 20, 
+    padding: 10 
+  },
 });
