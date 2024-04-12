@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Text, View, Button, Image, Alert, TouchableOpacity } from 'react-native';
 import { general } from '../../styles/general';
-import { db  } from '../../components/FirebaseConfig';
+import { auth, db  } from '../../components/FirebaseConfig';
 import { collection,  getDocs, query, where } from '@firebase/firestore';
 import { useLoginContext } from '../../components/LoginContext';
 import * as ImagePicker from 'expo-image-picker';
@@ -14,13 +14,17 @@ import { manageAccountStyle } from '../../styles/accountManagementStyles/manageA
 import { Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { PermissionContext } from '../../components/Permissions';
+import { TextInput } from 'react-native-paper';
 
 export default function ManageAccount() {
+  const { mediaLibararyStatus, requestMediaPermission, cameraStatus, requestCameraPermission } = useContext(PermissionContext)
   const { email } = useLoginContext(); 
-  const [userData, setUserData] = useState(null);
   const { colors } = useTheme();
+  const [userData, setUserData] = useState(null);
+  const [newEmail, setNewEmail] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [newUsername, setNewUsername] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const { mediaLibararyStatus, requestMediaPermission, cameraStatus, requestCameraPermission } = useContext(PermissionContext);
 
  
 
@@ -43,7 +47,9 @@ export default function ManageAccount() {
     }
   }, [email]);
 
-  // Function to handle image selection
+
+  // Photo deletion and selection handling starts 
+
   const selectImage = () => {
     setModalVisible(true);
   };
@@ -145,7 +151,39 @@ export default function ManageAccount() {
       Alert.alert('Error', 'Failed to delete profile picture.');
     }
   };
+
+  // Photo deletion and selection handling ends
+
+
+  // Account detail change handling starts
+
+  const handleChangeEmail = async () => {
+    // Handle updating email logic here
+  };
+
+  const handleChangePassword = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          await updatePassword(user,newPassword);
+          // Password updated successfully
+          Alert.alert('Success', 'Password updated successfully.');
+          setNewPassword('')
+        } else {
+          // No user signed in
+          Alert.alert('Error', 'No user signed in.');
+        }
+      } catch (error) {
+        console.error('Error updating password:', error.message);
+        Alert.alert('Error', 'Failed to update password.');
+      }
+  };
+
+  const handleChangeUsername = async () => {
+    // Handle updating username logic here
+  };
   
+    // Account detail change handling ends
 
   return (
     <View style={general.scaffold}>
@@ -160,6 +198,24 @@ export default function ManageAccount() {
               </View>
             </View>
           </TouchableOpacity>
+          <TextInput
+            placeholder={userData.email}
+            value={newEmail}
+            onChangeText={setNewEmail}
+          />
+          <TextInput
+            placeholder="New password"
+            secureTextEntry
+            onChangeText={setNewPassword}
+          />
+          <TextInput
+            placeholder={userData.username}
+            value={newUsername}
+            onChangeText={setNewUsername}
+          />
+          <Button title="Change Email" onPress={handleChangeEmail} />
+          <Button title="Change Password" onPress={handleChangePassword} />
+          <Button title="Change Username" onPress={handleChangeUsername} />
         </View>
       )}
       
