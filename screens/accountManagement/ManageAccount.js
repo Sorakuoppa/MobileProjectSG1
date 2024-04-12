@@ -15,7 +15,7 @@ import { Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { PermissionContext } from '../../components/Permissions';
 import { ThemeContext } from '../../components/ThemeContext';
-import { ActivityIndicator } from 'react-native-paper';
+import { ActivityIndicator, Surface } from 'react-native-paper';
 export default function ManageAccount() {
   const { mediaLibararyStatus, requestMediaPermission, cameraStatus, requestCameraPermission } = useContext(PermissionContext)
   const { email } = useLoginContext(); 
@@ -221,50 +221,78 @@ if (isLoading) {
 
   return (
     <View style={general.scaffold}>
-      <Text style={{...general.title, color: colors.text}}>Account</Text>
+      <Text style={{ ...general.title, color: colors.text }}>Account</Text>
       {userData && (
         <View>
           <TouchableOpacity onPress={selectImage}>
             <View>
-              <Image source={userData.profilePicture ? { uri: userData.profilePicture } : avatar} style={manageAccountStyle.image} />
-              <View style={{...manageAccountStyle.overlay, backgroundColor: colors.overlayBackgroundColor}}>
-              <MaterialIcons name="add-a-photo" size={24} color="black" onPress={selectImage} />
+ 
+                <Image
+                  source={
+                    userData.profilePicture
+                      ? { uri: userData.profilePicture }
+                      : avatar
+                  }
+                  style={manageAccountStyle.image}
+                />
+
+              <View
+                style={{
+                  ...manageAccountStyle.overlay,
+                  backgroundColor: colors.overlayBackgroundColor,
+                }}
+              >
+                <MaterialIcons
+                  name="add-a-photo"
+                  size={24}
+                  color={colors.primary}
+                  onPress={selectImage}
+                  style={{ opacity: 0.9, backgroundColor: colors.accent, borderRadius: 20, padding: 10 }}
+                />
               </View>
             </View>
           </TouchableOpacity>
         </View>
       )}
       <View style={manageAccountStyle.formFieldContainer}>
-      <TextInput
-            placeholder={userData.email}
-            value={newEmail}
-            onChangeText={setNewEmail}
-            style={{...manageAccountStyle.formField, borderColor: colors.primary,}}
-            autoCapitalize="none"
-          />
-       </View>
+        <TextInput
+          placeholder={userData.email}
+          value={newEmail}
+          onChangeText={setNewEmail}
+          style={{
+            ...manageAccountStyle.formField,
+            borderColor: colors.primary,
+          }}
+          autoCapitalize="none"
+        />
+      </View>
       <View style={manageAccountStyle.formFieldContainer}>
-      <TextInput
-            placeholder="New password"
-            secureTextEntry
-            onChangeText={setNewPassword}
-            autoCapitalize="none"
-            style={{...manageAccountStyle.formField, borderColor: colors.primary,}}
-          />
-       </View>
+        <TextInput
+          placeholder="New password"
+          secureTextEntry
+          onChangeText={setNewPassword}
+          autoCapitalize="none"
+          style={{
+            ...manageAccountStyle.formField,
+            borderColor: colors.primary,
+          }}
+        />
+      </View>
       <View style={manageAccountStyle.formFieldContainer}>
-      <TextInput
-            placeholder={userData.username}
-            value={newUsername}
-            onChangeText={setNewUsername}
-            style={{...manageAccountStyle.formField, borderColor: colors.primary,}}
-          />
-       </View>
+        <TextInput
+          placeholder={userData.username}
+          value={newUsername}
+          onChangeText={setNewUsername}
+          style={{
+            ...manageAccountStyle.formField,
+            borderColor: colors.primary,
+          }}
+        />
+      </View>
 
-    
-          <Button title="Change Email" onPress={handleChangeEmail} />
-          <Button title="Change Password" onPress={handleChangePassword} />
-          <Button title="Change Username" onPress={handleChangeUsername} />
+      <Button title="Change Email" onPress={handleChangeEmail} />
+      <Button title="Change Password" onPress={handleChangePassword} />
+      <Button title="Change Username" onPress={handleChangeUsername} />
       {/* Modal for selecting image source */}
       <Modal
         animationType="slide"
@@ -273,18 +301,78 @@ if (isLoading) {
         onRequestClose={() => setModalVisible(false)}
       >
         <View style={manageAccountStyle.modalContainer}>
-          <View style={{...manageAccountStyle.modalContent, backgroundColor: colors.background}}>
-            <TouchableOpacity style={{...manageAccountStyle.button, backgroundColor:colors.primary, alignSelf: 'left'}} onPress={takePictureWithCamera}>
-              <Text style={{...manageAccountStyle.modalButtonText, color: colors.text}}>Take a picture</Text>
+          <View
+            style={{
+              ...manageAccountStyle.modalContent,
+              backgroundColor: colors.background,
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                ...manageAccountStyle.button,
+                backgroundColor: colors.primary,
+                alignSelf: "left",
+              }}
+              onPress={takePictureWithCamera}
+            >
+              <Text
+                style={{
+                  ...manageAccountStyle.modalButtonText,
+                  color: colors.text,
+                }}
+              >
+                Take a picture
+              </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{...manageAccountStyle.button, backgroundColor:colors.primary, alignSelf: 'left'}} onPress={chooseFromGallery}>
-              <Text style={{...manageAccountStyle.modalButtonText, color: colors.text}}>Choose from gallery</Text>
+            <TouchableOpacity
+              style={{
+                ...manageAccountStyle.button,
+                backgroundColor: colors.primary,
+                alignSelf: "left",
+              }}
+              onPress={chooseFromGallery}
+            >
+              <Text
+                style={{
+                  ...manageAccountStyle.modalButtonText,
+                  color: colors.text,
+                }}
+              >
+                Choose from gallery
+              </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{...manageAccountStyle.button, backgroundColor:'red', alignSelf: 'left',}} onPress={deleteUserProfilePicture}>
-              <Text style={{...manageAccountStyle.modalButtonText, color: colors.text}}>Delete your profile picture</Text>
+            <TouchableOpacity
+              style={{
+                ...manageAccountStyle.button,
+                backgroundColor: "red",
+                alignSelf: "left",
+              }}
+              onPress={deleteUserProfilePicture}
+            >
+              <Text
+                style={{
+                  ...manageAccountStyle.modalButtonText,
+                  color: colors.text,
+                }}
+              >
+                Delete your profile picture
+              </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{...manageAccountStyle.button, backgroundColor:colors.primary}} onPress={() => setModalVisible(false)}>
-              <Text style={{...manageAccountStyle.modalButtonText, color: colors.text}}>Cancel</Text>
+            <TouchableOpacity
+              style={{
+                ...manageAccountStyle.button,
+                backgroundColor: colors.primary,
+              }}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text
+                style={{
+                  ...manageAccountStyle.modalButtonText,
+                  color: colors.text,
+                }}
+              >
+                Cancel
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
