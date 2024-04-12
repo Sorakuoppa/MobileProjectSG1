@@ -12,20 +12,27 @@ import { general } from "../../styles/general";
 import { trackerStyle } from "../../styles/trackingScreens/trackerStyle";
 import { addNewStyle } from "../../styles/trackingScreens/addNewStyle";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { Surface, Button, ActivityIndicator } from "react-native-paper";
+import {
+  Surface,
+  Button,
+  ActivityIndicator,
+  Dialog,
+  Portal,
+} from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useLoginContext } from "../../components/LoginContext";
+import { set } from "@firebase/database";
 
 export default function Trackers({ navigation }) {
   const { colors } = useTheme();
   const [trackerList, setTrackerList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [dialog, setDialog] = useState(false);
   const { loginState } = useLoginContext();
 
   useFocusEffect(
     useCallback(() => {
-      console.log("useFocusEffect");
       showTrackers();
       return () => {};
     }, [loginState])
@@ -47,27 +54,27 @@ export default function Trackers({ navigation }) {
   };
 
   const clearFirebase = async () => {
-    if (loginState === false || !auth.currentUser) {
-      AsyncStorage.clear();
+    if (loginState === false) {
+      console.log("AsyncStorage clear")
       return;
     } else {
       try {
-        const trackerRef = collection(
-          db,
-          "trackers",
-          auth.currentUser.uid,
-          "trackers"
+        const querySnapshot = await getDocs(
+          collection(db, "trackers", auth.currentUser.uid, "trackers")
         );
-        await deleteDoc(trackerRef);
+        querySnapshot.forEach((doc) => {
+          deleteDoc(doc.ref);
+        });
+        setTrackerList([]);
       } catch (e) {
         console.error("Error deleting document: ", e);
       }
     }
-};
+    setDialog(false);
+  };
 
   // TESTING ASYNCSTORAGE REMOVE THIS
   const showAsyncStorage = async () => {
-
     try {
       const value = await AsyncStorage.getAllKeys();
       if (value !== null) {
@@ -94,11 +101,34 @@ export default function Trackers({ navigation }) {
       <View style={general.scaffold}>
         <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
         <Button
-          children= "Delete all trackers"
+          children="Delete all trackers"
           mode="contained"
           buttonColor={colors.primary}
-          onPress={clearFirebase}
+          onPress={() => setDialog(true)}
         />
+        <Portal>
+          <Dialog
+            visible={dialog}
+            onDismiss={() => setDialog(false)}
+            style={{ backgroundColor: colors.accent }}
+          >
+            <Dialog.Title style={{ color: colors.text }}>
+              Are you sure you want to delete all trackers?
+            </Dialog.Title>
+            <Dialog.Actions>
+              <Button
+                children="Yes"
+                textColor={colors.primary}
+                onPress={clearFirebase}
+              />
+              <Button
+                children="No"
+                textColor={colors.primary}
+                onPress={() => setDialog(false)}
+              />
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
         <ScrollView>
           {trackerList.map((tracker, index) => (
             <Pressable
