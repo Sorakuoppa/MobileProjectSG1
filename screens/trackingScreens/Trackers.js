@@ -1,6 +1,3 @@
-// TODO: Show all the trackers that the user has created
-// and allow them to click on them to view the tracker details
-
 import React, { useEffect, useCallback, useState } from "react";
 import { View, Text, Pressable, Animated } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
@@ -22,11 +19,11 @@ import {
 import { useTheme } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useLoginContext } from "../../components/LoginContext";
-import { set } from "@firebase/database";
 
-export default function Trackers({ navigation }) {
+export default function Trackers({ navigation}) {
   const { colors } = useTheme();
   const [trackerList, setTrackerList] = useState([]);
+  const [trackerProgress, setTrackerProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [dialog, setDialog] = useState(false);
   const { loginState } = useLoginContext();
@@ -55,7 +52,8 @@ export default function Trackers({ navigation }) {
 
   const clearFirebase = async () => {
     if (loginState === false) {
-      console.log("AsyncStorage clear")
+      AsyncStorage.clear();
+      setDialog(false);
       return;
     } else {
       try {
@@ -157,6 +155,9 @@ export default function Trackers({ navigation }) {
                   size={40}
                   color={colors.primary}
                 />
+                <Text style={{ color: colors.text, fontSize: 24 }}>
+                  {trackerProgress}%
+                </Text>
                 <Text
                   style={{ ...addNewStyle.templateText, color: colors.text }}
                 >
