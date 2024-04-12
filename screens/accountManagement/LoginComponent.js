@@ -153,6 +153,7 @@ const LoginComponent = () => {
           onChangeText={setPassword}
           placeholder="Password"
           secureTextEntry
+          autoCapitalize="none"
         />
       </View>
       <View>

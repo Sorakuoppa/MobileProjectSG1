@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Text, View, Button, Image, Alert, TouchableOpacity } from 'react-native';
+import { Text, View, Button, Image, Alert, TouchableOpacity, TextInput } from 'react-native';
 import { general } from '../../styles/general';
 import { auth, db  } from '../../components/FirebaseConfig';
 import { collection,  getDocs, query, where } from '@firebase/firestore';
@@ -14,8 +14,8 @@ import { manageAccountStyle } from '../../styles/accountManagementStyles/manageA
 import { Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { PermissionContext } from '../../components/Permissions';
-import { TextInput } from 'react-native-paper';
-
+import { ThemeContext } from '../../components/ThemeContext';
+import { ActivityIndicator } from 'react-native-paper';
 export default function ManageAccount() {
   const { mediaLibararyStatus, requestMediaPermission, cameraStatus, requestCameraPermission } = useContext(PermissionContext)
   const { email } = useLoginContext(); 
@@ -25,6 +25,8 @@ export default function ManageAccount() {
   const [newPassword, setNewPassword] = useState('');
   const [newUsername, setNewUsername] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const { theme } = useContext(ThemeContext);
 
  
 
@@ -37,6 +39,7 @@ export default function ManageAccount() {
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
           setUserData(doc.data());
+          setIsLoading(false)
         });
       } catch (error) {
         console.error('Error fetching user data:', error.message);
@@ -185,6 +188,37 @@ export default function ManageAccount() {
   
     // Account detail change handling ends
 
+if (isLoading) {
+      return (
+        <View style={{...general.scaffold}}>
+          <Image
+            source={
+              theme === "dark"
+                ? require("../../assets/logos/onTrack_dark_theme.png")
+                : require("../../assets/logos/onTrack_light_theme.png")
+            }
+            style={{ width: 200, height: 100, marginBottom: 40}}
+          />
+          <View>
+            <Text
+              style={{
+                ...general.title,
+                color: colors.text,
+                marginBottom: 20,
+              }}
+            >
+              Fetching account data...
+            </Text>
+            <ActivityIndicator
+              animating={true}
+              color={colors.primary}
+              size={80}
+            />
+          </View>
+        </View>
+      );
+    }
+
   return (
     <View style={general.scaffold}>
       <Text style={{...general.title, color: colors.text}}>Account</Text>
@@ -198,27 +232,39 @@ export default function ManageAccount() {
               </View>
             </View>
           </TouchableOpacity>
-          <TextInput
+        </View>
+      )}
+      <View style={manageAccountStyle.formFieldContainer}>
+      <TextInput
             placeholder={userData.email}
             value={newEmail}
             onChangeText={setNewEmail}
+            style={{...manageAccountStyle.formField, borderColor: colors.primary,}}
+            autoCapitalize="none"
           />
-          <TextInput
+       </View>
+      <View style={manageAccountStyle.formFieldContainer}>
+      <TextInput
             placeholder="New password"
             secureTextEntry
             onChangeText={setNewPassword}
+            autoCapitalize="none"
+            style={{...manageAccountStyle.formField, borderColor: colors.primary,}}
           />
-          <TextInput
+       </View>
+      <View style={manageAccountStyle.formFieldContainer}>
+      <TextInput
             placeholder={userData.username}
             value={newUsername}
             onChangeText={setNewUsername}
+            style={{...manageAccountStyle.formField, borderColor: colors.primary,}}
           />
+       </View>
+
+    
           <Button title="Change Email" onPress={handleChangeEmail} />
           <Button title="Change Password" onPress={handleChangePassword} />
           <Button title="Change Username" onPress={handleChangeUsername} />
-        </View>
-      )}
-      
       {/* Modal for selecting image source */}
       <Modal
         animationType="slide"

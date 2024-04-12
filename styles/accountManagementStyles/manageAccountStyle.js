@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const windowWidth = Dimensions.get('window').width;
 
 export const manageAccountStyle = StyleSheet.create({
   modalContainer: {
@@ -54,5 +55,17 @@ export const manageAccountStyle = StyleSheet.create({
   text: {
     fontFamily: 'Gantari',
     fontSize: 16,
+  },
+  formFieldContainer: {
+    paddingTop: 10,
+    width: windowWidth - 40,
+  },
+  formField: {
+    borderRadius: 30,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    borderWidth: 3,
+    fontSize: 16,
+    fontFamily: 'Gantari',
   },
 });
