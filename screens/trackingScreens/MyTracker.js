@@ -70,7 +70,7 @@ export default function MyTracker({ route, navigation }) {
         onAnimationComplete={() => {}}
         backgroundColor={colors.text}
       />
-      <ScrollView>
+      <ScrollView contentContainerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
         {tracker.milestones.map((milestone, index) => (
           <MilestoneComponent
             key={index}

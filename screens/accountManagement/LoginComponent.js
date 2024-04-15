@@ -161,7 +161,7 @@ const LoginComponent = () => {
       <View>
         <Pressable>
           <Text
-            style={loginAndRegisterStyles.anonText}
+            style={{ ...loginAndRegisterStyles.anonText, color: colors.text }}
             onPress={navigateForgotPage}
           >
             Forgot password?
@@ -171,7 +171,7 @@ const LoginComponent = () => {
       <View style={loginAndRegisterStyles.paddingTopView}>
         <Pressable>
           <Text
-            style={loginAndRegisterStyles.anonText}
+            style={{ ...loginAndRegisterStyles.anonText, color: colors.text }}
             onPress={navigateRegisterPage}
           >
             New user? Register here!

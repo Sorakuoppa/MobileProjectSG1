@@ -28,7 +28,7 @@ export default function MilestoneComponent({
 
   if (numericMilestone) {
     return (
-      <TouchableOpacity onPress={handleCheck} style={{ width: "100%" }}>
+      <TouchableOpacity onPress={handleCheck} style={{ width: "100%", justifyContent: 'center', alignItems: 'center' }}>
         <View
           style={{
             ...templateStyle.milestones,
@@ -61,7 +61,10 @@ export default function MilestoneComponent({
   }
 
   return (
-    <TouchableOpacity onPress={handleCheck} style={{width: '100%'}}>
+    <TouchableOpacity
+      onPress={handleCheck}
+      style={{ width: "100%", justifyContent: "center", alignItems: "center" }}
+    >
       <View
         style={{
           ...templateStyle.milestones,
