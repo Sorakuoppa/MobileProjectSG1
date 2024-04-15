@@ -19,7 +19,7 @@ export default function Reading({ template, navigation }) {
   const onCheck = (text, numeric) => {
     let list = [...objectList];
     let newTrackerObject = {};
-    newTrackerObject = { milestone: text, checked: true, numeric: numeric };
+    newTrackerObject = { milestone: text, done: false, numeric: numeric };
     list.push(newTrackerObject);
     setObjectList(list);
   };
