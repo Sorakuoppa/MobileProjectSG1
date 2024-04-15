@@ -86,6 +86,7 @@ export default function Trackers({ navigation}) {
   if (isLoading) {
     return (
       <View style={{ ...general.scaffold, justifyContent: "center" }}>
+        <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
         <Text
           style={{ ...general.title, color: colors.text, marginBottom: 40 }}
         >
@@ -127,7 +128,7 @@ export default function Trackers({ navigation}) {
             </Dialog.Actions>
           </Dialog>
         </Portal>
-        <ScrollView>
+        <ScrollView contentContainerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 10, paddingBottom: 20}}>
           {trackerList.map((tracker, index) => (
             <Pressable
               key={index}

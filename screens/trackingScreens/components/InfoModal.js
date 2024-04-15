@@ -53,7 +53,7 @@ export default function InfoModal({ text1, text2, icon1, icon2, icon3 }) {
       <IconButton
         icon="information-outline"
         iconColor={colors.primary}
-        size={20}
+        size={30}
         onPress={() => setVisible(true)}
       />
     </>

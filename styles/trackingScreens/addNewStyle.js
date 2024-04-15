@@ -51,7 +51,7 @@ export const templateStyle = StyleSheet.create({
     width: "80%",
   },
   milestones: {
-    width: "90%",
+    width: "95%",
     height: "auto",
     flexDirection: "row",
     justifyContent: "space-between",

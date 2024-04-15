@@ -133,6 +133,7 @@ const LoginComponent = () => {
           onChangeText={setEmail}
           placeholder="Email"
           autoCapitalize="none"
+          selectionColor={colors.primary}
         />
       </View>
       <View style={loginAndRegisterStyles.formFieldContainer}>
@@ -154,12 +155,13 @@ const LoginComponent = () => {
           placeholder="Password"
           secureTextEntry
           autoCapitalize="none"
+          selectionColor={colors.primary}
         />
       </View>
       <View>
         <Pressable>
           <Text
-            style={loginAndRegisterStyles.anonText}
+            style={{ ...loginAndRegisterStyles.anonText, color: colors.text }}
             onPress={navigateForgotPage}
           >
             Forgot password?
@@ -169,7 +171,7 @@ const LoginComponent = () => {
       <View style={loginAndRegisterStyles.paddingTopView}>
         <Pressable>
           <Text
-            style={loginAndRegisterStyles.anonText}
+            style={{ ...loginAndRegisterStyles.anonText, color: colors.text }}
             onPress={navigateRegisterPage}
           >
             New user? Register here!
