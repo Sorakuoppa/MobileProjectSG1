@@ -2,7 +2,16 @@ import React, { useState } from "react";
 import { View, Text, Button, Alert } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
-import { collection, getDocs, deleteDoc, setDoc, onSnapshot, query } from "firebase/firestore";
+import {
+  collection,
+  getDoc,
+  getDocs,
+  deleteDoc,
+  setDoc,
+  onSnapshot,
+  query,
+  doc,
+} from "firebase/firestore";
 import { db, auth } from "../../../components/FirebaseConfig";
 import MilestoneComponent from "./MilestoneComponent";
 
@@ -25,10 +34,32 @@ export default function ProgressComponent({ tracker }) {
     // setDoc(collection(db, "trackers", auth.currentUser.uid, "trackers", tracker.id), {
     //   progress: newProgress,
     // });
+    const docRef = collection(db, "trackers", auth.currentUser.uid, "trackers");
+    const collectionSnap = await getDocs(docRef);
+    const idList = [];
+    collectionSnap.forEach((doc) => {
+        idList.push(doc.id);
+        }
+    )
+    console.log(idList[0])
 
-    const querySnapshot = await getDocs(collection(db, "trackers", auth.currentUser.uid, "trackers"));
-    console.log(querySnapshot);
-  };
+//     const specificDocRef = doc(
+//       db,
+//       "trackers",
+//       auth.currentUser.uid,
+//       "trackers",
+//       '4NYiDT1frWWulMX5aZjc'
+//     );
+//     const docSnap = await getDoc(specificDocRef);
+
+//     // Check if the document exists
+//     if (docSnap.exists()) {
+//       // Log the document data
+//       console.log(docSnap.id, " => ", docSnap.data());
+//     } else {
+//       console.log("No such document!");
+//     }
+//   };
 
   return (
     <View style={general.scaffold}>
