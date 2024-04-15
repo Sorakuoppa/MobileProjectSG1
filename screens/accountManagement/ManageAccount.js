@@ -33,10 +33,13 @@ export default function ManageAccount() {
   const [newPassword, setNewPassword] = useState('');
   const [newUsername, setNewUsername] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [isUserDataLoading, setIsUserDataLoading] = useState(true);
   const { theme } = useContext(ThemeContext);
   const {isLoading, setIsLoading} = useLoadingContext()
   const {setUsername, setUserEmail} = useLoginContext() 
+  const [reAuthEmail, setReAuthEmail] = useState('');
+  const [reAuthPassword, setReAuthPassword] = useState('');
 
 
   useEffect(() => {
@@ -166,7 +169,6 @@ export default function ManageAccount() {
 
   // Photo deletion and selection handling ends
 
-
   // Account detail change handling starts
 
   const handleChangeEmail = async () => {
@@ -178,8 +180,12 @@ export default function ManageAccount() {
       Alert.alert('Changed email succesfully')
       setNewEmail('')
     } catch (error) {
+      if (error === 'auth/requires-recent-login') {
+        setIsModalVisible(false)
+
+        Alert.alert('Please log in again to change your password.');
+      }
       console.log('Error changing email:', error);
-      console.log(error.code);
     }
   };
 
@@ -458,6 +464,35 @@ if (isUserDataLoading) {
                 Cancel
               </Text>
             </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={() => setIsModalVisible(false)}
+      >
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+          <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10 }}>
+            <Text style={{ fontSize: 18, marginBottom: 10 }}>Please re-enter your credentials</Text>
+            <TextInput
+              placeholder="Email"
+              value={reAuthEmail}
+              onChangeText={setReAuthEmail}
+              autoCapitalize="none"
+              style={{ borderWidth: 1, borderColor: 'gray', marginBottom: 10, padding: 10, borderRadius: 5 }}
+            />
+            <TextInput
+              placeholder="Password"
+              value={reAuthPassword}
+              onChangeText={setReAuthPassword}
+              secureTextEntry
+              style={{ borderWidth: 1, borderColor: 'gray', marginBottom: 10, padding: 10, borderRadius: 5 }}
+            />
+            <Pressable onPress={handleSave}>
+              <Text>Submit</Text>
+            </Pressable>
           </View>
         </View>
       </Modal>
