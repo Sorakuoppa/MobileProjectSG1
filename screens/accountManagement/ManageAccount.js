@@ -8,7 +8,7 @@ import * as ImagePicker from 'expo-image-picker';
 import UploadImage, { deleteProfilePicture } from '../../components/ImageManagement';
 import avatar from '../../assets/avatar.png'
 import { useTheme } from "@react-navigation/native";
-import { updatePassword } from 'firebase/auth';
+import { updateEmail, updatePassword } from 'firebase/auth';
 import { Modal } from 'react-native';
 import { manageAccountStyle } from '../../styles/accountManagementStyles/manageAccountStyle';
 import { Pressable } from 'react-native';
@@ -17,6 +17,13 @@ import { PermissionContext } from '../../components/Permissions';
 import { ThemeContext } from '../../components/ThemeContext';
 import { ActivityIndicator, Surface } from 'react-native-paper';
 import { useLoadingContext } from '../../components/ProfilePictureLoadingContext';
+import { isValidEmail, isValidPassword, isValidUsername } from '../../components/Validations';
+
+// TODO 15.4
+// ADD HANDLING FOR AUTH/REQUIRES-RECENT-LOGIN ERROR
+// STYLE SAVE CHANGES BUTTON
+// PRETTIFY ERROR HANDLING
+
 export default function ManageAccount() {
   const { mediaLibararyStatus, requestMediaPermission, cameraStatus, requestCameraPermission } = useContext(PermissionContext)
   const { email } = useLoginContext(); 
@@ -29,7 +36,7 @@ export default function ManageAccount() {
   const [isUserDataLoading, setIsUserDataLoading] = useState(true);
   const { theme } = useContext(ThemeContext);
   const {isLoading, setIsLoading} = useLoadingContext()
-  const {setUsername} = useLoginContext() 
+  const {setUsername, setUserEmail} = useLoginContext() 
 
 
   useEffect(() => {
@@ -163,7 +170,17 @@ export default function ManageAccount() {
   // Account detail change handling starts
 
   const handleChangeEmail = async () => {
-    // Handle updating email logic here
+    try {
+      await updateEmail(auth.currentUser, newEmail)
+      setUserEmail(newEmail)
+      const userRef = doc(db, "users", auth.currentUser.uid);
+      await updateDoc(userRef, { email: newEmail });
+      Alert.alert('Changed email succesfully')
+      setNewEmail('')
+    } catch (error) {
+      console.log('Error changing email:', error);
+      console.log(error.code);
+    }
   };
 
   const handleChangePassword = async () => {
@@ -193,12 +210,60 @@ export default function ManageAccount() {
       // Update local state with the new username
       setUserData(prevUserData => ({ ...prevUserData, username: newUsername }));
       setUsername(newUsername)
+      setNewUsername('')
       Alert.alert('Successfully updated username!')
       } catch (error) {
         console.log("Error updating username:", error);
       }
     };
   
+    const handleSave = async () => {
+      try {
+        // Validation checks
+        if ( newEmail && !isValidEmail(newEmail)) {
+          Alert.alert('Invalid Email', 'Please enter a valid email address.');
+          return;
+        }
+    
+        if ( newPassword && !isValidPassword(newPassword)) {
+          Alert.alert('Invalid Password', 'Please enter a valid password.');
+          return;
+        }
+    
+        if ( newUsername && !isValidUsername(newUsername)) {
+          Alert.alert('Invalid Username', 'Please enter a valid username.');
+          return;
+        }
+    
+        // Call only the functions for fields that have been changed
+        const promises = [];
+    
+        if (newEmail && newEmail !== email) {
+          promises.push(handleChangeEmail());
+        }
+    
+        if (newPassword) {
+          promises.push(handleChangePassword());
+        }
+    
+        if (newUsername) {
+          promises.push(handleChangeUsername());
+        }
+    
+        // Wait for all promises to resolve
+        if (promises){
+        await Promise.all(promises);
+        // Display a success message after all operations are completed
+        Alert.alert('Changes saved successfully');
+      } 
+      } catch (error) {
+        console.error('Error saving changes:', error);
+        Alert.alert('Error', 'Failed to save changes.');
+      }
+    };
+    
+
+
     // Account detail change handling ends
 
 if (isUserDataLoading) {
@@ -309,10 +374,9 @@ if (isUserDataLoading) {
           }}
         />
       </View>
-
-      <Button title="Change Email" onPress={handleChangeEmail} />
-      <Button title="Change Password" onPress={handleChangePassword} />
-      <Button title="Change Username" onPress={handleChangeUsername} />
+          <Pressable style={manageAccountStyle.button} onPress={handleSave}>
+          <Text>Save changes</Text>
+          </Pressable>
       {/* Modal for selecting image source */}
       <Modal
         animationType="slide"
