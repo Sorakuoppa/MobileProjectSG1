@@ -43,23 +43,23 @@ export default function ProgressComponent({ tracker }) {
     )
     console.log(idList[0])
 
-//     const specificDocRef = doc(
-//       db,
-//       "trackers",
-//       auth.currentUser.uid,
-//       "trackers",
-//       '4NYiDT1frWWulMX5aZjc'
-//     );
-//     const docSnap = await getDoc(specificDocRef);
+    const specificDocRef = doc(
+      db,
+      "trackers",
+      auth.currentUser.uid,
+      "trackers",
+      idList[0]
+    );
+    const docSnap = await getDoc(specificDocRef);
 
-//     // Check if the document exists
-//     if (docSnap.exists()) {
-//       // Log the document data
-//       console.log(docSnap.id, " => ", docSnap.data());
-//     } else {
-//       console.log("No such document!");
-//     }
-//   };
+    // Check if the document exists
+    if (docSnap.exists()) {
+      // Log the document data
+      console.log(docSnap.id, " => ", docSnap.data());
+    } else {
+      console.log("No such document!");
+    }
+  };
 
   return (
     <View style={general.scaffold}>
