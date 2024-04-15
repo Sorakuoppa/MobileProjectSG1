@@ -61,10 +61,12 @@ export const manageAccountStyle = StyleSheet.create({
     width: windowWidth - 40,
   },
   formField: {
+    backgroundColor: '#FFF',
+    paddingLeft: 10,
     borderRadius: 30,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    borderWidth: 3,
+    borderWidth: 2,
     fontSize: 16,
     fontFamily: 'Gantari',
   },

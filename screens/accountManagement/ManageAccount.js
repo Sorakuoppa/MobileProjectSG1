@@ -16,6 +16,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { PermissionContext } from '../../components/Permissions';
 import { ThemeContext } from '../../components/ThemeContext';
 import { ActivityIndicator, Surface } from 'react-native-paper';
+import { useLoadingContext } from '../../components/ProfilePictureLoadingContext';
 export default function ManageAccount() {
   const { mediaLibararyStatus, requestMediaPermission, cameraStatus, requestCameraPermission } = useContext(PermissionContext)
   const { email } = useLoginContext(); 
@@ -25,9 +26,9 @@ export default function ManageAccount() {
   const [newPassword, setNewPassword] = useState('');
   const [newUsername, setNewUsername] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isUserDataLoading, setIsUserDataLoading] = useState(true);
   const { theme } = useContext(ThemeContext);
-
+  const {isLoading, setIsLoading} = useLoadingContext()
  
 
 
@@ -39,7 +40,7 @@ export default function ManageAccount() {
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
           setUserData(doc.data());
-          setIsLoading(false)
+          setIsUserDataLoading(false)
         });
       } catch (error) {
         console.error('Error fetching user data:', error.message);
@@ -92,6 +93,7 @@ export default function ManageAccount() {
     }
   };
 
+
   const chooseFromGallery = async () => {
     try {
       // Check if media library permissions are granted
@@ -105,7 +107,7 @@ export default function ManageAccount() {
         const uri = result.assets[0].uri;
         if (!result.canceled && uri) {
           // Upload the selected picture to Firebase Storage and update user data
-          await UploadImage(uri);
+          await UploadImage(uri, setIsLoading);
           setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
           setModalVisible(false);
         }
@@ -183,12 +185,13 @@ export default function ManageAccount() {
   };
 
   const handleChangeUsername = async () => {
-    // Handle updating username logic here
+    const currentUsername = useLoginContext()
+    console.log(currentUsername);
   };
   
     // Account detail change handling ends
 
-if (isLoading) {
+if (isUserDataLoading) {
       return (
         <View style={{...general.scaffold}}>
           <Image

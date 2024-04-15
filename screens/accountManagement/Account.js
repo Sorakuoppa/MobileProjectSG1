@@ -6,11 +6,11 @@ import { collection,  getDocs, query, where } from '@firebase/firestore';
 import { useLoginContext } from '../../components/LoginContext';
 import { accountStyle } from '../../styles/accountManagementStyles/accountStyle';
 import avatar from '../../assets/avatar.png'
-import { useTheme } from "@react-navigation/native";
+import { useIsFocused, useTheme } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator } from "react-native-paper";
 import { ThemeContext } from "../../components/ThemeContext";
-
+import { useLoadingContext } from '../../components/ProfilePictureLoadingContext';
 
 
 export default function Account() {
@@ -18,8 +18,11 @@ export default function Account() {
     const { email } = useLoginContext(); // Assuming you have userEmail in your context
     const [userData, setUserData] = useState(null);
     const navigation = useNavigation()
-    const [isLoading, setIsLoading] = useState(true);
+    const [isAccountDataLoading, setIsAccountDataLoading] = useState(true);
     const { theme } = useContext(ThemeContext);
+    const isFocused = useIsFocused();
+    const { IsLoading } = useLoadingContext();
+
     const navigateToManagement = () => {
         navigation.navigate("ManageAccount")
     }
@@ -33,16 +36,16 @@ export default function Account() {
         querySnapshot.forEach((doc) => {
           setUserData(doc.data());
         });
-        setIsLoading(false)
+        setIsAccountDataLoading(false)
       } catch (error) {
         console.error('Error fetching user data:', error.message);
       }
     }
-    if (email) {
+    if (email && isFocused) {
       fetchUserData();
     }
-  }, [email]);
-  if (isLoading) {
+  }, [email, isFocused]);
+  if (isAccountDataLoading) {
     return (
       <View style={{...accountStyle.container}}>
         <Image
@@ -74,22 +77,53 @@ export default function Account() {
   }
   return (
     <View style={general.scaffold}>
-      <Text style={{...general.title, color:colors.text}}>Account</Text>
-      {userData && (
-        <View>
-          {userData.profilePicture ? (
-            <Image source={{ uri: userData.profilePicture }} style={{...accountStyle.image,}} />
-          ) : (
-            <Image source={avatar} style={{...accountStyle.image}} />
+      {isAccountDataLoading ? (
+        <View style={{ ...accountStyle.container }}>
+          <Image
+            source={
+              theme === "dark"
+                ? require("../../assets/logos/onTrack_dark_theme.png")
+                : require("../../assets/logos/onTrack_light_theme.png")
+            }
+            style={{ width: 200, height: 100, marginBottom: 40 }}
+          />
+          <View>
+            <Text
+              style={{
+                ...accountStyle.title,
+                color: colors.text,
+                marginBottom: 20,
+              }}
+            >
+              Fetching account data...
+            </Text>
+            <ActivityIndicator
+              animating={true}
+              color={colors.primary}
+              size={80}
+            />
+          </View>
+        </View>
+      ) : (
+        <View style={general.scaffold}>
+          <Text style={{ ...general.title, color: colors.text }}>Account</Text>
+          {userData && (
+            <View>
+              {userData.profilePicture ? (
+                <Image source={{ uri: userData.profilePicture }} style={{ ...accountStyle.image }} />
+              ) : (
+                <Image source={avatar} style={{ ...accountStyle.image }} />
+              )}
+            </View>
           )}
+          <Text style={{ ...accountStyle.text, color: colors.text }}>{userData.username}</Text>
+          <View>
+            <Pressable onPress={navigateToManagement} style={{ ...accountStyle.button, backgroundColor: colors.primary }}>
+              <Text style={{ ...accountStyle.buttonText, color: colors.text }}>Edit account</Text>
+            </Pressable>
+          </View>
         </View>
       )}
-      <Text style={{...accountStyle.text, color:colors.text}}>{userData.username}</Text>
-    <View>
-        <Pressable onPress={navigateToManagement} style={{...accountStyle.button, backgroundColor:colors.primary}}>
-            <Text style={{...accountStyle.buttonText, color:colors.text}}>Edit account</Text>
-        </Pressable>
-    </View>
     </View>
   );
 }

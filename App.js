@@ -15,6 +15,7 @@ import {
 import { FirstTimeLoadProvider } from "./components/FirstTimeLoadContext";
 import { LoginProvider } from "./components/LoginContext";
 import { PermissionProvider } from "./components/Permissions";
+import { LoadingProvider } from "./components/ProfilePictureLoadingContext";
 export default function App() {
   const [theme, setTheme] = useState("dark");
   //Custom fonts can be added to this list
@@ -41,10 +42,12 @@ export default function App() {
       <NavigationContainer theme={theme === "dark" ? DarkTheme : LightTheme}>
         {/* Go to ./components/ScreenStack to configure app navigation */}
         <ThemeContext.Provider value={{ theme, setTheme }}>
-          <FirstTimeLoadProvider>
+          <FirstTimeLoadProvider> 
+            <LoadingProvider>
             <LoginProvider>
               <MainNavigator />
             </LoginProvider>
+            </LoadingProvider>
           </FirstTimeLoadProvider>
         </ThemeContext.Provider>
       </NavigationContainer>
