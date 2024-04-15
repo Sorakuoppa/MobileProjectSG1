@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Text, View, Button, Image, Alert, TouchableOpacity, TextInput } from 'react-native';
 import { general } from '../../styles/general';
 import { auth, db  } from '../../components/FirebaseConfig';
-import { collection,  getDocs, query, where } from '@firebase/firestore';
+import { collection,  doc,  getDocs, query, updateDoc, where } from '@firebase/firestore';
 import { useLoginContext } from '../../components/LoginContext';
 import * as ImagePicker from 'expo-image-picker';
 import UploadImage, { deleteProfilePicture } from '../../components/ImageManagement';
@@ -29,7 +29,7 @@ export default function ManageAccount() {
   const [isUserDataLoading, setIsUserDataLoading] = useState(true);
   const { theme } = useContext(ThemeContext);
   const {isLoading, setIsLoading} = useLoadingContext()
- 
+  const {setUsername} = useLoginContext() 
 
 
   useEffect(() => {
@@ -184,10 +184,20 @@ export default function ManageAccount() {
       }
   };
 
-  const handleChangeUsername = async () => {
-    const currentUsername = useLoginContext()
-    console.log(currentUsername);
-  };
+    const handleChangeUsername = async () => {
+
+      try{
+      const userRef = doc(db, "users", auth.currentUser.uid);
+      await updateDoc(userRef, { username: newUsername });
+
+      // Update local state with the new username
+      setUserData(prevUserData => ({ ...prevUserData, username: newUsername }));
+      setUsername(newUsername)
+      Alert.alert('Successfully updated username!')
+      } catch (error) {
+        console.log("Error updating username:", error);
+      }
+    };
   
     // Account detail change handling ends
 
@@ -230,14 +240,21 @@ if (isUserDataLoading) {
           <TouchableOpacity onPress={selectImage}>
             <View>
               <Surface style={{borderRadius: 90, backgroundColor: colors.accent}} elevation={3}>
-                <Image
+                {!isLoading ?  <Image
                   source={
                     userData.profilePicture
                       ? { uri: userData.profilePicture }
                       : avatar
                   }
                   style={manageAccountStyle.image}
-                />
+                /> :
+                <ActivityIndicator
+            animating={true}
+            color={colors.primary}
+            size={200}
+          />
+                }
+                
               </Surface>
               <View
                 style={{

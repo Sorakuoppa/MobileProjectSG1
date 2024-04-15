@@ -142,6 +142,11 @@ export function DrawerStack({ navigation, route }) {
       return "Welcome Guest";
     }
   };
+useEffect(() => {
+  getHeaderTitle
+}, [username])
+
+ 
 
   useEffect(() => {
     // Check the login state every time the drawer stack mounts
