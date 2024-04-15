@@ -45,36 +45,6 @@ export default function Account() {
       fetchUserData();
     }
   }, [email, isFocused]);
-  if (isAccountDataLoading) {
-    return (
-      <View style={{...accountStyle.container}}>
-        <Image
-          source={
-            theme === "dark"
-              ? require("../../assets/logos/onTrack_dark_theme.png")
-              : require("../../assets/logos/onTrack_light_theme.png")
-          }
-          style={{ width: 200, height: 100, marginBottom: 40}}
-        />
-        <View>
-          <Text
-            style={{
-              ...accountStyle.title,
-              color: colors.text,
-              marginBottom: 20,
-            }}
-          >
-            Fetching account data...
-          </Text>
-          <ActivityIndicator
-            animating={true}
-            color={colors.primary}
-            size={80}
-          />
-        </View>
-      </View>
-    );
-  }
   return (
     <View style={general.scaffold}>
       {isAccountDataLoading ? (
@@ -109,21 +79,42 @@ export default function Account() {
           <Text style={{ ...general.title, color: colors.text }}>Account</Text>
           {userData && (
             <View>
-              {userData.profilePicture ? (
-                <Image source={{ uri: userData.profilePicture }} style={{ ...accountStyle.image }} />
+              {IsLoading ? (
+                <ActivityIndicator
+                  animating={true}
+                  color={colors.primary}
+                  size={200}
+                />
               ) : (
-                <Image source={avatar} style={{ ...accountStyle.image }} />
+                userData.profilePicture ? (
+                  <Image
+                    source={{ uri: userData.profilePicture }}
+                    style={{ ...accountStyle.image }}
+                  />
+                ) : (
+                  <Image
+                    source={avatar}
+                    style={{ ...accountStyle.image }}
+                  />
+                )
               )}
             </View>
           )}
-          <Text style={{ ...accountStyle.text, color: colors.text }}>{userData.username}</Text>
+          <Text style={{ ...accountStyle.text, color: colors.text }}>
+            {userData.username}
+          </Text>
           <View>
-            <Pressable onPress={navigateToManagement} style={{ ...accountStyle.button, backgroundColor: colors.primary }}>
-              <Text style={{ ...accountStyle.buttonText, color: colors.text }}>Edit account</Text>
+            <Pressable
+              onPress={navigateToManagement}
+              style={{ ...accountStyle.button, backgroundColor: colors.primary }}
+            >
+              <Text style={{ ...accountStyle.buttonText, color: colors.text }}>
+                Edit account
+              </Text>
             </Pressable>
           </View>
         </View>
       )}
     </View>
   );
-}
+}  
