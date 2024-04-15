@@ -32,7 +32,7 @@ export default function Running({ template, navigation }) {
   const buttonHandler = () => {
     let newName = trackerName.trim();
     if (newName === "") {
-      newName = "My Reading Tracker";
+      newName = "My Running Tracker";
       setTrackerName(newName);
     }
     if (objectList.length > 0) {
