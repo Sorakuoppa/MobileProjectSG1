@@ -5,6 +5,7 @@ import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 import Icon from "react-native-vector-icons/FontAwesome5";
 import MilestoneComponent from "./components/MilestoneComponent";
+import ProgressComponent from "./components/ProgressComponent";
 import { useLoginContext } from "../../components/LoginContext"; // Importing LoginContext
 
 import { general } from "../../styles/general";
@@ -13,13 +14,15 @@ import { ScrollView } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function MyTracker({ route, navigation }) {
-  const [progress, setProgress] = useState(0);
   const { tracker } = route.params;
+  const [progress, setProgress] = useState(0);
+  const [progressAmount, setProgressAmount] = useState(tracker.milestones.length * 10);
   const { colors } = useTheme();
   const { loginState } = useLoginContext(); // Accessing login state from context
 
   // MAKE THIS UPDATE THE PROGRESS IN FIREBASE
   const updateProgress = (value) => {
+    console.log(tracker.milestones.length);
     const newProgress = progress + value;
     setProgress(newProgress);
   };
@@ -62,7 +65,8 @@ export default function MyTracker({ route, navigation }) {
       <Text style={{ ...general.title, color: colors.text }}>
         {tracker.name}
       </Text>
-      <AnimatedCircularProgress
+      <ProgressComponent tracker={tracker}/>
+      {/* <AnimatedCircularProgress
         size={120}
         width={15}
         fill={progress}
@@ -80,7 +84,7 @@ export default function MyTracker({ route, navigation }) {
             onUncheck={() => updateProgress(-20)}
           />
         ))}
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 }
