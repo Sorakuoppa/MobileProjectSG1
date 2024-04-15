@@ -25,7 +25,7 @@ export default function Exercise({ template, navigation }) {
   const handleAddTracker = () => {
     let newName = trackerName.trim();
     if (newName === "") {
-      newName = "My Reading Tracker";
+      newName = "My Exercise Tracker";
       setTrackerName(newName);
     }
     if (selectedExercises.length > 0) {
