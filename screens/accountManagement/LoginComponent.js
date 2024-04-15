@@ -133,6 +133,7 @@ const LoginComponent = () => {
           onChangeText={setEmail}
           placeholder="Email"
           autoCapitalize="none"
+          selectionColor={colors.primary}
         />
       </View>
       <View style={loginAndRegisterStyles.formFieldContainer}>
@@ -154,6 +155,7 @@ const LoginComponent = () => {
           placeholder="Password"
           secureTextEntry
           autoCapitalize="none"
+          selectionColor={colors.primary}
         />
       </View>
       <View>
