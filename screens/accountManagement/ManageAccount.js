@@ -17,7 +17,7 @@ import { PermissionContext } from '../../components/Permissions';
 import { ThemeContext } from '../../components/ThemeContext';
 import { ActivityIndicator, Surface } from 'react-native-paper';
 import { useLoadingContext } from '../../components/ProfilePictureLoadingContext';
-import { isValidEmail, isValidPassword, isValidUsername } from '../../components/Validations';
+import { isValidEmail, isValidPassword, isValidUsername, reauthenticateUser } from '../../components/Validations';
 
 // TODO 15.4
 // ADD HANDLING FOR AUTH/REQUIRES-RECENT-LOGIN ERROR
@@ -38,7 +38,6 @@ export default function ManageAccount() {
   const { theme } = useContext(ThemeContext);
   const {isLoading, setIsLoading} = useLoadingContext()
   const {setUsername, setUserEmail} = useLoginContext() 
-  const [reAuthEmail, setReAuthEmail] = useState('');
   const [reAuthPassword, setReAuthPassword] = useState('');
 
 
@@ -173,17 +172,18 @@ export default function ManageAccount() {
 
   const handleChangeEmail = async () => {
     try {
+
       await updateEmail(auth.currentUser, newEmail)
       setUserEmail(newEmail)
       const userRef = doc(db, "users", auth.currentUser.uid);
       await updateDoc(userRef, { email: newEmail });
-      Alert.alert('Changed email succesfully')
       setNewEmail('')
+      console.log(newEmail);
+      console.log(userData.email);
+      Alert.alert('Changed email succesfully')
     } catch (error) {
-      if (error === 'auth/requires-recent-login') {
-        setIsModalVisible(false)
-
-        Alert.alert('Please log in again to change your password.');
+      if (error.code === 'auth/requires-recent-login') {
+        setIsModalVisible(true);
       }
       console.log('Error changing email:', error);
     }
@@ -223,6 +223,22 @@ export default function ManageAccount() {
       }
     };
   
+    const openReauthModal = () => {
+      setIsModalVisible(true)
+      setReAuthPassword('')
+    }
+
+    const handleReauthentication = async () => {
+      setIsModalVisible(false)
+      const reauthResult = await reauthenticateUser(reAuthPassword);
+      if (reauthResult) {
+            handleSave()
+          } else {
+            Alert.alert('Failed to reauthenticate user.')
+          }
+    }
+    
+
     const handleSave = async () => {
       try {
         // Validation checks
@@ -347,7 +363,7 @@ if (isUserDataLoading) {
       )}
       <View style={manageAccountStyle.formFieldContainer}>
         <TextInput
-          placeholder={userData.email}
+          placeholder={email}
           value={newEmail}
           onChangeText={setNewEmail}
           style={{
@@ -360,6 +376,7 @@ if (isUserDataLoading) {
       <View style={manageAccountStyle.formFieldContainer}>
         <TextInput
           placeholder="New password"
+          value={newPassword}
           secureTextEntry
           onChangeText={setNewPassword}
           autoCapitalize="none"
@@ -380,7 +397,7 @@ if (isUserDataLoading) {
           }}
         />
       </View>
-          <Pressable style={manageAccountStyle.button} onPress={handleSave}>
+          <Pressable style={{...manageAccountStyle.button, backgroundColor: colors.primary, alignSelf: 'center'}} onPress={openReauthModal}>
           <Text>Save changes</Text>
           </Pressable>
       {/* Modal for selecting image source */}
@@ -474,24 +491,23 @@ if (isUserDataLoading) {
         onRequestClose={() => setIsModalVisible(false)}
       >
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-          <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10 }}>
-            <Text style={{ fontSize: 18, marginBottom: 10 }}>Please re-enter your credentials</Text>
-            <TextInput
-              placeholder="Email"
-              value={reAuthEmail}
-              onChangeText={setReAuthEmail}
-              autoCapitalize="none"
-              style={{ borderWidth: 1, borderColor: 'gray', marginBottom: 10, padding: 10, borderRadius: 5 }}
-            />
+          <View style={{ backgroundColor: colors.background, padding: 20, borderRadius: 10 }}>
+            <Text style={{...manageAccountStyle.text, color:colors.text, backgroundColor: colors.background, paddingBottom: 15}}>Please re-enter your password</Text>
+            
             <TextInput
               placeholder="Password"
               value={reAuthPassword}
               onChangeText={setReAuthPassword}
               secureTextEntry
-              style={{ borderWidth: 1, borderColor: 'gray', marginBottom: 10, padding: 10, borderRadius: 5 }}
+              style={{...manageAccountStyle.formField,
+                borderColor: colors.primary,
+              }}
             />
-            <Pressable onPress={handleSave}>
-              <Text>Submit</Text>
+            <Pressable 
+            style={{...manageAccountStyle.button, backgroundColor: colors.primary, alignSelf: 'center',}} 
+            onPress={handleReauthentication}>
+              <Text style={{...manageAccountStyle.modalButtonText,
+                  color: colors.text,}}>Submit</Text>
             </Pressable>
           </View>
         </View>
