@@ -64,6 +64,7 @@ export const manageAccountStyle = StyleSheet.create({
     backgroundColor: '#FFF',
     paddingLeft: 10,
     borderRadius: 30,
+    paddingVertical: 8,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     borderWidth: 2,
@@ -74,5 +75,10 @@ export const manageAccountStyle = StyleSheet.create({
     opacity: 0.9,
     borderRadius: 20, 
     padding: 10 
+  },
+  formFieldTitle: {
+    fontSize: 16,
+    fontFamily: 'Gantari',
+    marginBottom: 5,
   },
 });

@@ -363,6 +363,14 @@ if (isUserDataLoading) {
         </View>
       )}
       <View style={manageAccountStyle.formFieldContainer}>
+      <Text
+          style={{
+            ...manageAccountStyle.formFieldTitle,
+            color: colors.primary,
+          }}
+        >
+          Email
+        </Text>
         <TextInput
           placeholder={email}
           value={newEmail}
@@ -375,6 +383,14 @@ if (isUserDataLoading) {
         />
       </View>
       <View style={manageAccountStyle.formFieldContainer}>
+      <Text
+          style={{
+            ...manageAccountStyle.formFieldTitle,
+            color: colors.primary,
+          }}
+        >
+          Password
+        </Text>
         <TextInput
           placeholder="New password"
           value={newPassword}
@@ -388,6 +404,14 @@ if (isUserDataLoading) {
         />
       </View>
       <View style={manageAccountStyle.formFieldContainer}>
+      <Text
+          style={{
+            ...manageAccountStyle.formFieldTitle,
+            color: colors.primary,
+          }}
+        >
+          Username
+        </Text>
         <TextInput
           placeholder={userData.username}
           value={newUsername}
