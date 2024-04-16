@@ -172,16 +172,17 @@ export default function ManageAccount() {
 
   const handleChangeEmail = async () => {
     try {
-
-      await updateEmail(auth.currentUser, newEmail)
-      setUserEmail(newEmail)
+      // Update email address in Firebase Authentication
+      await updateEmail(auth.currentUser, newEmail);
+      // Update email address in Firestore
       const userRef = doc(db, "users", auth.currentUser.uid);
       await updateDoc(userRef, { email: newEmail });
-      setNewEmail('')
-      console.log(newEmail);
-      console.log(userData.email);
-      Alert.alert('Changed email succesfully')
-    } catch (error) {
+      // Update local state with the new email
+      setUserEmail(newEmail);
+      // Clear the new email input
+      setNewEmail('');
+      console.log('Changed email successfully'); 
+   } catch (error) {
       if (error.code === 'auth/requires-recent-login') {
         setIsModalVisible(true);
       }
@@ -248,7 +249,7 @@ export default function ManageAccount() {
         }
     
         if ( newPassword && !isValidPassword(newPassword)) {
-          Alert.alert('Invalid Password', 'Please enter a valid password.');
+          Alert.alert('Invalid Password', 'Password must be atleast 6 characters.');
           return;
         }
     
@@ -260,7 +261,7 @@ export default function ManageAccount() {
         // Call only the functions for fields that have been changed
         const promises = [];
     
-        if (newEmail && newEmail !== email) {
+        if (newEmail) {
           promises.push(handleChangeEmail());
         }
     
@@ -485,33 +486,43 @@ if (isUserDataLoading) {
         </View>
       </Modal>
       <Modal
-        animationType="slide"
-        transparent={true}
-        visible={isModalVisible}
-        onRequestClose={() => setIsModalVisible(false)}
+  animationType="slide"
+  transparent={true}
+  visible={isModalVisible}
+  onRequestClose={() => setIsModalVisible(false)}
+>
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+    <View style={{ backgroundColor: colors.background, padding: 20, borderRadius: 10 }}>
+      <TouchableOpacity
+        onPress={() => setIsModalVisible(false)}
+        style={{ position: 'absolute', top: 10, right: 10, zIndex: 1 }}
       >
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-          <View style={{ backgroundColor: colors.background, padding: 20, borderRadius: 10 }}>
-            <Text style={{...manageAccountStyle.text, color:colors.text, backgroundColor: colors.background, paddingBottom: 15}}>Please re-enter your password</Text>
-            
-            <TextInput
-              placeholder="Password"
-              value={reAuthPassword}
-              onChangeText={setReAuthPassword}
-              secureTextEntry
-              style={{...manageAccountStyle.formField,
-                borderColor: colors.primary,
-              }}
-            />
-            <Pressable 
-            style={{...manageAccountStyle.button, backgroundColor: colors.primary, alignSelf: 'center',}} 
-            onPress={handleReauthentication}>
-              <Text style={{...manageAccountStyle.modalButtonText,
-                  color: colors.text,}}>Submit</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
+        <MaterialIcons
+          name="close"
+          color={colors.primary}
+          size={24}
+          onPress={() => setIsModalVisible(false)}
+        />
+      </TouchableOpacity>
+      <Text style={{ ...manageAccountStyle.text, color: colors.text, backgroundColor: colors.background, paddingBottom: 15, marginTop: 30 }}>Please re-enter your password</Text>
+
+      <TextInput
+        placeholder="Password"
+        value={reAuthPassword}
+        onChangeText={setReAuthPassword}
+        secureTextEntry
+        autoCapitalize="none"
+        style={{ ...manageAccountStyle.formField, borderColor: colors.primary, marginBottom: 15 }}
+      />
+      <Pressable
+        style={{ ...manageAccountStyle.button, backgroundColor: colors.primary, alignSelf: 'center' }}
+        onPress={handleReauthentication}
+      >
+        <Text style={{ ...manageAccountStyle.modalButtonText, color: colors.text }}>Submit</Text>
+      </Pressable>
+    </View>
+  </View>
+</Modal>
     </View>
   );
 }
