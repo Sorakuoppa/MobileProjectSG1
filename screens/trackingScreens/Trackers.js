@@ -2,8 +2,8 @@ import React, { useEffect, useCallback, useState } from "react";
 import { View, Text, Pressable, Animated } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { collection, getDocs, deleteDoc } from "firebase/firestore";
-import { getTrackers } from "../../components/ReadFirebaseDb";
-import { db, auth } from "../../components/FirebaseConfig";
+import { getTrackers } from "../../components/FirebaseComponents/ReadFirebaseDb";
+import { db, auth } from "../../components/FirebaseComponents/FirebaseConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { general } from "../../styles/general";
 import { trackerStyle } from "../../styles/trackingScreens/trackerStyle";
@@ -18,7 +18,7 @@ import {
 } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
-import { useLoginContext } from "../../components/LoginContext";
+import { useLoginContext } from "../../components/Contexts/LoginContext";
 
 export default function Trackers({ navigation}) {
   const { colors } = useTheme();

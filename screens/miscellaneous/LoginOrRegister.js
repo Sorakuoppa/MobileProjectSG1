@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'; CommonActions
 import { View, Text, Pressable, Image } from 'react-native';
 import { CommonActions, useTheme } from '@react-navigation/native'; // Import 
-import { FirstTimeLoadContext } from '../../components/FirstTimeLoadContext';
+import { FirstTimeLoadContext } from '../../components/Contexts/FirstTimeLoadContext';
 import { logOrReg } from '../../styles/miscellaneous/loginOrRegisterStyle';
 import { general } from '../../styles/general';
 import onTrackLogo from "../../assets/logos/onTrack_smaller_dark_theme.png";

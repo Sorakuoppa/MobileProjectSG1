@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { signOut } from '@firebase/auth';
-import { useLoginContext } from '../../components/LoginContext';
-import { auth } from '../../components/FirebaseConfig';
+import { useLoginContext } from '../../components/Contexts/LoginContext';
+import { auth } from '../../components/FirebaseComponents/FirebaseConfig';
 import { DrawerItem } from '@react-navigation/drawer';
 import Icon from "react-native-vector-icons/FontAwesome5";
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from '@firebase/auth';
-import FirebaseConfig from '../../components/FirebaseConfig'; // Import FirebaseConfig component
+import FirebaseConfig from '../../components/FirebaseComponents/FirebaseConfig'; // Import FirebaseConfig component
 
 const AuthComponent = () => {
   const [email, setEmail] = useState('');

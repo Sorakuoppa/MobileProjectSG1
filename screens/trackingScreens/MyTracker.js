@@ -6,7 +6,7 @@ import { AnimatedCircularProgress } from "react-native-circular-progress";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import MilestoneComponent from "./components/MilestoneComponent";
 import ProgressComponent from "./components/ProgressComponent";
-import { useLoginContext } from "../../components/LoginContext"; // Importing LoginContext
+import { useLoginContext } from "../../components/Contexts/LoginContext"; // Importing LoginContext
 
 import { general } from "../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";

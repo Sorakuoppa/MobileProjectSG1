@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert, Pressable } from 'react-native';
 import { createUserWithEmailAndPassword } from '@firebase/auth'; // Import createUserWithEmailAndPassword function
-import { auth, db } from '../../components/FirebaseConfig'; // Import FirebaseConfig auth
+import { auth, db } from '../../components/FirebaseComponents/FirebaseConfig'; // Import FirebaseConfig auth
 import { useNavigation } from '@react-navigation/native';
 import { loginAndRegisterStyles } from '../../styles/accountManagementStyles/loginAndRegisterComponent';
 import { setDoc, doc } from '@firebase/firestore';

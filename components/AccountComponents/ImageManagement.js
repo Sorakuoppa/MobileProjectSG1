@@ -1,5 +1,5 @@
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
-import { auth, db, storage } from './FirebaseConfig';
+import { auth, db, storage } from '../FirebaseComponents/FirebaseConfig';
 import { doc, updateDoc } from '@firebase/firestore';
 
 export async function deleteProfilePicture(userData) {

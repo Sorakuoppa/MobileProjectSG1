@@ -8,7 +8,7 @@ import CollapsibleComponent from "../components/CollapsibleComponent";
 import MilestoneComponent from "../components/MilestoneComponent";
 import InfoModal from "../components/InfoModal";
 import { exerciseData, exerciseTrackers } from "../data/exerciseData";
-import addToFirebase from "../../../components/AddToFirebase";
+import addToFirebase from "../../../components/FirebaseComponents/AddToFirebase";
 
 import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";

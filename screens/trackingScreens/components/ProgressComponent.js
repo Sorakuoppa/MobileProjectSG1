@@ -12,7 +12,7 @@ import {
   query,
   doc,
 } from "firebase/firestore";
-import { db, auth } from "../../../components/FirebaseConfig";
+import { db, auth } from "../../../components/FirebaseComponents/FirebaseConfig";
 import MilestoneComponent from "./MilestoneComponent";
 
 import { general } from "../../../styles/general";

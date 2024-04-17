@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Text, View, TextInput, Pressable, Alert } from 'react-native'
 import { forgotPasswordStyle } from '../../styles/accountManagementStyles/forgotPasswordStyle'
-import { db, passwordReset } from '../../components/FirebaseConfig' // Assuming passwordReset function is exported from FirebaseConfig
+import { db, passwordReset } from '../../components/FirebaseComponents/FirebaseConfig' // Assuming passwordReset function is exported from FirebaseConfig
 import { collection, getDocs, query, where } from '@firebase/firestore'
 import { useTheme } from "@react-navigation/native";
 

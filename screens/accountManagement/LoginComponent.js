@@ -10,13 +10,13 @@ import {
 } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
-import { auth, db } from "../../components/FirebaseConfig"; // Import FirebaseConfig auth
+import { auth, db } from "../../components/FirebaseComponents/FirebaseConfig"; // Import FirebaseConfig auth
 import { loginAndRegisterStyles } from "../../styles/accountManagementStyles/loginAndRegisterComponent";
 import { useTheme } from "@react-navigation/native";
-import { ThemeContext } from "../../components/ThemeContext";
+import { ThemeContext } from "../../components/Contexts/ThemeContext";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { useLoginContext } from "../../components/LoginContext";
-import { FirstTimeLoadContext } from "../../components/FirstTimeLoadContext";
+import { useLoginContext } from "../../components/Contexts/LoginContext";
+import { FirstTimeLoadContext } from "../../components/Contexts/FirstTimeLoadContext";
 import { CommonActions, useNavigation } from "@react-navigation/native";
 const LoginComponent = () => {
   const { setFirstTimeLoaded } = useContext(FirstTimeLoadContext); // Updated context and variable

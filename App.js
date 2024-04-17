@@ -4,7 +4,7 @@ import { StatusBar, useColorScheme } from "react-native";
 import { DrawerStack, MainNavigator } from "./components/ScreenStack";
 import { PaperProvider } from "react-native-paper";
 import { NavigationContainer, useTheme } from "@react-navigation/native";
-import { ThemeContext } from "./components/ThemeContext";
+import { ThemeContext } from "./components/Contexts/ThemeContext";
 import { useFonts } from "expo-font";
 import {
   darkColors,
@@ -12,10 +12,10 @@ import {
   DarkTheme,
   LightTheme,
 } from "./styles/general";
-import { FirstTimeLoadProvider } from "./components/FirstTimeLoadContext";
-import { LoginProvider } from "./components/LoginContext";
-import { PermissionProvider } from "./components/Permissions";
-import { LoadingProvider } from "./components/ProfilePictureLoadingContext";
+import { FirstTimeLoadProvider } from "./components/Contexts/FirstTimeLoadContext";
+import { LoginProvider } from "./components/Contexts/LoginContext";
+import { PermissionProvider } from "./components/AccountComponents/Permissions";
+import { LoadingProvider } from "./components/Contexts/ProfilePictureLoadingContext";
 export default function App() {
   const [theme, setTheme] = useState("dark");
   //Custom fonts can be added to this list

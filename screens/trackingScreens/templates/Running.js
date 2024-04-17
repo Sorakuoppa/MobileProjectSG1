@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Button, TextInput } from "react-native-paper";
-import addToFirebase from "../../../components/AddToFirebase";
+import addToFirebase from "../../../components/FirebaseComponents/AddToFirebase";
 import MilestoneComponent from "../components/MilestoneComponent";
 import InfoModal from "../components/InfoModal";
 import { runningData } from "../data/runningData";

@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Text, View, Image, Pressable } from 'react-native';
 import { general } from '../../styles/general';
-import { db  } from '../../components/FirebaseConfig';
+import { db  } from '../../components/FirebaseComponents/FirebaseConfig';
 import { collection,  getDocs, query, where } from '@firebase/firestore';
-import { useLoginContext } from '../../components/LoginContext';
+import { useLoginContext } from '../../components/Contexts/LoginContext';
 import { accountStyle } from '../../styles/accountManagementStyles/accountStyle';
 import avatar from '../../assets/avatar.png'
 import { useIsFocused, useTheme } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator } from "react-native-paper";
-import { ThemeContext } from "../../components/ThemeContext";
-import { useLoadingContext } from '../../components/ProfilePictureLoadingContext';
+import { ThemeContext } from "../../components/Contexts/ThemeContext";
+import { useLoadingContext } from '../../components/Contexts/ProfilePictureLoadingContext';
 
 
 export default function Account() {

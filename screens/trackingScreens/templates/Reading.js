@@ -5,7 +5,7 @@ import { Button, Checkbox, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import MilestoneComponent from "../components/MilestoneComponent";
 import InfoModal from "../components/InfoModal";
-import addToFirebase from "../../../components/AddToFirebase";
+import addToFirebase from "../../../components/FirebaseComponents/AddToFirebase";
 import { readingData } from "../data/readingData";
 
 import { general } from "../../../styles/general";

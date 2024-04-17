@@ -1,5 +1,5 @@
 import { EmailAuthProvider, reauthenticateWithCredential, signInWithCredential } from "firebase/auth";
-import { auth } from "./FirebaseConfig";
+import { auth } from "../FirebaseComponents/FirebaseConfig";
 
 export const reauthenticateUser = async (password) => {
   try {

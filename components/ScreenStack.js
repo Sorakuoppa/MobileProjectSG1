@@ -19,12 +19,12 @@ import GetStarted from "../screens/miscellaneous/GetStarted";
 import LoginOrRegister from "../screens/miscellaneous/LoginOrRegister";
 import LoginComponent from "../screens/accountManagement/LoginComponent";
 import RegisterComponent from "../screens/accountManagement/RegisterComponent";
-import { useLoginContext } from "./LoginContext";
-import { ThemeContext } from "./ThemeContext";
-import { useLoaded } from "./FirstTimeLoadContext";
+import { useLoginContext } from "./Contexts/LoginContext";
+import { ThemeContext } from "./Contexts/ThemeContext";
+import { useLoaded } from "./Contexts/FirstTimeLoadContext";
 import SignOut from "../screens/accountManagement/SignOut";
 import ForgotPassword from "../screens/accountManagement/ForgotPassword";
-import { auth } from "./FirebaseConfig";
+import { auth } from "./FirebaseComponents/FirebaseConfig";
 
 const navigateForgotPage = (navigation, action) => {
   if (action === "ForgotPassword") {

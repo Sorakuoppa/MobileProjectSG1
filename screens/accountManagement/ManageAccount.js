@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Text, View, Button, Image, Alert, TouchableOpacity, TextInput } from 'react-native';
 import { general } from '../../styles/general';
-import { auth, db  } from '../../components/FirebaseConfig';
+import { auth, db  } from '../../components/FirebaseComponents/FirebaseConfig';
 import { collection,  doc,  getDocs, query, updateDoc, where } from '@firebase/firestore';
-import { useLoginContext } from '../../components/LoginContext';
+import { useLoginContext } from '../../components/Contexts/LoginContext';
 import * as ImagePicker from 'expo-image-picker';
-import UploadImage, { deleteProfilePicture } from '../../components/ImageManagement';
+import UploadImage, { deleteProfilePicture } from '../../components/AccountComponents/ImageManagement';
 import avatar from '../../assets/avatar.png'
 import { useTheme } from "@react-navigation/native";
 import { updateEmail, updatePassword } from 'firebase/auth';
@@ -13,11 +13,11 @@ import { Modal } from 'react-native';
 import { manageAccountStyle } from '../../styles/accountManagementStyles/manageAccountStyle';
 import { Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
-import { PermissionContext } from '../../components/Permissions';
-import { ThemeContext } from '../../components/ThemeContext';
+import { PermissionContext } from '../../components/AccountComponents/Permissions';
+import { ThemeContext } from '../../components/Contexts/ThemeContext';
 import { ActivityIndicator, Surface } from 'react-native-paper';
-import { useLoadingContext } from '../../components/ProfilePictureLoadingContext';
-import { isValidEmail, isValidPassword, isValidUsername, reauthenticateUser } from '../../components/Validations';
+import { useLoadingContext } from '../../components/Contexts/ProfilePictureLoadingContext';
+import { isValidEmail, isValidPassword, isValidUsername, reauthenticateUser } from '../../components/AccountComponents/Validations';
 
 // TODO 15.4
 // ADD HANDLING FOR AUTH/REQUIRES-RECENT-LOGIN ERROR
