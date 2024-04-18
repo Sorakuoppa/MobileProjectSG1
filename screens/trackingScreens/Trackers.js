@@ -102,7 +102,7 @@ export default function Trackers({ navigation}) {
         <Button
           children="Delete all trackers"
           mode="contained"
-          buttonColor={colors.primary}
+          buttonColor="red"
           onPress={() => setDialog(true)}
         />
         <Portal>
