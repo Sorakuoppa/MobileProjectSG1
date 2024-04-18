@@ -137,9 +137,9 @@ export function DrawerStack({ navigation, route }) {
   const { theme } = useContext(ThemeContext);
   const getHeaderTitle = (route, loginState, username) => {
     if (loginState) {
-      return `Welcome ${username}`;
+      return `Welcome ${username}!`;
     } else {
-      return "Welcome Guest";
+      return "Welcome Guest!";
     }
   };
 useEffect(() => {
