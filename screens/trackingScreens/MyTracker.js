@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, Button, Alert } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 import Icon from "react-native-vector-icons/FontAwesome5";
-import MilestoneComponent from "./components/MilestoneComponent";
 import ProgressComponent from "./components/ProgressComponent";
-import { useLoginContext } from "../../components/Contexts/LoginContext"; // Importing LoginContext
-
+import { useLoginContext } from "../../components/Contexts/LoginContext";
 import { general } from "../../styles/general";
-import { ScrollView } from "react-native-gesture-handler";
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function MyTracker({ route, navigation }) {
@@ -18,14 +13,8 @@ export default function MyTracker({ route, navigation }) {
   const [progress, setProgress] = useState(0);
   const [progressAmount, setProgressAmount] = useState(tracker.milestones.length * 10);
   const { colors } = useTheme();
-  const { loginState } = useLoginContext(); // Accessing login state from context
+  const { loginState } = useLoginContext(); 
 
-  // MAKE THIS UPDATE THE PROGRESS IN FIREBASE
-  const updateProgress = (value) => {
-    console.log(tracker.milestones.length);
-    const newProgress = progress + value;
-    setProgress(newProgress);
-  };
 
   const deleteTracker = async () => {
     try {

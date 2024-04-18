@@ -2,16 +2,11 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, Alert } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+import { getDoc, updateDoc, doc } from "firebase/firestore";
 import {
-  collection,
-  getDoc,
-  getDocs,
-  deleteDoc,
-  setDoc,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
-import { db, auth } from "../../../components/FirebaseComponents/FirebaseConfig";
+  db,
+  auth,
+} from "../../../components/FirebaseComponents/FirebaseConfig";
 import MilestoneComponent from "./MilestoneComponent";
 
 import { general } from "../../../styles/general";
@@ -25,7 +20,13 @@ export default function ProgressComponent({ tracker, navigation }) {
   useEffect(() => {
     const fetchMilestones = async () => {
       try {
-        const docRef = doc(db, "trackers", auth.currentUser.uid, "trackers", tracker.name);
+        const docRef = doc(
+          db,
+          "trackers",
+          auth.currentUser.uid,
+          "trackers",
+          tracker.name
+        );
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const data = docSnap.data();
@@ -38,14 +39,19 @@ export default function ProgressComponent({ tracker, navigation }) {
       } catch (e) {
         console.error("Error adding document: ", e);
       }
-    }
+    };
     fetchMilestones();
   }, [tracker.name]);
-    
 
   const updateFBProgress = async (value, milestone) => {
     try {
-      const docRef = doc(db, "trackers", auth.currentUser.uid, "trackers", tracker.name);
+      const docRef = doc(
+        db,
+        "trackers",
+        auth.currentUser.uid,
+        "trackers",
+        tracker.name
+      );
       const newProgress = progress + value;
       const newMilestones = milestones.map((item) => {
         if (item === milestone) {
@@ -62,11 +68,11 @@ export default function ProgressComponent({ tracker, navigation }) {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-
   };
 
   return (
     <View style={general.scaffold}>
+      {/* THIS SHOULD BE DYNAMIC BASED ON THE AMOUNT OF MILESTONES CHOSEN */}
       <AnimatedCircularProgress
         size={120}
         width={15}
