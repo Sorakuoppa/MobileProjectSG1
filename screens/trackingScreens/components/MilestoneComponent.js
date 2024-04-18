@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { IconButton, Checkbox, RadioButton, Tooltip } from "react-native-paper";
@@ -12,10 +12,16 @@ export default function MilestoneComponent({
   onCheck,
   onUncheck,
   numeric,
+  isDone
 }) {
   const [checked, setChecked] = useState(false);
   const [numericMilestone, setNumericMilestone] = useState(numeric);
   const { colors } = useTheme();
+
+  useEffect(() => {
+    setChecked(isDone);
+  }, [isDone]);
+  
 
   const handleCheck = () => {
     setChecked(!checked);

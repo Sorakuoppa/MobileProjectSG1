@@ -91,6 +91,7 @@ export default function ProgressComponent({ tracker, navigation }) {
             numeric={milestone.numeric}
             onCheck={() => updateFBProgress(20, milestone)}
             onUncheck={() => updateFBProgress(-20, milestone)}
+            isDone={milestone.done}
           />
         ))}
       </ScrollView>
