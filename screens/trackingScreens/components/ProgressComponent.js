@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Button, Alert } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
@@ -17,32 +17,51 @@ import MilestoneComponent from "./MilestoneComponent";
 import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function ProgressComponent({ tracker }) {
+export default function ProgressComponent({ tracker, navigation }) {
   const [progress, setProgress] = useState(0);
+  const [milestones, setMilestones] = useState([]);
   const { colors } = useTheme();
 
-  const updateFBProgress = async (value, milestone) => {
-
-    const newMilestones = tracker.milestones.map((m) => {
-      if (m === milestone) {
-        return { ...m, done: !m.done };
-      } else {
-        return m;
+  useEffect(() => {
+    const fetchMilestones = async () => {
+      try {
+        const docRef = doc(db, "trackers", auth.currentUser.uid, "trackers", tracker.name);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const progress = data.progress;
+          setProgress(progress);
+          setMilestones(data.milestones);
+        } else {
+          console.log("No such document!");
+        }
+      } catch (e) {
+        console.error("Error adding document: ", e);
       }
-    });
-    try {
-    const docRef = doc(db, "trackers", auth.currentUser.uid, "trackers", tracker.name);
-    console.log(milestone.milestone);
+    }
+    fetchMilestones();
+  }, [tracker.name]);
+    
 
-    await updateDoc(docRef, {
-      milestones: newMilestones,
-      progress: 0,
-    });
+  const updateFBProgress = async (value, milestone) => {
+    try {
+      const docRef = doc(db, "trackers", auth.currentUser.uid, "trackers", tracker.name);
+      const newProgress = progress + value;
+      const newMilestones = milestones.map((item) => {
+        if (item === milestone) {
+          return { ...item, done: !item.done };
+        }
+        return item;
+      });
+      await updateDoc(docRef, {
+        progress: newProgress,
+        milestones: newMilestones,
+      });
+      setProgress(newProgress);
+      setMilestones(newMilestones);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-
-    
 
   };
 
@@ -63,7 +82,7 @@ export default function ProgressComponent({ tracker }) {
           marginTop: 10,
         }}
       >
-        {tracker.milestones.map((milestone, index) => (
+        {milestones.map((milestone, index) => (
           <MilestoneComponent
             key={index}
             text={
@@ -72,7 +91,6 @@ export default function ProgressComponent({ tracker }) {
             numeric={milestone.numeric}
             onCheck={() => updateFBProgress(20, milestone)}
             onUncheck={() => updateFBProgress(-20, milestone)}
-            isDone={milestone.done}
           />
         ))}
       </ScrollView>

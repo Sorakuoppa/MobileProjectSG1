@@ -21,6 +21,7 @@ export default function Reading({ template, navigation }) {
     let newTrackerObject = {};
     newTrackerObject = { milestone: text, done: false, numeric: numeric };
     list.push(newTrackerObject);
+    console.log(text);
     setObjectList(list);
   };
 
@@ -80,8 +81,8 @@ export default function Reading({ template, navigation }) {
             key={index}
             text={milestone.title}
             numeric={milestone.numeric}
-            onCheck={(text) => onCheck(text, milestone.numeric)}
-            onUncheck={onUncheck}
+            onCheck={() => onCheck(milestone.title, milestone.numeric)}
+            onUncheck={() => onUncheck(milestone.title)}
           />
         ))}
       </ScrollView>

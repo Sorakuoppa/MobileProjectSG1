@@ -77,8 +77,8 @@ export default function Running({ template, navigation }) {
             key={index}
             text={milestone.title}
             numeric={milestone.numeric}
-            onCheck={(text) => onCheck(text, milestone.numeric)}
-            onUncheck={onUncheck}
+            onCheck={() => onCheck(milestone.title, milestone.numeric)}
+            onUncheck={() => onUncheck(milestone.title)}
           />
         ))}
       </ScrollView>
