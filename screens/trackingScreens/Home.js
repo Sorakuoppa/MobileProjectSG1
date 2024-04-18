@@ -27,9 +27,11 @@ export default function Home() {
         onPress={() => console.log("Button Pressed")}
       />
       </LinearGradient> */}
-      <View style={{...homeStyles.progress, borderColor: colors.primary}}>
-        <Text style={{ color: colors.primary }}>Milestone achieved!</Text>
-        <Text style={{ color: colors.text }}>Run 10km</Text>
+      <View style={{...homeStyles.progress}}>
+        <Text style={{...homeStyles.progress}}>Today</Text>
+        <Text style={{...homeStyles.progress}}>May 15th</Text>
+        <Text style={{...homeStyles.progress}}>*PROGRESS*</Text>
+        <Text style={{...homeStyles.progress}}>Milestones 0/2 done</Text>
       </View>
     </View>
   );

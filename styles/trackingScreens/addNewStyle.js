@@ -5,7 +5,7 @@ export const addNewStyle = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "90%",
+    width: "95%",
     height: "auto",
     padding: 10,
   },
@@ -22,7 +22,6 @@ export const addNewStyle = StyleSheet.create({
   ripple: {
     borderRadius: 20,
     margin: 10,
-    borderWidth: 1,
     borderRadius: 15,
   },
 });

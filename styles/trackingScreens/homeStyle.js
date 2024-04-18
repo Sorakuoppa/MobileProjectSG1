@@ -11,13 +11,12 @@ export const homeStyles = StyleSheet.create({
     borderRadius: 10,
   },
   progress: {
+    backgroundColor: "#FFE8D3",
     flex: 0.2,
-    borderRadius: 10,
+    borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    textAlign: "center",
     width: "80%",
-    borderWidth: 2,
-    margin: 10,
   },
 });
