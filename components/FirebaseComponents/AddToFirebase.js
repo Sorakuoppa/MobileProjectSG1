@@ -1,19 +1,26 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { auth, db } from "./FirebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 
 export default async function addToFirebase(object, type, trackerName, progress) {
   if (auth.currentUser) {
     try {
-      await addDoc(
-        collection(db, "trackers", auth.currentUser.uid, "trackers"),
-        {
-          milestones: object,
-          type: type,
-          name: trackerName,
-          progress: progress,
-        }
-      );
+      // await addDoc(
+      //   collection(db, "trackers", auth.currentUser.uid, "trackers"),
+      //   {
+      //     milestones: object,
+      //     type: type,
+      //     name: trackerName,
+      //     progress: progress,
+      //   }
+      // );
+      const docRef = doc(db, "trackers", auth.currentUser.uid, "trackers", trackerName);
+      await setDoc(docRef, {
+        milestones: object,
+        type: type,
+        name: trackerName,
+        progress: progress,
+      });
     } catch (e) {
       console.error("Error adding document: ", e);
     }

@@ -12,17 +12,18 @@ export default function MilestoneComponent({
   onCheck,
   onUncheck,
   numeric,
+  isDone
 }) {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(isDone);
   const [numericMilestone, setNumericMilestone] = useState(numeric);
   const { colors } = useTheme();
 
   const handleCheck = () => {
     setChecked(!checked);
     if (!checked) {
-      onCheck(text);
+      onCheck();
     } else {
-      onUncheck(text);
+      onUncheck();
     }
   };
 

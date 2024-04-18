@@ -8,8 +8,7 @@ import {
   getDocs,
   deleteDoc,
   setDoc,
-  onSnapshot,
-  query,
+  updateDoc,
   doc,
 } from "firebase/firestore";
 import { db, auth } from "../../../components/FirebaseComponents/FirebaseConfig";
@@ -22,43 +21,29 @@ export default function ProgressComponent({ tracker }) {
   const [progress, setProgress] = useState(0);
   const { colors } = useTheme();
 
-  const updateProgress = (value) => {
-    console.log(tracker.milestones.length);
-    const newProgress = progress + value;
-    setProgress(newProgress);
-  };
+  const updateFBProgress = async (value, milestone) => {
 
-  const updateFBProgress = async (value) => {
-    // const newProgress = progress + value;
-    // setProgress(newProgress);
-    // setDoc(collection(db, "trackers", auth.currentUser.uid, "trackers", tracker.id), {
-    //   progress: newProgress,
-    // });
-    const docRef = collection(db, "trackers", auth.currentUser.uid, "trackers");
-    const collectionSnap = await getDocs(docRef);
-    const idList = [];
-    collectionSnap.forEach((doc) => {
-        idList.push(doc.id);
-        }
-    )
-    console.log(idList[0])
+    const newMilestones = tracker.milestones.map((m) => {
+      if (m === milestone) {
+        return { ...m, done: !m.done };
+      } else {
+        return m;
+      }
+    });
+    try {
+    const docRef = doc(db, "trackers", auth.currentUser.uid, "trackers", tracker.name);
+    console.log(milestone.milestone);
 
-    const specificDocRef = doc(
-      db,
-      "trackers",
-      auth.currentUser.uid,
-      "trackers",
-      idList[0]
-    );
-    const docSnap = await getDoc(specificDocRef);
-
-    // Check if the document exists
-    if (docSnap.exists()) {
-      // Log the document data
-      console.log(docSnap.id, " => ", docSnap.data());
-    } else {
-      console.log("No such document!");
+    await updateDoc(docRef, {
+      milestones: newMilestones,
+      progress: 0,
+    });
+    } catch (e) {
+      console.error("Error adding document: ", e);
     }
+
+    
+
   };
 
   return (
@@ -85,8 +70,9 @@ export default function ProgressComponent({ tracker }) {
               tracker.type === "Exercise" ? milestone.name : milestone.milestone
             }
             numeric={milestone.numeric}
-            onCheck={() => updateFBProgress(20)}
-            onUncheck={() => updateProgress(-20)}
+            onCheck={() => updateFBProgress(20, milestone)}
+            onUncheck={() => updateFBProgress(-20, milestone)}
+            isDone={milestone.done}
           />
         ))}
       </ScrollView>
