@@ -14,7 +14,6 @@ export default async function addToFirebase(object, type, trackerName, progress)
       //     progress: progress,
       //   }
       // );
-      console.log(object, type, trackerName, progress)
       const docRef = doc(db, "trackers", auth.currentUser.uid, "trackers", trackerName);
       await setDoc(docRef, {
         milestones: object,
