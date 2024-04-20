@@ -16,10 +16,13 @@ export default function MilestoneComponent({
 }) {
   const [checked, setChecked] = useState(false);
   const [numericMilestone, setNumericMilestone] = useState(numeric);
+
   const { colors } = useTheme();
 
   useEffect(() => {
+
     setChecked(isDone);
+
   }, [isDone]);
   
 

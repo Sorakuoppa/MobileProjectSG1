@@ -20,7 +20,7 @@ import { useTheme } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useLoginContext } from "../../components/Contexts/LoginContext";
 
-export default function Trackers({ navigation}) {
+export default function Trackers({ navigation }) {
   const { colors } = useTheme();
   const [trackerList, setTrackerList] = useState([]);
   const [trackerProgress, setTrackerProgress] = useState(0);
@@ -28,12 +28,16 @@ export default function Trackers({ navigation}) {
   const [dialog, setDialog] = useState(false);
   const { loginState } = useLoginContext();
 
-  useFocusEffect(
-    useCallback(() => {
-      showTrackers();
-      return () => {};
-    }, [loginState])
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     showTrackers();
+  //     return () => {};
+  //   }, [loginState])
+  // );
+
+  useEffect(() => {
+    showTrackers();
+  }, [loginState]);
 
   const showTrackers = async () => {
     setIsLoading(true);
@@ -85,7 +89,7 @@ export default function Trackers({ navigation}) {
 
   if (isLoading) {
     return (
-      <View style={{ ...general.scaffold, justifyContent: "center" }}>
+      <View style={{ ...general.scaffold, justifyContent: "flex-start"}}>
         <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
         <Text
           style={{ ...general.title, color: colors.text, marginBottom: 40 }}
@@ -128,7 +132,14 @@ export default function Trackers({ navigation}) {
             </Dialog.Actions>
           </Dialog>
         </Portal>
-        <ScrollView contentContainerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 10, paddingBottom: 20}}>
+        <ScrollView
+          contentContainerStyle={{
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 10,
+            paddingBottom: 20,
+          }}
+        >
           {trackerList.map((tracker, index) => (
             <Pressable
               key={index}
