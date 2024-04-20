@@ -18,4 +18,22 @@ export const homeStyles = StyleSheet.create({
     textAlign: "center",
     width: "80%",
   },
+  progressDate: {
+    fontSize: 20,
+    fontFamily: "Gantari",
+    textAlign: "right",
+  },
+  progressName: {
+    fontSize: 20,
+    fontFamily: "Gantari",
+  },
+  progressMilestone: {
+    fontSize: 20,
+    fontFamily: "Gantari",
+  },
+  progressBottomInfo: {
+    fontSize: 20,
+    fontFamily: "Gantari",
+    textAlign: "right",
+  },
 });
