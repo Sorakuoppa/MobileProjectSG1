@@ -11,7 +11,6 @@ export const homeStyles = StyleSheet.create({
     borderRadius: 10,
   },
   progress: {
-    backgroundColor: "#FFE8D3",
     flex: 0.2,
     borderRadius: 15,
     justifyContent: "center",
