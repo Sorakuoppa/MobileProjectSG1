@@ -13,7 +13,6 @@ import MilestoneComponent from "./MilestoneComponent";
 
 import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";
-import { set } from "@firebase/database";
 
 export default function ProgressComponent({ tracker }) {
   const [progress, setProgress] = useState(0);
@@ -21,12 +20,7 @@ export default function ProgressComponent({ tracker }) {
   const [isLoading, setIsLoading] = useState(true);
   const { colors } = useTheme();
 
-  // useFocusEffect(() => {
-  //   useCallback(() => {
-  //     fetchMilestones();
-  //     return () => {};
-  //   });
-  // }, [tracker.name]);
+let progressValue = 100/milestones.length;
 
   useEffect(() => {
     setIsLoading(true);
@@ -97,10 +91,9 @@ export default function ProgressComponent({ tracker }) {
   } else if (!isLoading) {
     return (
       <View style={general.scaffold}>
-        {/* THIS SHOULD BE DYNAMIC BASED ON THE AMOUNT OF MILESTONES CHOSEN */}
         <AnimatedCircularProgress
           size={120}
-          width={15}
+          width={20}
           fill={progress}
           tintColor={colors.primary}
           onAnimationComplete={() => {}}
@@ -122,8 +115,8 @@ export default function ProgressComponent({ tracker }) {
                   : milestone.milestone
               }
               numeric={milestone.numeric}
-              onCheck={() => updateFBProgress(20, milestone)}
-              onUncheck={() => updateFBProgress(-20, milestone)}
+              onCheck={() => updateFBProgress(progressValue, milestone)}
+              onUncheck={() => updateFBProgress(-progressValue, milestone)}
               isDone={milestone.done}
             />
           ))}

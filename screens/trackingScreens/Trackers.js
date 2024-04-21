@@ -28,16 +28,14 @@ export default function Trackers({ navigation }) {
   const [dialog, setDialog] = useState(false);
   const { loginState } = useLoginContext();
 
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     showTrackers();
-  //     return () => {};
-  //   }, [loginState])
-  // );
+  useFocusEffect(
+    useCallback(() => {
+      showTrackers();
+      return () => {};
+    }, [loginState])
+  );
 
-  useEffect(() => {
-    showTrackers();
-  }, [loginState]);
+
 
   const showTrackers = async () => {
     setIsLoading(true);
@@ -168,7 +166,7 @@ export default function Trackers({ navigation }) {
                   color={colors.primary}
                 />
                 <Text style={{ color: colors.text, fontSize: 24 }}>
-                  {tracker.progress}%
+                  {Math.round(tracker.progress)}%
                 </Text>
                 <Text
                   style={{ ...addNewStyle.templateText, color: colors.text }}
