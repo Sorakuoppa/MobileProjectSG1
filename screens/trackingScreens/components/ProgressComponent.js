@@ -54,7 +54,7 @@ let progressValue = 100/milestones.length;
       setIsLoading(false);
     }
   };
-
+// THIS NEEDS DIFFERENT FUNCTIONALITY FOR NUMERIC MILESTONES
   const updateFBProgress = async (value, milestone) => {
     try {
       const docRef = doc(
@@ -97,7 +97,7 @@ let progressValue = 100/milestones.length;
           fill={progress}
           tintColor={colors.primary}
           onAnimationComplete={() => {}}
-          backgroundColor={colors.text}
+          backgroundColor={colors.accent}
         />
         <ScrollView
           contentContainerStyle={{

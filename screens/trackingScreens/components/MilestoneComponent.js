@@ -88,6 +88,7 @@ export default function MilestoneComponent({
         >
           <Text style={{ color: colors.text }}> {text} </Text>
           <View style={templateStyle.icons}>
+            {/* THIS HERE NEEDS BACKEND FUNCTIONALITY */}
             <IconButton
               icon="minus"
               iconColor={colors.primary}
