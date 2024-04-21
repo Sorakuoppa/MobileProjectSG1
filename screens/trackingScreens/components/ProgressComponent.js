@@ -114,6 +114,7 @@ let progressValue = 100/milestones.length;
                   ? milestone.name
                   : milestone.milestone
               }
+              type="tracker"
               numeric={milestone.numeric}
               onCheck={() => updateFBProgress(progressValue, milestone)}
               onUncheck={() => updateFBProgress(-progressValue, milestone)}

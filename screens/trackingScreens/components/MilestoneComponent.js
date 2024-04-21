@@ -12,15 +12,15 @@ export default function MilestoneComponent({
   onCheck,
   onUncheck,
   numeric,
-  isDone
+  isDone,
+  type
 }) {
   const [checked, setChecked] = useState(false);
   const [numericMilestone, setNumericMilestone] = useState(numeric);
-
+  const [numericAmount, setNumericAmount] = useState(0);
   const { colors } = useTheme();
 
   useEffect(() => {
-
     setChecked(isDone);
 
   }, [isDone]);
@@ -35,7 +35,7 @@ export default function MilestoneComponent({
     }
   };
 
-  if (numericMilestone) {
+  if (numericMilestone && type === "undefined") {
     return (
       <TouchableOpacity onPress={handleCheck} style={{ width: "100%", justifyContent: 'center', alignItems: 'center' }}>
         <View
@@ -57,6 +57,68 @@ export default function MilestoneComponent({
               color={colors.primary}
               style={{ marginRight: 10 }}
             />
+            <Checkbox
+              status={checked ? "checked" : "unchecked"}
+              onPress={handleCheck}
+              color={colors.primary}
+              uncheckedColor={colors.text}
+            />
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
+  if (numericMilestone === true && type === "tracker") {
+    return (
+      <TouchableOpacity
+        onPress={handleCheck}
+        style={{
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            ...templateStyle.milestones,
+            backgroundColor: colors.accent,
+            borderColor: colors.primary,
+          }}
+        >
+          <Text style={{ color: colors.text }}> {text} </Text>
+          <View style={templateStyle.icons}>
+            <IconButton
+              icon="minus"
+              iconColor={colors.primary}
+              style={{ marginRight: 10 }}
+              onPress={() =>  setNumericAmount(numericAmount - 1)}
+            />
+            <Text style={{ color: colors.text }}> {numericAmount} </Text>
+            <IconButton
+              icon="plus"
+              iconColor={colors.primary}
+              style={{ marginRight: 10 }}
+              onPress={() => setNumericAmount(numericAmount + 1)}
+            />
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
+  if (!numericMilestone && type === "tracker") {
+    return (
+      <TouchableOpacity onPress={handleCheck} style={{ width: "100%", justifyContent: 'center', alignItems: 'center' }}>
+        <View
+          style={{
+            ...templateStyle.milestones,
+            backgroundColor: colors.accent,
+            borderColor: colors.primary,
+          }}
+        >
+          <Text style={{ color: colors.text }}> {text} </Text>
+          <View style={templateStyle.icons}>
             <Checkbox
               status={checked ? "checked" : "unchecked"}
               onPress={handleCheck}
