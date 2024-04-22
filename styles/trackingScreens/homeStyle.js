@@ -10,6 +10,13 @@ export const homeStyles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
   },
+  header: {
+    textAlign: 'center',
+    color: '#ffe8d3',
+    fontSize: 24,
+    fontWeight: 'bold',
+    fontFamily: "Gantari"
+  },
   progress: {
     flex: 0.2,
     borderRadius: 15,
