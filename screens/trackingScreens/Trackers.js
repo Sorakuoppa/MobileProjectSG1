@@ -51,7 +51,7 @@ export default function Trackers({ navigation }) {
   };
 
   const clearFirebase = async () => {
-    if (loginState === false) {
+    if (!loginState) {
       AsyncStorage.clear();
 
       setDialog(false);

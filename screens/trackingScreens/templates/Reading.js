@@ -30,7 +30,7 @@ export default function Reading({ template, navigation }) {
     setObjectList(list);
   };
 
-  const buttonHandler = () => {
+  const buttonHandler = async () => {
     let newName = trackerName.trim();
     if (newName === "") {
       newName = "My Reading Tracker";
@@ -39,9 +39,9 @@ export default function Reading({ template, navigation }) {
 
     if (objectList.length > 0) {
       console.log(newName);
-      addToFirebase(objectList, "Reading", newName, 0);
+      await addToFirebase(objectList, "Reading", newName, 0);
       setTrackerName("");
-      navigation.navigate("Trackers");
+      navigation.navigate("Trackers", {refresh: true});
     } else {
       alert("Please select at least one milestone to add this tracker");
     }
