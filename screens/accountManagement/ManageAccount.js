@@ -81,7 +81,7 @@ export default function ManageAccount() {
         console.log('URI Logged', uri);
         if (!result.canceled && uri) {
           // Upload the taken picture to Firebase Storage and update user data
-          await UploadImage(uri);
+          await UploadImage(uri, setIsLoading);
           setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
           setModalVisible(false);
         }

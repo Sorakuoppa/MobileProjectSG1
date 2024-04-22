@@ -110,7 +110,10 @@ export default function ProgressComponent({ tracker }) {
           onAnimationComplete={() => {}}
           backgroundColor={colors.accent}
           style={{ marginBottom: 20 }}
-        />
+        >
+                    {() => <Text style={{ color: colors.text }}>{Math.round(progress)}%</Text>}
+
+          </AnimatedCircularProgress>
         <ScrollView
           contentContainerStyle={{
             justifyContent: "center",
