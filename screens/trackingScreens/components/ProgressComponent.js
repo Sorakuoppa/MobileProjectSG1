@@ -9,6 +9,7 @@ import {
   db,
   auth,
 } from "../../../components/FirebaseComponents/FirebaseConfig";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import MilestoneComponent from "./MilestoneComponent";
 
 import { general } from "../../../styles/general";
@@ -20,14 +21,14 @@ export default function ProgressComponent({ tracker }) {
   const [isLoading, setIsLoading] = useState(true);
   const { colors } = useTheme();
 
-let progressValue = 100/milestones.length;
+  let progressValue = 100 / milestones.length;
 
   useEffect(() => {
     setIsLoading(true);
+    console.log(tracker.name);
     setTimeout(() => {
       fetchMilestones();
     }, 1000);
-    
   }, [tracker.name]);
 
   const fetchMilestones = async () => {
@@ -53,8 +54,18 @@ let progressValue = 100/milestones.length;
     } finally {
       setIsLoading(false);
     }
+    if (!auth.currentUser) {
+      try {
+          const allKeys = await AsyncStorage.getAllKeys();
+          const trackers = await AsyncStorage.multiGet(allKeys);
+          const tracker = trackers.find((item) => item[0] === tracker.name);
+          console.log("Tracker from AsyncStorage:", tracker[1])
+      } catch (error) {
+        console.error("Error fetching trackers from AsyncStorage:", error);
+      }
+    }
   };
-// THIS NEEDS DIFFERENT FUNCTIONALITY FOR NUMERIC MILESTONES
+  // THIS NEEDS DIFFERENT FUNCTIONALITY FOR NUMERIC MILESTONES
   const updateFBProgress = async (value, milestone) => {
     try {
       const docRef = doc(

@@ -7,42 +7,35 @@ import { homeStyles } from "../../styles/trackingScreens/homeStyle";
 import { general } from "../../styles/general";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { Modal, Portal, IconButton, Divider } from "react-native-paper";
 
 export default function Home() {
   const { colors } = useTheme();
   return (
     <View style={[general.scaffold, { backgroundColor: colors.background }]}>
-      {/* <LinearGradient
-        useAngle={true}
-        angle={45}
-        angleCenter={{ x: 0.5, y: 0.5 }}
-        start={{ x: 0.0, y: 0.25 }}
-        end={{ x: 0.5, y: 1.0 }}
-        colors={gradientColors}
-        style={general.container}
-      >
-        <Text style={general.title}>My exercise routine</Text>
-        <Button
-        children="Show my progress!"
-        mode="contained"
-        onPress={() => console.log("Button Pressed")}
-      />
-      </LinearGradient> */}
+      
       <View style={[homeStyles.progress, { backgroundColor: colors.accent }]}>
         <Text style={[homeStyles.card, { color: colors.text }]}>Today</Text>
         <Text style={[homeStyles.card, { color: colors.text }]}>May 15th</Text>
         <Text style={[homeStyles.card, { color: colors.text }]}>*PROGRESS*</Text>
         <Text style={[homeStyles.card, { color: colors.text }]}>Milestones 0/2 done</Text>
       </View>
-      <View style={{ backgroundColor: colors.primary, height: 2 }} 
-      />
+      <View style={{ height: 2, backgroundColor: colors.primary }} />
+
+
       <Text style={[homeStyles.card, { color: colors.text }]}>Today's milestones</Text>
+
+
       <View style={[homeStyles.progress, { backgroundColor: colors.accent }]}>
         <Text style={[homeStyles.progressDate, { color: colors.text }]}>15.5.2024</Text>
         <Text style={[homeStyles.progressName, { color: colors.text }]}>Gardening</Text>
         <Text style={[homeStyles.progressMilestone, { color: colors.text }]}>Water succulets</Text>
         <Text style={[homeStyles.progressBottomInfo, { color: colors.text }]}>
-        <Icon name="info-circle" size={24} color={colors.text} />
+        <IconButton
+        icon="information-outline"
+        iconColor={colors.primary}
+        size={30}
+      />
       </Text>
       </View>
     </View>

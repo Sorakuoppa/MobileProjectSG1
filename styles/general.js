@@ -31,6 +31,7 @@ export const DarkTheme = {
     text: "white",
     border: darkColors.primary,
     notification: darkColors.primary,
+    outlineVariant: darkColors.primary,
   },
 };
 

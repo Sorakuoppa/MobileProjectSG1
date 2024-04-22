@@ -8,6 +8,8 @@ import { useLoginContext } from "../../components/Contexts/LoginContext";
 import { general } from "../../styles/general";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { set } from "@firebase/database";
+import { deleteDoc, doc } from "@firebase/firestore";
+import { auth, db } from "../../components/FirebaseComponents/FirebaseConfig";
 
 export default function MyTracker({ route, navigation }) {
   const { tracker } = route.params;
@@ -20,6 +22,8 @@ export default function MyTracker({ route, navigation }) {
   const { loginState } = useLoginContext();
 
   const deleteTracker = async () => {
+  if (!loginState) {
+    console.log('Hit log out block');
     try {
       // Retrieve the tracker list from AsyncStorage
       const trackerListString = await AsyncStorage.getItem("trackers");
@@ -40,8 +44,26 @@ export default function MyTracker({ route, navigation }) {
       }
     } catch (error) {
       console.error("Error deleting tracker from AsyncStorage:", error);
-    }
-  };
+    }} else {
+      try {
+        const docRef = doc(
+          db,
+          "trackers",
+          auth.currentUser.uid,
+          "trackers",
+          tracker.name
+        );
+        await deleteDoc(docRef);
+        Alert.alert("Tracker deleted from database");  
+        navigation.navigate("Trackers", { refresh: true });
+      } 
+        catch (error) {
+          console.error("Error deleting tracker from database:", error);
+        }
+      }
+      }
+      
+  ;
 
   return (
     <View style={general.scaffold}>
