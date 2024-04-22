@@ -15,7 +15,7 @@ export const forgotPasswordStyle = StyleSheet.create({
   },
   button: {
     paddingVertical: 12,
-    paddingHorizontal: 100,
+    paddingHorizontal: 20,
     borderRadius: 30,
     alignItems: 'center',
     marginTop: 20, // Add margin between content and button

@@ -12,12 +12,7 @@ const firebaseConfig = {
   messagingSenderId: "638686673712",
   appId: "1:638686673712:web:d3f4dbe5ed223a8db0e6f5"
 };
-const actionCodeSettings = {
-  // Customize email template
-  emailTemplate: {
-body: `You can customize the body of the email here. Use {{link}} to include the password reset link.`,
-  },
-};
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -26,7 +21,7 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 const storageRef = ref(storage);
 const passwordReset = (email) => {
-  return sendPasswordResetEmail(auth, email, actionCodeSettings); 
+  return sendPasswordResetEmail(auth, email); 
 };
 
 

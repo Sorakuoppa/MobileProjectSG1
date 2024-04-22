@@ -5,7 +5,7 @@ import { db, passwordReset } from '../../components/FirebaseComponents/FirebaseC
 import { collection, getDocs, query, where } from '@firebase/firestore'
 import { useTheme } from "@react-navigation/native";
 
-export default function ForgotPassword() {
+export default function ForgotPassword({ navigation }) {
     const [email, setEmail] = useState('')
     const { colors } = useTheme();
 
@@ -22,9 +22,20 @@ export default function ForgotPassword() {
                 passwordReset(email)
                     .then(() => {
                         console.log('Password reset email sent successfully');
+                        Alert.alert(
+                            'Password Reset Email Sent',
+                            'A password reset link has been sent to your email address. Please check your inbox and follow the instructions to reset your password.',
+                            [
+                                {
+                                    text: 'OK',
+                                    onPress: () => navigation.goBack() // Redirect user back to previous screen
+                                }
+                            ]
+                        );
                     })
                     .catch((error) => {
                         console.error('Error sending password reset email:', error.message);
+                        Alert.alert("Error", "Failed to send password reset email. Please try again later.");
                     });
             }
         } catch (error) {
@@ -40,6 +51,7 @@ export default function ForgotPassword() {
                 placeholder="Email"
                 style={{...forgotPasswordStyle.formFieldInput, borderColor: colors.primary}}
                 value={email}
+                autoCapitalize='none'
                 onChangeText={setEmail}
             />
             <Pressable  style={{...forgotPasswordStyle.button, backgroundColor: colors.primary}} onPress={handlePasswordReset}>
