@@ -46,7 +46,7 @@ export default function Create({ template, navigation }) {
       newName = "My Tracker";
       setTrackerName(newName);
     } else {
-      addToFirebase(milestoneList, icon, trackerName, 0, icon);
+      addToFirebase(milestoneList, "Custom", trackerName, 0, icon);
       setTrackerName("");
       setMilestoneList([]);
       navigation.navigate("Trackers", { refresh: true });
