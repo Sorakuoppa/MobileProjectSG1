@@ -1,43 +1,98 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-
-import { Button } from "react-native-paper";
-import { LinearGradient } from "expo-linear-gradient";
+import React, { useCallback, useState } from "react";
+import { View, Text } from "react-native";
+import { useFocusEffect, useTheme } from "@react-navigation/native";
+import { getTrackers } from "../../components/FirebaseComponents/ReadFirebaseDb";
+import { useLoginContext } from "../../components/Contexts/LoginContext";
+import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { homeStyles } from "../../styles/trackingScreens/homeStyle";
 import { general } from "../../styles/general";
-import { useTheme } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { Modal, Portal, IconButton, Divider } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function Home() {
   const { colors } = useTheme();
+  const { loginState } = useLoginContext();
+  const [trackerList, setTrackerList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      showTrackers();
+      return () => {};
+    }, [loginState])
+  );
+
+  const showTrackers = async () => {
+    setIsLoading(true);
+    try {
+      const fetchedTrackers = await getTrackers(loginState);
+      setTrackerList(fetchedTrackers);
+    } catch (error) {
+      console.error("Error fetching trackers:", error);
+    }
+    setIsLoading(false);
+  };
+
+
+
+  let totalMilestones = 0;
+  let completedMilestones = 0;
+  trackerList.forEach(tracker => {
+    totalMilestones += tracker.milestones.length;
+    completedMilestones += tracker.milestones.filter(milestone => milestone.done).length;
+  });
+  const currentDate = () => {
+    const date = new Date();
+    const options = { month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  };
+
+  const progress = (completedMilestones / totalMilestones) * 100;
+  if (isLoading) {
+    return (
+      <View style={{ ...general.scaffold, justifyContent: "flex-start" }}>
+        <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
+        <Text
+          style={{ ...general.title, color: colors.text, marginBottom: 40 }}
+        >
+          Fetching your trackers...
+        </Text>
+        <ActivityIndicator animating={true} color={colors.primary} size={80} />
+      </View>
+    );
+  } 
   return (
-    <View style={[general.scaffold, { backgroundColor: colors.background }]}>
-      
-      <View style={[homeStyles.progress, { backgroundColor: colors.accent }]}>
-        <Text style={[homeStyles.card, { color: colors.text }]}>Today</Text>
-        <Text style={[homeStyles.card, { color: colors.text }]}>May 15th</Text>
-        <Text style={[homeStyles.card, { color: colors.text }]}>*PROGRESS*</Text>
-        <Text style={[homeStyles.card, { color: colors.text }]}>Milestones 0/2 done</Text>
+    <View style={{ backgroundColor: colors.background }}>
+      {/* Card showing current date and progress */}
+      <View style={{ alignItems: "center", paddingVertical: 20 }}>
+        
+<Text style={[homeStyles.card, homeStyles.header, { color: colors.text }]}> {currentDate()}</Text>
+       
+        <AnimatedCircularProgress
+          size={120}
+          width={20}
+          fill={progress}
+          tintColor={colors.primary}
+          backgroundColor={colors.accent}
+          style={{ marginBottom: 20, marginTop: 20 }}
+        >
+          {() => <Text style={{ color: colors.text }}>{Math.round(progress)}%</Text>}
+        </AnimatedCircularProgress>
+        <Text style={{ color: colors.text }}>Progress: {completedMilestones} / {totalMilestones} Milestones completed!</Text>
+
       </View>
-      <View style={{ height: 2, backgroundColor: colors.primary }} />
 
-
-      <Text style={[homeStyles.card, { color: colors.text }]}>Today's milestones</Text>
-
-
-      <View style={[homeStyles.progress, { backgroundColor: colors.accent }]}>
-        <Text style={[homeStyles.progressDate, { color: colors.text }]}>15.5.2024</Text>
-        <Text style={[homeStyles.progressName, { color: colors.text }]}>Gardening</Text>
-        <Text style={[homeStyles.progressMilestone, { color: colors.text }]}>Water succulets</Text>
-        <Text style={[homeStyles.progressBottomInfo, { color: colors.text }]}>
-        <IconButton
-        icon="information-outline"
-        iconColor={colors.primary}
-        size={30}
-      />
-      </Text>
-      </View>
+      {/* Individual tracker cards */}
+      {trackerList.map((tracker, index) => (
+        <View key={index} style={{ backgroundColor: colors.accent, padding: 20, marginBottom: 10 }}>
+          <Text style={{ color: colors.text }}>Name: {tracker.name}</Text>
+          <Text style={{ color: colors.text }}>Type: {tracker.type}</Text>
+          <Text style={{ color: colors.text }}>
+            Milestones: {tracker.milestones.filter(milestone => milestone.done).length} / {tracker.milestones.length}
+          </Text>
+        </View>
+      ))}
     </View>
   );
 }
+
+
