@@ -10,9 +10,9 @@ export const manageAccountStyle = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    width: '80%', // Adjust the width as needed
+    padding: 15,
+    borderRadius: 15,
+    width: '85%', // Adjust the width as needed
   },
   modalButton: {
     paddingVertical: 10,
@@ -34,7 +34,6 @@ export const manageAccountStyle = StyleSheet.create({
     borderRadius: 30,
     alignItems: 'center',
     marginTop: 15, // Add margin between content and button
-  
   },
   image: {
     width: 200,
