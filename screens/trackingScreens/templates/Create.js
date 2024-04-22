@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Button, TextInput, RadioButton, IconButton } from "react-native-paper";
+import addToFirebase from "../../../components/FirebaseComponents/AddToFirebase";
 import IconPicker from "react-native-icon-picker";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { choosableIcons } from "../data/createData";
@@ -10,24 +11,49 @@ import { createStyle } from "../../../styles/trackingScreens/createStyle";
 import MilestoneComponent from "../components/MilestoneComponent";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Create({ template }) {
+export default function Create({ template, navigation }) {
   const [value, setValue] = useState("Check");
   const [icon, setIcon] = useState("plus-circle");
   const [picker, setPicker] = useState(false);
+  const [trackerName, setTrackerName] = useState("");
   const [milestoneName, setMilestoneName] = useState("");
   const [milestoneList, setMilestoneList] = useState([]);
   const { colors } = useTheme();
 
   const chooseIcon = (icon) => {
-    console.log(icon);
+    setMilestoneList([]);
     setIcon(icon.icon);
     setPicker(!picker);
   };
 
-  const addMilestone = (name, type) => {
-    setMilestoneList([...milestoneList, { name: name, type: type }]);
-    console.log(milestoneList);
+  const addMilestone = (name, numeric) => {
+    if (name === "") {
+      alert("Please enter a name for the milestone");
+      return;
+    } else if (numeric === "Numeric") {
+      setMilestoneList([...milestoneList, { milestone: name, numeric: true, done: false }]);
+      setMilestoneName("");
+    } else {
+      setMilestoneList([...milestoneList, { milestone: name, numeric: false, done: false}]);
+      setMilestoneName("");
+    }
   };
+
+  const createTracker = () => {
+    let newName = trackerName.trim();
+    console.log(newName);
+    if (newName === "") {
+      newName = "My Tracker";
+      setTrackerName(newName);
+    } else {
+      addToFirebase(milestoneList, icon, trackerName, 0, icon);
+      setTrackerName("");
+      setMilestoneList([]);
+      navigation.navigate("Trackers", { refresh: true });
+    }
+   
+  };
+
 
   return (
     <View style={{ ...general.scaffold, justifyContent: "flex-start" }}>
@@ -43,6 +69,8 @@ export default function Create({ template }) {
         label=""
         mode="outlined"
         style={{ width: "95%", margin: 10 }}
+        value={trackerName}
+        onChangeText={(text) => setTrackerName(text)}
       />
       <Text style={{ ...general.title, color: colors.text }}>
         Choose icon:{" "}
@@ -96,9 +124,24 @@ export default function Create({ template }) {
         style={{ width: "95%", margin: 10 }}
         onPress={() => addMilestone(milestoneName, value)}
       />
+      <Button 
+        children="Create Tracker"
+        mode="contained"
+        buttonColor={colors.primary}
+        style={{ width: "95%", margin: 10 }}
+        onPress={() => createTracker()}
+      />
       <ScrollView>
         {milestoneList.map((milestone, index) => (
-          <MilestoneComponent key={index} text={milestone.name} />
+          <MilestoneComponent
+            key={index}
+            text={milestone.milestone}
+            numeric={milestone.numeric}
+            onCheck={() => {}}
+            onUncheck={() => {}}
+            type="undefined"
+            isDone={false}
+          />
         ))}
       </ScrollView>
     </View>

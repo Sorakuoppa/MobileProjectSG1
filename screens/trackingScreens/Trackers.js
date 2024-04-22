@@ -83,7 +83,6 @@ export default function Trackers({ navigation }) {
           const item = await AsyncStorage.getItem(key);
           console.log(item);
         });
-
       }
     } catch (e) {
       console.error("Error fetching asyncStorage: ", e);
@@ -157,19 +156,7 @@ export default function Trackers({ navigation }) {
                   borderColor: colors.primary,
                 }}
               >
-                <Icon
-                  name={
-                    tracker.type === "Running"
-                      ? "running"
-                      : tracker.type === "Reading"
-                      ? "book"
-                      : tracker.type === "Exercise"
-                      ? "dumbbell"
-                      : "question-circle"
-                  }
-                  size={40}
-                  color={colors.primary}
-                />
+                <Icon name={tracker.icon} size={40} color={colors.primary} />
                 <Text style={{ color: colors.text, fontSize: 24 }}>
                   {Math.round(tracker.progress)}%
                 </Text>

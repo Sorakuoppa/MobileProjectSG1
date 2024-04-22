@@ -69,13 +69,7 @@ export default function MyTracker({ route, navigation }) {
     <View style={general.scaffold}>
       <Icon
         name={
-          tracker.type === "Running"
-            ? "running"
-            : tracker.type === "Reading"
-              ? "book"
-              : tracker.type === "Exercise"
-                ? "dumbbell"
-                : "question"
+          tracker.icon
         }
         size={40}
         color={colors.primary}

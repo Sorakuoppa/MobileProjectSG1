@@ -3,7 +3,7 @@ import { auth, db } from "./FirebaseConfig";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { useLoginContext } from "../Contexts/LoginContext";
 
-export default async function addToFirebase(object, type, trackerName, progress) {
+export default async function addToFirebase(object, type, trackerName, progress, icon) {
 
   if (auth.currentUser) {
     try {
@@ -13,6 +13,7 @@ export default async function addToFirebase(object, type, trackerName, progress)
         type: type,
         name: trackerName,
         progress: progress,
+        icon: icon,
       });
     } catch (e) {
       console.error("Error adding document: ", e);

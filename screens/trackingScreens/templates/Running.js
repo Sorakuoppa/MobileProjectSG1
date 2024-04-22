@@ -36,7 +36,7 @@ export default function Running({ template, navigation }) {
       setTrackerName(newName);
     }
     if (objectList.length > 0) {
-      addToFirebase(objectList, "Running", newName, 0);
+      addToFirebase(objectList, "Running", newName, 0, template.icon);
       setTrackerName("");
       navigation.navigate("Trackers");
     } else {

@@ -39,7 +39,7 @@ export default function Reading({ template, navigation }) {
 
     if (objectList.length > 0) {
       console.log(newName);
-      await addToFirebase(objectList, "Reading", newName, 0);
+      await addToFirebase(objectList, "Reading", newName, 0, template.icon);
       setTrackerName("");
       navigation.navigate("Trackers", {refresh: true});
     } else {
