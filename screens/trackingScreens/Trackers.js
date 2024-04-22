@@ -35,10 +35,6 @@ export default function Trackers({ navigation }) {
     }, [loginState])
   );
 
-
-
-
-
   const showTrackers = async () => {
     setIsLoading(true);
     try {
@@ -57,7 +53,9 @@ export default function Trackers({ navigation }) {
   const clearFirebase = async () => {
     if (loginState === false) {
       AsyncStorage.clear();
+
       setDialog(false);
+      showTrackers();
       return;
     } else {
       try {
@@ -81,15 +79,20 @@ export default function Trackers({ navigation }) {
       const value = await AsyncStorage.getAllKeys();
       if (value !== null) {
         alert(value);
+        value.map(async (key) => {
+          const item = await AsyncStorage.getItem(key);
+          console.log(item);
+        });
+
       }
     } catch (e) {
       console.error("Error fetching asyncStorage: ", e);
     }
   };
 
-  if (isLoading ) {
+  if (isLoading) {
     return (
-      <View style={{ ...general.scaffold, justifyContent: "flex-start"}}>
+      <View style={{ ...general.scaffold, justifyContent: "flex-start" }}>
         <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
         <Text
           style={{ ...general.title, color: colors.text, marginBottom: 40 }}
