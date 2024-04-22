@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
 import { getTrackers } from "../../components/FirebaseComponents/ReadFirebaseDb";
 import { useLoginContext } from "../../components/Contexts/LoginContext";
@@ -9,7 +9,7 @@ import { general } from "../../styles/general";
 import { ActivityIndicator, IconButton } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Home() {
+export default function Home({navigation}) {
   const { colors } = useTheme();
   const { loginState } = useLoginContext();
   const [trackerList, setTrackerList] = useState([]);
@@ -21,6 +21,10 @@ export default function Home() {
       return () => {};
     }, [loginState])
   );
+
+  const trackerPress = (tracker) => {
+    navigation.navigate("MyTracker", { tracker: tracker });
+  };
 
   const showTrackers = async () => {
     setIsLoading(true);
@@ -84,6 +88,7 @@ export default function Home() {
       {/* Individual tracker cards */}
       <ScrollView style={{ backgroundColor: colors.background }}>
         {trackerList.map((tracker, index) => (
+          <Pressable key={index} onPress={() => trackerPress(tracker)}>
           <View key={index} style={{ backgroundColor: colors.accent, padding: 20, marginBottom: 10 }}>
             <Text style={{ color: colors.text }}>Name: {tracker.name}</Text>
             <Text style={{ color: colors.text }}>Type: {tracker.type}</Text>
@@ -95,10 +100,11 @@ export default function Home() {
         icon="information-outline"
         iconColor={colors.primary}
         size={30}
-        onPress={() => setVisible(true)}
       />
-  </View>
+      
+      </View>
           </View>
+          </Pressable>
         ))}
       </ScrollView>
     </>
