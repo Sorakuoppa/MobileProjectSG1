@@ -21,7 +21,7 @@ export default function ProgressComponent({ tracker }) {
   const [isLoading, setIsLoading] = useState(true);
   const { colors } = useTheme();
 
-let progressValue = 100/milestones.length;
+  let progressValue = 100 / milestones.length;
 
   useEffect(() => {
     setIsLoading(true);
@@ -29,7 +29,6 @@ let progressValue = 100/milestones.length;
     setTimeout(() => {
       fetchMilestones();
     }, 1000);
-    
   }, [tracker.name]);
 
   const fetchMilestones = async () => {
@@ -57,21 +56,16 @@ let progressValue = 100/milestones.length;
     }
     if (!auth.currentUser) {
       try {
-        const allKeys = await AsyncStorage.getAllKeys();
-        if (tracker.name === allKeys[0]) {
-          const storedData = await AsyncStorage.getItem(allKeys[0]);
-          const parsedData = JSON.parse(storedData);
-          setMilestones(parsedData.milestones);
-          setProgress(parsedData.progress);
-          setIsLoading(false);
-        }
-
+          const allKeys = await AsyncStorage.getAllKeys();
+          const trackers = await AsyncStorage.multiGet(allKeys);
+          const tracker = trackers.find((item) => item[0] === tracker.name);
+          console.log("Tracker from AsyncStorage:", tracker[1])
       } catch (error) {
         console.error("Error fetching trackers from AsyncStorage:", error);
       }
     }
   };
-// THIS NEEDS DIFFERENT FUNCTIONALITY FOR NUMERIC MILESTONES
+  // THIS NEEDS DIFFERENT FUNCTIONALITY FOR NUMERIC MILESTONES
   const updateFBProgress = async (value, milestone) => {
     try {
       const docRef = doc(
