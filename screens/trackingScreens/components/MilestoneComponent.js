@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { IconButton, Checkbox, RadioButton, Tooltip } from "react-native-paper";
+import { IconButton, Checkbox, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { general } from "../../../styles/general";
@@ -13,7 +13,7 @@ export default function MilestoneComponent({
   onUncheck,
   numeric,
   isDone,
-  type
+  type,
 }) {
   const [checked, setChecked] = useState(false);
   const [numericMilestone, setNumericMilestone] = useState(numeric);
@@ -22,9 +22,7 @@ export default function MilestoneComponent({
 
   useEffect(() => {
     setChecked(isDone);
-
   }, [isDone]);
-  
 
   const handleCheck = () => {
     setChecked(!checked);
@@ -37,7 +35,14 @@ export default function MilestoneComponent({
 
   if (numericMilestone && type === "undefined") {
     return (
-      <TouchableOpacity onPress={handleCheck} style={{ width: "100%", justifyContent: 'center', alignItems: 'center' }}>
+      <TouchableOpacity
+        onPress={handleCheck}
+        style={{
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <View
           style={{
             ...templateStyle.milestones,
@@ -93,9 +98,18 @@ export default function MilestoneComponent({
               icon="minus"
               iconColor={colors.primary}
               style={{ marginRight: 10 }}
-              onPress={() =>  setNumericAmount(numericAmount - 1)}
+              onPress={() => setNumericAmount(numericAmount - 1)}
             />
-            <Text style={{ color: colors.text }}> {numericAmount} </Text>
+            <TextInput
+              mode="outlined"
+              selectionColor={colors.primary}
+              activeOutlineColor={colors.primary}
+              dense={true}
+              style={{ width: 50, height: 40}}
+            >
+              {" "}
+              {numericAmount}{" "}
+            </TextInput>
             <IconButton
               icon="plus"
               iconColor={colors.primary}
@@ -110,7 +124,14 @@ export default function MilestoneComponent({
 
   if (!numericMilestone && type === "tracker") {
     return (
-      <TouchableOpacity onPress={handleCheck} style={{ width: "100%", justifyContent: 'center', alignItems: 'center' }}>
+      <TouchableOpacity
+        onPress={handleCheck}
+        style={{
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <View
           style={{
             ...templateStyle.milestones,

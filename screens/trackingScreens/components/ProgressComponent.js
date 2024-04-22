@@ -98,12 +98,14 @@ let progressValue = 100/milestones.length;
           tintColor={colors.primary}
           onAnimationComplete={() => {}}
           backgroundColor={colors.accent}
+          style={{ marginBottom: 20 }}
         />
         <ScrollView
           contentContainerStyle={{
             justifyContent: "center",
             alignItems: "center",
             marginTop: 10,
+            paddingBottom: 20,
           }}
         >
           {milestones.map((milestone, index) => (

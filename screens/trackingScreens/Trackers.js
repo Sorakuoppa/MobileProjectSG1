@@ -37,6 +37,8 @@ export default function Trackers({ navigation }) {
 
 
 
+
+
   const showTrackers = async () => {
     setIsLoading(true);
     try {
@@ -85,7 +87,7 @@ export default function Trackers({ navigation }) {
     }
   };
 
-  if (isLoading) {
+  if (isLoading ) {
     return (
       <View style={{ ...general.scaffold, justifyContent: "flex-start"}}>
         <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
