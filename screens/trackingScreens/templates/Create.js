@@ -4,25 +4,30 @@ import { useTheme } from "@react-navigation/native";
 import { Button, TextInput, RadioButton, IconButton } from "react-native-paper";
 import IconPicker from "react-native-icon-picker";
 import Icon from "react-native-vector-icons/FontAwesome5";
-
 import { choosableIcons } from "../data/createData";
-
 import { general } from "../../../styles/general";
 import { createStyle } from "../../../styles/trackingScreens/createStyle";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+import MilestoneComponent from "../components/MilestoneComponent";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Create({ template }) {
   const [value, setValue] = useState("Check");
   const [icon, setIcon] = useState("plus-circle");
   const [picker, setPicker] = useState(false);
+  const [milestoneName, setMilestoneName] = useState("");
+  const [milestoneList, setMilestoneList] = useState([]);
   const { colors } = useTheme();
 
   const chooseIcon = (icon) => {
-    console.log(icon)
+    console.log(icon);
     setIcon(icon.icon);
     setPicker(!picker);
-  }
+  };
+
+  const addMilestone = (name, type) => {
+    setMilestoneList([...milestoneList, { name: name, type: type }]);
+    console.log(milestoneList);
+  };
 
   return (
     <View style={{ ...general.scaffold, justifyContent: "flex-start" }}>
@@ -50,9 +55,10 @@ export default function Create({ template }) {
         content={<Icon name={icon} size={40} color={colors.primary} />}
         selectedIcon={{ icon: icon, family: "FontAwesome5" }}
         selectedIconContainerStyle={{ backgroundColor: colors.primary }}
-        
       />
-      <Text style={{ ...general.title, color: colors.text, marginTop: 20 }}>Milestones</Text>
+      <Text style={{ ...general.title, color: colors.text, marginTop: 20 }}>
+        Milestones
+      </Text>
       <Text
         style={{ color: colors.text, alignSelf: "flex-start", marginLeft: 20 }}
       >
@@ -62,6 +68,8 @@ export default function Create({ template }) {
         label=""
         mode="outlined"
         style={{ width: "95%", margin: 10 }}
+        value={milestoneName}
+        onChangeText={(text) => setMilestoneName(text)}
       />
       <Text style={{ color: colors.text }}>Milestone type:</Text>
       <RadioButton.Group
@@ -86,9 +94,13 @@ export default function Create({ template }) {
         mode="contained"
         buttonColor={colors.primary}
         style={{ width: "95%", margin: 10 }}
-        onPress={() => {}}
+        onPress={() => addMilestone(milestoneName, value)}
       />
-      <View style={createStyle.milestoneList}></View>
+      <ScrollView>
+        {milestoneList.map((milestone, index) => (
+          <MilestoneComponent key={index} text={milestone.name} />
+        ))}
+      </ScrollView>
     </View>
   );
 }
