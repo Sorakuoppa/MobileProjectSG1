@@ -6,7 +6,8 @@ import { useLoginContext } from "../../components/Contexts/LoginContext";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { homeStyles } from "../../styles/trackingScreens/homeStyle";
 import { general } from "../../styles/general";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, IconButton } from "react-native-paper";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Home() {
   const { colors } = useTheme();
@@ -61,37 +62,46 @@ export default function Home() {
     );
   } 
   return (
-    <View style={{ backgroundColor: colors.background }}>
+    <>
       {/* Card showing current date and progress */}
-      <View style={{ alignItems: "center", paddingVertical: 20 }}>
-        
-<Text style={[homeStyles.card, homeStyles.header, { color: colors.text }]}> {currentDate()}</Text>
-       
-        <AnimatedCircularProgress
-          size={120}
-          width={20}
-          fill={progress}
-          tintColor={colors.primary}
-          backgroundColor={colors.accent}
-          style={{ marginBottom: 20, marginTop: 20 }}
-        >
-          {() => <Text style={{ color: colors.text }}>{Math.round(progress)}%</Text>}
-        </AnimatedCircularProgress>
-        <Text style={{ color: colors.text }}>Progress: {completedMilestones} / {totalMilestones} Milestones completed!</Text>
-
-      </View>
-
-      {/* Individual tracker cards */}
-      {trackerList.map((tracker, index) => (
-        <View key={index} style={{ backgroundColor: colors.accent, padding: 20, marginBottom: 10 }}>
-          <Text style={{ color: colors.text }}>Name: {tracker.name}</Text>
-          <Text style={{ color: colors.text }}>Type: {tracker.type}</Text>
-          <Text style={{ color: colors.text }}>
-            Milestones: {tracker.milestones.filter(milestone => milestone.done).length} / {tracker.milestones.length}
-          </Text>
+      <View style={{ backgroundColor: colors.background }}>
+        <View style={{ alignItems: "center", paddingVertical: 20 }}>
+          <Text style={[homeStyles.card, homeStyles.header, { color: colors.text }]}> {currentDate()}</Text>
+          <AnimatedCircularProgress
+            size={120}
+            width={20}
+            fill={progress}
+            tintColor={colors.primary}
+            backgroundColor={colors.accent}
+            style={{ marginBottom: 20, marginTop: 20 }}
+          >
+            {() => <Text style={{ color: colors.text }}>{Math.round(progress)}%</Text>}
+          </AnimatedCircularProgress>
+          <Text style={{ color: colors.text }}>Progress: {completedMilestones} / {totalMilestones} Milestones completed!</Text>
         </View>
-      ))}
-    </View>
+      </View>
+  
+      {/* Individual tracker cards */}
+      <ScrollView style={{ backgroundColor: colors.background }}>
+        {trackerList.map((tracker, index) => (
+          <View key={index} style={{ backgroundColor: colors.accent, padding: 20, marginBottom: 10 }}>
+            <Text style={{ color: colors.text }}>Name: {tracker.name}</Text>
+            <Text style={{ color: colors.text }}>Type: {tracker.type}</Text>
+            <View style={{alignContent: ''}}>
+            <Text style={{ color: colors.text }}>
+              Milestones: {tracker.milestones.filter(milestone => milestone.done).length} / {tracker.milestones.length}
+            </Text>
+            <IconButton
+        icon="information-outline"
+        iconColor={colors.primary}
+        size={30}
+        onPress={() => setVisible(true)}
+      />
+  </View>
+          </View>
+        ))}
+      </ScrollView>
+    </>
   );
 }
 
