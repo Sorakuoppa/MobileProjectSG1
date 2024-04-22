@@ -25,6 +25,7 @@ let progressValue = 100/milestones.length;
 
   useEffect(() => {
     setIsLoading(true);
+    console.log(tracker.name);
     setTimeout(() => {
       fetchMilestones();
     }, 1000);
@@ -56,9 +57,15 @@ let progressValue = 100/milestones.length;
     }
     if (!auth.currentUser) {
       try {
-        const keys = await AsyncStorage.getAllKeys();
-        const storedData = [];
-        console.log("Keys: ", keys);
+        const allKeys = await AsyncStorage.getAllKeys();
+        if (tracker.name === allKeys[0]) {
+          const storedData = await AsyncStorage.getItem(allKeys[0]);
+          const parsedData = JSON.parse(storedData);
+          setMilestones(parsedData.milestones);
+          setProgress(parsedData.progress);
+          setIsLoading(false);
+        }
+
       } catch (error) {
         console.error("Error fetching trackers from AsyncStorage:", error);
       }
