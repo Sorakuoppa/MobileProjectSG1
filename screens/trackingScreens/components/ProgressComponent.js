@@ -82,9 +82,10 @@ export default function ProgressComponent({ tracker }) {
         console.log("Progress:", progressValue);
         console.log("Type:", typeValue);
         console.log("Tracker:", milestoneValue);
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching trackers from AsyncStorage:", error);
+      } finally {
+        setIsLoading(false);
       }
     }
   };

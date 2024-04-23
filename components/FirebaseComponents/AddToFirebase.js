@@ -1,8 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { auth, db } from "./FirebaseConfig";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
-import { useLoginContext } from "../Contexts/LoginContext";
-import { Alert } from "react-native";
+import { setDoc, doc } from "firebase/firestore";
 
 export default async function addToFirebase(object, type, trackerName, progress, icon) {
 

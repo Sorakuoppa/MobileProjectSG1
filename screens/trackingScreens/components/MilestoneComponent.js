@@ -3,8 +3,6 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { IconButton, Checkbox, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
-
-import { general } from "../../../styles/general";
 import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
 
 export default function MilestoneComponent({

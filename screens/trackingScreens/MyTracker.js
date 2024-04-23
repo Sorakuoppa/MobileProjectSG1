@@ -22,28 +22,21 @@ export default function MyTracker({ route, navigation }) {
   const { loginState } = useLoginContext();
 
 
-  // This still doesn't work as of 23.4
+  // Function used for deleting single trackers from both asyncStorage and database
   const deleteTracker = async () => {
     if (!loginState) {
-      console.log("Hit log out block");
       try {
-        // Retrieve the tracker list from AsyncStorage
-        const trackerListString = await AsyncStorage.getItem("trackers");
-        if (trackerListString) {
-          const trackerList = JSON.parse(trackerListString);
-          // Filter out the deleted tracker from the list
-          const updatedTrackerList = trackerList.filter(
-            (item) => item.id !== tracker.id
-          );
-          // Save the updated tracker list back to AsyncStorage
-          await AsyncStorage.setItem(
-            "trackers",
-            JSON.stringify(updatedTrackerList)
-          );
-          Alert.alert("Tracker deleted from AsyncStorage");
-          // Signal to the Trackers component to refresh the list of trackers
+        const allKeys = await AsyncStorage.getAllKeys();
+        const trackers = await AsyncStorage.multiGet(allKeys);
+        const foundTrackerIndex = trackers.findIndex((item) => item[1] === tracker.name);
+        if (foundTrackerIndex !== -1) {
+          // Delete all items associated with the found tracker index
+          const keysToDelete = trackers.filter((item) => item[0].includes(foundTrackerIndex));
+          await AsyncStorage.multiRemove(keysToDelete.map((item) => item[0]));
           navigation.navigate("Trackers", { refresh: true });
+          alert('Successfully deleted your tracker.')
         }
+        
       } catch (error) {
         console.error("Error deleting tracker from AsyncStorage:", error);
       }
