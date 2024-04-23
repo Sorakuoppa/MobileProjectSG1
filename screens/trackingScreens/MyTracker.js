@@ -21,6 +21,8 @@ export default function MyTracker({ route, navigation }) {
   const { colors } = useTheme();
   const { loginState } = useLoginContext();
 
+
+  // This still doesn't work as of 23.4
   const deleteTracker = async () => {
     if (!loginState) {
       console.log("Hit log out block");

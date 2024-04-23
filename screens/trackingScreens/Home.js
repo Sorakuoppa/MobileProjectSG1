@@ -100,6 +100,7 @@ export default function Home({navigation}) {
         icon="information-outline"
         iconColor={colors.primary}
         size={30}
+        onPress={() => trackerPress(tracker)}
       />
       
       </View>

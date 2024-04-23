@@ -59,8 +59,9 @@ export default function ProgressComponent({ tracker }) {
       try {
         const allKeys = await AsyncStorage.getAllKeys();
         const trackers = await AsyncStorage.multiGet(allKeys);
-        const tracker = trackers.find((item) => item[0] === tracker.name);
-        console.log("Tracker from AsyncStorage:", tracker[1]);
+        console.log(trackers);
+        const foundTracker = trackers.find((item) => item[1] === tracker.name);
+        console.log("Tracker from AsyncStorage:", foundTracker[1]);
       } catch (error) {
         console.error("Error fetching trackers from AsyncStorage:", error);
       }
