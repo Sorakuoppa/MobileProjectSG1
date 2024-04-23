@@ -33,8 +33,9 @@ export default function MyTracker({ route, navigation }) {
           // Delete all items associated with the found tracker index
           const keysToDelete = trackers.filter((item) => item[0].includes(foundTrackerIndex));
           await AsyncStorage.multiRemove(keysToDelete.map((item) => item[0]));
-          navigation.navigate("Trackers", { refresh: true });
           alert('Successfully deleted your tracker.')
+          navigation.navigate("Trackers", { refresh: true });
+
         }
         
       } catch (error) {
