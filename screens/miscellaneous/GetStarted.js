@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable, StatusBar } from "react-native";
+import { View, Text, Pressable, StatusBar, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { general } from "../../styles/general";
 import { useNavigation } from '@react-navigation/native';
@@ -19,6 +19,10 @@ export default function GetStarted() {
       style={startedStyle.container}
     >
       <StatusBar barStyle="light-content" backgroundColor={"#FF2E00"} />
+      <Image
+        source={require("../../assets/logos/onTrack_dark_theme.png")}
+        style={{ width: 250, height: 200, marginBottom: 30 }}
+      />
       <View style={startedStyle.content}>
         <Text style={startedStyle.welcomeTitle}>
           Welcome to Our Tracking Application!
