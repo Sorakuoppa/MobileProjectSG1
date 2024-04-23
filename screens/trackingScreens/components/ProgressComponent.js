@@ -21,6 +21,7 @@ export default function ProgressComponent({ tracker }) {
   const [progress, setProgress] = useState(0);
   const [milestones, setMilestones] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [foundLocalTrackerName, setFoundLocalTrackerName] = useState('');
   const { colors } = useTheme();
 
   let progressValue = 100 / milestones.length;
@@ -57,11 +58,28 @@ export default function ProgressComponent({ tracker }) {
     }
     if (!auth.currentUser) {
       try {
+        // TÄMÄ LÖYTÄÄ NYKYISEN TRÄCKERIN ASYNC STORAGESTA.
         const allKeys = await AsyncStorage.getAllKeys();
         const trackers = await AsyncStorage.multiGet(allKeys);
-        console.log(trackers);
-        const foundTracker = trackers.find((item) => item[1] === tracker.name);
-        console.log("Tracker from AsyncStorage:", foundTracker[1]);
+        const foundTrackerIndex = trackers.findIndex((item) => item[1] === tracker.name);
+
+        // Tbh en tiiä mihi noita keytä tarvitaa, mutta assignaa oikeat 
+        // Keypairit kyseiseen träckeriin 
+
+        const [, trackerName] = trackers[foundTrackerIndex]; // Extract the tracker name
+        const [progressKey, progressValue] = trackers.find((item) => item[0] === `progress${foundTrackerIndex}`);
+        const [typeKey, typeValue] = trackers.find((item) => item[0] === `type${foundTrackerIndex}`);
+        const [trackerKey, milestoneValue] = trackers.find((item) => item[0] === `tracker${foundTrackerIndex}`);
+
+        // Parsitaan milestone valuet ja runnataan jo määritellyt funktiot niillä
+        console.log('progress value raw: ',typeof(progressValue));
+        const parsedTrackers = JSON.parse(milestoneValue)
+        setProgress(progressValue);
+        setMilestones(parsedTrackers);
+        // Now you have access to the related key-value pairs
+        console.log("Progress:", progressValue);
+        console.log("Type:", typeValue);
+        console.log("Tracker:", milestoneValue);
       } catch (error) {
         console.error("Error fetching trackers from AsyncStorage:", error);
       }
@@ -69,29 +87,58 @@ export default function ProgressComponent({ tracker }) {
   };
   // THIS NEEDS DIFFERENT FUNCTIONALITY FOR NUMERIC MILESTONES
   const updateFBProgress = async (value, milestone) => {
-    try {
-      const docRef = doc(
-        db,
-        "trackers",
-        auth.currentUser.uid,
-        "trackers",
-        tracker.name
-      );
-      const newProgress = progress + value;
-      const newMilestones = milestones.map((item) => {
-        if (item === milestone) {
-          return { ...item, done: !item.done };
+    if (auth.currentUser) {
+      try {
+        const docRef = doc(
+          db,
+          "trackers",
+          auth.currentUser.uid,
+          "trackers",
+          tracker.name
+        );
+        const newProgress = progress + value;
+        const newMilestones = milestones.map((item) => {
+          if (item === milestone) {
+            return { ...item, done: !item.done };
+          }
+          return item;
+        });
+        await updateDoc(docRef, {
+          progress: newProgress,
+          milestones: newMilestones,
+        });
+        setProgress(newProgress);
+        setMilestones(newMilestones);
+      } catch (e) {
+        console.error("Error updating document: ", e);
+      }
+    } else {
+      try {
+        const allKeys = await AsyncStorage.getAllKeys();
+        const trackers = await AsyncStorage.multiGet(allKeys);
+        const foundTrackerIndex = trackers.findIndex((item) => item[1] === tracker.name);
+        if (foundTrackerIndex !== -1) {
+          const [trackerKey, milestoneValue] = trackers.find((item) => item[0] === `tracker${foundTrackerIndex}`);
+          const parsedTrackerValue = JSON.parse(milestoneValue);
+          const updatedTrackerValue = parsedTrackerValue.map((item) => {
+            if (item.milestone === milestone.milestone) {
+              return { ...item, done: !item.done };
+            }
+            return item;
+          });
+          await AsyncStorage.setItem(`tracker${foundTrackerIndex}`, JSON.stringify(updatedTrackerValue));
+          
+          // Calculate new progress value based on the updated milestones
+          const newProgress = updatedTrackerValue.filter((item) => item.done).length / updatedTrackerValue.length * 100;
+          await AsyncStorage.setItem(`progress${foundTrackerIndex}`, newProgress.toString());
+
+          // Update state with new progress value and updated milestones
+          setProgress(newProgress);
+          setMilestones(updatedTrackerValue);
         }
-        return item;
-      });
-      await updateDoc(docRef, {
-        progress: newProgress,
-        milestones: newMilestones,
-      });
-      setProgress(newProgress);
-      setMilestones(newMilestones);
-    } catch (e) {
-      console.error("Error adding document: ", e);
+      } catch (error) {
+        console.error("Error updating AsyncStorage: ", error);
+      }
     }
   };
 

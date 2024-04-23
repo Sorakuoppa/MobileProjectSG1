@@ -69,6 +69,10 @@ export default function MyTracker({ route, navigation }) {
   return (
     <View style={general.scaffold}>
       <Icon name={tracker.icon} size={40} color={colors.primary} />
+      <Text style={{ ...general.title, color: colors.text }}>
+        {tracker.name}
+      </Text>
+      <ProgressComponent tracker={tracker} />
       <Button
         children="Delete tracker"
         mode="contained"
@@ -99,10 +103,6 @@ export default function MyTracker({ route, navigation }) {
           </Dialog.Actions>
         </Dialog>
       </Portal>
-      <Text style={{ ...general.title, color: colors.text }}>
-        {tracker.name}
-      </Text>
-      <ProgressComponent tracker={tracker} />
     </View>
   );
 }
