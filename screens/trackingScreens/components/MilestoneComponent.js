@@ -105,7 +105,8 @@ export default function MilestoneComponent({
               selectionColor={colors.primary}
               activeOutlineColor={colors.primary}
               dense={true}
-              style={{ width: 50, height: 40}}
+              style={{ width: 50, height: 40 }}
+              keyboardType="numeric"
             >
               {" "}
               {numericAmount}{" "}

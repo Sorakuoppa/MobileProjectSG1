@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useFocusEffect } from "@react-navigation/native";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
+import Collapsible from "react-native-collapsible";
 import { ActivityIndicator } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
@@ -11,6 +12,7 @@ import {
 } from "../../../components/FirebaseComponents/FirebaseConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MilestoneComponent from "./MilestoneComponent";
+import ExerciseComponent from "./ExerciseComponent";
 
 import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";
@@ -55,10 +57,10 @@ export default function ProgressComponent({ tracker }) {
     }
     if (!auth.currentUser) {
       try {
-          const allKeys = await AsyncStorage.getAllKeys();
-          const trackers = await AsyncStorage.multiGet(allKeys);
-          const tracker = trackers.find((item) => item[0] === tracker.name);
-          console.log("Tracker from AsyncStorage:", tracker[1])
+        const allKeys = await AsyncStorage.getAllKeys();
+        const trackers = await AsyncStorage.multiGet(allKeys);
+        const tracker = trackers.find((item) => item[0] === tracker.name);
+        console.log("Tracker from AsyncStorage:", tracker[1]);
       } catch (error) {
         console.error("Error fetching trackers from AsyncStorage:", error);
       }
@@ -110,9 +112,10 @@ export default function ProgressComponent({ tracker }) {
           backgroundColor={colors.accent}
           style={{ marginBottom: 20 }}
         >
-                    {() => <Text style={{ color: colors.text }}>{Math.round(progress)}%</Text>}
-
-          </AnimatedCircularProgress>
+          {() => (
+            <Text style={{ color: colors.text }}>{Math.round(progress)}%</Text>
+          )}
+        </AnimatedCircularProgress>
         <ScrollView
           contentContainerStyle={{
             justifyContent: "center",
@@ -121,21 +124,21 @@ export default function ProgressComponent({ tracker }) {
             paddingBottom: 20,
           }}
         >
-          {milestones.map((milestone, index) => (
-            <MilestoneComponent
-              key={index}
-              text={
-                tracker.type === "Exercise"
-                  ? milestone.name
-                  : milestone.milestone
-              }
-              type="tracker"
-              numeric={milestone.numeric}
-              onCheck={() => updateFBProgress(progressValue, milestone)}
-              onUncheck={() => updateFBProgress(-progressValue, milestone)}
-              isDone={milestone.done}
-            />
-          ))}
+          {tracker.type === "Exercise" && (
+            <ExerciseComponent tracker={tracker} />
+          )}
+          {tracker.type != "Exercise" &&
+            milestones.map((milestone, index) => (
+              <MilestoneComponent
+                key={index}
+                text={milestone.milestone}
+                type="tracker"
+                numeric={milestone.numeric}
+                onCheck={() => updateFBProgress(progressValue, milestone)}
+                onUncheck={() => updateFBProgress(-progressValue, milestone)}
+                isDone={milestone.done}
+              />
+            ))}
         </ScrollView>
       </View>
     );
