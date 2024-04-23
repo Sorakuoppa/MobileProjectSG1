@@ -31,27 +31,27 @@ export default function App() {
   }
 
   return (
-  <PaperProvider>
-      <StatusBar
-        barStyle={theme === "dark" ? "light-content" : "dark-content"}
-        backgroundColor={
-          theme === "dark" ? darkColors.secondary : lightColors.secondary
-        }
-      />
-    <PermissionProvider>
-      <NavigationContainer theme={theme === "dark" ? DarkTheme : LightTheme}>
-        {/* Go to ./components/ScreenStack to configure app navigation */}
-        <ThemeContext.Provider value={{ theme, setTheme }}>
-          <FirstTimeLoadProvider> 
-            <LoadingProvider>
-            <LoginProvider>
-              <MainNavigator />
-            </LoginProvider>
-            </LoadingProvider>
-          </FirstTimeLoadProvider>
-        </ThemeContext.Provider>
-      </NavigationContainer>
-    </PermissionProvider>
-  </PaperProvider>
+    <PaperProvider>
+      <PermissionProvider>
+        <NavigationContainer theme={theme === "dark" ? DarkTheme : LightTheme}>
+          <StatusBar
+            barStyle={theme === "dark" ? "light-content" : "dark-content"}
+            backgroundColor={
+              theme === 'started' ? '#FF2E00' :
+              theme === "dark" ? darkColors.secondary : lightColors.secondary
+            }
+          />
+          <ThemeContext.Provider value={{ theme, setTheme }}>
+            <FirstTimeLoadProvider>
+              <LoadingProvider>
+                <LoginProvider>
+                  <MainNavigator />
+                </LoginProvider>
+              </LoadingProvider>
+            </FirstTimeLoadProvider>
+          </ThemeContext.Provider>
+        </NavigationContainer>
+      </PermissionProvider>
+    </PaperProvider>
   );
 }

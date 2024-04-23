@@ -5,7 +5,7 @@ export const startedStyle = StyleSheet.create({
     container: {
         flex: 1,
         height: 1,
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
         backgroundColor: darkColors.primary,
     },

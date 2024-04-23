@@ -21,7 +21,6 @@ export default function Reading({ template, navigation }) {
     let newTrackerObject = {};
     newTrackerObject = { milestone: text, done: false, numeric: numeric };
     list.push(newTrackerObject);
-    console.log(text);
     setObjectList(list);
   };
 
@@ -38,7 +37,6 @@ export default function Reading({ template, navigation }) {
     }
 
     if (objectList.length > 0) {
-      console.log(newName);
       await addToFirebase(objectList, "Reading", newName, 0, template.icon);
       setTrackerName("");
       navigation.navigate("Trackers", {refresh: true});
