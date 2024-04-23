@@ -22,29 +22,30 @@ export default function MyTracker({ route, navigation }) {
   const { loginState } = useLoginContext();
 
   const deleteTracker = async () => {
-  if (!loginState) {
-    console.log('Hit log out block');
-    try {
-      // Retrieve the tracker list from AsyncStorage
-      const trackerListString = await AsyncStorage.getItem("trackers");
-      if (trackerListString) {
-        const trackerList = JSON.parse(trackerListString);
-        // Filter out the deleted tracker from the list
-        const updatedTrackerList = trackerList.filter(
-          (item) => item.id !== tracker.id
-        );
-        // Save the updated tracker list back to AsyncStorage
-        await AsyncStorage.setItem(
-          "trackers",
-          JSON.stringify(updatedTrackerList)
-        );
-        Alert.alert("Tracker deleted from AsyncStorage");
-        // Signal to the Trackers component to refresh the list of trackers
-        navigation.navigate("Trackers", { refresh: true });
+    if (!loginState) {
+      console.log("Hit log out block");
+      try {
+        // Retrieve the tracker list from AsyncStorage
+        const trackerListString = await AsyncStorage.getItem("trackers");
+        if (trackerListString) {
+          const trackerList = JSON.parse(trackerListString);
+          // Filter out the deleted tracker from the list
+          const updatedTrackerList = trackerList.filter(
+            (item) => item.id !== tracker.id
+          );
+          // Save the updated tracker list back to AsyncStorage
+          await AsyncStorage.setItem(
+            "trackers",
+            JSON.stringify(updatedTrackerList)
+          );
+          Alert.alert("Tracker deleted from AsyncStorage");
+          // Signal to the Trackers component to refresh the list of trackers
+          navigation.navigate("Trackers", { refresh: true });
+        }
+      } catch (error) {
+        console.error("Error deleting tracker from AsyncStorage:", error);
       }
-    } catch (error) {
-      console.error("Error deleting tracker from AsyncStorage:", error);
-    }} else {
+    } else {
       try {
         const docRef = doc(
           db,
@@ -54,32 +55,25 @@ export default function MyTracker({ route, navigation }) {
           tracker.name
         );
         await deleteDoc(docRef);
-        Alert.alert("Tracker deleted from database");  
+        Alert.alert("Tracker deleted from database");
         navigation.navigate("Trackers", { refresh: true });
-      } 
-        catch (error) {
-          console.error("Error deleting tracker from database:", error);
-        }
+      } catch (error) {
+        console.error("Error deleting tracker from database:", error);
       }
-      }
-      
-  ;
+    }
+    setDialog(false);
+  };
 
   return (
     <View style={general.scaffold}>
-      <Icon
-        name={
-          tracker.icon
-        }
-        size={40}
-        color={colors.primary}
-      />
+      <Icon name={tracker.icon} size={40} color={colors.primary} />
       <Button
         children="Delete tracker"
         mode="contained"
         buttonColor="red"
-        style={{ marginTop: 10, marginBottom: 10}}
-        onPress={() => setDialog(true)} />
+        style={{ marginTop: 10, marginBottom: 10 }}
+        onPress={() => setDialog(true)}
+      />
       <Portal>
         <Dialog
           visible={dialog}

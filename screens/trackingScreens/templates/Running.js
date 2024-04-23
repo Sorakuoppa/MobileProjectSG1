@@ -54,7 +54,6 @@ export default function Running({ template, navigation }) {
         mode="outlined"
         value={trackerName}
         onChangeText={(text) => setTrackerName(text)}
-        selectionColor={colors.primary}
         outlineColor={colors.primary}
         activeOutlineColor={colors.primary}
         style={{ width: "90%", marginBottom: 20 }}
