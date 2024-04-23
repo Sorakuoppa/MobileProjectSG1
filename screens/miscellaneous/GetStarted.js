@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import { View, Text, Pressable, StatusBar, Image } from "react-native";
+import { ThemeContext } from "../../components/Contexts/ThemeContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { general } from "../../styles/general";
 import { useNavigation } from '@react-navigation/native';
@@ -7,9 +8,15 @@ import { startedStyle } from "../../styles/miscellaneous/startedStyle";
 
 export default function GetStarted() {
   const navigation = useNavigation();
+  const theme = useContext(ThemeContext);
+
+  useEffect(() => {
+    theme.setTheme("started");
+  }, []);
 
   // Function to navigate to LoginOrRegister screen
   const goToLoginOrRegister = () => {
+    theme.setTheme("dark");
     navigation.navigate('LoginOrRegister');
   };
 
@@ -18,10 +25,9 @@ export default function GetStarted() {
       colors={["#FF2E00", "#FFC700"]}
       style={startedStyle.container}
     >
-      <StatusBar barStyle="light-content" backgroundColor={"#FF2E00"} />
       <Image
         source={require("../../assets/logos/onTrack_dark_theme.png")}
-        style={{ width: 250, height: 200, marginBottom: 30 }}
+        style={{ width: 250, height: 200, marginBottom: 20 }}
       />
       <View style={startedStyle.content}>
         <Text style={startedStyle.welcomeTitle}>
