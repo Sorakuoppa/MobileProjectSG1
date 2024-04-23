@@ -25,7 +25,6 @@ export default function ProgressComponent({ tracker }) {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log(tracker.name);
     setTimeout(() => {
       fetchMilestones();
     }, 1000);

@@ -41,7 +41,6 @@ export default function Create({ template, navigation }) {
 
   const createTracker = () => {
     let newName = trackerName.trim();
-    console.log(newName);
     if (newName === "") {
       newName = "My Tracker";
       setTrackerName(newName);
