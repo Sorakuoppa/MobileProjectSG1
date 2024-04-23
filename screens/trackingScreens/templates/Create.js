@@ -70,6 +70,8 @@ export default function Create({ template, navigation }) {
         style={{ width: "95%", margin: 10 }}
         value={trackerName}
         onChangeText={(text) => setTrackerName(text)}
+        activeOutlineColor={colors.primary}
+        outlineColor={colors.primary}
       />
       <Text style={{ ...general.title, color: colors.text }}>
         Choose icon:{" "}
@@ -97,6 +99,8 @@ export default function Create({ template, navigation }) {
         style={{ width: "95%", margin: 10 }}
         value={milestoneName}
         onChangeText={(text) => setMilestoneName(text)}
+        activeOutlineColor={colors.primary}
+        outlineColor={colors.primary}
       />
       <Text style={{ color: colors.text }}>Milestone type:</Text>
       <RadioButton.Group
@@ -123,7 +127,7 @@ export default function Create({ template, navigation }) {
         style={{ width: "95%", margin: 10 }}
         onPress={() => addMilestone(milestoneName, value)}
       />
-      <Button 
+      <Button
         children="Create Tracker"
         mode="contained"
         buttonColor={colors.primary}
