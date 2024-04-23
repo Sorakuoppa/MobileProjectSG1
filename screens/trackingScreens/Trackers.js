@@ -23,7 +23,6 @@ import { useLoginContext } from "../../components/Contexts/LoginContext";
 export default function Trackers({ navigation }) {
   const { colors } = useTheme();
   const [trackerList, setTrackerList] = useState([]);
-  const [trackerProgress, setTrackerProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [dialog, setDialog] = useState(false);
   const { loginState } = useLoginContext();
@@ -105,35 +104,7 @@ export default function Trackers({ navigation }) {
     return (
       <View style={general.scaffold}>
         <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
-        <Button
-          children="Delete all trackers"
-          mode="contained"
-          buttonColor="red"
-          onPress={() => setDialog(true)}
-        />
-        <Portal>
-          <Dialog
-            visible={dialog}
-            onDismiss={() => setDialog(false)}
-            style={{ backgroundColor: colors.accent }}
-          >
-            <Dialog.Title style={{ color: colors.text }}>
-              Are you sure you want to delete all trackers?
-            </Dialog.Title>
-            <Dialog.Actions>
-              <Button
-                children="Yes"
-                textColor={colors.primary}
-                onPress={clearFirebase}
-              />
-              <Button
-                children="No"
-                textColor={colors.primary}
-                onPress={() => setDialog(false)}
-              />
-            </Dialog.Actions>
-          </Dialog>
-        </Portal>
+        
         <ScrollView
           contentContainerStyle={{
             justifyContent: "center",
@@ -169,15 +140,47 @@ export default function Trackers({ navigation }) {
             </Pressable>
           ))}
         </ScrollView>
-
-        {/* Button for testing asyncStorage */}
+        
+        {/* DELETE ALL TRACKERS BUTTON */ }
         <Button
+          children="Delete all trackers"
+          mode="contained"
+          buttonColor="red"
+          onPress={() => setDialog(true)}
+          style={{marginBottom: 20}}
+        />
+        <Portal>
+          <Dialog
+            visible={dialog}
+            onDismiss={() => setDialog(false)}
+            style={{ backgroundColor: colors.accent }}
+          >
+            <Dialog.Title style={{ color: colors.text }}>
+              Are you sure you want to delete all trackers?
+            </Dialog.Title>
+            <Dialog.Actions>
+              <Button
+                children="Yes"
+                textColor={colors.primary}
+                onPress={clearFirebase}
+              />
+              <Button
+                children="No"
+                textColor={colors.primary}
+                onPress={() => setDialog(false)}
+              />
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
+        {/* Button for testing asyncStorage */}
+       { /*<Button
           children="Show asyncStorage"
           mode="contained"
           buttonColor={colors.primary}
           onPress={showAsyncStorage}
         />
-      </View>
+     */}
+      </View> 
     );
   }
 }
