@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { general } from "../../styles/general";
 import { useTheme } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -10,7 +10,7 @@ import MattiImage from "../../assets/about/Matti.png";
 import RoosaImage from "../../assets/about/Roosa.png";
 import SamuliImage from "../../assets/about/Samuli.png";
 
-export default function AboutUs() {
+export default function AboutUs({ navigation }) {
     const { colors } = useTheme();
 
     const members = [
@@ -21,6 +21,10 @@ export default function AboutUs() {
         { name: "Samuli Ruotsalainen", role: "Lead Developer", image: SamuliImage }
     ];
 
+    const handleMemberPress = (memberName) => {
+        navigation.navigate('moreAboutUs', { name: memberName });
+    };
+
     return (
         <View style={general.scaffold}>
             <Text style={{ ...general.title, color: colors.primary }}>About Us</Text>
@@ -28,13 +32,15 @@ export default function AboutUs() {
             <ScrollView style={{ backgroundColor: colors.background }}>
                 {/* Display images, names, and roles */}
                 {members.map((member, index) => (
-                    <View key={index} style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-                        <Image source={member.image} style={{ width: 80, height: 80, borderRadius: 40, marginRight: 10 }} />
-                        <View>
-                            <Text style={{ color: colors.primary, fontWeight: 'bold' }}>{member.name}</Text>
-                            <Text style={{ color: colors.text }}>{member.role}</Text>
+                    <TouchableOpacity key={index} onPress={() => handleMemberPress(member.name)}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                            <Image source={member.image} style={{ width: 80, height: 80, borderRadius: 40, marginRight: 10 }} />
+                            <View>
+                                <Text style={{ color: colors.primary, fontWeight: 'bold' }}>{member.name}</Text>
+                                <Text style={{ color: colors.text }}>{member.role}</Text>
+                            </View>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 ))}
             </ScrollView>
         </View>
