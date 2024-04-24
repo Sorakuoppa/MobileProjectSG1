@@ -7,7 +7,6 @@ import { useLoginContext } from '../../components/Contexts/LoginContext';
 import * as ImagePicker from 'expo-image-picker';
 import UploadImage, { deleteProfilePicture } from '../../components/AccountComponents/ImageManagement';
 import avatar from '../../assets/avatar/2.png'
-import avatars from '../../assets/avatar'; // valmiit avatarit
 import { useTheme } from "@react-navigation/native";
 import { updateEmail, updatePassword } from 'firebase/auth';
 import { Modal } from 'react-native';
