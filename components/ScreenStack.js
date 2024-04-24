@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Icon from "react-native-vector-icons/FontAwesome5";
 import AboutUs from "../screens/miscellaneous/AboutUs";
+import MoreAboutUs from "../screens/miscellaneous/moreAboutUs";
 import Account from "../screens/accountManagement/Account";
 import ManageAccount from "../screens/accountManagement/ManageAccount";
 import AddNew from "../screens/trackingScreens/AddNew";
@@ -142,11 +143,9 @@ export function DrawerStack({ navigation, route }) {
       return "Welcome Guest!";
     }
   };
-useEffect(() => {
-  getHeaderTitle
-}, [username])
-
- 
+  useEffect(() => {
+    getHeaderTitle;
+  }, [username]);
 
   useEffect(() => {
     // Check the login state every time the drawer stack mounts
@@ -190,6 +189,11 @@ useEffect(() => {
       drawerItemStyle: { marginTop: 400 },
     },
     {
+      name: "MoreAboutUs",
+      component: MoreAboutUs,
+      drawerItemStyle: { display: "none" },
+    },
+    {
       name: "Templates",
       component: Templates,
       drawerItemStyle: { display: "none" },
@@ -213,7 +217,7 @@ useEffect(() => {
   ];
 
   return (
-    <Drawer.Navigator 
+    <Drawer.Navigator
       initialRouteName="Home"
       screenOptions={({ route }) => ({
         headerTitle: getHeaderTitle(route, loginState, username),
@@ -233,7 +237,11 @@ useEffect(() => {
         options={{
           drawerIcon: ({ focused }) => (
             <Image
-              source={theme === "dark" ? require("../assets/logos/onTrack_dark_theme.png") : require("../assets/logos/onTrack_light_theme.png")}
+              source={
+                theme === "dark"
+                  ? require("../assets/logos/onTrack_dark_theme.png")
+                  : require("../assets/logos/onTrack_light_theme.png")
+              }
               style={{ width: 200, height: 100 }}
             />
           ),
