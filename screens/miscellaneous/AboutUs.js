@@ -35,6 +35,7 @@ export default function AboutUs({ navigation }) {
           paddingLeft: 10,
           paddingRight: 10,
           textAlign: "center",
+          fontFamily: "Gantari"
         }}
       >
         Welcome to Team 2's school project: On Track. We've developed a mobile
