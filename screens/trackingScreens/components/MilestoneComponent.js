@@ -48,7 +48,9 @@ export default function MilestoneComponent({
             borderColor: colors.primary,
           }}
         >
-          <Text style={{ color: colors.text }}> {text} </Text>
+          <Text style={{ color: colors.text, fontFamily: "Gantari" }}>
+            {text}
+          </Text>
           <View style={templateStyle.icons}>
             <Icon
               name="minus"
@@ -89,7 +91,9 @@ export default function MilestoneComponent({
             borderColor: colors.primary,
           }}
         >
-          <Text style={{ color: colors.text }}> {text} </Text>
+          <Text style={{ color: colors.text, fontFamily: "Gantari" }}>
+            {text}
+          </Text>
           <View style={templateStyle.icons}>
             {/* THIS HERE NEEDS BACKEND FUNCTIONALITY */}
             <IconButton
@@ -106,8 +110,7 @@ export default function MilestoneComponent({
               style={{ width: 50, height: 40 }}
               keyboardType="numeric"
             >
-              {" "}
-              {numericAmount}{" "}
+              {numericAmount}
             </TextInput>
             <IconButton
               icon="plus"
@@ -138,7 +141,9 @@ export default function MilestoneComponent({
             borderColor: colors.primary,
           }}
         >
-          <Text style={{ color: colors.text }}> {text} </Text>
+          <Text style={{ color: colors.text, fontFamily: "Gantari" }}>
+            {text}
+          </Text>
           <View style={templateStyle.icons}>
             <Checkbox
               status={checked ? "checked" : "unchecked"}
@@ -164,7 +169,9 @@ export default function MilestoneComponent({
           borderColor: colors.primary,
         }}
       >
-        <Text style={{ color: colors.text }}> {text} </Text>
+        <Text style={{ color: colors.text, fontFamily: "Gantari" }}>
+          {text}
+        </Text>
         <View style={templateStyle.icons}>
           <Icon
             name="check"
