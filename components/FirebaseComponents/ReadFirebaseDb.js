@@ -32,7 +32,7 @@ async function getTrackersFromAsyncStorage() {
         const typeKey = key.replace("tracker", "type");
         const nameKey = key.replace("tracker", "name");
         const progressKey = key.replace("tracker", "progress");
-        const iconKey = key.replace("tracker", "icon");
+        const iconKey = key.replace("tracker", "picon");
         
         const object = await AsyncStorage.getItem(objectKey);
         const type = await AsyncStorage.getItem(typeKey);

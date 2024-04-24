@@ -127,7 +127,7 @@ export default function Trackers({ navigation }) {
                   borderColor: colors.primary,
                 }}
               >
-                <Icon name={tracker.icon} size={40} color={colors.primary} />
+                <Icon name= {tracker.icon} size={40} color={colors.primary} />
                 <Text style={{ color: colors.text, fontSize: 24, fontFamily: 'Gantari' }}>
                   {Math.round(tracker.progress)} %
                 </Text>
@@ -173,13 +173,13 @@ export default function Trackers({ navigation }) {
           </Dialog>
         </Portal>
         {/* Button for testing asyncStorage */}
-       { /*<Button
+       <Button
           children="Show asyncStorage"
           mode="contained"
           buttonColor={colors.primary}
           onPress={showAsyncStorage}
         />
-     */}
+     
       </View> 
     );
   }
