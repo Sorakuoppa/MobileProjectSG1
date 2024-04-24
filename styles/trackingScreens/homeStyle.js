@@ -47,9 +47,10 @@ export const homeStyles = StyleSheet.create({
   progressName: {
     fontSize: 20,
     fontFamily: "Gantari",
+    fontWeight: "bold",
   },
   progressMilestone: {
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: "Gantari",
   },
   progressPercent: {
