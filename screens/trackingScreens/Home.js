@@ -78,7 +78,7 @@ export default function Home({ navigation }) {
             fill={progress}
             tintColor={colors.primary}
             backgroundColor={colors.accent}
-            style={{ marginBottom: 20, marginTop: 20 }}
+            style={{ marginBottom: 30, marginTop: 20 }}
           >
             {() => <Text style={[homeStyles.header, { color: colors.text }]}>{Math.round(progress)}%</Text>}
           </AnimatedCircularProgress>
