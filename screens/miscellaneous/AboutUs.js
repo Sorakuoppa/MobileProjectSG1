@@ -35,7 +35,7 @@ export default function AboutUs({ navigation }) {
           paddingLeft: 10,
           paddingRight: 10,
           textAlign: "center",
-          fontFamily: "Gantari"
+          fontFamily: "Gantari",
         }}
       >
         Welcome to Team 2's school project: On Track. We've developed a mobile
@@ -67,10 +67,10 @@ export default function AboutUs({ navigation }) {
                 }}
               />
               <View>
-                <Text style={{ color: colors.primary, fontWeight: "bold" }}>
+                <Text style={{ color: colors.primary, fontWeight: "bold", fontFamily: 'Gantari' }}>
                   {member.name}
                 </Text>
-                <Text style={{ color: colors.text }}>{member.role}</Text>
+                <Text style={{ color: colors.text, fontFamily: "Gantari", }}>{member.role}</Text>
               </View>
             </View>
           </TouchableOpacity>
