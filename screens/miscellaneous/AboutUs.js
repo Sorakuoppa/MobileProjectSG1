@@ -11,38 +11,70 @@ import RoosaImage from "../../assets/about/Roosa.png";
 import SamuliImage from "../../assets/about/Samuli.png";
 
 export default function AboutUs({ navigation }) {
-    const { colors } = useTheme();
+  const { colors } = useTheme();
 
-    const members = [
-        { name: "Timo Hyttinen", role: "UI/UX Designer", image: TimoImage },
-        { name: "Severi Jokelainen", role: "Lead Developer", image: SeveriImage },
-        { name: "Matti Pitkänen", role: "Lead Developer", image: MattiImage },
-        { name: "Roosa Rautio", role: "UI/UX Designer", image: RoosaImage },
-        { name: "Samuli Ruotsalainen", role: "Lead Developer", image: SamuliImage }
-    ];
+  const members = [
+    { name: "Timo Hyttinen", role: "UI/UX Designer", image: TimoImage },
+    { name: "Severi Jokelainen", role: "Lead Developer", image: SeveriImage },
+    { name: "Matti Pitkänen", role: "Lead Developer", image: MattiImage },
+    { name: "Roosa Rautio", role: "UI/UX Designer", image: RoosaImage },
+    { name: "Samuli Ruotsalainen", role: "Lead Developer", image: SamuliImage },
+  ];
 
-    const handleMemberPress = (memberName) => {
-        navigation.navigate('moreAboutUs', { name: memberName });
-    };
+  const handleMemberPress = (memberName) => {
+    navigation.navigate("MoreAboutUs", { name: memberName });
+  };
 
-    return (
-        <View style={general.scaffold}>
-            <Text style={{ ...general.title, color: colors.primary }}>About Us</Text>
-            <Text style={{ color: colors.text, marginBottom: 20, paddingLeft: 10, paddingRight: 10, textAlign: 'center' }}>Welcome to Team 2's school project: On Track. We've developed a mobile application aimed at simplifying your life. On Track allows you to effortlessly monitor your daily activities, academic progress, fitness routines, and hobbies. Stay organized, stay motivated with On Track.</Text>
-            <ScrollView style={{ backgroundColor: colors.background }}>
-                {/* Display images, names, and roles */}
-                {members.map((member, index) => (
-                    <TouchableOpacity key={index} onPress={() => handleMemberPress(member.name)}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-                            <Image source={member.image} style={{ width: 80, height: 80, borderRadius: 40, marginRight: 10 }} />
-                            <View>
-                                <Text style={{ color: colors.primary, fontWeight: 'bold' }}>{member.name}</Text>
-                                <Text style={{ color: colors.text }}>{member.role}</Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                ))}
-            </ScrollView>
-        </View>
-    );
+  return (
+    <View style={general.scaffold}>
+      <Text style={{ ...general.title, color: colors.primary }}>About Us</Text>
+      <Text
+        style={{
+          color: colors.text,
+          marginBottom: 20,
+          paddingLeft: 10,
+          paddingRight: 10,
+          textAlign: "center",
+        }}
+      >
+        Welcome to Team 2's school project: On Track. We've developed a mobile
+        application aimed at simplifying your life. On Track allows you to
+        effortlessly monitor your daily activities, academic progress, fitness
+        routines, and hobbies. Stay organized, stay motivated with On Track.
+      </Text>
+      <ScrollView style={{ backgroundColor: colors.background }}>
+        {/* Display images, names, and roles */}
+        {members.map((member, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => handleMemberPress(member.name)}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginBottom: 10,
+              }}
+            >
+              <Image
+                source={member.image}
+                style={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: 40,
+                  marginRight: 10,
+                }}
+              />
+              <View>
+                <Text style={{ color: colors.primary, fontWeight: "bold" }}>
+                  {member.name}
+                </Text>
+                <Text style={{ color: colors.text }}>{member.role}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </View>
+  );
 }
