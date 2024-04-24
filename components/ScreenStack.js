@@ -187,7 +187,7 @@ export function DrawerStack({ navigation, route }) {
       name: "About us",
       component: AboutUs,
       iconName: "question",
-      drawerItemStyle: { marginTop: 400 },
+      drawerItemStyle: { marginTop: 300, },
     },
     {
       name: "MoreAboutUs",
