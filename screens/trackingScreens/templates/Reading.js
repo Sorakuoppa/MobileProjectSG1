@@ -76,6 +76,7 @@ export default function Reading({ template, navigation }) {
       <ScrollView contentContainerStyle={{ width: "95%" }}>
         {readingData.map((milestone, index) => (
           <MilestoneComponent
+            type={"undefined"}
             key={index}
             text={milestone.title}
             numeric={milestone.numeric}
