@@ -24,6 +24,7 @@ export default async function addToFirebase(object, type, trackerName, progress,
       let key2 = "type" + counter;
       let key3 = "name" + counter;
       let key4 = "progress" + counter;
+      let key5 = "icon" + counter;
 
       while (await AsyncStorage.getItem(key)) {
         counter++;
@@ -31,12 +32,14 @@ export default async function addToFirebase(object, type, trackerName, progress,
         key2 = "type" + counter;
         key3 = "name" + counter;
         key4 = "progress" + counter;
+        key5 = "icon" + counter;
       }
       
       await AsyncStorage.setItem(key, JSON.stringify(object));
       await AsyncStorage.setItem(key2, type);
       await AsyncStorage.setItem(key3, trackerName);
       await AsyncStorage.setItem(key4, progress.toString());
+      await AsyncStorage.setItem(key5, icon);
     } catch (e) {
       console.error("Error adding document: ", e);
     }

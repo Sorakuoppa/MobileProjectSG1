@@ -32,17 +32,20 @@ async function getTrackersFromAsyncStorage() {
         const typeKey = key.replace("tracker", "type");
         const nameKey = key.replace("tracker", "name");
         const progressKey = key.replace("tracker", "progress");
+        const iconKey = key.replace("tracker", "icon");
         
         const object = await AsyncStorage.getItem(objectKey);
         const type = await AsyncStorage.getItem(typeKey);
         const name = await AsyncStorage.getItem(nameKey);
         const progress= await AsyncStorage.getItem(progressKey)
+        const icon = await AsyncStorage.getItem(iconKey)
         
         storedData.push({
           milestones: JSON.parse(object),
           type,
           name,
-          progress
+          progress,
+          icon
         });
       }
     }
