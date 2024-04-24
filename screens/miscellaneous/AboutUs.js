@@ -21,8 +21,8 @@ export default function AboutUs({ navigation }) {
     { name: "Samuli Ruotsalainen", role: "Lead Developer", image: SamuliImage },
   ];
 
-  const handleMemberPress = (memberName) => {
-    navigation.navigate("MoreAboutUs", { name: memberName });
+  const handleMemberPress = (memberName, memberImage) => {
+    navigation.navigate("MoreAboutUs", { name: memberName, image: memberImage });
   };
 
   return (
@@ -48,7 +48,7 @@ export default function AboutUs({ navigation }) {
         {members.map((member, index) => (
           <TouchableOpacity
             key={index}
-            onPress={() => handleMemberPress(member.name)}
+            onPress={() => handleMemberPress(member.name, member.image)}
           >
             <View
               style={{
