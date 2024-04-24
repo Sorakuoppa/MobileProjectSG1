@@ -30,7 +30,7 @@ export default function AboutUs({ navigation }) {
       name: "Matti Pitkänen",
       role: "Lead Developer",
       image: MattiImage,
-      link: "",
+      link: "https://www.linkedin.com/in/matti-pitk%C3%A4nen-963552244/",
     },
     {
       name: "Roosa Rautio",
