@@ -40,7 +40,6 @@ export default function Reading({ template, navigation }) {
       await addToFirebase(objectList, "Reading", newName, 0, template.icon);
       setTrackerName("");
       navigation.navigate("Trackers", {refresh: true});
-      alert('Succesfully created tracker!')
     } else {
       alert("Please select at least one milestone to add this tracker");
     }
