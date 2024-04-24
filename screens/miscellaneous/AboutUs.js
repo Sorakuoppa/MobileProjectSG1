@@ -14,11 +14,36 @@ export default function AboutUs({ navigation }) {
   const { colors } = useTheme();
 
   const members = [
-    { name: "Timo Hyttinen", role: "UI/UX Designer", image: TimoImage, link: "" },
-    { name: "Severi Jokelainen", role: "Lead Developer", image: SeveriImage, link: ""  },
-    { name: "Matti Pitkänen", role: "Lead Developer", image: MattiImage, link: ""  },
-    { name: "Roosa Rautio", role: "UI/UX Designer", image: RoosaImage, link: "https://www.linkedin.com/in/roosa-r-02630610a/"  },
-    { name: "Samuli Ruotsalainen", role: "Lead Developer", image: SamuliImage, link: ""  },
+    {
+      name: "Timo Hyttinen",
+      role: "UI/UX Designer",
+      image: TimoImage,
+      link: "",
+    },
+    {
+      name: "Severi Jokelainen",
+      role: "Lead Developer",
+      image: SeveriImage,
+      link: "https://www.linkedin.com/in/severi-jokelainen-4783a024b/",
+    },
+    {
+      name: "Matti Pitkänen",
+      role: "Lead Developer",
+      image: MattiImage,
+      link: "",
+    },
+    {
+      name: "Roosa Rautio",
+      role: "UI/UX Designer",
+      image: RoosaImage,
+      link: "https://www.linkedin.com/in/roosa-r-02630610a/",
+    },
+    {
+      name: "Samuli Ruotsalainen",
+      role: "Lead Developer",
+      image: SamuliImage,
+      link: "",
+    },
   ];
 
   const handleMemberPress = (memberName, memberImage, memberLink) => {

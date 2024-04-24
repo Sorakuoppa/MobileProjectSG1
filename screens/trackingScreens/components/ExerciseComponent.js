@@ -30,7 +30,9 @@ export default function ExerciseComponent({ tracker, navigation }) {
           justifyContent: "center",
           alignItems: "center",
         }}
-        onPress={() => navigation.navigate("ExerciseScreen", {tracker: tracker})}
+        onPress={() =>
+          navigation.navigate("ExerciseScreen", { tracker: tracker })
+        }
       >
         <View
           style={{
@@ -40,12 +42,12 @@ export default function ExerciseComponent({ tracker, navigation }) {
           }}
         >
           <Text style={{ ...templateStyle.exerciseText, color: colors.text }}>
-            Workouts
-            <Icon 
-              name="arrow-right" 
-              size={20} 
-              color={colors.text} 
-              style={{marginLeft: 10}}
+            Workouts {" "}
+            <Icon
+              name="arrow-right"
+              size={20}
+              color={colors.primary}
+              style={{ marginLeft: 10 }}
             />
           </Text>
         </View>
