@@ -49,7 +49,7 @@ export default function MoreAboutUs({ navigation, route }) {
           </Text>
           {link && (
             <TouchableOpacity onPress={handleLinkedInPress}>
-              <Text style={{ color: colors.primary, textDecorationLine: 'underline', marginTop: 10, marginLeft: 10}}>
+              <Text style={{ color: colors.primary, textDecorationLine: 'underline', marginTop: 10, marginLeft: 10, marginBottom: 30, fontWeight: 'bold'}}>
                 Go to LinkedIn
               </Text>
             </TouchableOpacity>

@@ -64,9 +64,9 @@ export default function AboutUs({ navigation }) {
         style={{
           color: colors.text,
           marginBottom: 20,
-          paddingLeft: 10,
-          paddingRight: 10,
-          textAlign: "center",
+          paddingLeft: 20,
+          paddingRight: 20,
+          textAlign: "justify",
           fontFamily: "Gantari",
         }}
       >
