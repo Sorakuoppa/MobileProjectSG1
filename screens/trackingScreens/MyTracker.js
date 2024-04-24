@@ -51,7 +51,6 @@ export default function MyTracker({ route, navigation }) {
           tracker.name
         );
         await deleteDoc(docRef);
-        Alert.alert("Tracker deleted from database");
         navigation.navigate("Trackers", { refresh: true });
       } catch (error) {
         console.error("Error deleting tracker from database:", error);
@@ -66,7 +65,7 @@ export default function MyTracker({ route, navigation }) {
       <Text style={{ ...general.title, color: colors.text }}>
         {tracker.name}
       </Text>
-      <ProgressComponent tracker={tracker} />
+      <ProgressComponent tracker={tracker} navigation={navigation} route={route} />
       <Button
         children="Delete tracker"
         mode="contained"
