@@ -6,7 +6,8 @@ import { collection,  doc,  getDocs, query, updateDoc, where } from '@firebase/f
 import { useLoginContext } from '../../components/Contexts/LoginContext';
 import * as ImagePicker from 'expo-image-picker';
 import UploadImage, { deleteProfilePicture } from '../../components/AccountComponents/ImageManagement';
-import avatar from '../../assets/avatar.png'
+import avatar from '../../assets/avatar/2.png'
+import avatars from '../../assets/avatar'; // valmiit avatarit
 import { useTheme } from "@react-navigation/native";
 import { updateEmail, updatePassword } from 'firebase/auth';
 import { Modal } from 'react-native';
@@ -327,14 +328,14 @@ if (isUserDataLoading) {
         <View>
           <TouchableOpacity onPress={selectImage}>
             <View>
-              <Surface style={{borderRadius: 90, backgroundColor: colors.accent}} elevation={3}>
+              <Surface style={{borderRadius: 120, backgroundColor: colors.accent, padding: 5}} elevation={3}>
                 {!isLoading ?  <Image
                   source={
                     userData.profilePicture
                       ? { uri: userData.profilePicture }
                       : avatar
                   }
-                  style={manageAccountStyle.image}
+                  style={{...manageAccountStyle.image}}
                 /> :
                 <ActivityIndicator
             animating={true}
