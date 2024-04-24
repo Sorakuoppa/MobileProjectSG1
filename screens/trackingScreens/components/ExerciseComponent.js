@@ -20,35 +20,19 @@ export default function ExerciseComponent({ tracker }) {
     setCollapsedState(newCollapsedState);
   };
   return (
-    <>
-      {tracker.milestones.map((exercise, index) => (
-        <TouchableOpacity
-          onPress={() => toggleCollapsed(index)}
-          style={{
-            ...templateStyle.exerciseContainer,
-            flexDirection: "column",
-            borderColor: colors.primary,
-            backgroundColor: colors.accent,
-          }}
-          key={index}
-        >
-          <View style={templateStyle.exerciseTitle}>
-            <Text style={{ color: colors.text }}> {exercise.name} </Text>
-            <Checkbox
-              status={checked ? "checked" : "unchecked"}
-              onPress={() => {}}
-              color={colors.primary}
-              uncheckedColor={colors.text}
-            />
-          </View>
-          <ExerciseCollapsible
-            key={index}
-            exercise={exercise}
-            collapse={collapsedState[index]}
-            toggleCollapsed={() => toggleCollapsed(index)}
-          />
-        </TouchableOpacity>
-      ))}
-    </>
+    <TouchableOpacity
+      style={{
+        ...templateStyle.exerciseContainer,
+        backgroundColor: colors.accent,
+        borderColor: colors.primary,
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <View>
+        <Text style={{ color: colors.text }}>Workouts</Text>
+      </View>
+    </TouchableOpacity>
   );
 }

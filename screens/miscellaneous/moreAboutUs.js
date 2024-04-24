@@ -1,10 +1,10 @@
-import { createStackNavigator } from '@react-navigation/stack';
-const Stack = createStackNavigator();
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 
-export const MainNavigator = () => {
+export default function MoreAboutUs() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="moreAboutUs" component={moreAboutUs} />
-    </Stack.Navigator>
+    <View>
+      <Text>More About Us</Text>
+    </View>
   );
-};
+}

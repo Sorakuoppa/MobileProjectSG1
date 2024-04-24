@@ -21,23 +21,24 @@ export default function MyTracker({ route, navigation }) {
   const { colors } = useTheme();
   const { loginState } = useLoginContext();
 
-
   // Function used for deleting single trackers from both asyncStorage and database
   const deleteTracker = async () => {
     if (!loginState) {
       try {
         const allKeys = await AsyncStorage.getAllKeys();
         const trackers = await AsyncStorage.multiGet(allKeys);
-        const foundTrackerIndex = trackers.findIndex((item) => item[1] === tracker.name);
+        const foundTrackerIndex = trackers.findIndex(
+          (item) => item[1] === tracker.name
+        );
         if (foundTrackerIndex !== -1) {
           // Delete all items associated with the found tracker index
-          const keysToDelete = trackers.filter((item) => item[0].includes(foundTrackerIndex));
+          const keysToDelete = trackers.filter((item) =>
+            item[0].includes(foundTrackerIndex)
+          );
           await AsyncStorage.multiRemove(keysToDelete.map((item) => item[0]));
-          alert('Successfully deleted your tracker.')
+          alert("Successfully deleted your tracker.");
           navigation.navigate("Trackers", { refresh: true });
-
         }
-        
       } catch (error) {
         console.error("Error deleting tracker from AsyncStorage:", error);
       }

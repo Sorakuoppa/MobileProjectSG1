@@ -21,7 +21,7 @@ export default function ProgressComponent({ tracker }) {
   const [progress, setProgress] = useState(0);
   const [milestones, setMilestones] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [foundLocalTrackerName, setFoundLocalTrackerName] = useState('');
+  const [foundLocalTrackerName, setFoundLocalTrackerName] = useState("");
   const { colors } = useTheme();
 
   let progressValue = 100 / milestones.length;
@@ -35,47 +35,54 @@ export default function ProgressComponent({ tracker }) {
 
   const fetchMilestones = async () => {
     if (auth.currentUser) {
-    try {
-      const docRef = doc(
-        db,
-        "trackers",
-        auth.currentUser.uid,
-        "trackers",
-        tracker.name
-      );
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        const progress = data.progress;
-        setProgress(progress);
-        setMilestones(data.milestones);
-      } else {
-        console.log("No such document!");
+      try {
+        const docRef = doc(
+          db,
+          "trackers",
+          auth.currentUser.uid,
+          "trackers",
+          tracker.name
+        );
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const progress = data.progress;
+          setProgress(progress);
+          setMilestones(data.milestones);
+        } else {
+          console.log("No such document!");
+        }
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-    else {
+    } else {
       try {
         // TÄMÄ LÖYTÄÄ NYKYISEN TRÄCKERIN ASYNC STORAGESTA.
         const allKeys = await AsyncStorage.getAllKeys();
         const trackers = await AsyncStorage.multiGet(allKeys);
-        const foundTrackerIndex = trackers.findIndex((item) => item[1] === tracker.name);
+        const foundTrackerIndex = trackers.findIndex(
+          (item) => item[1] === tracker.name
+        );
 
-        // Tbh en tiiä mihi noita keytä tarvitaa, mutta assignaa oikeat 
-        // Keypairit kyseiseen träckeriin 
+        // Tbh en tiiä mihi noita keytä tarvitaa, mutta assignaa oikeat
+        // Keypairit kyseiseen träckeriin
 
         const [, trackerName] = trackers[foundTrackerIndex]; // Extract the tracker name
-        const [progressKey, progressValue] = trackers.find((item) => item[0] === `progress${foundTrackerIndex}`);
-        const [typeKey, typeValue] = trackers.find((item) => item[0] === `type${foundTrackerIndex}`);
-        const [trackerKey, milestoneValue] = trackers.find((item) => item[0] === `tracker${foundTrackerIndex}`);
+        const [progressKey, progressValue] = trackers.find(
+          (item) => item[0] === `progress${foundTrackerIndex}`
+        );
+        const [typeKey, typeValue] = trackers.find(
+          (item) => item[0] === `type${foundTrackerIndex}`
+        );
+        const [trackerKey, milestoneValue] = trackers.find(
+          (item) => item[0] === `tracker${foundTrackerIndex}`
+        );
 
         // Parsitaan milestone valuet ja runnataan jo määritellyt funktiot niillä
-        console.log('progress value raw: ',typeof(progressValue));
-        const parsedTrackers = JSON.parse(milestoneValue)
+        console.log("progress value raw: ", typeof progressValue);
+        const parsedTrackers = JSON.parse(milestoneValue);
         setProgress(progressValue);
         setMilestones(parsedTrackers);
         // Now you have access to the related key-value pairs
@@ -120,9 +127,13 @@ export default function ProgressComponent({ tracker }) {
       try {
         const allKeys = await AsyncStorage.getAllKeys();
         const trackers = await AsyncStorage.multiGet(allKeys);
-        const foundTrackerIndex = trackers.findIndex((item) => item[1] === tracker.name);
+        const foundTrackerIndex = trackers.findIndex(
+          (item) => item[1] === tracker.name
+        );
         if (foundTrackerIndex !== -1) {
-          const [trackerKey, milestoneValue] = trackers.find((item) => item[0] === `tracker${foundTrackerIndex}`);
+          const [trackerKey, milestoneValue] = trackers.find(
+            (item) => item[0] === `tracker${foundTrackerIndex}`
+          );
           const parsedTrackerValue = JSON.parse(milestoneValue);
           const updatedTrackerValue = parsedTrackerValue.map((item) => {
             if (item.milestone === milestone.milestone) {
@@ -130,11 +141,20 @@ export default function ProgressComponent({ tracker }) {
             }
             return item;
           });
-          await AsyncStorage.setItem(`tracker${foundTrackerIndex}`, JSON.stringify(updatedTrackerValue));
-          
+          await AsyncStorage.setItem(
+            `tracker${foundTrackerIndex}`,
+            JSON.stringify(updatedTrackerValue)
+          );
+
           // Calculate new progress value based on the updated milestones
-          const newProgress = updatedTrackerValue.filter((item) => item.done).length / updatedTrackerValue.length * 100;
-          await AsyncStorage.setItem(`progress${foundTrackerIndex}`, newProgress.toString());
+          const newProgress =
+            (updatedTrackerValue.filter((item) => item.done).length /
+              updatedTrackerValue.length) *
+            100;
+          await AsyncStorage.setItem(
+            `progress${foundTrackerIndex}`,
+            newProgress.toString()
+          );
 
           // Update state with new progress value and updated milestones
           setProgress(newProgress);
