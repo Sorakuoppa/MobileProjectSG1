@@ -9,7 +9,7 @@ import { general } from "../../styles/general";
 import { ActivityIndicator, IconButton } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
   const { colors } = useTheme();
   const { loginState } = useLoginContext();
   const [trackerList, setTrackerList] = useState([]);
@@ -18,7 +18,7 @@ export default function Home({navigation}) {
   useFocusEffect(
     useCallback(() => {
       showTrackers();
-      return () => {};
+      return () => { };
     }, [loginState])
   );
 
@@ -64,13 +64,13 @@ export default function Home({navigation}) {
         <ActivityIndicator animating={true} color={colors.primary} size={80} />
       </View>
     );
-  } 
+  }
   return (
     <>
       {/* Card showing current date and progress */}
       <View style={{ backgroundColor: colors.background }}>
         <View style={{ alignItems: "center", paddingVertical: 20 }}>
-          <Text style={[homeStyles.card, homeStyles.header, { color: colors.text }]}> {currentDate()}</Text>
+          <Text style={[homeStyles.card, homeStyles.header, { color: colors.text }]}>Today is {currentDate()}</Text>
           <AnimatedCircularProgress
             size={120}
             width={20}
@@ -79,32 +79,42 @@ export default function Home({navigation}) {
             backgroundColor={colors.accent}
             style={{ marginBottom: 20, marginTop: 20 }}
           >
-            {() => <Text style={{ color: colors.text }}>{Math.round(progress)}%</Text>}
+            {() => <Text style={[homeStyles.header, { color: colors.text }]}>{Math.round(progress)}%</Text>}
           </AnimatedCircularProgress>
-          <Text style={{ color: colors.text }}>Progress: {completedMilestones} / {totalMilestones} Milestones completed!</Text>
+          <Text style={[homeStyles.progressText, { color: colors.text }]}>Progress: {completedMilestones} / {totalMilestones} Milestones completed!</Text>
         </View>
       </View>
-  
+
       {/* Individual tracker cards */}
       <ScrollView style={{ backgroundColor: colors.background }}>
         {trackerList.map((tracker, index) => (
           <Pressable key={index} onPress={() => trackerPress(tracker)}>
-          <View key={index} style={{ backgroundColor: colors.accent, padding: 20, marginBottom: 10 }}>
-            <Text style={{ color: colors.text }}>Name: {tracker.name}</Text>
-            <Text style={{ color: colors.text }}>Type: {tracker.type}</Text>
-            <View style={{alignContent: ''}}>
-            <Text style={{ color: colors.text }}>
-              Milestones: {tracker.milestones.filter(milestone => milestone.done).length} / {tracker.milestones.length}
-            </Text>
-            <IconButton
-        icon="information-outline"
-        iconColor={colors.primary}
-        size={30}
-        onPress={() => trackerPress(tracker)}
-      />
-      
-      </View>
-          </View>
+            <View key={index} style={[homeStyles.progressCard, { backgroundColor: colors.accent, borderColor: colors.primary }]}>
+              <Text style={[homeStyles.progressName, { color: colors.text }]}>Name: {tracker.name}</Text>
+              {/* <Text style={[homeStyles.progressName, { color: colors.text }]}>Type: {tracker.type}</Text> */}
+              <View style={[homeStyles.progressLine, { alignContent: '' }]}>
+                <Text style={[homeStyles.progressMilestone, { color: colors.text }]}>
+                  Milestones: {tracker.milestones.filter(milestone => milestone.done).length} / {tracker.milestones.length}
+                </Text>
+                <AnimatedCircularProgress
+                  size={60}
+                  width={8}
+                  animating= {"false"}
+                  fill={tracker.progress}
+                  tintColor={colors.primary}
+                  backgroundColor={colors.background}
+                  style={{ marginBottom: 5, marginTop: 5, marginRight: 5 }}
+                >
+                  {() => <Text style={[homeStyles.progressPercent, { color: colors.text }]}>{Math.round(tracker.progress)}%</Text>}
+                </AnimatedCircularProgress>
+              </View>
+              <IconButton
+                  icon="information-outline"
+                  iconColor={colors.primary}
+                  size={30}
+                  onPress={() => trackerPress(tracker)}
+                />
+            </View>
           </Pressable>
         ))}
       </ScrollView>

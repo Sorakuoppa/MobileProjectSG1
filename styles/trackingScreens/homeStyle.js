@@ -17,13 +17,27 @@ export const homeStyles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: "Gantari"
   },
-  progress: {
+  progressText: {
+    textAlign: 'center',
+    color: '#ffe8d3',
+    fontSize: 18,
+    fontWeight: 'bold',
+    fontFamily: "Gantari"
+  },
+  progressLine: {
     flex: 0.2,
-    borderRadius: 15,
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    textAlign: "center",
-    width: "80%",
+  },
+  progressCard: {
+    padding: 15,
+    margin: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    marginBottom: 10,
+    borderWidth: 1,
+    width: "90%",
   },
   progressDate: {
     fontSize: 20,
@@ -35,7 +49,11 @@ export const homeStyles = StyleSheet.create({
     fontFamily: "Gantari",
   },
   progressMilestone: {
-    fontSize: 20,
+    fontSize: 16,
+    fontFamily: "Gantari",
+  },
+  progressPercent: {
+    fontSize: 14,
     fontFamily: "Gantari",
   },
   progressBottomInfo: {
