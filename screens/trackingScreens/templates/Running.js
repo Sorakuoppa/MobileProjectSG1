@@ -73,6 +73,7 @@ export default function Running({ template, navigation }) {
       <ScrollView contentContainerStyle={{ width: "95%" }}>
         {runningData.map((milestone, index) => (
           <MilestoneComponent
+            type={"undefined"}
             key={index}
             text={milestone.title}
             numeric={milestone.numeric}

@@ -14,6 +14,7 @@ import AddNew from "../screens/trackingScreens/AddNew";
 import Home from "../screens/trackingScreens/Home";
 import Trackers from "../screens/trackingScreens/Trackers";
 import MyTracker from "../screens/trackingScreens/MyTracker";
+import ExerciseScreen from "../screens/trackingScreens/ExerciseScreen";
 import Templates from "../screens/trackingScreens/Templates";
 import Settings from "../screens/miscellaneous/Settings";
 import GetStarted from "../screens/miscellaneous/GetStarted";
@@ -201,6 +202,11 @@ export function DrawerStack({ navigation, route }) {
     {
       name: "MyTracker",
       component: MyTracker,
+      drawerItemStyle: { display: "none" },
+    },
+    {
+      name: "ExerciseScreen",
+      component: ExerciseScreen,
       drawerItemStyle: { display: "none" },
     },
     {

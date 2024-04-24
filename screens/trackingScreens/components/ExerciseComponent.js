@@ -7,10 +7,11 @@ import {
   templateStyle,
   addNewStyle,
 } from "../../../styles/trackingScreens/addNewStyle";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import MilestoneComponent from "./MilestoneComponent";
 import ExerciseCollapsible from "./ExerciseCollapsible";
 
-export default function ExerciseComponent({ tracker }) {
+export default function ExerciseComponent({ tracker, navigation }) {
   const [checked, setChecked] = useState(false);
   const { colors } = useTheme();
 
@@ -19,9 +20,6 @@ export default function ExerciseComponent({ tracker }) {
       (item) => item.type === "tracker"
     );
 
-    useEffect(() => {
-      console.log(filteredList);
-    }, [filteredList]);
 
 
   return (
@@ -32,6 +30,7 @@ export default function ExerciseComponent({ tracker }) {
           justifyContent: "center",
           alignItems: "center",
         }}
+        onPress={() => navigation.navigate("ExerciseScreen", {tracker: tracker})}
       >
         <View
           style={{
@@ -42,6 +41,12 @@ export default function ExerciseComponent({ tracker }) {
         >
           <Text style={{ ...templateStyle.exerciseText, color: colors.text }}>
             Workouts
+            <Icon 
+              name="arrow-right" 
+              size={20} 
+              color={colors.text} 
+              style={{marginLeft: 10}}
+            />
           </Text>
         </View>
       </TouchableOpacity>

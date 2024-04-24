@@ -88,6 +88,7 @@ export default function Exercise({ template, navigation }) {
         />
         {exerciseTrackers.map((tracker, index) => (
           <MilestoneComponent
+            type={"undefined"}
             key={index}
             text={tracker.name}
             numeric={tracker.numeric}

@@ -17,7 +17,7 @@ import ExerciseComponent from "./ExerciseComponent";
 import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function ProgressComponent({ tracker }) {
+export default function ProgressComponent({ tracker, navigation, route }) {
   const [progress, setProgress] = useState(0);
   const [milestones, setMilestones] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -198,7 +198,7 @@ export default function ProgressComponent({ tracker }) {
           }}
         >
           {tracker.type === "Exercise" && (
-            <ExerciseComponent tracker={tracker} />
+            <ExerciseComponent tracker={tracker} navigation={navigation}/>
           )}
           {tracker.type != "Exercise" &&
             milestones.map((milestone, index) => (

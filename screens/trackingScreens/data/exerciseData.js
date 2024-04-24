@@ -133,7 +133,7 @@ export const exerciseTrackers = [
     id: "19",
   },
   {
-    name: "Hours on gym",
+    name: "Hours spent on gym",
     type: "tracker",
     numeric: true,
     id: "23",
