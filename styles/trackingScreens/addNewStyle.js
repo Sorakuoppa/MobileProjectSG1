@@ -12,6 +12,7 @@ export const addNewStyle = StyleSheet.create({
   templateText: {
     fontSize: 15,
     width: "50%",
+    fontFamily: "Gantari",
   },
   templatesContainer: {
     justifyContent: "flex-start",
@@ -48,6 +49,14 @@ export const templateStyle = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "80%",
+  },
+  exerciseText: {
+    width: "100%",
+    textAlign: "center",
+    fontSize: 16,
+    fontFamily: "Gantari",
+    paddingBottom: 10,
+    paddingTop: 10,
   },
   milestones: {
     width: "95%",

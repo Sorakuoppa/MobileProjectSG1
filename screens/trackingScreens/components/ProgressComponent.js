@@ -194,6 +194,7 @@ export default function ProgressComponent({ tracker }) {
             alignItems: "center",
             marginTop: 10,
             paddingBottom: 20,
+            
           }}
         >
           {tracker.type === "Exercise" && (
