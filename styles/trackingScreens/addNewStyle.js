@@ -18,7 +18,6 @@ export const addNewStyle = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     width: "100%",
-    
   },
   ripple: {
     borderRadius: 20,
@@ -58,6 +57,19 @@ export const templateStyle = StyleSheet.create({
     paddingBottom: 10,
     paddingTop: 10,
   },
+  exerciseTableContainer: {
+    flexDirection: "row",
+    width: "45%",
+    justifyContent: "flex-start",
+    alignSelf: "center",
+  },
+  exerciseTableText: {
+    width: "auto",
+    fontFamily: "Gantari",
+    fontSize: 15,
+    padding: 10,
+    width: 100,
+  },
   milestones: {
     width: "95%",
     height: "auto",
@@ -85,7 +97,6 @@ export const modalStyle = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     borderWidth: 1,
-    
   },
   modalContent: {
     justifyContent: "space-between",
