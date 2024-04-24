@@ -1,6 +1,6 @@
 export const runningData = [
     {
-        title: "Run 1 mile",
+        title: "Run a mile",
         numeric: false,
         id: "1"
     },
@@ -20,17 +20,17 @@ export const runningData = [
         id: "4"
     },
     {
-        title: "Miles run",
+        title: "Track your miles",
         numeric: true,
         id: "5"
     },
     {
-        title: "Hours run",
+        title: "Track hours ran",
         numeric: true,
         id: "6"
     },
     {
-        title: "Minutes run",
+        title: "Track minutes ran",
         numeric: true,
         id: "8"
     }

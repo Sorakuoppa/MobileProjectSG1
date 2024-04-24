@@ -15,22 +15,22 @@ export const readingData = [
         id: "3"
     },
     {
-        title: "Book read!",
+        title: "Finish one book!",
         numeric: false,
         id: "4"
     },
     {
-        title: "Pages read",
+        title: "Track your pages",
         numeric: true,
         id: "5"
     },
     {
-        title: "Books read",
+        title: "Track your read books",
         numeric: true,
         id: "6"
     },
     {
-        title: "Hours read",
+        title: "Track your reading hours",
         numeric: true,
         id: "8"
     }
