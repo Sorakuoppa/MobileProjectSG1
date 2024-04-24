@@ -36,7 +36,6 @@ export default function MyTracker({ route, navigation }) {
             item[0].includes(foundTrackerIndex)
           );
           await AsyncStorage.multiRemove(keysToDelete.map((item) => item[0]));
-          alert("Successfully deleted your tracker.");
           navigation.navigate("Trackers", { refresh: true });
         }
       } catch (error) {
