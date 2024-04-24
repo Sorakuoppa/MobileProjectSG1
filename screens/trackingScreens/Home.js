@@ -6,8 +6,9 @@ import { useLoginContext } from "../../components/Contexts/LoginContext";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { homeStyles } from "../../styles/trackingScreens/homeStyle";
 import { general } from "../../styles/general";
-import { ActivityIndicator, IconButton } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 export default function Home({ navigation }) {
   const { colors } = useTheme();
@@ -90,7 +91,15 @@ export default function Home({ navigation }) {
         {trackerList.map((tracker, index) => (
           <Pressable key={index} onPress={() => trackerPress(tracker)}>
             <View key={index} style={[homeStyles.progressCard, { backgroundColor: colors.accent, borderColor: colors.primary }]}>
-              <Text style={[homeStyles.progressName, { color: colors.text }]}>Name: {tracker.name}</Text>
+              <View style={[homeStyles.progressLine, { alignContent: '' , marginBottom: 10}]}>
+              <Text style={[homeStyles.progressName, { color: colors.text }]}>{tracker.name}</Text>
+              <Icon
+                  name={tracker.icon}
+                  color={colors.primary}
+                  size={30}
+                  style={{marginRight: 20}}
+                />
+              </View>
               {/* <Text style={[homeStyles.progressName, { color: colors.text }]}>Type: {tracker.type}</Text> */}
               <View style={[homeStyles.progressLine, { alignContent: '' }]}>
                 <Text style={[homeStyles.progressMilestone, { color: colors.text }]}>
@@ -108,12 +117,6 @@ export default function Home({ navigation }) {
                   {() => <Text style={[homeStyles.progressPercent, { color: colors.text }]}>{Math.round(tracker.progress)}%</Text>}
                 </AnimatedCircularProgress>
               </View>
-              <IconButton
-                  icon="information-outline"
-                  iconColor={colors.primary}
-                  size={30}
-                  onPress={() => trackerPress(tracker)}
-                />
             </View>
           </Pressable>
         ))}
