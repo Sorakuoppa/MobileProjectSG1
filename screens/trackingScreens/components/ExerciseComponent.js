@@ -3,36 +3,57 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Checkbox, TextInput } from "react-native-paper";
 import Collapsible from "react-native-collapsible";
 import { useTheme } from "@react-navigation/native";
-import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
+import {
+  templateStyle,
+  addNewStyle,
+} from "../../../styles/trackingScreens/addNewStyle";
 import MilestoneComponent from "./MilestoneComponent";
 import ExerciseCollapsible from "./ExerciseCollapsible";
 
 export default function ExerciseComponent({ tracker }) {
-  const [collapsedState, setCollapsedState] = useState(
-    Array(tracker.milestones.length).fill(true)
-  );
   const [checked, setChecked] = useState(false);
   const { colors } = useTheme();
 
-  const toggleCollapsed = (index) => {
-    const newCollapsedState = [...collapsedState];
-    newCollapsedState[index] = !newCollapsedState[index];
-    setCollapsedState(newCollapsedState);
-  };
+
+    const filteredList = tracker.milestones.filter(
+      (item) => item.type === "tracker"
+    );
+
+    useEffect(() => {
+      console.log(filteredList);
+    }, [filteredList]);
+
+
   return (
-    <TouchableOpacity
-      style={{
-        ...templateStyle.exerciseContainer,
-        backgroundColor: colors.accent,
-        borderColor: colors.primary,
-        width: "100%",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <View>
-        <Text style={{ color: colors.text }}>Workouts</Text>
-      </View>
-    </TouchableOpacity>
+    <>
+      <TouchableOpacity
+        style={{
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            ...templateStyle.milestones,
+            backgroundColor: colors.accent,
+            borderColor: colors.primary,
+          }}
+        >
+          <Text style={{ ...templateStyle.exerciseText, color: colors.text }}>
+            Workouts
+          </Text>
+        </View>
+      </TouchableOpacity>
+      {filteredList.map((milestone, index) => (
+        <MilestoneComponent
+          key={index}
+          text={milestone.name}
+          type={milestone.type}
+          numeric={milestone.numeric}
+          isDone={milestone.done}
+        />
+      ))}
+    </>
   );
 }

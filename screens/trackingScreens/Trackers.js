@@ -128,7 +128,7 @@ export default function Trackers({ navigation }) {
                 }}
               >
                 <Icon name={tracker.icon} size={40} color={colors.primary} />
-                <Text style={{ color: colors.text, fontSize: 24 }}>
+                <Text style={{ color: colors.text, fontSize: 24, fontFamily: 'Gantari' }}>
                   {Math.round(tracker.progress)} %
                 </Text>
                 <Text
