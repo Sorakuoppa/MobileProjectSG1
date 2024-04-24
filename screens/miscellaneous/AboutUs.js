@@ -16,38 +16,43 @@ export default function AboutUs({ navigation }) {
   const members = [
     {
       name: "Timo Hyttinen",
+      fname: "Timo",
       role: "UI/UX Designer",
       image: TimoImage,
       link: "",
     },
     {
       name: "Severi Jokelainen",
+      fname: "Severi",
       role: "Lead Developer",
       image: SeveriImage,
       link: "https://www.linkedin.com/in/severi-jokelainen-4783a024b/",
     },
     {
       name: "Matti Pitkänen",
+      fname: "Matti",
       role: "Lead Developer",
       image: MattiImage,
       link: "https://www.linkedin.com/in/matti-pitk%C3%A4nen-963552244/",
     },
     {
       name: "Roosa Rautio",
+      fname: "Roosa",
       role: "UI/UX Designer",
       image: RoosaImage,
       link: "https://www.linkedin.com/in/roosa-r-02630610a/",
     },
     {
       name: "Samuli Ruotsalainen",
+      fname: "Samuli",
       role: "Lead Developer",
       image: SamuliImage,
       link: "",
     },
   ];
 
-  const handleMemberPress = (memberName, memberImage, memberLink) => {
-    navigation.navigate("MoreAboutUs", { name: memberName, image: memberImage, link: memberLink});
+  const handleMemberPress = (memberName, memberFname, memberImage, memberLink) => {
+    navigation.navigate("MoreAboutUs", { name: memberName, fname: memberFname, image: memberImage, link: memberLink});
   };
   
 
@@ -75,7 +80,7 @@ export default function AboutUs({ navigation }) {
         {members.map((member, index) => (
           <TouchableOpacity
             key={index}
-            onPress={() => handleMemberPress(member.name, member.image, member.link)}
+            onPress={() => handleMemberPress(member.name, member.fname, member.image, member.link)}
           >
             <View
               style={{

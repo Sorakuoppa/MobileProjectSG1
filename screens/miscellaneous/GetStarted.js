@@ -26,7 +26,7 @@ export default function GetStarted() {
       style={startedStyle.container}
     >
       <Image
-        source={require("../../assets/logos/onTrack_dark_theme.png")}
+        source={require("../../assets/logos/StartupLogo.png")} 
         style={{ width: 250, height: 200, marginBottom: 20 }}
       />
       <View style={startedStyle.content}>

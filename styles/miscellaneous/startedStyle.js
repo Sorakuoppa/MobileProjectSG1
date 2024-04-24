@@ -17,7 +17,7 @@ export const startedStyle = StyleSheet.create({
       fontFamily: "Gantari"
     },
     welcomeText: {
-        textAlign: 'justify',
+        textAlign: 'center',
         marginBottom: 20,
         padding: 20,
         fontSize: 18,
