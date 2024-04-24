@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Linking } from "react-native";
 import { general } from "../../styles/general";
 import { useTheme } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -14,16 +14,18 @@ export default function AboutUs({ navigation }) {
   const { colors } = useTheme();
 
   const members = [
-    { name: "Timo Hyttinen", role: "UI/UX Designer", image: TimoImage },
-    { name: "Severi Jokelainen", role: "Lead Developer", image: SeveriImage },
-    { name: "Matti Pitkänen", role: "Lead Developer", image: MattiImage },
-    { name: "Roosa Rautio", role: "UI/UX Designer", image: RoosaImage },
-    { name: "Samuli Ruotsalainen", role: "Lead Developer", image: SamuliImage },
+    { name: "Timo Hyttinen", role: "UI/UX Designer", image: TimoImage, link: "" },
+    { name: "Severi Jokelainen", role: "Lead Developer", image: SeveriImage, link: ""  },
+    { name: "Matti Pitkänen", role: "Lead Developer", image: MattiImage, link: ""  },
+    { name: "Roosa Rautio", role: "UI/UX Designer", image: RoosaImage, link: "https://www.linkedin.com/in/roosa-r-02630610a/"  },
+    { name: "Samuli Ruotsalainen", role: "Lead Developer", image: SamuliImage, link: ""  },
   ];
 
-  const handleMemberPress = (memberName, memberImage) => {
-    navigation.navigate("MoreAboutUs", { name: memberName, image: memberImage });
+  const handleMemberPress = (memberName, memberImage, memberLink) => {
+    navigation.navigate("MoreAboutUs", { name: memberName, image: memberImage, link: memberLink});
   };
+  
+
 
   return (
     <View style={general.scaffold}>
@@ -48,7 +50,7 @@ export default function AboutUs({ navigation }) {
         {members.map((member, index) => (
           <TouchableOpacity
             key={index}
-            onPress={() => handleMemberPress(member.name, member.image)}
+            onPress={() => handleMemberPress(member.name, member.image, member.link)}
           >
             <View
               style={{
