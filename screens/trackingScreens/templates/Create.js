@@ -59,6 +59,7 @@ export default function Create({ template, navigation }) {
       <Text style={{ ...general.title, color: colors.text }}>
         Create your own tracker
       </Text>
+      <ScrollView>
       <Text
         style={{ color: colors.text, alignSelf: "flex-start", marginLeft: 20 }}
       >
@@ -127,14 +128,8 @@ export default function Create({ template, navigation }) {
         style={{ width: "95%", margin: 10 }}
         onPress={() => addMilestone(milestoneName, value)}
       />
-      <Button
-        children="Create Tracker"
-        mode="contained"
-        buttonColor={colors.primary}
-        style={{ width: "95%", margin: 10 }}
-        onPress={() => createTracker()}
-      />
-      <ScrollView>
+      
+      <View>
         {milestoneList.map((milestone, index) => (
           <MilestoneComponent
             key={index}
@@ -146,7 +141,16 @@ export default function Create({ template, navigation }) {
             isDone={false}
           />
         ))}
+      </View>
+      <Button
+        children="Create Tracker"
+        mode="contained"
+        buttonColor={colors.primary}
+        style={{ width: "95%", margin: 10 }}
+        onPress={() => createTracker()}
+      />
       </ScrollView>
+
     </View>
   );
 }
