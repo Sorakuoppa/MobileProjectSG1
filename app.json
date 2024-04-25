@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -19,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.serveriii.progresstracker"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -28,9 +31,16 @@
       [
         "expo-font",
         {
-          "fonts": [".assets/fonts/Gantari.ttf"]
+          "fonts": [
+            ".assets/fonts/Gantari.ttf"
+          ]
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "99d9bc25-8a62-4ea1-8a55-8b0240948c78"
+      }
+    }
   }
 }
