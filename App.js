@@ -1,11 +1,11 @@
 import "react-native-gesture-handler";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar, useColorScheme } from "react-native";
 import { DrawerStack, MainNavigator } from "./components/ScreenStack";
 import { PaperProvider } from "react-native-paper";
 import { NavigationContainer, useTheme } from "@react-navigation/native";
 import { ThemeContext } from "./components/Contexts/ThemeContext";
-import { useFonts } from "expo-font";
+import * as Font from "expo-font";
 import {
   darkColors,
   lightColors,
@@ -19,14 +19,24 @@ import { LoadingProvider } from "./components/Contexts/ProfilePictureLoadingCont
 export default function App() {
   const [theme, setTheme] = useState("dark");
   //Custom fonts can be added to this list
-  const [fontsLoaded] = useFonts({
-    Gantari: require("./assets/fonts/Gantari.ttf"),
-  });
+ const [fontLoaded, setFontLoaded] = useState(false);
+
+useEffect(() => {
+  async function loadFont() {
+    await Font.loadAsync({
+      Gantari: require("./assets/fonts/Gantari.ttf"),
+    });
+
+    setFontLoaded(true);
+  }
+
+  loadFont();
+}, []);
 
   //Detects the device's color scheme
   // const scheme = useColorScheme();
 
-  if (!fontsLoaded) {
+  if (!fontLoaded) {
     return null;
   }
 
