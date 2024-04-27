@@ -29,12 +29,7 @@
     },
     "plugins": [
       [
-        "expo-font",
-        {
-          "fonts": [
-            ".assets/fonts/Gantari.ttf"
-          ]
-        }
+        "expo-font"
       ]
     ],
     "extra": {
