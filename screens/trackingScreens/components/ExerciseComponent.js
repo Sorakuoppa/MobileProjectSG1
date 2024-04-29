@@ -59,6 +59,8 @@ export default function ExerciseComponent({ tracker, navigation }) {
           type={milestone.type}
           numeric={milestone.numeric}
           isDone={milestone.done}
+          onCheck={() => {}}
+          onUncheck={() => {}}
         />
       ))}
     </>

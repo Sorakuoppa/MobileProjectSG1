@@ -8,6 +8,7 @@ import {
   templateStyle,
   addNewStyle,
 } from "../../styles/trackingScreens/addNewStyle";
+import { onIdChange } from "firebase/installations";
 
 export default function ExerciseScreen({ route }) {
   const [legCollapse, setLegCollapse] = useState(true);
@@ -45,6 +46,7 @@ export default function ExerciseScreen({ route }) {
 
         {legDay.map((item, index) => (
           <View
+          key={index}
             style={{
               flexDirection: "row",
               justifyContent: "flex-start",
@@ -56,7 +58,6 @@ export default function ExerciseScreen({ route }) {
                 color: colors.text,
                 marginRight: 20,
               }}
-              key={index}
             >
               {item.name + " "}
             </Text>
