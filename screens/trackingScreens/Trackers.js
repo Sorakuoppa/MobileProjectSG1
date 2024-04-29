@@ -173,13 +173,13 @@ export default function Trackers({ navigation }) {
           </Dialog>
         </Portal>
         {/* Button for testing asyncStorage */}
-     {  /*  <Button
+      <Button
           children="Show asyncStorage"
           mode="contained"
           buttonColor={colors.primary}
           onPress={showAsyncStorage}
         />
-       */ }
+      
     
       </View> 
     );
