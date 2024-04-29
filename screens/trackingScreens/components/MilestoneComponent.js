@@ -87,8 +87,7 @@ export default function MilestoneComponent({
 
   if (numericMilestone === true && type === "tracker") {
     return (
-      <TouchableOpacity
-        onPress={handleCheck}
+      <View
         style={{
           width: "100%",
           justifyContent: "center",
@@ -131,7 +130,7 @@ export default function MilestoneComponent({
             />
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   }
 
