@@ -31,6 +31,17 @@ export default function MilestoneComponent({
     }
   };
 
+  const handleNumeric = (value, icon) => {
+    if (icon === "minus") {
+      setNumericAmount(value);
+      onUncheck();
+    }
+    if (icon === "plus") {
+      setNumericAmount(value);
+      onCheck();
+    }
+  };
+
   if (numericMilestone && type === "undefined") {
     return (
       <TouchableOpacity
@@ -100,14 +111,14 @@ export default function MilestoneComponent({
               icon="minus"
               iconColor={colors.primary}
               style={{ marginRight: 10 }}
-              onPress={() => setNumericAmount(numericAmount - 1)}
+              onPress={() => handleNumeric(numericAmount - 1, "minus")}
             />
             <TextInput
               mode="outlined"
               selectionColor={colors.primary}
               activeOutlineColor={colors.primary}
               dense={true}
-              style={{ width: 50, height: 40 }}
+              style={{ width: 50, height: 35, padding: 5 }}
               keyboardType="numeric"
             >
               {numericAmount}
@@ -116,7 +127,7 @@ export default function MilestoneComponent({
               icon="plus"
               iconColor={colors.primary}
               style={{ marginRight: 10 }}
-              onPress={() => setNumericAmount(numericAmount + 1)}
+              onPress={() => handleNumeric(numericAmount + 1, "plus")}
             />
           </View>
         </View>
