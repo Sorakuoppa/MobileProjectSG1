@@ -136,7 +136,7 @@ function ScreenStack() {
 
 export function DrawerStack({ navigation, route }) {
   const { loginState, username } = useLoginContext(); // Get the function to update login state from the context
-  const { theme } = useContext(ThemeContext);
+  const  theme  = useContext(ThemeContext);
   const getHeaderTitle = (route, loginState, username) => {
     if (loginState) {
       return `Welcome ${username}!`;
@@ -147,6 +147,10 @@ export function DrawerStack({ navigation, route }) {
   useEffect(() => {
     getHeaderTitle;
   }, [username]);
+
+  useEffect(() => {
+    theme.setTheme("dark");
+  }, []);
 
   useEffect(() => {
     // Check the login state every time the drawer stack mounts
@@ -294,5 +298,6 @@ export function DrawerStack({ navigation, route }) {
 }
 export function MainNavigator() {
   const { firstTimeLoaded } = useLoaded();
+
   return <>{firstTimeLoaded ? <DrawerStack /> : <InitialStackScreen />}</>;
 }
