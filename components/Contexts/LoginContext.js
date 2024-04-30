@@ -16,12 +16,14 @@ export const LoginProvider = ({ children }) => {
     const unsubscribe = auth.onAuthStateChanged( async (user) => {
       if (user) {
          await fetchUserData(user.email)
+         setIsLoading(false); 
       } else {
         // No user is signed in.
         // Clear user email and set login state to false
         setUserEmail('');
         setUsername('')
         setLoginState(false);
+        setIsLoading(false); 
       }
     });
     return unsubscribe;
@@ -36,14 +38,11 @@ export const LoginProvider = ({ children }) => {
         const snapshotResult = doc.data()
         setUserEmail(snapshotResult.email);
         setUsername(snapshotResult.username)
-        setLoginState(true);
             });
-      
+            setLoginState(true);
     } catch (error) {
       console.error('Error fetching user data:', error.message);
-    } finally {
-      setIsLoading(false); 
-    }
+    } 
   }
 
  
