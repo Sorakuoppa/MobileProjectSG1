@@ -69,6 +69,7 @@ export default function ManageAccount() {
 
   const takePictureWithCamera = async () => {
     try {
+      console.log(cameraStatus);
       if (cameraStatus.granted) {
         const result = await ImagePicker.launchCameraAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -78,7 +79,16 @@ export default function ManageAccount() {
         });
         handleImagePickerResult(result);
       } else {
-        await requestCameraPermission();
+        const status = await requestCameraPermission();
+        if (status.granted) {
+          const result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+          });
+          handleImagePickerResult(result);
+      }
       }
     } catch (error) {
       console.log('Error taking picture:', error);
@@ -88,6 +98,7 @@ export default function ManageAccount() {
   
   const chooseFromGallery = async () => {
     try {
+      console.log(mediaLibararyStatus);
       if (mediaLibararyStatus.granted) {
         const result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -97,13 +108,23 @@ export default function ManageAccount() {
         });
         handleImagePickerResult(result);
       } else {
-        await requestMediaPermission();
+        const status = await requestMediaPermission();
+        if (status.granted) {
+          const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+          });
+          handleImagePickerResult(result);
       }
-    } catch (error) {
+    }
+  } catch (error) {
       console.log('ImagePicker Error:', error);
       // Handle specific errors if needed
     }
-  };
+  }
+;
   
   const handleImagePickerResult = async (result) => {
     const uri = result.assets[0].uri;

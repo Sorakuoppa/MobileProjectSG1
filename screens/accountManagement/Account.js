@@ -5,7 +5,7 @@ import { db  } from '../../components/FirebaseComponents/FirebaseConfig';
 import { collection,  getDocs, query, where } from '@firebase/firestore';
 import { useLoginContext } from '../../components/Contexts/LoginContext';
 import { accountStyle } from '../../styles/accountManagementStyles/accountStyle';
-import avatar from '../../assets/avatar.png'
+import avatar from '../../assets/avatar/2.png'
 import { useIsFocused, useTheme } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator } from "react-native-paper";
