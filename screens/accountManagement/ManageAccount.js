@@ -69,7 +69,6 @@ export default function ManageAccount() {
 
   const takePictureWithCamera = async () => {
     try {
-      // Check if camera permissions are granted
       if (cameraStatus.granted) {
         const result = await ImagePicker.launchCameraAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -77,35 +76,18 @@ export default function ManageAccount() {
           aspect: [4, 3],
           quality: 1,
         });
-        const uri = result.assets[0].uri;
-        console.log('URI Logged', uri);
-        if (!result.canceled && uri) {
-          // Upload the taken picture to Firebase Storage and update user data
-          await UploadImage(uri, setIsLoading);
-          setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
-          setModalVisible(false);
-        }
-      } else if (!cameraStatus.granted) {
-        // Request camera permissions
-        const { status } = await requestCameraPermission();
-        if (status.granted) {
-          // If permissions granted, proceed to take picture
-          takePictureWithCamera();
-        } else {
-          Alert.alert('Camera permissions are required to take a photo.');
-        }
+        handleImagePickerResult(result);
       } else {
-        Alert.alert('Camera permissions are required to take a photo.');
+        await requestCameraPermission();
       }
     } catch (error) {
       console.log('Error taking picture:', error);
+      // Handle specific errors if needed
     }
   };
-
-
+  
   const chooseFromGallery = async () => {
     try {
-      // Check if media library permissions are granted
       if (mediaLibararyStatus.granted) {
         const result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -113,28 +95,23 @@ export default function ManageAccount() {
           aspect: [4, 3],
           quality: 1,
         });
-        const uri = result.assets[0].uri;
-        if (!result.canceled && uri) {
-          // Upload the selected picture to Firebase Storage and update user data
-          await UploadImage(uri, setIsLoading);
-          setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
-          setModalVisible(false);
-        }
-      } else if (!mediaLibararyStatus.granted) {
-        // Request media library permissions
-        const { status } = await requestMediaPermission();
-        console.log(status);
-        if (status.granted) {
-          // If permissions granted, proceed to choose from gallery
-          chooseFromGallery();
-        } else {
-          Alert.alert('Media library permissions are required to choose a photo.');
-        }
+        handleImagePickerResult(result);
       } else {
-        Alert.alert('Media library permissions are required to choose a photo.');
+        await requestMediaPermission();
       }
     } catch (error) {
       console.log('ImagePicker Error:', error);
+      // Handle specific errors if needed
+    }
+  };
+  
+  const handleImagePickerResult = async (result) => {
+    const uri = result.assets[0].uri;
+    if (!result.canceled && uri) {
+      // Upload the selected picture to Firebase Storage and update user data
+      await UploadImage(uri, setIsLoading);
+      setUserData(prevUserData => ({ ...prevUserData, profilePicture: uri }));
+      setModalVisible(false);
     }
   };
   const deleteUserProfilePicture = async () => {
@@ -196,7 +173,6 @@ export default function ManageAccount() {
         if (user) {
           await updatePassword(user,newPassword);
           // Password updated successfully
-          Alert.alert('Success', 'Password updated successfully.');
           setNewPassword('')
         } else {
           // No user signed in
@@ -218,16 +194,19 @@ export default function ManageAccount() {
       setUserData(prevUserData => ({ ...prevUserData, username: newUsername }));
       setUsername(newUsername)
       setNewUsername('')
-      Alert.alert('Successfully updated username!')
       } catch (error) {
         console.log("Error updating username:", error);
       }
     };
   
     const openReauthModal = () => {
+      if (newEmail != '' || newPassword != '') {
       setIsModalVisible(true)
       setReAuthPassword('')
+    } else {
+      handleSave()
     }
+  }
 
     const handleReauthentication = async () => {
       setIsModalVisible(false)
@@ -285,8 +264,8 @@ export default function ManageAccount() {
       }
     };
     
-
-
+    
+   
     // Account detail change handling ends
 
 if (isUserDataLoading) {
@@ -425,6 +404,7 @@ if (isUserDataLoading) {
           <Pressable style={{...manageAccountStyle.button, backgroundColor: colors.primary, alignSelf: 'center'}} onPress={openReauthModal}>
           <Text>Save changes</Text>
           </Pressable>
+          
       {/* Modal for selecting image source */}
       <Modal
         animationType="slide"
@@ -528,7 +508,7 @@ if (isUserDataLoading) {
           onPress={() => setIsModalVisible(false)}
         />
       </TouchableOpacity>
-      <Text style={{ ...manageAccountStyle.text, color: colors.text, backgroundColor: colors.background, paddingBottom: 15, marginTop: 30 }}>Please re-enter your password</Text>
+      <Text style={{ ...manageAccountStyle.text, color: colors.text, backgroundColor: colors.background, paddingBottom: 15, marginTop: 30 }}>Please re-enter your current password</Text>
 
       <TextInput
         placeholder="Password"
