@@ -10,7 +10,7 @@ import {
 } from "../../styles/trackingScreens/addNewStyle";
 
 
-export default function ExerciseScreen({ route }) {
+export default function ExerciseScreen({ route, navigation }) {
   const [legCollapse, setLegCollapse] = useState(true);
   const [pullCollapse, setPullCollapse] = useState(true);
   const [pushCollapse, setPushCollapse] = useState(true);
