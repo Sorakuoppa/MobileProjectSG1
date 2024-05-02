@@ -19,7 +19,12 @@ export default function Running({ template, navigation }) {
   const onCheck = (text, numeric) => {
     let list = [...objectList];
     let newTrackerObject = {};
-    newTrackerObject = { milestone: text, done: false, numeric: numeric };
+    newTrackerObject = {
+      milestone: text,
+      done: false,
+      numeric: numeric,
+      numericValue: 0,
+    };
     list.push(newTrackerObject);
     setObjectList(list);
   };

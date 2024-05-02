@@ -10,6 +10,9 @@ export default function MilestoneComponent({
   onCheck,
   onUncheck,
   numeric,
+  numericValue,
+  decrease,
+  increase,
   isDone,
   type,
 }) {
@@ -20,6 +23,7 @@ export default function MilestoneComponent({
 
   useEffect(() => {
     setChecked(isDone);
+    setNumericAmount(numericValue);
   }, [isDone]);
 
   const handleCheck = () => {
@@ -35,13 +39,13 @@ export default function MilestoneComponent({
     if (icon === "minus") {
       setNumericAmount(value);
       if (numericAmount === 1111) {
-        onUncheck();
+        decrease();
       }
     }
     if (icon === "plus") {
       setNumericAmount(value);
       if (numericAmount === 11114) {
-        onCheck();
+        increase();
       }
     }
   };
@@ -105,11 +109,12 @@ export default function MilestoneComponent({
             borderColor: colors.primary,
           }}
         >
-          <Text style={{ color: colors.text, fontFamily: "Gantari" }}>
-            {text}
-          </Text>
+          <View style={{width: '40%'}}>
+            <Text style={{ color: colors.text, fontFamily: "Gantari" }}>
+              {text}
+            </Text>
+          </View>
           <View style={templateStyle.icons}>
-            {/* THIS HERE NEEDS BACKEND FUNCTIONALITY */}
             <IconButton
               icon="minus"
               iconColor={colors.primary}
@@ -123,14 +128,21 @@ export default function MilestoneComponent({
               dense={true}
               style={{ width: 50, height: 35, padding: 5 }}
               keyboardType="numeric"
-            >
-              {numericAmount}
-            </TextInput>
+              value={numericAmount.toString()}
+              onChangeText={(text) => setNumericAmount(text)}
+            />
+
             <IconButton
               icon="plus"
               iconColor={colors.primary}
               style={{ marginRight: 10 }}
               onPress={() => handleNumeric(numericAmount + 1, "plus")}
+            />
+            <Checkbox
+              status={checked ? "checked" : "unchecked"}
+              onPress={handleCheck}
+              color={colors.primary}
+              uncheckedColor={colors.text}
             />
           </View>
         </View>

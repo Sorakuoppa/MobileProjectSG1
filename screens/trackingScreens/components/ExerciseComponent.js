@@ -27,6 +27,7 @@ export default function ExerciseComponent({ tracker, navigation }) {
     (item) => item.type === "tracker"
   );
   setMilestones(filteredList);
+  console.log(tracker)
   }, [tracker.milestones]);
 
   let progressValue = 100 / milestones.length;
@@ -54,8 +55,7 @@ export default function ExerciseComponent({ tracker, navigation }) {
             return item;
           });
           await updateDoc(docRef, {
-            progress: updatedProgress,
-            milestones: updatedMilestones,
+            progress: updatedProgress
           });
         } else {
           console.log("No such document!");
@@ -102,6 +102,7 @@ export default function ExerciseComponent({ tracker, navigation }) {
           text={milestone.name}
           type={milestone.type}
           numeric={milestone.numeric}
+          numericValue={milestone.numericValue}
           isDone={milestone.done}
           onCheck={() => {
             updateFBProgress(progressValue, milestone);

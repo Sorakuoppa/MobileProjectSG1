@@ -113,29 +113,33 @@ export const exerciseData = [
 ];
 
 export const exerciseTrackers = [
-    // Additional trackers
+  // Additional trackers
   {
     name: "Workout completed",
     type: "tracker",
     numeric: false,
+    numericValue: 0,
     id: "18",
   },
   {
     name: "Five workouts this week",
     type: "tracker",
     numeric: false,
+    numericValue: 0,
     id: "20",
   },
   {
     name: "Sets completed",
     type: "tracker",
     numeric: true,
+    numericValue: 0,
     id: "19",
   },
   {
     name: "Hours spent on gym",
     type: "tracker",
     numeric: true,
+    numericValue: 0,
     id: "23",
-  }
+  },
 ];

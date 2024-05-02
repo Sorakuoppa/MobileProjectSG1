@@ -31,7 +31,7 @@ export default function Create({ template, navigation }) {
       alert("Please enter a name for the milestone");
       return;
     } else if (numeric === "Numeric") {
-      setMilestoneList([...milestoneList, { milestone: name, numeric: true, done: false }]);
+      setMilestoneList([...milestoneList, { milestone: name, numeric: true, numericValue: 0, done: false }]);
       setMilestoneName("");
     } else {
       setMilestoneList([...milestoneList, { milestone: name, numeric: false, done: false}]);

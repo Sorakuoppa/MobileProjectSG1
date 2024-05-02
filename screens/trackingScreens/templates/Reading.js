@@ -19,7 +19,12 @@ export default function Reading({ template, navigation }) {
   const onCheck = (text, numeric) => {
     let list = [...objectList];
     let newTrackerObject = {};
-    newTrackerObject = { milestone: text, done: false, numeric: numeric };
+    newTrackerObject = {
+      milestone: text,
+      done: false,
+      numeric: numeric,
+      numericValue: 0,
+    };
     list.push(newTrackerObject);
     setObjectList(list);
   };
@@ -39,7 +44,7 @@ export default function Reading({ template, navigation }) {
     if (objectList.length > 0) {
       await addToFirebase(objectList, "Reading", newName, 0, template.icon);
       setTrackerName("");
-      navigation.navigate("Trackers", {refresh: true});
+      navigation.navigate("Trackers", { refresh: true });
     } else {
       alert("Please select at least one milestone to add this tracker");
     }

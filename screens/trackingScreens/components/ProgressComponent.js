@@ -34,6 +34,7 @@ export default function ProgressComponent({ tracker, navigation, route }) {
   }, [tracker.name]);
 
   const fetchMilestones = async () => {
+   
     if (auth.currentUser) {
       try {
         const docRef = doc(
@@ -101,6 +102,7 @@ export default function ProgressComponent({ tracker, navigation, route }) {
   };
   // THIS NEEDS DIFFERENT FUNCTIONALITY FOR NUMERIC MILESTONES
   const updateFBProgress = async (value, milestone) => {
+    console.log(milestone.numeric)
     if (auth.currentUser) {
       try {
         const docRef = doc(
@@ -210,8 +212,10 @@ export default function ProgressComponent({ tracker, navigation, route }) {
                 text={milestone.milestone}
                 type="tracker"
                 numeric={milestone.numeric}
+                numericValue={milestone.numericValue}
                 onCheck={() => updateFBProgress(progressValue, milestone)}
                 onUncheck={() => updateFBProgress(-progressValue, milestone)}
+                decrease={() => {}}
                 isDone={milestone.done}
               />
             ))}
