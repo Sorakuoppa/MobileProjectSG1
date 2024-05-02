@@ -27,7 +27,6 @@ export default function ExerciseComponent({ tracker, navigation }) {
     (item) => item.type === "tracker"
   );
   setMilestones(filteredList);
-  console.log(tracker)
   }, [tracker.milestones]);
 
   let progressValue = 100 / milestones.length;

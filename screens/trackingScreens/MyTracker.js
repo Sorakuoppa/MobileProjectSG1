@@ -7,7 +7,6 @@ import ProgressComponent from "./components/ProgressComponent";
 import { useLoginContext } from "../../components/Contexts/LoginContext";
 import { general } from "../../styles/general";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { set } from "@firebase/database";
 import { deleteDoc, doc } from "@firebase/firestore";
 import { auth, db } from "../../components/FirebaseComponents/FirebaseConfig";
 

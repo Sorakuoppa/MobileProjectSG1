@@ -21,10 +21,6 @@ export default function ExerciseScreen({ route, navigation }) {
   const pullDay = tracker.milestones.filter((item) => item.type === "pull");
   const pushDay = tracker.milestones.filter((item) => item.type === "push");
 
-  useEffect(() => {
-    console.log(tracker);
-  }
-  , [legDay, pullDay, pushDay]);
 
   return (
     <View style={{ justifyContent: "space-between", flex: 1 }}>

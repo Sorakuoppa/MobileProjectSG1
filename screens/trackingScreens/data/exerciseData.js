@@ -119,6 +119,7 @@ export const exerciseTrackers = [
     type: "tracker",
     numeric: false,
     numericValue: 0,
+    done: false,
     id: "18",
   },
   {
@@ -126,6 +127,7 @@ export const exerciseTrackers = [
     type: "tracker",
     numeric: false,
     numericValue: 0,
+    done: false,
     id: "20",
   },
   {
@@ -133,6 +135,7 @@ export const exerciseTrackers = [
     type: "tracker",
     numeric: true,
     numericValue: 0,
+    done: false,
     id: "19",
   },
   {
@@ -140,6 +143,7 @@ export const exerciseTrackers = [
     type: "tracker",
     numeric: true,
     numericValue: 0,
+    done: false,
     id: "23",
   },
 ];

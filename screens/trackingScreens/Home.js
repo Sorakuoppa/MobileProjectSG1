@@ -19,7 +19,7 @@ export default function Home({ navigation }) {
   useFocusEffect(
     useCallback(() => {
       showTrackers();
-      return () => { };
+      return () => {};
     }, [loginState])
   );
 
@@ -31,6 +31,7 @@ export default function Home({ navigation }) {
     setIsLoading(true);
     try {
       const fetchedTrackers = await getTrackers(loginState);
+
       setTrackerList(fetchedTrackers);
     } catch (error) {
       console.error("Error fetching trackers:", error);
@@ -38,18 +39,25 @@ export default function Home({ navigation }) {
     setIsLoading(false);
   };
 
-
-
   let totalMilestones = 0;
   let completedMilestones = 0;
-  trackerList.forEach(tracker => {
-    totalMilestones += tracker.milestones.length;
-    completedMilestones += tracker.milestones.filter(milestone => milestone.done).length;
+  trackerList.forEach((tracker) => {
+    if (tracker.type === "Exercise") {
+      const filteredList = tracker.milestones.filter(
+        (item) => item.type === "tracker"
+      );
+      totalMilestones += filteredList.length;
+    } else {
+      totalMilestones += tracker.milestones.length;
+    }
+    completedMilestones += tracker.milestones.filter(
+      (milestone) => milestone.done
+    ).length;
   });
   const currentDate = () => {
     const date = new Date();
-    const options = { month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
+    const options = { month: "long", day: "numeric" };
+    return date.toLocaleDateString("en-US", options);
   };
 
   const progress = (completedMilestones / totalMilestones) * 100;
@@ -71,7 +79,11 @@ export default function Home({ navigation }) {
       {/* Card showing current date and progress */}
       <View style={{ backgroundColor: colors.background }}>
         <View style={{ alignItems: "center", paddingVertical: 20 }}>
-          <Text style={[homeStyles.card, homeStyles.header, { color: colors.text }]}>Today is {currentDate()}</Text>
+          <Text
+            style={[homeStyles.card, homeStyles.header, { color: colors.text }]}
+          >
+            Today is {currentDate()}
+          </Text>
           <AnimatedCircularProgress
             size={120}
             width={20}
@@ -80,9 +92,16 @@ export default function Home({ navigation }) {
             backgroundColor={colors.accent}
             style={{ marginBottom: 30, marginTop: 20 }}
           >
-            {() => <Text style={[homeStyles.header, { color: colors.text }]}>{Math.round(progress)}%</Text>}
+            {() => (
+              <Text style={[homeStyles.header, { color: colors.text }]}>
+                {Math.round(progress)}%
+              </Text>
+            )}
           </AnimatedCircularProgress>
-          <Text style={[homeStyles.progressText, { color: colors.text }]}>Progress: {completedMilestones} / {totalMilestones} Milestones completed!</Text>
+          <Text style={[homeStyles.progressText, { color: colors.text }]}>
+            Progress: {completedMilestones} / {totalMilestones} Milestones
+            completed!
+          </Text>
         </View>
       </View>
 
@@ -90,31 +109,68 @@ export default function Home({ navigation }) {
       <ScrollView style={{ backgroundColor: colors.background }}>
         {trackerList.map((tracker, index) => (
           <Pressable key={index} onPress={() => trackerPress(tracker)}>
-            <View key={index} style={[homeStyles.progressCard, { backgroundColor: colors.accent, borderColor: colors.primary }]}>
-              <View style={[homeStyles.progressLine, { alignContent: '' , marginBottom: 10}]}>
-              <Text style={[homeStyles.progressName, { color: colors.text }]}>{tracker.name}</Text>
-              <Icon
+            <View
+              key={index}
+              style={[
+                homeStyles.progressCard,
+                { backgroundColor: colors.accent, borderColor: colors.primary },
+              ]}
+            >
+              <View
+                style={[
+                  homeStyles.progressLine,
+                  { alignContent: "", marginBottom: 10 },
+                ]}
+              >
+                <Text style={[homeStyles.progressName, { color: colors.text }]}>
+                  {tracker.name}
+                </Text>
+                <Icon
                   name={tracker.icon}
                   color={colors.primary}
                   size={30}
-                  style={{marginRight: 20}}
+                  style={{ marginRight: 20 }}
                 />
               </View>
               {/* <Text style={[homeStyles.progressName, { color: colors.text }]}>Type: {tracker.type}</Text> */}
-              <View style={[homeStyles.progressLine, { alignContent: '' }]}>
-                <Text style={[homeStyles.progressMilestone, { color: colors.text }]}>
-                  Milestones: {tracker.milestones.filter(milestone => milestone.done).length} / {tracker.milestones.length}
+              <View style={[homeStyles.progressLine, { alignContent: "" }]}>
+                <Text
+                  style={[homeStyles.progressMilestone, { color: colors.text }]}
+                >
+                  Milestones:{" "}
+                  {tracker.type === "Exercise"
+                    ? tracker.milestones.filter(
+                        (milestone) =>
+                          milestone.type === "tracker" && milestone.done
+                      ).length
+                    : tracker.milestones.filter((milestone) => milestone.done)
+                        .length}{" "}
+                  /{" "}
+                  {tracker.type === "Exercise"
+                    ? tracker.milestones.filter(
+                        (milestone) => milestone.type === "tracker"
+                      ).length
+                    : tracker.milestones.length}
                 </Text>
                 <AnimatedCircularProgress
                   size={60}
                   width={8}
-                  animating= {"false"}
+                  animating={"false"}
                   fill={tracker.progress}
                   tintColor={colors.primary}
                   backgroundColor={colors.background}
                   style={{ marginBottom: 5, marginTop: 5, marginRight: 5 }}
                 >
-                  {() => <Text style={[homeStyles.progressPercent, { color: colors.text }]}>{Math.round(tracker.progress)}%</Text>}
+                  {() => (
+                    <Text
+                      style={[
+                        homeStyles.progressPercent,
+                        { color: colors.text },
+                      ]}
+                    >
+                      {Math.round(tracker.progress)}%
+                    </Text>
+                  )}
                 </AnimatedCircularProgress>
               </View>
             </View>
@@ -124,5 +180,3 @@ export default function Home({ navigation }) {
     </>
   );
 }
-
-
