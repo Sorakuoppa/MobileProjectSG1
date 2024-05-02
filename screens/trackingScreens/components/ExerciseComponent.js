@@ -2,6 +2,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Checkbox, TextInput } from "react-native-paper";
 import Collapsible from "react-native-collapsible";
+import { getDoc, updateDoc, doc } from "firebase/firestore";
+import {
+  db,
+  auth,
+} from "../../../components/FirebaseComponents/FirebaseConfig";
 import { useTheme } from "@react-navigation/native";
 import {
   templateStyle,
@@ -13,14 +18,53 @@ import ExerciseCollapsible from "./ExerciseCollapsible";
 
 export default function ExerciseComponent({ tracker, navigation }) {
   const [checked, setChecked] = useState(false);
+  const [progress, setProgress] = useState(tracker.progress);
+  const [milestones, setMilestones] = useState([]);
   const { colors } = useTheme();
 
+  useEffect(() => {
+  const filteredList = tracker.milestones.filter(
+    (item) => item.type === "tracker"
+  );
+  setMilestones(filteredList);
+  }, [tracker.milestones]);
 
-    const filteredList = tracker.milestones.filter(
-      (item) => item.type === "tracker"
-    );
+  let progressValue = 100 / milestones.length;
 
-
+  const updateFBProgress = async (value, milestone) => {
+    if (auth.currentUser) {
+      try {
+        const docRef = doc(
+          db,
+          "trackers",
+          auth.currentUser.uid,
+          "trackers",
+          tracker.name
+        );
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const progress = data.progress;
+          const updatedProgress = progress + value;
+          setProgress(updatedProgress);
+          const updatedMilestones = data.milestones.map((item) => {
+            if (item.name === milestone.name) {
+              return { ...item, done: !item.done };
+            }
+            return item;
+          });
+          await updateDoc(docRef, {
+            progress: updatedProgress,
+            milestones: updatedMilestones,
+          });
+        } else {
+          console.log("No such document!");
+        }
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    }
+  };
 
   return (
     <>
@@ -42,7 +86,7 @@ export default function ExerciseComponent({ tracker, navigation }) {
           }}
         >
           <Text style={{ ...templateStyle.exerciseText, color: colors.text }}>
-            Workouts {" "}
+            Workouts{" "}
             <Icon
               name="arrow-right"
               size={20}
@@ -52,15 +96,19 @@ export default function ExerciseComponent({ tracker, navigation }) {
           </Text>
         </View>
       </TouchableOpacity>
-      {filteredList.map((milestone, index) => (
+      {milestones.map((milestone, index) => (
         <MilestoneComponent
           key={index}
           text={milestone.name}
           type={milestone.type}
           numeric={milestone.numeric}
           isDone={milestone.done}
-          onCheck={() => {}}
-          onUncheck={() => {}}
+          onCheck={() => {
+            updateFBProgress(progressValue, milestone);
+          }}
+          onUncheck={() => {
+            updateFBProgress(-progressValue, milestone);
+          }}
         />
       ))}
     </>
