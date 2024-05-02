@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../../components/Contexts/ThemeContext";
 import { View, Text, useColorScheme } from "react-native";
 import { Switch } from "react-native-paper";
@@ -10,6 +10,14 @@ export default function Settings() {
   const [switchOn, setSwitchOn] = useState(true);
   const { colors } = useTheme();
   const theme = useContext(ThemeContext);
+
+  useEffect(() => {
+    if (theme.theme === "dark") {
+      setSwitchOn(true);
+    } else { 
+      setSwitchOn(false);
+    }
+  }, []);
 
   const toggleSwitch = () => {
     setSwitchOn(!switchOn);

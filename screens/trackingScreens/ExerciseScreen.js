@@ -10,7 +10,7 @@ import {
 } from "../../styles/trackingScreens/addNewStyle";
 
 
-export default function ExerciseScreen({ route }) {
+export default function ExerciseScreen({ route, navigation }) {
   const [legCollapse, setLegCollapse] = useState(true);
   const [pullCollapse, setPullCollapse] = useState(true);
   const [pushCollapse, setPushCollapse] = useState(true);
@@ -20,6 +20,14 @@ export default function ExerciseScreen({ route }) {
   const legDay = tracker.milestones.filter((item) => item.type === "legs");
   const pullDay = tracker.milestones.filter((item) => item.type === "pull");
   const pushDay = tracker.milestones.filter((item) => item.type === "push");
+
+  useEffect(() => {
+    console.log(legDay);
+    console.log(pullDay);
+    console.log(pushDay);
+    console.log(tracker);
+  }
+  , [legDay, pullDay, pushDay]);
 
   return (
     <View style={{ justifyContent: "space-between", flex: 1 }}>

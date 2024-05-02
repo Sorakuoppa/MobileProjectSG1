@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { View, Image, Text } from 'react-native'
 import { ActivityIndicator } from 'react-native-paper'
 import { accountStyle } from '../../styles/accountManagementStyles/accountStyle'
@@ -7,9 +7,14 @@ import { useTheme } from '@react-navigation/native'
 
 export default function LoadingScreen() {
     const { colors } = useTheme();
-    const { theme } = useContext(ThemeContext);
+    const  theme  = useContext(ThemeContext);
+
+    useEffect(() => {
+      theme.setTheme("dark");
+    }, []);
+
   return (
-    <View style={{ ...accountStyle.container }}>
+    <View style={{ ...accountStyle.container, backgroundColor: colors.background }}>
     <Image
       source={
         theme === "dark"
