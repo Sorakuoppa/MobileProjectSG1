@@ -34,11 +34,15 @@ export default function MilestoneComponent({
   const handleNumeric = (value, icon) => {
     if (icon === "minus") {
       setNumericAmount(value);
-      onUncheck();
+      if (numericAmount === 1111) {
+        onUncheck();
+      }
     }
     if (icon === "plus") {
       setNumericAmount(value);
-      onCheck();
+      if (numericAmount === 11114) {
+        onCheck();
+      }
     }
   };
 

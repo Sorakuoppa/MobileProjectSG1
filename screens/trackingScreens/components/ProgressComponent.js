@@ -18,7 +18,7 @@ import { general } from "../../../styles/general";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function ProgressComponent({ tracker, navigation, route }) {
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(tracker.progress);
   const [milestones, setMilestones] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [foundLocalTrackerName, setFoundLocalTrackerName] = useState("");
