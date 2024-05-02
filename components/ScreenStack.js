@@ -101,6 +101,7 @@ function InitialStackScreen() {
 
 function ScreenStack() {
   const { colors } = useTheme();
+
   return (
     <Stack.Navigator
       initialRouteName="Add new"
@@ -149,13 +150,8 @@ export function DrawerStack({ navigation, route }) {
   }, [username]);
 
   useEffect(() => {
-    theme.setTheme("dark");
-  }, []);
-
-  useEffect(() => {
-    // Check the login state every time the drawer stack mounts
-    console.log("Login state checked:", loginState);
-  }, [loginState]);
+    console.log(theme.theme)
+  }, [theme.theme]);
 
   const { colors } = useTheme();
   const screens = [

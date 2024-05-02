@@ -33,8 +33,6 @@ useEffect(() => {
   loadFont();
 }, []);
 
-  //Detects the device's color scheme
-  // const scheme = useColorScheme();
 
   if (!fontLoaded) {
     return null;
