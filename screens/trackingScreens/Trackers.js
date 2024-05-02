@@ -72,22 +72,6 @@ export default function Trackers({ navigation }) {
     setDialog(false);
   };
 
-  // TESTING ASYNCSTORAGE REMOVE THIS
-  const showAsyncStorage = async () => {
-    try {
-      const value = await AsyncStorage.getAllKeys();
-      if (value !== null) {
-        alert(value);
-        value.map(async (key) => {
-          const item = await AsyncStorage.getItem(key);
-          console.log(item);
-        });
-      }
-    } catch (e) {
-      console.error("Error fetching asyncStorage: ", e);
-    }
-  };
-
   if (isLoading) {
     return (
       <View style={{ ...general.scaffold, justifyContent: "flex-start" }}>
@@ -120,7 +104,7 @@ export default function Trackers({ navigation }) {
               style={{}}
             >
               <Surface
-                elevation={4}
+                elevation={1}
                 style={{
                   ...trackerStyle.tracker,
                   backgroundColor: colors.accent,
@@ -173,14 +157,6 @@ export default function Trackers({ navigation }) {
           </Dialog>
         </Portal>
         {/* Button for testing asyncStorage */}
-      <Button
-          children="Show asyncStorage"
-          mode="contained"
-          buttonColor={colors.primary}
-          onPress={showAsyncStorage}
-        />
-      
-    
       </View> 
     );
   }

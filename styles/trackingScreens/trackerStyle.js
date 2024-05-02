@@ -5,7 +5,7 @@ export const trackerStyle = StyleSheet.create({
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
-  width: "90%",
+  width: "92%",
   height: "auto",
   padding: 10,
   margin: 5,
