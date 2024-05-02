@@ -11,10 +11,6 @@ export default function MoreAboutUs({ navigation, route }) {
 
   const filteredList = aboutUsData.filter((item) => item.name === name);
 
-  useEffect(() => {
-    console.log(filteredList);
-  }, [filteredList]);
-
   // Function to handle opening the LinkedIn link
   const handleLinkedInPress = () => {
     if (link) {
