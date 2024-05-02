@@ -14,14 +14,12 @@ export const homeStyles = StyleSheet.create({
     textAlign: 'center',
     color: '#ffe8d3',
     fontSize: 24,
-    fontWeight: 'bold',
     fontFamily: "Gantari"
   },
   progressText: {
     textAlign: 'center',
     color: '#ffe8d3',
     fontSize: 18,
-    fontWeight: 'bold',
     fontFamily: "Gantari"
   },
   progressLine: {
