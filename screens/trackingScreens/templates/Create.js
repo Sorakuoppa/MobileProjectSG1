@@ -124,34 +124,32 @@ export default function Create({ template, navigation }) {
         children="Add Milestone"
         mode="contained"
         buttonColor={colors.primary}
-        style={{ width: "95%", margin: 10 }}
+        style={{ width: "95%", margin: 10, color: colors.text }}
         onPress={() => addMilestone(milestoneName, value)}
       />
-            <ScrollView>
-
-      <View>
-        {milestoneList.map((milestone, index) => (
-          <MilestoneComponent
-            key={index}
-            text={milestone.milestone}
-            numeric={milestone.numeric}
-            onCheck={() => {}}
-            onUncheck={() => {}}
-            type="undefined"
-            isDone={false}
-          />
-        ))}
-      </View>
+      <ScrollView>
+        <View>
+          {milestoneList.map((milestone, index) => (
+            <MilestoneComponent
+              key={index}
+              text={milestone.milestone}
+              numeric={milestone.numeric}
+              onCheck={() => {}}
+              onUncheck={() => {}}
+              type="undefined"
+              isDone={false}
+            />
+          ))}
+        </View>
       </ScrollView>
 
       <Button
         children="Create Tracker"
         mode="contained"
         buttonColor={colors.primary}
-        style={{ width: "95%", margin: 10 }}
+        style={{ width: "95%", margin: 10, color: colors.text }}
         onPress={() => createTracker()}
       />
-
     </View>
   );
 }

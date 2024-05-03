@@ -113,7 +113,7 @@ export default function Exercise({ template, navigation }) {
         children="Add this tracker"
         mode="contained"
         buttonColor={colors.primary}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, color: colors.text }}
         onPress={handleAddTracker}
       />
     </View>

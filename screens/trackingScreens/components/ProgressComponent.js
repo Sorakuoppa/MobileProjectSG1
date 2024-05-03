@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useFocusEffect } from "@react-navigation/native";
-import { View, Text, TouchableOpacity } from "react-native";
-import Collapsible from "react-native-collapsible";
+
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+
 import { ActivityIndicator } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
@@ -15,7 +15,7 @@ import MilestoneComponent from "./MilestoneComponent";
 import ExerciseComponent from "./ExerciseComponent";
 
 import { general } from "../../../styles/general";
-import { ScrollView } from "react-native-gesture-handler";
+
 
 export default function ProgressComponent({ tracker, navigation, route }) {
   const [progress, setProgress] = useState(tracker.progress);
