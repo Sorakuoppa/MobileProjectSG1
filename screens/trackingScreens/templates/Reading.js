@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Button, Checkbox, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
@@ -9,7 +9,7 @@ import addToFirebase from "../../../components/FirebaseComponents/AddToFirebase"
 import { readingData } from "../data/readingData";
 
 import { general } from "../../../styles/general";
-import { ScrollView } from "react-native-gesture-handler";
+
 
 export default function Reading({ template, navigation }) {
   const [objectList, setObjectList] = useState([]);

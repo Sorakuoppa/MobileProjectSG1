@@ -13,7 +13,7 @@ export const FirstTimeLoadProvider = ({ children }) => {
     const loadFirstTimeLoaded = async () => {
       try {
         const value = await AsyncStorage.getItem('firstTimeLoaded');
-        if (value !== null) {
+        if (value === null) {
           setFirstTimeLoadedState(value === 'true');
         }
       } catch (error) {

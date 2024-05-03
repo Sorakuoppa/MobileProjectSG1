@@ -1,6 +1,6 @@
 // Toimii toistaiseksi puskee FB:hen valitut liikkeet ja niiden tiedot
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Button, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
@@ -11,7 +11,7 @@ import { exerciseData, exerciseTrackers } from "../data/exerciseData";
 import addToFirebase from "../../../components/FirebaseComponents/AddToFirebase";
 
 import { general } from "../../../styles/general";
-import { ScrollView } from "react-native-gesture-handler";
+
 
 export default function Exercise({ template, navigation }) {
   const [trackerName, setTrackerName] = useState("");

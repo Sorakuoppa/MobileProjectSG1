@@ -149,9 +149,6 @@ export function DrawerStack({ navigation, route }) {
     getHeaderTitle;
   }, [username]);
 
-  useEffect(() => {
-    console.log(theme.theme)
-  }, [theme.theme]);
 
   const { colors } = useTheme();
   const screens = [

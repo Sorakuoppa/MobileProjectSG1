@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Button, TextInput, RadioButton, IconButton } from "react-native-paper";
 import addToFirebase from "../../../components/FirebaseComponents/AddToFirebase";
@@ -9,7 +9,7 @@ import { choosableIcons } from "../data/createData";
 import { general } from "../../../styles/general";
 import { createStyle } from "../../../styles/trackingScreens/createStyle";
 import MilestoneComponent from "../components/MilestoneComponent";
-import { ScrollView } from "react-native-gesture-handler";
+
 
 export default function Create({ template, navigation }) {
   const [value, setValue] = useState("Check");

@@ -5,7 +5,6 @@ import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { general } from "../../styles/general";
 import { addNewStyle } from "../../styles/trackingScreens/addNewStyle";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function AddNew({ navigation }) {
   const { colors } = useTheme();

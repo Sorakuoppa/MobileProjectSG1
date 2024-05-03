@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, ScrollView } from "react-native";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
 import { getTrackers } from "../../components/FirebaseComponents/ReadFirebaseDb";
 import { useLoginContext } from "../../components/Contexts/LoginContext";
@@ -7,7 +7,6 @@ import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { homeStyles } from "../../styles/trackingScreens/homeStyle";
 import { general } from "../../styles/general";
 import { ActivityIndicator } from "react-native-paper";
-import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 export default function Home({ navigation }) {

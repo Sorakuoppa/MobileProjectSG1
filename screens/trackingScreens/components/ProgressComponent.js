@@ -63,12 +63,9 @@ export default function ProgressComponent({ tracker, navigation, route }) {
         // TÄMÄ LÖYTÄÄ NYKYISEN TRÄCKERIN ASYNC STORAGESTA.
         const allKeys = await AsyncStorage.getAllKeys();
         const trackers = await AsyncStorage.multiGet(allKeys);
-        console.log(trackers);
         const foundTrackerIndex = trackers.findIndex(
           (item) => item[1] === tracker.name
         );
-        console.log(tracker.name);
-        console.log(foundTrackerIndex);
         // Tbh en tiiä mihi noita keytä tarvitaa, mutta assignaa oikeat
         // Keypairit kyseiseen träckeriin
         const trackerName = trackers[foundTrackerIndex][1]; // Access the tracker name directly
@@ -102,7 +99,6 @@ export default function ProgressComponent({ tracker, navigation, route }) {
   };
   // THIS NEEDS DIFFERENT FUNCTIONALITY FOR NUMERIC MILESTONES
   const updateFBProgress = async (value, milestone) => {
-    console.log(milestone.numeric)
     if (auth.currentUser) {
       try {
         const docRef = doc(

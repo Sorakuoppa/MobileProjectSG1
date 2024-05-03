@@ -17,7 +17,6 @@ import {
   Portal,
 } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
-// import { ScrollView } from "react-native-gesture-handler";
 import { useLoginContext } from "../../components/Contexts/LoginContext";
 
 export default function Trackers({ navigation }) {
