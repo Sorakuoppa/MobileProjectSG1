@@ -1,3 +1,4 @@
+// List for all choosable icons in the IconPicker which is used in the custom tracker creation
 export const choosableIcons = [
   { family: "FontAwesome5", icons: ["plus-circle"] },
   { family: "FontAwesome5", icons: ["wallet"] },

@@ -7,6 +7,8 @@ import { general } from "../../styles/general";
 import { addNewStyle } from "../../styles/trackingScreens/addNewStyle";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+// This is the main tracker creation screen, displays our templates as well as the option to create a custom tracker
+
 export default function AddNew({ navigation }) {
   const { colors } = useTheme();
   const fadeAnims = useRef(
@@ -27,6 +29,7 @@ export default function AddNew({ navigation }) {
     });
   };
 
+  // This function dynamically handles the navigation to the chosen template
   const templatePress = (templateName) => {
     const routeObject = templateList.find(
       (template) => template.name === templateName

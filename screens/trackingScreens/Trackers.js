@@ -20,6 +20,8 @@ import { useTheme } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useLoginContext } from "../../components/Contexts/LoginContext";
 
+// Main tracker screen, displays all trackers and allows for deletion of all trackers
+
 export default function Trackers({ navigation }) {
   const { colors } = useTheme();
   const [trackerList, setTrackerList] = useState([]);
@@ -45,6 +47,7 @@ export default function Trackers({ navigation }) {
     setIsLoading(false);
   };
 
+  // Function to determine which tracker was pressed and navigate to the correct tracker
   const trackerPress = (tracker) => {
     navigation.navigate("MyTracker", { tracker: tracker });
   };

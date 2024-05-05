@@ -1,4 +1,4 @@
-
+// This datasheet is used to manage our 'About Us' screen info.
 export const aboutUsData = [
     {
         name: 'Timo Hyttinen',

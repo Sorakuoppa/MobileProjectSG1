@@ -1,3 +1,6 @@
+// This component was setup to use dynamically in the Exercise tracker but was left unused due to peroformance issues
+
+
 import React, {useEffect, useState} from "react";
 import { View, Text } from "react-native";
 import { TextInput, Button } from "react-native-paper";

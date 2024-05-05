@@ -50,7 +50,7 @@ export default function AboutUs({ navigation }) {
       link: "",
     },
   ];
-
+// Member info is passed to MoreAboutUs screen
   const handleMemberPress = (memberName, memberFname, memberImage, memberLink) => {
     navigation.navigate("MoreAboutUs", { name: memberName, fname: memberFname, image: memberImage, link: memberLink});
   };

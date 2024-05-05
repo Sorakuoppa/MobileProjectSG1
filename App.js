@@ -17,7 +17,9 @@ import { LoginProvider } from "./components/Contexts/LoginContext";
 import { PermissionProvider } from "./components/AccountComponents/Permissions";
 import { LoadingProvider } from "./components/Contexts/ProfilePictureLoadingContext";
 export default function App() {
+
   const [theme, setTheme] = useState("dark");
+
   //Custom fonts can be added to this list
  const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -41,6 +43,7 @@ useEffect(() => {
   return (
     <PaperProvider>
       <PermissionProvider>
+        {/* Theme colors are handled here */}
         <NavigationContainer theme={theme === "dark" ? DarkTheme : LightTheme}>
           <StatusBar
             barStyle={theme === "dark" ? "light-content" : "dark-content"}

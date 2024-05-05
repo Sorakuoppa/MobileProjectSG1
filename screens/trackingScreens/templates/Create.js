@@ -7,9 +7,10 @@ import IconPicker from "react-native-icon-picker";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { choosableIcons } from "../data/createData";
 import { general } from "../../../styles/general";
-import { createStyle } from "../../../styles/trackingScreens/createStyle";
 import MilestoneComponent from "../components/MilestoneComponent";
 import { ScrollView } from "react-native-gesture-handler";
+
+// Custom tracker is created here and then added to Firebase
 
 export default function Create({ template, navigation }) {
   const [value, setValue] = useState("Check");

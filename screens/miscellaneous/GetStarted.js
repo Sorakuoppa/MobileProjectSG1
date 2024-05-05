@@ -10,6 +10,7 @@ export default function GetStarted() {
   const navigation = useNavigation();
   const theme = useContext(ThemeContext);
 
+  // This theme displays an orange statusbar to match the gradient background
   useEffect(() => {
     theme.setTheme("started");
   }, []);

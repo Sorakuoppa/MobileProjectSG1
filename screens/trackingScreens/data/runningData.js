@@ -1,3 +1,4 @@
+// Milestone list for Running-template for easier management
 export const runningData = [
     {
         title: "Run a mile",

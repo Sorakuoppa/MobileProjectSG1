@@ -1,13 +1,11 @@
 import React from "react";
-
-
 import Create from "./templates/Create";
 import Exercise from "./templates/Exercise";
 import Reading from "./templates/Reading";
 import Running from "./templates/Running";
 
 
-
+// Simple switch case to determine which template to render
 export default function Templates({ route, navigation }) {
   const { template } = route.params;
 

@@ -98,7 +98,7 @@ function InitialStackScreen() {
     </InitialStack.Navigator>
   );
 }
-
+// This function handles the bottom tabs navigation
 function ScreenStack() {
   const { colors } = useTheme();
 
@@ -134,7 +134,7 @@ function ScreenStack() {
     </Stack.Navigator>
   );
 }
-
+// DrawerStack manages all main app screens and navigation between them, only select few are shown in the drawer
 export function DrawerStack({ navigation, route }) {
   const { loginState, username } = useLoginContext(); // Get the function to update login state from the context
   const  theme  = useContext(ThemeContext);
@@ -292,6 +292,7 @@ export function DrawerStack({ navigation, route }) {
     </Drawer.Navigator>
   );
 }
+// Showing the GetStarted screen is handled using the FirstTimeLoadContext
 export function MainNavigator() {
   const { firstTimeLoaded } = useLoaded();
 

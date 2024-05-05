@@ -1,4 +1,3 @@
-// CollapsibleComponent.js
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
@@ -6,6 +5,7 @@ import { Button, Checkbox } from "react-native-paper";
 import Collapsible from "react-native-collapsible";
 import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
 
+// Dynamic component to display and handle the collapsible buttons in Exercise template screen
 export default function CollapsibleComponent({
   dataList,
   title,

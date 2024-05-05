@@ -10,6 +10,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { deleteDoc, doc } from "@firebase/firestore";
 import { auth, db } from "../../components/FirebaseComponents/FirebaseConfig";
 
+// Dynamically renders the tracker chosen in Tracker.js
+
 export default function MyTracker({ route, navigation }) {
   const { tracker } = route.params;
   const [dialog, setDialog] = useState(false);

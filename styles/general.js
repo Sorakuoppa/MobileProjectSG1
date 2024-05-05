@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+// Theme colors are defined here
 export const darkColors = {
   primary: "#ff8c4c",
   secondary: "#36363e",

@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { general } from "../../../styles/general";
 import { addNewStyle, modalStyle } from "../../../styles/trackingScreens/addNewStyle";
 
+// Attempt at a dynamic modal component, was only used once though
 export default function InfoModal({ text1, text2, icon1, icon2, icon3 }) {
   const [visible, setVisible] = useState(false);
   const { colors } = useTheme();

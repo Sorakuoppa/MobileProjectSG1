@@ -5,6 +5,7 @@ import { IconButton, Checkbox, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { templateStyle } from "../../../styles/trackingScreens/addNewStyle";
 
+// Dynamic component to display and handle milestones in all app screens
 export default function MilestoneComponent({
   text,
   onCheck,

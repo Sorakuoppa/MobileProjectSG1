@@ -9,6 +9,7 @@ import {
   addNewStyle,
 } from "../../styles/trackingScreens/addNewStyle";
 
+// This screen displays the exercises for the exercise tracker, used in every exercise tracker
 
 export default function ExerciseScreen({ route, navigation }) {
   const [legCollapse, setLegCollapse] = useState(true);

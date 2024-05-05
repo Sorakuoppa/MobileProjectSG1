@@ -1,3 +1,4 @@
+// Milestone list for Reading-template for easier management
 export const readingData = [
     {
         title: "Read 50 pages",

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { Checkbox, TextInput } from "react-native-paper";
-import Collapsible from "react-native-collapsible";
+
 import { getDoc, updateDoc, doc } from "firebase/firestore";
 import {
   db,
@@ -14,7 +13,7 @@ import {
 } from "../../../styles/trackingScreens/addNewStyle";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import MilestoneComponent from "./MilestoneComponent";
-import ExerciseCollapsible from "./ExerciseCollapsible";
+
 
 export default function ExerciseComponent({ tracker, navigation }) {
   const [checked, setChecked] = useState(false);

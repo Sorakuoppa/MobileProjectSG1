@@ -1,4 +1,4 @@
-
+// Exercise and milestone list for Exercise-template for easier management
 export const exerciseData = [
   // Pull Exercises
   {

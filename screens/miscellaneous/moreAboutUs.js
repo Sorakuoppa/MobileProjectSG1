@@ -5,6 +5,7 @@ import { useTheme } from "@react-navigation/native";
 import { aboutUsData } from "./data/aboutUsData";
 import { general } from "../../styles/general";
 
+
 export default function MoreAboutUs({ navigation, route }) {
   const { colors } = useTheme();
   const { name, fname, image, link } = route.params;
@@ -18,6 +19,7 @@ export default function MoreAboutUs({ navigation, route }) {
     }
   };
 
+  // Dynamically display the member's information
   return (
     <View style={{ flex: 1, marginTop: 50, alignItems: "center" }}>
       <Text style={{ color: colors.primary, fontFamily: "Gantari", fontSize: 32, marginBottom: 20 }}>

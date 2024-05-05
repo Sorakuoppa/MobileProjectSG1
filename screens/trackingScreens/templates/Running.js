@@ -7,9 +7,7 @@ import MilestoneComponent from "../components/MilestoneComponent";
 import InfoModal from "../components/InfoModal";
 import { runningData } from "../data/runningData";
 import Icon from "react-native-vector-icons/FontAwesome5";
-
 import { general } from "../../../styles/general";
-import { set } from "@firebase/database";
 
 export default function Running({ template, navigation }) {
   const [objectList, setObjectList] = useState([]);
