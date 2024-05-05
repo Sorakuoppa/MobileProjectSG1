@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+
 import { ActivityIndicator } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
@@ -12,7 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import MilestoneComponent from "./MilestoneComponent";
 import ExerciseComponent from "./ExerciseComponent";
 import { general } from "../../../styles/general";
-import { ScrollView } from "react-native-gesture-handler";
+
 
 // This component fetches all milestones from the chosen tracker and displays them on the trackers progress screen
 // It's also used to update the progress value and milestone status in Firebase or AsyncStorage
@@ -63,12 +65,9 @@ export default function ProgressComponent({ tracker, navigation, route }) {
         // TÄMÄ LÖYTÄÄ NYKYISEN TRÄCKERIN ASYNC STORAGESTA.
         const allKeys = await AsyncStorage.getAllKeys();
         const trackers = await AsyncStorage.multiGet(allKeys);
-        console.log(trackers);
         const foundTrackerIndex = trackers.findIndex(
           (item) => item[1] === tracker.name
         );
-        console.log(tracker.name);
-        console.log(foundTrackerIndex);
         // Tbh en tiiä mihi noita keytä tarvitaa, mutta assignaa oikeat
         // Keypairit kyseiseen träckeriin
         const trackerName = trackers[foundTrackerIndex][1]; // Access the tracker name directly
@@ -103,7 +102,6 @@ export default function ProgressComponent({ tracker, navigation, route }) {
   // Update the progress value and milestone status in Firebase or AsyncStorage
   // THIS NEEDS DIFFERENT FUNCTIONALITY FOR NUMERIC MILESTONES
   const updateFBProgress = async (value, milestone) => {
-    console.log(milestone.numeric)
     if (auth.currentUser) {
       try {
         const docRef = doc(

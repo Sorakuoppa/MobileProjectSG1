@@ -1,4 +1,3 @@
-import "react-native-gesture-handler";
 import React, { useState, useEffect } from "react";
 import { StatusBar, useColorScheme } from "react-native";
 import { DrawerStack, MainNavigator } from "./components/ScreenStack";
@@ -16,6 +15,7 @@ import { FirstTimeLoadProvider } from "./components/Contexts/FirstTimeLoadContex
 import { LoginProvider } from "./components/Contexts/LoginContext";
 import { PermissionProvider } from "./components/AccountComponents/Permissions";
 import { LoadingProvider } from "./components/Contexts/ProfilePictureLoadingContext";
+
 export default function App() {
 
   const [theme, setTheme] = useState("dark");

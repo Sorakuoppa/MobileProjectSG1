@@ -423,7 +423,7 @@ if (isUserDataLoading) {
         />
       </View>
           <Pressable style={{...manageAccountStyle.button, backgroundColor: colors.primary, alignSelf: 'center'}} onPress={openReauthModal}>
-          <Text>Save changes</Text>
+          <Text style={{color: colors.text}}>Save changes</Text>
           </Pressable>
           
       {/* Modal for selecting image source */}

@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from "react";
-import { View, Text, Pressable, Animated } from "react-native";
+import { View, Text, Pressable, Animated, ScrollView } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { collection, getDocs, deleteDoc } from "firebase/firestore";
 import { getTrackers } from "../../components/FirebaseComponents/ReadFirebaseDb";
@@ -17,7 +17,6 @@ import {
   Portal,
 } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
-import { ScrollView } from "react-native-gesture-handler";
 import { useLoginContext } from "../../components/Contexts/LoginContext";
 
 // Main tracker screen, displays all trackers and allows for deletion of all trackers
@@ -91,7 +90,7 @@ export default function Trackers({ navigation }) {
     return (
       <View style={general.scaffold}>
         <Text style={{ ...general.title, color: colors.text }}>Trackers</Text>
-        
+
         <ScrollView
           contentContainerStyle={{
             justifyContent: "center",
@@ -114,8 +113,14 @@ export default function Trackers({ navigation }) {
                   borderColor: colors.primary,
                 }}
               >
-                <Icon name= {tracker.icon} size={40} color={colors.primary} />
-                <Text style={{ color: colors.text, fontSize: 24, fontFamily: 'Gantari' }}>
+                <Icon name={tracker.icon} size={40} color={colors.primary} />
+                <Text
+                  style={{
+                    color: colors.text,
+                    fontSize: 24,
+                    fontFamily: "Gantari",
+                  }}
+                >
                   {Math.round(tracker.progress)} %
                 </Text>
                 <Text
@@ -127,14 +132,14 @@ export default function Trackers({ navigation }) {
             </Pressable>
           ))}
         </ScrollView>
-        
-        {/* DELETE ALL TRACKERS BUTTON */ }
+
+        {/* DELETE ALL TRACKERS BUTTON */}
         <Button
           children="Delete all trackers"
           mode="contained"
           buttonColor="red"
           onPress={() => setDialog(true)}
-          style={{marginBottom: 20}}
+          style={{ marginBottom: 20, color: colors.text }}
         />
         <Portal>
           <Dialog
@@ -160,7 +165,7 @@ export default function Trackers({ navigation }) {
           </Dialog>
         </Portal>
         {/* Button for testing asyncStorage */}
-      </View> 
+      </View>
     );
   }
 }

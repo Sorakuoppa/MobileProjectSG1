@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, Linking } from "react-native";
+import { View, Text, Image, TouchableOpacity, Linking, ScrollView } from "react-native";
 import { general } from "../../styles/general";
 import { useTheme } from "@react-navigation/native";
-import { ScrollView } from "react-native-gesture-handler";
 
 import TimoImage from "../../assets/about/Timo.png";
 import SeveriImage from "../../assets/about/Sepi.png";

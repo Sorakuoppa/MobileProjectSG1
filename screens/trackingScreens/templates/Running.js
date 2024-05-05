@@ -90,7 +90,7 @@ export default function Running({ template, navigation }) {
         buttonColor={colors.primary}
         children="Add this tracker"
         onPress={buttonHandler}
-        style={{ margin: 20 }}
+        style={{ margin: 20, color: colors.text }}
       />
     </View>
   );

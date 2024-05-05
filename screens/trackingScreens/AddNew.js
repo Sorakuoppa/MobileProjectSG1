@@ -5,7 +5,6 @@ import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { general } from "../../styles/general";
 import { addNewStyle } from "../../styles/trackingScreens/addNewStyle";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 // This is the main tracker creation screen, displays our templates as well as the option to create a custom tracker
 

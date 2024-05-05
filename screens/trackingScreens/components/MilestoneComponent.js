@@ -127,7 +127,8 @@ export default function MilestoneComponent({
               selectionColor={colors.primary}
               activeOutlineColor={colors.primary}
               dense={true}
-              style={{ width: 50, height: 35, padding: 5 }}
+              style={{ width: 50, height: 35, padding: 5}}
+              contentStyle={{ fontSize: 12 }}
               keyboardType="numeric"
               value={numericAmount.toString()}
               onChangeText={(text) => setNumericAmount(text)}

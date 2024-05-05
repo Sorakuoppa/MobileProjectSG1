@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Button, TextInput, RadioButton, IconButton } from "react-native-paper";
 import addToFirebase from "../../../components/FirebaseComponents/AddToFirebase";
@@ -8,7 +8,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { choosableIcons } from "../data/createData";
 import { general } from "../../../styles/general";
 import MilestoneComponent from "../components/MilestoneComponent";
-import { ScrollView } from "react-native-gesture-handler";
+
 
 // Custom tracker is created here and then added to Firebase
 
@@ -125,34 +125,32 @@ export default function Create({ template, navigation }) {
         children="Add Milestone"
         mode="contained"
         buttonColor={colors.primary}
-        style={{ width: "95%", margin: 10 }}
+        style={{ width: "95%", margin: 10, color: colors.text }}
         onPress={() => addMilestone(milestoneName, value)}
       />
-            <ScrollView>
-
-      <View>
-        {milestoneList.map((milestone, index) => (
-          <MilestoneComponent
-            key={index}
-            text={milestone.milestone}
-            numeric={milestone.numeric}
-            onCheck={() => {}}
-            onUncheck={() => {}}
-            type="undefined"
-            isDone={false}
-          />
-        ))}
-      </View>
+      <ScrollView>
+        <View>
+          {milestoneList.map((milestone, index) => (
+            <MilestoneComponent
+              key={index}
+              text={milestone.milestone}
+              numeric={milestone.numeric}
+              onCheck={() => {}}
+              onUncheck={() => {}}
+              type="undefined"
+              isDone={false}
+            />
+          ))}
+        </View>
       </ScrollView>
 
       <Button
         children="Create Tracker"
         mode="contained"
         buttonColor={colors.primary}
-        style={{ width: "95%", margin: 10 }}
+        style={{ width: "95%", margin: 10, color: colors.text }}
         onPress={() => createTracker()}
       />
-
     </View>
   );
 }

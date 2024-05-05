@@ -71,7 +71,7 @@ export default function MyTracker({ route, navigation }) {
         children="Delete tracker"
         mode="contained"
         buttonColor="red"
-        style={{ marginTop: 10, marginBottom: 10 }}
+        style={{ marginTop: 10, marginBottom: 10, color: colors.text }}
         onPress={() => setDialog(true)}
       />
       <Portal>
